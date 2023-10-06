@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SearchUnit_BTF">
+    <default-activity id="__1">SearchUnit</default-activity>
+    <managed-bean id="__21">
+      <managed-bean-name id="__20">FilmStrip</managed-bean-name>
+      <managed-bean-class id="__19">com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope id="__18">backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__34">
+      <managed-bean-name id="__36">SearchUnitBB</managed-bean-name>
+      <managed-bean-class id="__35">custom.lease.view.bean.backing.SearchhUnitBB</managed-bean-class>
+      <managed-bean-scope id="__33">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchUnit">
+      <page>/Fragment/SearchUnit.jsff</page>
+    </view>
+    <task-flow-call id="AddEditUnit_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditUnit_BTF.xml</document>
+        <id>AddEditUnit_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>NavigationResult</name>
+        <value>#{pageFlowScope.naviResult}</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>UnitId</name>
+        <value>#{pageFlowScope.uid}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome id="__9">
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ShowFS">
+      <method>#{backingBeanScope.FilmStrip._showFilmStrip}</method>
+      <outcome id="__32">
+        <fixed-outcome>toBack</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id id="__3">SearchUnit</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome id="__6">ToUnit</from-outcome>
+        <to-activity-id id="__4">AddEditUnit_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id id="__11">AddEditUnit_BTF</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome id="__13">cancel</from-outcome>
+        <to-activity-id id="__12">Execute</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__15">
+        <from-outcome id="__16">commit</from-outcome>
+        <to-activity-id id="__17">Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__22">
+      <from-activity-id id="__23">Execute</from-activity-id>
+      <control-flow-case id="__25">
+        <from-outcome id="__26">Execute</from-outcome>
+        <to-activity-id id="__24">ShowFS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__27">
+      <from-activity-id id="__28">ShowFS</from-activity-id>
+      <control-flow-case id="__29">
+        <from-outcome id="__31">toBack</from-outcome>
+        <to-activity-id id="__30">SearchUnit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

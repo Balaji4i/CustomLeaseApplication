@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73"
+                id="Attachmnent_BTF_Attachmnent_BTF_intAttachmentsPageDef"
+                Package="TaskFlow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="intAttachments" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="intAttachments"
+                  IsViewObjectMethod="false"
+                  DataControl="Documents_AMDataControl"
+                  InstanceName="Documents_AMDataControl.dataProvider">
+      <NamedData NDName="funcid" NDValue="#{pageFlowScope.funcId}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="funcrefid" NDValue="#{pageFlowScope.funcRefId}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

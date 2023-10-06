@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Documents_AM"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true"
+  ComponentClass="custom.lease.model.AM.Documents_AMImpl"
+  DefClass="custom.lease.model.AM.Documents_AMDefImpl"
+  ComponentInterface="custom.lease.model.AM.common.Documents_AM"
+  ClientProxyName="custom.lease.model.AM.client.Documents_AMClient">
+  <DesignTime>
+    <Attr Name="_deployType" Value="0"/>
+    <Attr Name="_isDefCodegen" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewUsage
+    Name="XxfndFuncAttachVO"
+    ViewObjectName="custom.lease.model.View.XxfndFuncAttachVO"/>
+  <ViewUsage
+    Name="getUserDetailsROVO1"
+    ViewObjectName="custom.lease.model.ROVO.getUserDetailsROVO"/>
+  <ViewUsage
+    Name="getMenuAccessforMenuROVO1"
+    ViewObjectName="custom.lease.model.ROVO.getMenuAccessforMenuROVO"/>
+  <ViewUsage
+    Name="AppovalTypeROVO1"
+    ViewObjectName="custom.lease.model.ROVO.AppovalTypeROVO"/>
+  <ViewUsage
+    Name="XxplChecklist_VO"
+    ViewObjectName="custom.lease.model.View.XxplChecklist_VO"/>
+  <ViewUsage
+    Name="GetID_Rovo1"
+    ViewObjectName="custom.lease.model.ROVO.GetID_Rovo"/>
+  <ClientInterface>
+    <Method
+      Name="intAttachments">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="funcid"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="funcrefid"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="CheckUserNaname">
+      <Return
+        Type="java.lang.String"/>
+      <Parameter
+        Name="userName"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="commitAttachment">
+      <Return
+        Type="void"/>
+    </Method>
+    <Method
+      Name="filterCheckList">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="funcId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="funcRefId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+</AppModule>

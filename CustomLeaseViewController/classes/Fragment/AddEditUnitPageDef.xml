@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="AddEditUnitPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.PropertyUnitAM1.XxplPropertyUnitsView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplPropertyUnitsView1Iterator"/>
+    <iterator Binds="Root.PropertyUnitAM1.XxplPropertyAreaView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="4"
+              id="XxplPropertyAreaView1Iterator"/>
+    <searchRegion Binds="XxplPropertyAreaView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="XxplPropertyAreaView1Query"/>
+    <iterator Binds="Root.PropertyUnitAM1.XxplPropertyCarparksView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="5"
+              id="XxplPropertyCarparksView1Iterator"/>
+    <searchRegion Binds="XxplPropertyCarparksView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="XxplPropertyCarparksView1Query"/>
+    <iterator Binds="Root.PropertyUnitAM1.CarParkingROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="6"
+              id="CarParkingROVO1Iterator"/>
+    <searchRegion Binds="CarParkingROVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="CarParkingROVO1Query"/>
+    <iterator id="CarParkingROVO1Iterator1"
+              Binds="Root.PropertyUnitAM1.CarParkingROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator id="XxplPropertyCarparksView2Iterator"
+              Binds="Root.PropertyUnitAM1.XxplPropertyCarparksView2"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator id="XxplPropertyUnitsView2Iterator"
+              Binds="Root.PropertyUnitAM1.XxplPropertyUnitsView2"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="Root.PropertyUnitAM1.XxplPropertyFeaturesView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="10"
+              id="XxplPropertyFeaturesView1Iterator"/>
+    <searchRegion Binds="XxplPropertyFeaturesView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="XxplPropertyFeaturesView1Query"/>
+    <iterator Binds="Root.PropertyUnitAM1.ActivityLogROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="8"
+              id="ActivityLogROVO1Iterator"/>
+    <iterator Binds="Root.PropertyUnitAM1.XxplOwnerDtleView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="5"
+              id="XxplOwnerDtleView1Iterator"/>
+    <searchRegion Binds="XxplOwnerDtleView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="XxplOwnerDtleView1Query"/>
+  </executables>
+  <bindings>
+    <listOfValues StaticList="false"
+                  IterBinding="XxplPropertyUnitsView1Iterator"
+                  Uses="LOV_OrgName" id="OrgName"/>
+    <listOfValues StaticList="false"
+                  IterBinding="XxplPropertyUnitsView1Iterator"
+                  Uses="LOV_PropertynameTrans" id="PropertynameTrans"/>
+    <listOfValues StaticList="false"
+                  IterBinding="XxplPropertyUnitsView1Iterator"
+                  Uses="LOV_BuildingNameTrans" id="BuildingNameTrans"/>
+    <listOfValues StaticList="false"
+                  IterBinding="XxplPropertyUnitsView1Iterator"
+                  Uses="LOV_UnitTypeTrans" id="UnitTypeTrans"/>
+    <listOfValues StaticList="false"
+                  IterBinding="XxplPropertyUnitsView1Iterator"
+                  Uses="LOV_FloorTrans" id="FloorTrans"/>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator" id="UnitId">
+      <AttrNames>
+        <Item Value="UnitId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="PropertyId">
+      <AttrNames>
+        <Item Value="PropertyId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator" id="BuildId">
+      <AttrNames>
+        <Item Value="BuildId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator" id="UnitName">
+      <AttrNames>
+        <Item Value="UnitName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="UnitNameTl">
+      <AttrNames>
+        <Item Value="UnitNameTl"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="UnitNumber">
+      <AttrNames>
+        <Item Value="UnitNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="UnitShortcode">
+      <AttrNames>
+        <Item Value="UnitShortcode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator" id="OrgId">
+      <AttrNames>
+        <Item Value="OrgId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="DocRefNumber1">
+      <AttrNames>
+        <Item Value="DocRefNumber1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="DocRefNumber2">
+      <AttrNames>
+        <Item Value="DocRefNumber2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="DocRefNumber3">
+      <AttrNames>
+        <Item Value="DocRefNumber3"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="FloorNumber">
+      <AttrNames>
+        <Item Value="FloorNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="NoOfRooms">
+      <AttrNames>
+        <Item Value="NoOfRooms"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator" id="UnitType">
+      <AttrNames>
+        <Item Value="UnitType"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplPropertyUnitsView1Iterator" StaticList="false"
+          Uses="LOV_AreaType" id="AreaType" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XxplPropertyUnitsView1Iterator" StaticList="false"
+          Uses="LOV_ViewType" id="ViewType" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplPropertyUnitsView1Iterator" StaticList="false"
+          Uses="LOV_UnitClass" id="UnitClass" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XxplPropertyUnitsView1Iterator" StaticList="false"
+          Uses="LOV_UnitCategory" id="UnitCategory" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="LastUpdatedBy">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="LastUpdateDate">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="LastUpdateLogin">
+      <AttrNames>
+        <Item Value="LastUpdateLogin"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction"
+            DataControl="customRootAppModuleDataControl"/>
+    <list IterBinding="XxplPropertyUnitsView1Iterator" StaticList="false"
+          Uses="LOV_AllotType" id="AllotType" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <tree IterBinding="XxplPropertyAreaView1Iterator"
+          id="XxplPropertyAreaView1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplPropertyAreaView"
+                      Name="XxplPropertyAreaView10">
+        <AttrNames>
+          <Item Value="AreaId"/>
+          <Item Value="PropertyId"/>
+          <Item Value="BuildId"/>
+          <Item Value="UnitId"/>
+          <Item Value="Area"/>
+          <Item Value="Uom"/>
+          <Item Value="Value"/>
+          <Item Value="Description"/>
+          <Item Value="ActiveYn"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="AreaType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <tree IterBinding="XxplPropertyCarparksView1Iterator"
+          id="XxplPropertyCarparksView1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplPropertyCarparksView"
+                      Name="XxplPropertyCarparksView10">
+        <AttrNames>
+          <Item Value="CarparkId"/>
+          <Item Value="UnitId"/>
+          <Item Value="CpUnitId"/>
+          <Item Value="UnitNumberTrans"/>
+          <Item Value="CarParkingUnitNumber"/>
+          <Item Value="AllotType"/>
+          <Item Value="Value"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="CarParkingROVO1Iterator" id="CarParkingROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.CarParkingROVO"
+                      Name="CarParkingROVO10">
+        <AttrNames>
+          <Item Value="UnitId"/>
+          <Item Value="PropertyId"/>
+          <Item Value="BuildId"/>
+          <Item Value="UnitName"/>
+          <Item Value="UnitNameTl"/>
+          <Item Value="UnitNumber"/>
+          <Item Value="UnitShortcode"/>
+          <Item Value="UnitType"/>
+          <Item Value="AreaType"/>
+          <Item Value="ViewType"/>
+          <Item Value="Status"/>
+          <Item Value="UnitClass"/>
+          <Item Value="PropertyName"/>
+          <Item Value="PropertyNumber"/>
+          <Item Value="BuildName"/>
+          <Item Value="BuildNumber"/>
+          <Item Value="OrgName"/>
+          <Item Value="UnitTypeDisp"/>
+          <Item Value="AreaTypeDisp"/>
+          <Item Value="ViewTypeDisp"/>
+          <Item Value="SelectAll_Trans"/>
+          <Item Value="FuncId"/>
+          <Item Value="AllotType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="XxplPropertyFeaturesView1Iterator"
+          id="XxplPropertyFeaturesView1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplPropertyFeaturesView"
+                      Name="XxplPropertyFeaturesView10">
+        <AttrNames>
+          <Item Value="FeatureId"/>
+          <Item Value="PropertyId"/>
+          <Item Value="BuildId"/>
+          <Item Value="UnitId"/>
+          <Item Value="FeatureType"/>
+          <Item Value="FittingOptionTrans"/>
+          <Item Value="FeatureCondition"/>
+          <Item Value="Uom"/>
+          <Item Value="Quantity"/>
+          <Item Value="Rate"/>
+          <Item Value="Value"/>
+          <Item Value="Description"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplPropertyFeaturesView1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="XxplPropertyFeaturesView1Iterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="ActivityLogROVO1Iterator" id="ActivityLogROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.ActivityLogROVO"
+                      Name="ActivityLogROVO10">
+        <AttrNames>
+          <Item Value="ActivityId"/>
+          <Item Value="ActivityNumber"/>
+          <Item Value="ActivityDate"/>
+          <Item Value="Status"/>
+          <Item Value="Description"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplOwnerDtleView1Iterator" id="CreateInsert1"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="XxplOwnerDtleView1Iterator" id="Delete1"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="XxplOwnerDtleView1Iterator" id="XxplOwnerDtleView1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplOwnerDtleView"
+                      Name="XxplOwnerDtleView10">
+        <AttrNames>
+          <Item Value="OwnerId"/>
+          <Item Value="PropertyId"/>
+          <Item Value="BuildId"/>
+          <Item Value="UnitId"/>
+          <Item Value="OrgId"/>
+          <Item Value="VendId"/>
+          <Item Value="TransVendorName"/>
+          <Item Value="VendSiteId"/>
+          <Item Value="TransVendorSite"/>
+          <Item Value="TransientCheckBox"/>
+          <Item Value="PrimaryYn"/>
+          <Item Value="Description"/>
+          <Item Value="ActiveYn"/>
+          <Item Value="TransMobileNumber"/>
+          <Item Value="TransContractname"/>
+          <Item Value="TransAddress1"/>
+          <Item Value="TransAddress2"/>
+          <Item Value="TransAddress3"/>
+          <Item Value="TransAddress4"/>
+          <Item Value="TransPostalCode"/>
+          <Item Value="City"/>
+          <Item Value="Country"/>
+          <Item Value="TransPhoneNumber"/>
+          <Item Value="TransEmailId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="XxplPropertyUnitsView1Iterator" StaticList="false"
+          Uses="LOV_UnitMethod" id="UnitMethod" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <button IterBinding="XxplPropertyUnitsView1Iterator" id="LeaseableYn"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="LeaseableYn"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="XxplPropertyUnitsView1Iterator"
+                     id="DocRefNumber4">
+      <AttrNames>
+        <Item Value="DocRefNumber4"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="XxplPropertyAreaView1Iterator" id="Delete2"
+            InstanceName="customRootAppModuleDataControl.Root.PropertyUnitAM1.XxplPropertyAreaView1"
+            DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <list IterBinding="XxplPropertyUnitsView1Iterator" StaticList="false"
+          Uses="LOV_Status_Trans" id="Status_Trans" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

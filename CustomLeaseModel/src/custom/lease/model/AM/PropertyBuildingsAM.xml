@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PropertyBuildingsAM"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true">
+  <DesignTime>
+    <Attr Name="_deployType" Value="0"/>
+  </DesignTime>
+  <ViewUsage
+    Name="SearchBuilding_ROVO1"
+    ViewObjectName="custom.lease.model.ROVO.SearchBuilding_ROVO"/>
+  <ViewUsage
+    Name="XXplPropertyBuildingView1"
+    ViewObjectName="custom.lease.model.View.XXplPropertyBuildingView">
+    <ViewCriteriaUsage
+      Name="FindBy_BuildiId_VC"
+      FullName="custom.lease.model.View.XXplPropertyBuildingView.FindBy_BuildiId_VC"/>
+  </ViewUsage>
+  <ViewUsage
+    Name="XxplPropertyAreaView1"
+    ViewObjectName="custom.lease.model.View.XxplPropertyAreaView">
+    <ViewCriteriaUsage
+      Name="FilterForBuilding"
+      FullName="custom.lease.model.View.XxplPropertyAreaView.FilterForBuilding"/>
+  </ViewUsage>
+  <ViewUsage
+    Name="SearchUnitFilterROVO"
+    ViewObjectName="custom.lease.model.ROVO.SearchUnitFilterROVO"/>
+  <ViewLinkUsage
+    Name="BuildingArea_VL1"
+    ViewLinkObjectName="custom.lease.model.VL.BuildingArea_VL"
+    SrcViewUsageName="custom.lease.model.AM.PropertyBuildingsAM.XXplPropertyBuildingView1"
+    DstViewUsageName="custom.lease.model.AM.PropertyBuildingsAM.XxplPropertyAreaView1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="BuildingUnit_VL1"
+    ViewLinkObjectName="custom.lease.model.VL.BuildingUnit_VL"
+    SrcViewUsageName="custom.lease.model.AM.PropertyBuildingsAM.XXplPropertyBuildingView1"
+    DstViewUsageName="custom.lease.model.AM.PropertyBuildingsAM.SearchUnitFilterROVO"
+    Reversed="false"/>
+</AppModule>

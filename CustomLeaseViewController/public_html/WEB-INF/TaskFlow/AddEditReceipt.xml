@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="AddEditReceipt">
+    <default-activity id="__1">router1</default-activity>
+    <transaction id="__20">
+      <requires-transaction/>
+    </transaction>
+    <data-control-scope id="__19">
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__10">
+      <name id="__11">navigation</name>
+      <value>#{pageFlowScope.navigation}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__13">
+      <name id="__12">receiptid</name>
+      <value>#{pageFlowScope.receiptid}</value>
+    </input-parameter-definition>
+    <managed-bean id="__5">
+      <managed-bean-name id="__6">ReceiptBean</managed-bean-name>
+      <managed-bean-class id="__18">custom.lease.view.bean.backing.ReceiptBean</managed-bean-class>
+      <managed-bean-scope id="__17">request</managed-bean-scope>
+    </managed-bean>
+    <view id="AddEditReceipts">
+      <page>/Fragment/AddEditReceipts.jsff</page>
+    </view>
+    <router id="router1">
+      <case>
+        <expression>#{pageFlowScope.navigation eq 'add'}</expression>
+        <outcome id="__14">add</outcome>
+      </case>
+      <case>
+        <expression>#{pageFlowScope.navigation eq 'edit'}</expression>
+        <outcome id="__15">edit</outcome>
+      </case>
+      <default-outcome>add</default-outcome>
+    </router>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome id="__16">
+        <name>taskFlowReturn1</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome id="__51">
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="taskFlowReturn2">
+      <outcome id="__60">
+        <name>taskFlowReturn2</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome id="__4">
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome id="__31">
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id id="__3">router1</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome id="__9">edit</from-outcome>
+        <to-activity-id id="__8">Execute</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__54">
+        <from-outcome id="__53">add</from-outcome>
+        <to-activity-id id="__52">CreateInsert</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__21">
+      <from-activity-id id="__22">AddEditReceipts</from-activity-id>
+      <control-flow-case id="__24">
+        <from-outcome id="__25">cancel</from-outcome>
+        <to-activity-id id="__23">taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__61">
+        <from-outcome id="__63">save</from-outcome>
+        <to-activity-id id="__62">taskFlowReturn2</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__55">
+      <from-activity-id id="__56">CreateInsert</from-activity-id>
+      <control-flow-case id="__57">
+        <from-outcome id="__58">CreateInsert</from-outcome>
+        <to-activity-id id="__59">AddEditReceipts</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__26">
+      <from-activity-id id="__27">ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__28">
+        <from-outcome id="__30">ExecuteWithParams</from-outcome>
+        <to-activity-id id="__29">AddEditReceipts</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__32">
+      <from-activity-id id="__33">Execute</from-activity-id>
+      <control-flow-case id="__35">
+        <from-outcome id="__36">Execute</from-outcome>
+        <to-activity-id id="__34">ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SearchPriceList_BTF">
+    <default-activity id="__1">SearchPriceList</default-activity>
+    <managed-bean id="__12">
+      <managed-bean-name id="__10">SearchBean</managed-bean-name>
+      <managed-bean-class id="__11">custom.lease.view.bean.backing.SearchPriceList</managed-bean-class>
+      <managed-bean-scope id="__9">backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__14">
+      <managed-bean-name id="__13">FlimStrip</managed-bean-name>
+      <managed-bean-class id="__16">com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope id="__15">backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__38">
+      <managed-bean-name id="__39">SearchPriceList</managed-bean-name>
+      <managed-bean-class id="__40">custom.lease.view.bean.backing.SearchPriceList</managed-bean-class>
+      <managed-bean-scope id="__37">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchPriceList">
+      <page>/Fragment/SearchPriceList.jsff</page>
+    </view>
+    <task-flow-call id="AddEditPriceList_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditPriceList_BTF.xml</document>
+        <id>AddEditPriceList_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>plid</name>
+        <value>#{pageFlowScope.Priceid}</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>plnavi</name>
+        <value>#{pageFlowScope.action}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome id="__17">
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ShowFS">
+      <method>#{backingBeanScope.FlimStrip._showFilmStrip}</method>
+      <outcome id="__36">
+        <fixed-outcome>back</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id id="__3">SearchPriceList</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome id="__6">toPrice</from-outcome>
+        <to-activity-id id="__5">AddEditPriceList_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__18">
+      <from-activity-id id="__19">AddEditPriceList_BTF</from-activity-id>
+      <control-flow-case id="__20">
+        <from-outcome id="__22">rollback</from-outcome>
+        <to-activity-id id="__21">ShowFS</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__23">
+        <from-outcome id="__24">commit</from-outcome>
+        <to-activity-id id="__25">ShowFS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__31">
+      <from-activity-id id="__32">ShowFS</from-activity-id>
+      <control-flow-case id="__28">
+        <from-outcome id="__26">back</from-outcome>
+        <to-activity-id id="__27">Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__29">
+      <from-activity-id id="__30">Execute</from-activity-id>
+      <control-flow-case id="__33">
+        <from-outcome id="__35">Execute</from-outcome>
+        <to-activity-id id="__34">SearchPriceList</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

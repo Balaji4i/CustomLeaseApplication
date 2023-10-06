@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XxplInvoiceLineVO"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  SelectList="XxplInvoiceLines.ACTIVEYN, 
+       XxplInvoiceLines.AMOUNT, 
+       XxplInvoiceLines.ATTRIBUTE1, 
+       XxplInvoiceLines.ATTRIBUTE10, 
+       XxplInvoiceLines.ATTRIBUTE2, 
+       XxplInvoiceLines.ATTRIBUTE3, 
+       XxplInvoiceLines.ATTRIBUTE4, 
+       XxplInvoiceLines.ATTRIBUTE5, 
+       XxplInvoiceLines.ATTRIBUTE6, 
+       XxplInvoiceLines.ATTRIBUTE7, 
+       XxplInvoiceLines.ATTRIBUTE8, 
+       XxplInvoiceLines.ATTRIBUTE9, 
+       XxplInvoiceLines.ATTRIBUTE_CATEGORY, 
+       XxplInvoiceLines.BOOKING_DTL_ID, 
+       XxplInvoiceLines.BOOKING_MS_DTL_ID, 
+       XxplInvoiceLines.BUILD_ID, 
+       XxplInvoiceLines.BUILD_NUMBER, 
+       XxplInvoiceLines.CHARGE_TYPE, 
+       XxplInvoiceLines.CREATED_BY, 
+       XxplInvoiceLines.CREATION_DATE, 
+       XxplInvoiceLines.CUSTOMER_TRX_LINE_ID, 
+       XxplInvoiceLines.DESCRIPTION, 
+       XxplInvoiceLines.INSTALLMENT_TYPE, 
+       XxplInvoiceLines.INVOICE_ID, 
+       XxplInvoiceLines.INVOICE_LINE_ID, 
+       XxplInvoiceLines.LAST_UPDATE_DATE, 
+       XxplInvoiceLines.LAST_UPDATE_LOGIN, 
+       XxplInvoiceLines.LAST_UPDATED_BY, 
+       XxplInvoiceLines.LINE_AMOUNT, 
+       XxplInvoiceLines.LINE_NUMBER, 
+       XxplInvoiceLines.LINE_TYPE, 
+       XxplInvoiceLines.OBJECT_VERSION, 
+       XxplInvoiceLines.OFFER_DTL_ID, 
+       XxplInvoiceLines.PRICE, 
+       XxplInvoiceLines.PROPERTY_ID, 
+       XxplInvoiceLines.PROPERTY_NUMBER, 
+       XxplInvoiceLines.QUANTITY, 
+       XxplInvoiceLines.REV_ACNT_CODE, 
+       XxplInvoiceLines.REV_ACNT_ID, 
+       XxplInvoiceLines.TAX_AMOUNT, 
+       XxplInvoiceLines.TAX_CODE, 
+       XxplInvoiceLines.TAX_PERC, 
+       XxplInvoiceLines.UNIT_ID, 
+       XxplInvoiceLines.UNIT_NUMBER, 
+       XxplInvoiceLines.UOM_CODE"
+  FromList="XXPL_INVOICE_LINES XxplInvoiceLines"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  RowClass="custom.lease.model.View.XxplInvoiceLineVORowImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="custom.lease.model.View.XxplInvoiceLineVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="BookingROVOLOV"
+    ViewObjectName="custom.lease.model.ROVO.BookingROVOLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="InvoiceLinesROVO"
+    ViewObjectName="custom.lease.model.ROVO.InvoiceLinesROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="XXFND_LOOKUP_V_ROVO"
+    ViewObjectName="custom.lease.model.ROVO.XXFND_LOOKUP_V_ROVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="FindByTaxTypeFIlter"
+      FullName="custom.lease.model.ROVO.XXFND_LOOKUP_V_ROVO.FindByTaxTypeFIlter"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="XXFND_LOOKUP_V_ROVO_Charge"
+    ViewObjectName="custom.lease.model.ROVO.XXFND_LOOKUP_V_ROVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="FindByChargeInvoieType"
+      FullName="custom.lease.model.ROVO.XXFND_LOOKUP_V_ROVO.FindByChargeInvoieType"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="InvoiceLinesROVA_E"
+    ViewObjectName="custom.lease.model.ROVO.InvoiceLinesROVO">
+    <ViewCriteriaUsage
+      Name="FindByBookingId"
+      FullName="custom.lease.model.ROVO.InvoiceLinesROVO.FindByBookingId"/>
+    <ParameterMap>
+      <PIMap Variable="bv_inv_build_id">
+        <TransientExpression><![CDATA[BuildId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_PropertyTrans"
+    ListVOName="InvoiceLinesROVO"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_PropertyTrans_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PropertyTrans"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="PropertyId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="PropertyName"/>
+      <Item Value="PropertyId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="PropertyName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="FindByPropertyName"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_BuildNumberTrans"
+    ListVOName="InvoiceLinesROVO"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_BuildNumberTrans_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="BuildNumberTrans"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="BuildId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="BuildName"/>
+      <Item Value="BuildingId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="BuildName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="FindByBuildName"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_UnitNumber"
+    ListVOName="InvoiceLinesROVO"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_UnitNumber_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="UnitNumber"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="UnitId"/>
+      <Item Value="InstallmentType"/>
+      <Item Value="ChargeType"/>
+      <Item Value="PropertyNumber"/>
+      <Item Value="BuildNumber"/>
+      <Item Value="PropertyId"/>
+      <Item Value="BuildId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UnitNumber"/>
+      <Item Value="UnitId"/>
+      <Item Value="InstallmentName"/>
+      <Item Value="ChargeType"/>
+      <Item Value="PropertyNumber"/>
+      <Item Value="BuildNumber"/>
+      <Item Value="PropertyId"/>
+      <Item Value="BuildingId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="UnitNumber"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="FindByUnitNUmber"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_InstallmentType"
+    ListVOName="InvoiceLinesROVO"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="InstallmentType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InstallmentName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="InstallmentName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TaxCode"
+    ListVOName="XXFND_LOOKUP_V_ROVO"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TaxCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValueNameDisp"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValueNameDisp"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ChargeType"
+    ListVOName="XXFND_LOOKUP_V_ROVO_Charge"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_ChargeType_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ChargeType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValueName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValueNameDisp"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="XxplInvoiceLines"
+    Entity="custom.lease.model.Entity.XxplInvoiceLines"/>
+  <ViewAttribute
+    Name="Activeyn"
+    PrecisionRule="true"
+    EntityAttrName="Activeyn"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="ACTIVEYN"/>
+  <ViewAttribute
+    Name="Amount"
+    PrecisionRule="true"
+    EntityAttrName="Amount"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="AMOUNT"/>
+  <ViewAttribute
+    Name="Attribute1"
+    PrecisionRule="true"
+    EntityAttrName="Attribute1"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="ATTRIBUTE1"/>
+  <ViewAttribute
+    Name="Attribute10"
+    PrecisionRule="true"
+    EntityAttrName="Attribute10"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="ATTRIBUTE10"/>
+  <ViewAttribute
+    Name="Attribute2"
+    PrecisionRule="true"
+    EntityAttrName="Attribute2"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="ATTRIBUTE2"/>
+  <ViewAttribute
+    Name="Attribute3"
+    PrecisionRule="true"
+    EntityAttrName="Attribute3"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="ATTRIBUTE3"/>
+  <ViewAttribute
+    Name="Attribute4"
+    PrecisionRule="true"
+    EntityAttrName="Attribute4"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="ATTRIBUTE4"/>
+  <ViewAttribute
+    Name="Attribute5"
+    PrecisionRule="true"
+    EntityAttrName="Attribute5"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="ATTRIBUTE5"/>
+  <ViewAttribute
+    Name="Attribute6"
+    PrecisionRule="true"
+    EntityAttrName="Attribute6"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="ATTRIBUTE6"/>
+  <ViewAttribute
+    Name="Attribute7"
+    PrecisionRule="true"
+    EntityAttrName="Attribute7"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="ATTRIBUTE7"/>
+  <ViewAttribute
+    Name="Attribute8"
+    PrecisionRule="true"
+    EntityAttrName="Attribute8"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="ATTRIBUTE8"/>
+  <ViewAttribute
+    Name="Attribute9"
+    PrecisionRule="true"
+    EntityAttrName="Attribute9"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="ATTRIBUTE9"/>
+  <ViewAttribute
+    Name="AttributeCategory"
+    PrecisionRule="true"
+    EntityAttrName="AttributeCategory"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="ATTRIBUTE_CATEGORY"/>
+  <ViewAttribute
+    Name="BookingDtlId"
+    PrecisionRule="true"
+    EntityAttrName="BookingDtlId"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="BOOKING_DTL_ID"/>
+  <ViewAttribute
+    Name="BookingMsDtlId"
+    PrecisionRule="true"
+    EntityAttrName="BookingMsDtlId"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="BOOKING_MS_DTL_ID">
+    <TransientExpression><![CDATA[XxplInvoiceHeader11.BookingId]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BuildId"
+    PrecisionRule="true"
+    EntityAttrName="BuildId"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="BUILD_ID"/>
+  <ViewAttribute
+    Name="BuildNumber"
+    PrecisionRule="true"
+    EntityAttrName="BuildNumber"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="BUILD_NUMBER"/>
+  <ViewAttribute
+    Name="ChargeType"
+    PrecisionRule="true"
+    EntityAttrName="ChargeType"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="CHARGE_TYPE"
+    LOVName="LOV_ChargeType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="CREATED_BY"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="CreationDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="CREATION_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="CustomerTrxLineId"
+    PrecisionRule="true"
+    EntityAttrName="CustomerTrxLineId"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="CUSTOMER_TRX_LINE_ID"/>
+  <ViewAttribute
+    Name="Description"
+    PrecisionRule="true"
+    EntityAttrName="Description"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="DESCRIPTION"
+    DefaultValue="Lease Invoice Line"/>
+  <ViewAttribute
+    Name="InstallmentType"
+    PrecisionRule="true"
+    EntityAttrName="InstallmentType"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="INSTALLMENT_TYPE"
+    LOVName="LOV_InstallmentType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InvoiceId"
+    PrecisionRule="true"
+    EntityAttrName="InvoiceId"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="INVOICE_ID"/>
+  <ViewAttribute
+    Name="InvoiceLineId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="InvoiceLineId"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="INVOICE_LINE_ID"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="LAST_UPDATE_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateLogin"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="LAST_UPDATE_LOGIN"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="LAST_UPDATED_BY"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="LineAmount"
+    PrecisionRule="true"
+    EntityAttrName="LineAmount"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="LINE_AMOUNT"/>
+  <ViewAttribute
+    Name="LineNumber"
+    PrecisionRule="true"
+    EntityAttrName="LineNumber"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="LINE_NUMBER"/>
+  <ViewAttribute
+    Name="LineType"
+    PrecisionRule="true"
+    EntityAttrName="LineType"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="LINE_TYPE"/>
+  <ViewAttribute
+    Name="ObjectVersion"
+    PrecisionRule="true"
+    EntityAttrName="ObjectVersion"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="OBJECT_VERSION"/>
+  <ViewAttribute
+    Name="OfferDtlId"
+    PrecisionRule="true"
+    EntityAttrName="OfferDtlId"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="OFFER_DTL_ID"/>
+  <ViewAttribute
+    Name="Price"
+    PrecisionRule="true"
+    EntityAttrName="Price"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="PRICE"/>
+  <ViewAttribute
+    Name="PropertyId"
+    PrecisionRule="true"
+    EntityAttrName="PropertyId"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="PROPERTY_ID"/>
+  <ViewAttribute
+    Name="PropertyNumber"
+    PrecisionRule="true"
+    EntityAttrName="PropertyNumber"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="PROPERTY_NUMBER"/>
+  <ViewAttribute
+    Name="Quantity"
+    PrecisionRule="true"
+    EntityAttrName="Quantity"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="QUANTITY"/>
+  <ViewAttribute
+    Name="RevAcntCode"
+    PrecisionRule="true"
+    EntityAttrName="RevAcntCode"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="REV_ACNT_CODE"/>
+  <ViewAttribute
+    Name="RevAcntId"
+    PrecisionRule="true"
+    EntityAttrName="RevAcntId"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="REV_ACNT_ID"/>
+  <ViewAttribute
+    Name="TaxAmount"
+    PrecisionRule="true"
+    EntityAttrName="TaxAmount"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="TAX_AMOUNT"/>
+  <ViewAttribute
+    Name="TaxCode"
+    PrecisionRule="true"
+    EntityAttrName="TaxCode"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="TAX_CODE"
+    LOVName="LOV_TaxCode">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TaxPerc"
+    PrecisionRule="true"
+    EntityAttrName="TaxPerc"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="TAX_PERC"/>
+  <ViewAttribute
+    Name="UnitId"
+    PrecisionRule="true"
+    EntityAttrName="UnitId"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="UNIT_ID"/>
+  <ViewAttribute
+    Name="UnitNumber"
+    PrecisionRule="true"
+    EntityAttrName="UnitNumber"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="UNIT_NUMBER"
+    LOVName="LOV_UnitNumber">
+    <Dependencies>
+      <Item
+        Value="BookingMsDtlId"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UomCode"
+    PrecisionRule="true"
+    EntityAttrName="UomCode"
+    EntityUsage="XxplInvoiceLines"
+    AliasName="UOM_CODE"/>
+  <ViewAttribute
+    Name="Org_id"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="BIGINT"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <TransientExpression><![CDATA[XxplInvoiceHeader11.OrgId]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PropertyTrans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_PropertyTrans">
+    <TransientExpression><![CDATA[if(InvoiceLinesROVA_E.first()!=null && PropertyId !=null && BuildId !=null)
+{
+InvoiceLinesROVA_E.first().getAttribute("PropertyName");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="BookingMsDtlId"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BuildNumberTrans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_BuildNumberTrans">
+    <TransientExpression><![CDATA[if(InvoiceLinesROVA_E.first()!=null && PropertyId !=null && BuildId !=null)
+{
+InvoiceLinesROVA_E.first().getAttribute("BuildName");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="BookingMsDtlId"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CheckBoxFreeze"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewLinkAccessor
+    Name="XxplInvoiceHeader11"
+    ViewLink="custom.lease.model.VL.XxplInvoiceVL"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="custom.lease.model.CustomLeaseModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

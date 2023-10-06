@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="AddEditBuilding_BTF">
+    <default-activity id="__1">router</default-activity>
+    <transaction id="__6">
+      <requires-transaction/>
+    </transaction>
+    <input-parameter-definition id="__20">
+      <name id="__19">addEditMode</name>
+      <value>#{pageFlowScope.addEditMode}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__32">
+      <name id="__31">editBuildId</name>
+      <value>#{pageFlowScope.editBuildId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__36">
+      <managed-bean-name id="__34">AddEditBuildingBB</managed-bean-name>
+      <managed-bean-class id="__35">AddEditBuildingBB.AddEditBuildingBB</managed-bean-class>
+      <managed-bean-scope id="__33">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="AditEditBuilding">
+      <page>/Fragment/AditEditBuilding.jsff</page>
+    </view>
+    <router id="router">
+      <case>
+        <expression>#{pageFlowScope.addEditMode eq 'Add'}</expression>
+        <outcome id="__3">toAdd</outcome>
+      </case>
+      <default-outcome>toEdit</default-outcome>
+    </router>
+    <task-flow-return id="Commit">
+      <outcome id="__4">
+        <name>Commit</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="Rollback">
+      <outcome id="__5">
+        <name>Rollback</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome id="__10">
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome id="__2">
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__11">
+      <from-activity-id id="__12">router</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome id="__17">toEdit</from-outcome>
+        <to-activity-id id="__16">ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__9">
+        <from-outcome id="__7">toAdd</from-outcome>
+        <to-activity-id id="__8">CreateInsert</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__21">
+      <from-activity-id id="__22">ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__23">
+        <from-outcome id="__25">ExecuteWithParams</from-outcome>
+        <to-activity-id id="__24">AditEditBuilding</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id id="__14">CreateInsert</from-activity-id>
+      <control-flow-case id="__26">
+        <from-outcome id="__27">CreateInsert</from-outcome>
+        <to-activity-id id="__18">AditEditBuilding</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__28">
+      <from-activity-id id="__29">AditEditBuilding</from-activity-id>
+      <control-flow-case id="__37">
+        <from-outcome id="__38">toSave</from-outcome>
+        <to-activity-id id="__30">Commit</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__39">
+        <from-outcome id="__41">toCancel</from-outcome>
+        <to-activity-id id="__40">Rollback</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

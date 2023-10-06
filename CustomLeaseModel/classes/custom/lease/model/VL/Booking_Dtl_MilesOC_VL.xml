@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Booking_Dtl_MilesOC_VL"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  EntityAssociation="custom.lease.model.Asso.Booking_Dtl_MilesOC_Assoc">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewLinkDefEnd
+    Name="XxplBookingDetail_VO"
+    Cardinality="1"
+    Owner="custom.lease.model.View.XxplBookingDetail_VO"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XxplBookingDetail_VO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_accessor" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.View.XxplBookingDetail_VO.BookingDtlId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="XxplBookingMilestones_VO"
+    Cardinality="-1"
+    Owner="custom.lease.model.View.XxplBookingMilestones_VO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XxplBookingMilestones_VO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="custom.lease.model.View.XxplBookingMilestones_VO.BookingDtlId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

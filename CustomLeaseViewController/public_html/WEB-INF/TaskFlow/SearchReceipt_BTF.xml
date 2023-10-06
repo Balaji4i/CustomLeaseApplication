@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SearchReceipt_BTF">
+    <default-activity id="__1">SearchReceipt</default-activity>
+    <managed-bean id="__14">
+      <managed-bean-name id="__20">filmStrip</managed-bean-name>
+      <managed-bean-class id="__22">com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope id="__21">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchReceipt">
+      <page>/Fragment/SearchReceipt.jsff</page>
+    </view>
+    <task-flow-call id="AddEditReceipt">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditReceipt.xml</document>
+        <id>AddEditReceipt</id>
+      </task-flow-reference>
+      <input-parameter id="__2">
+        <name>receiptid</name>
+        <value>#{pageFlowScope.receiptid}</value>
+      </input-parameter>
+      <input-parameter id="__3">
+        <name>navigation</name>
+        <value>#{pageFlowScope.navigation}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome id="__9">
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Hide_FS">
+      <method>#{backingBeanScope.filmStrip._hideFilmStrip}</method>
+      <outcome id="__28">
+        <fixed-outcome>hide</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Show_FS">
+      <method>#{backingBeanScope.filmStrip._showFilmStrip}</method>
+      <outcome id="__34">
+        <fixed-outcome>show</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__4">
+      <from-activity-id id="__5">SearchReceipt</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome id="__8">AddEdit</from-outcome>
+        <to-activity-id id="__6">Hide_FS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id id="__11">AddEditReceipt</from-activity-id>
+      <control-flow-case id="__13">
+        <to-activity-id id="__12">Show_FS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id id="__16">Execute</from-activity-id>
+      <control-flow-case id="__18">
+        <from-outcome id="__19">Execute</from-outcome>
+        <to-activity-id id="__17">SearchReceipt</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id id="__24">Hide_FS</from-activity-id>
+      <control-flow-case id="__25">
+        <from-outcome id="__27">hide</from-outcome>
+        <to-activity-id id="__26">AddEditReceipt</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__29">
+      <from-activity-id id="__30">Show_FS</from-activity-id>
+      <control-flow-case id="__31">
+        <from-outcome id="__33">show</from-outcome>
+        <to-activity-id id="__32">SearchReceipt</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

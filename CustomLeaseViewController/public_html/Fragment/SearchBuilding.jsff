@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+      <af:panelGroupLayout id="pgl1">
+        <af:panelHeader text="Search Building" id="ph2">
+          <af:query id="qryId1" headerText="Search" disclosed="true"
+                    value="#{bindings.SearchBuildingROVOCriteriaQuery.queryDescriptor}"
+                    model="#{bindings.SearchBuildingROVOCriteriaQuery.queryModel}"
+                    queryListener="#{bindings.SearchBuildingROVOCriteriaQuery.processQuery}"
+                    queryOperationListener="#{bindings.SearchBuildingROVOCriteriaQuery.processQueryOperation}"
+                    resultComponentId="::pc3:resId2" rows="2" maxColumns="2"/>
+        </af:panelHeader>
+        <af:panelBox text="Search Result" id="pb1" showDisclosure="false">
+          <f:facet name="toolbar"/>
+          <af:panelCollection id="pc3" styleClass="AFStretchWidth">
+            <f:facet name="menus"/>
+            <f:facet name="toolbar">
+              <af:toolbar id="t1" flex="10">
+                <af:commandImageLink id="cil1" inlineStyle="margin-right:10px;"
+                                     hoverIcon="/images/func_add_16_hov.png"
+                                     depressedIcon="/images/func_add_16_act.png"
+                                     disabledIcon="/images/func_add_16_dis.png"
+                                     icon="/images/func_add_16_ena.png"
+                                     action="toBuilding">
+                  <af:setPropertyListener from="Add"
+                                          to="#{pageFlowScope.addEditMode}"
+                                          type="action"/>
+                  <af:setPropertyListener from="-1"
+                                          to="#{pageFlowScope.editBuildId}"
+                                          type="action"/>
+                  <af:clientListener method="enforcePreventUserInput"
+                                     type="action"/>
+                </af:commandImageLink>
+                <af:spacer width="10" height="10" id="s2"/>
+                <af:commandImageLink id="cil2"
+                                     hoverIcon="/images/func_pencil_16_hov.png"
+                                     inlineStyle="margin-right:10px;"
+                                     disabledIcon="/images/func_pencil_16_dis.png"
+                                     depressedIcon="/images/func_pencil_16_act.png"
+                                     icon="/images/func_pencil_16_ena.png"
+                                     action="toBuilding">
+                  <af:setPropertyListener from="Edit"
+                                          to="#{pageFlowScope.addEditMode}"
+                                          type="action"/>
+                  <af:setPropertyListener from="#{bindings.BuildId.inputValue}"
+                                          to="#{pageFlowScope.editBuildId}"
+                                          type="action"/>
+                  <af:clientListener method="enforcePreventUserInput"
+                                     type="action"/>
+                </af:commandImageLink>
+              </af:toolbar>
+            </f:facet>
+            <f:facet name="statusbar"/>
+            <af:table value="#{bindings.SearchBuilding_ROVO12.collectionModel}"
+                      var="row"
+                      rows="#{bindings.SearchBuilding_ROVO12.rangeSize}"
+                      emptyText="#{bindings.SearchBuilding_ROVO12.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="10"
+                      rowBandingInterval="0"
+                      filterModel="#{bindings.SearchBuildingROVOCriteriaQuery.queryDescriptor}"
+                      queryListener="#{bindings.SearchBuildingROVOCriteriaQuery.processQuery}"
+                      filterVisible="true" varStatus="vs"
+                      selectedRowKeys="#{bindings.SearchBuilding_ROVO12.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.SearchBuilding_ROVO12.collectionModel.makeCurrent}"
+                      rowSelection="single" id="resId2"
+                      columnStretching="column:resId2c8" scrollPolicy="page"
+                      autoHeightRows="0">
+              <af:column id="c7" width="50" headerText="S.No" filterable="true"
+                         frozen="true">
+                <af:panelGroupLayout id="pgl4" halign="center"
+                                     layout="vertical">
+                  <af:outputText value="#{vs.index+1}" id="ot1"/>
+                </af:panelGroupLayout>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.BuildNumber.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.BuildNumber.label}"
+                         id="resId2c5" width="200">
+                <af:commandImageLink text="#{row.BuildNumber}"
+                                     action="toBuilding"
+                                     inlineStyle="font-weight:bolder;font-size:small;color:#1367AE;"
+                                     id="cil3">
+                  <af:setPropertyListener from="Edit"
+                                          to="#{pageFlowScope.addEditMode}"
+                                          type="action"/>
+                  <af:setPropertyListener from="#{bindings.BuildId.inputValue}"
+                                          to="#{pageFlowScope.editBuildId}"
+                                          type="action"/>
+                  <af:clientListener method="enforcePreventUserInput"
+                                     type="action"/>
+                </af:commandImageLink>
+                <af:outputText value="#{row.BuildNumber}" id="ot13"
+                               rendered="false"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.BuildName.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.BuildName.label}"
+                         id="resId2c4" width="200">
+                <af:outputText value="#{row.BuildName}" id="ot5"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.PropertyName.name}"
+                         filterable="true" sortable="false" width="200"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.PropertyName.label}"
+                         id="resId2c1">
+                <af:outputText value="#{row.PropertyName}" id="ot2"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.BuildId.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.BuildId.label}"
+                         id="resId2c2" width="200" rendered="false">
+                <af:outputText value="#{row.BuildId}" id="ot6">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.SearchBuilding_ROVO12.hints.BuildId.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.PropertyId.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.PropertyId.label}"
+                         id="resId2c3" rendered="false" width="200">
+                <af:outputText value="#{row.PropertyId}" id="ot11">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.SearchBuilding_ROVO12.hints.PropertyId.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.BuildShortcode.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.BuildShortcode.label}"
+                         id="resId2c6" width="200">
+                <af:outputText value="#{row.BuildShortcode}" id="ot16"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.BuildType.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.BuildType.label}"
+                         id="resId2c7" width="200">
+                <af:outputText value="#{row.BuildType}" id="ot9"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.Description.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.Description.label}"
+                         id="resId2c8" width="200">
+                <af:outputText value="#{row.Description}" id="ot14"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.ActiveYn.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.ActiveYn.label}"
+                         id="resId2c9" width="200" rendered="false">
+                <af:outputText value="#{row.ActiveYn}" id="ot3"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.SaleableYn.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.SaleableYn.label}"
+                         id="resId2c10" width="200" rendered="false">
+                <af:outputText value="#{row.SaleableYn}" id="ot4"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.LeaseableYn.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.LeaseableYn.label}"
+                         id="resId2c11" width="200" rendered="false">
+                <af:outputText value="#{row.LeaseableYn}" id="ot15"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.NoOfFloors.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.NoOfFloors.label}"
+                         id="resId2c12" width="200" rendered="false">
+                <af:outputText value="#{row.NoOfFloors}" id="ot7">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.SearchBuilding_ROVO12.hints.NoOfFloors.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.CreatedBy.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.CreatedBy.label}"
+                         id="resId2c13" width="200" rendered="false">
+                <af:outputText value="#{row.CreatedBy}" id="ot12"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.CreationDate.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.CreationDate.label}"
+                         id="resId2c14" width="200" rendered="false">
+                <f:facet name="filter">
+                  <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                id="id1"/>
+                </f:facet>
+                <af:outputText value="#{row.CreationDate}" id="ot8">
+                  <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.LastUpdatedBy.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.LastUpdatedBy.label}"
+                         id="resId2c15" width="200" rendered="false">
+                <af:outputText value="#{row.LastUpdatedBy}" id="ot17"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchBuilding_ROVO12.hints.LastUpdateLogin.name}"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchBuilding_ROVO12.hints.LastUpdateLogin.label}"
+                         id="resId2c16" width="200" rendered="false">
+                <af:outputText value="#{row.LastUpdateLogin}" id="ot10"/>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </af:panelBox>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

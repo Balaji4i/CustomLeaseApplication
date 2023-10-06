@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="SearchPaymentPlanPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.PaymentPlanAM1.SearchPaymenPlan_ROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="12"
+              id="SearchPaymenPlan_ROVO1Iterator" CacheResults="false"/>
+    <searchRegion Criteria="Search_Paymen_Plan"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchPaymenPlan_ROVO1Iterator"
+                  id="SearchPaymenPlanROVOCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SearchPaymenPlan_ROVO1Iterator"
+          id="SearchPaymenPlan_ROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SearchPaymenPlan_ROVO"
+                      Name="SearchPaymenPlan_ROVO10">
+        <AttrNames>
+          <Item Value="MsHdrId"/>
+          <Item Value="MilestoneNumber"/>
+          <Item Value="MilestoneName"/>
+          <Item Value="MilestoneShortcode"/>
+          <Item Value="MilestoneDate"/>
+          <Item Value="MilestoneType"/>
+          <Item Value="ProjectName"/>
+          <Item Value="OrgName"/>
+          <Item Value="StartDate"/>
+          <Item Value="EndDate"/>
+          <Item Value="ActiveYn"/>
+          <Item Value="Status"/>
+          <Item Value="Description"/>
+          <Item Value="RevisedBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SearchPaymenPlan_ROVO1Iterator" id="MsHdrId">
+      <AttrNames>
+        <Item Value="MsHdrId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

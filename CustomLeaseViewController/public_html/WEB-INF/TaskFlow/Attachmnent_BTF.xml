@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Attachmnent_BTF">
+    <default-activity id="__1">intAttachments</default-activity>
+    <input-parameter-definition id="__4">
+      <name id="__3">funcId</name>
+      <value>#{pageFlowScope.funcId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__6">
+      <name id="__5">funcRefId</name>
+      <value>#{pageFlowScope.funcRefId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__39">
+      <managed-bean-name id="__38">Attachment</managed-bean-name>
+      <managed-bean-class id="__40">custom.lease.view.bean.backing.Attachment</managed-bean-class>
+      <managed-bean-scope id="__41">backingBean</managed-bean-scope>
+    </managed-bean>
+    <method-call id="intAttachments">
+      <method>#{bindings.intAttachments.execute}</method>
+      <outcome id="__2">
+        <fixed-outcome>intAttachments</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome id="__7">
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <view id="Attachment">
+      <page>/Page/Attachment.jspx</page>
+    </view>
+    <control-flow-rule id="__28">
+      <from-activity-id id="__29">intAttachments</from-activity-id>
+      <control-flow-case id="__31">
+        <from-outcome id="__30">intAttachments</from-outcome>
+        <to-activity-id id="__32">Attachment</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__33">
+      <from-activity-id id="__34">Attachment</from-activity-id>
+      <control-flow-case id="__36">
+        <from-outcome id="__37">retunBack</from-outcome>
+        <to-activity-id id="__35">taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="AddEditReceiptsPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.Receipt_AM.XxplReceiptHeaderView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplReceiptHeaderView1Iterator"/>
+    <iterator Binds="Root.Receipt_AM.XxplReceiptLineView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="6"
+              id="XxplReceiptLineView1Iterator"/>
+    <iterator Binds="Root.Receipt_AM.ReceiptLineMs_ROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="ReceiptLineMs_ROVO1Iterator"/>
+    <searchRegion Binds="ReceiptLineMs_ROVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ReceiptLineMs_ROVO1Query"/>
+    <iterator Binds="Root.Receipt_AM.XXPL_TENANT_OPEN_INV_VROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="6"
+              id="XXPL_TENANT_OPEN_INV_VROVO1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="ReceiptNumber">
+      <AttrNames>
+        <Item Value="ReceiptNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="ReceiptDate">
+      <AttrNames>
+        <Item Value="ReceiptDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplReceiptHeaderView1Iterator" StaticList="false"
+          Uses="LOV_OrgId" id="OrgId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator" id="CustId">
+      <AttrNames>
+        <Item Value="CustId"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplReceiptHeaderView1Iterator" StaticList="false"
+          Uses="LOV_CurrencyCode" id="CurrencyCode" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XxplReceiptHeaderView1Iterator" StaticList="false"
+          Uses="LOV_ReceiptType" id="ReceiptType" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator" id="BankName">
+      <AttrNames>
+        <Item Value="BankName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="BankBranchName">
+      <AttrNames>
+        <Item Value="BankBranchName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="BankAccountNum">
+      <AttrNames>
+        <Item Value="BankAccountNum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="ReceivedAmount">
+      <AttrNames>
+        <Item Value="ReceivedAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="ReceiptAmount">
+      <AttrNames>
+        <Item Value="ReceiptAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="PdcNumber">
+      <AttrNames>
+        <Item Value="PdcNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="RemitBankAcctUseId">
+      <AttrNames>
+        <Item Value="RemitBankAcctUseId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="InterfaceStatus">
+      <AttrNames>
+        <Item Value="InterfaceStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false"
+                  IterBinding="XxplReceiptHeaderView1Iterator"
+                  Uses="LOV_ReceiptMethodTrans" id="ReceiptMethodTrans"/>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator" id="FuncId">
+      <AttrNames>
+        <Item Value="FuncId"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="XxplReceiptHeaderView1Iterator" id="ReceiptRiskYn"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ReceiptRiskYn"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="ReceiptId">
+      <AttrNames>
+        <Item Value="ReceiptId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XxplReceiptLineView1Iterator" id="XxplReceiptLineView1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplReceiptLineView"
+                      Name="XxplReceiptLineView10">
+        <AttrNames>
+          <Item Value="BookingMsDtlId"/>
+          <Item Value="MocName_Trans"/>
+          <Item Value="ChargeType_trans"/>
+          <Item Value="CustId"/>
+          <Item Value="ReceiptDtlId"/>
+          <Item Value="invoicenumberTrans"/>
+          <Item Value="InvoiceId"/>
+          <Item Value="ReceiptId"/>
+          <Item Value="InstallmentTypeTrans"/>
+          <Item Value="TransactionAmountTrans"/>
+          <Item Value="TransactionApplied"/>
+          <Item Value="TransactionBalance"/>
+          <Item Value="AmountApplied"/>
+          <Item Value="AppliedDate"/>
+          <Item Value="InterfaceStatus"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="GlDate"/>
+          <Item Value="ReversalGlDate"/>
+          <Item Value="UnappliedDate"/>
+          <Item Value="UnApplyInterfaceStatus"/>
+          <Item Value="AmountBalance"/>
+          <Item Value="ReceiptAmountApplied_trans"/>
+          <Item Value="InterfaceErrorMsg"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplReceiptLineView1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="Commit" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="CustomerSiteTrans">
+      <AttrNames>
+        <Item Value="CustomerSiteTrans"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="InterfaceErrorMsg">
+      <AttrNames>
+        <Item Value="InterfaceErrorMsg"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="RevGlDate">
+      <AttrNames>
+        <Item Value="RevGlDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="RevReason">
+      <AttrNames>
+        <Item Value="RevReason"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator" id="RevDesc">
+      <AttrNames>
+        <Item Value="RevDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="RevIntStatus">
+      <AttrNames>
+        <Item Value="RevIntStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplReceiptHeaderView1Iterator" StaticList="false"
+          Uses="LOV_ModeOfReceipt" id="ModeOfReceipt" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues StaticList="false"
+                  IterBinding="XxplReceiptHeaderView1Iterator"
+                  Uses="LOV_CustomerName" id="CustomerName"/>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="UnitNumber_Trans">
+      <AttrNames>
+        <Item Value="UnitNumber_Trans"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="BookingNumber_Trans">
+      <AttrNames>
+        <Item Value="BookingNumber_Trans"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="SourceFuncRefId">
+      <AttrNames>
+        <Item Value="SourceFuncRefId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="ReceiptLineMs_ROVO1Iterator" id="ReceiptLineMs_ROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.ReceiptLineMs_ROVO"
+                      Name="ReceiptLineMs_ROVO10">
+        <AttrNames>
+          <Item Value="BookingMsDtlId"/>
+          <Item Value="InstallmentType"/>
+          <Item Value="ChargeName"/>
+          <Item Value="ChargeType"/>
+          <Item Value="OrgId"/>
+          <Item Value="BookingNumber"/>
+          <Item Value="PropertyId"/>
+          <Item Value="BuildingId"/>
+          <Item Value="UnitId"/>
+          <Item Value="Select_trans" Binds="Select_trans"/>
+          <Item Value="UnitNumber"/>
+          <Item Value="BuildName"/>
+          <Item Value="BuildNumber"/>
+          <Item Value="PropertyNumber"/>
+          <Item Value="PropertyName"/>
+          <Item Value="InstallmentName"/>
+          <Item Value="ChargeTypeDisp"/>
+          <Item Value="ChargeNameDisp"/>
+          <Item Value="CarparkingId"/>
+          <Item Value="CarparkingNum"/>
+          <Item Value="MocCode"/>
+          <Item Value="MocName"/>
+          <Item Value="InstallmentPct"/>
+          <Item Value="Baseamount"/>
+          <Item Value="TaxRate"/>
+          <Item Value="TaxCode"/>
+          <Item Value="TaxAmount"/>
+          <Item Value="InstallmentAmount"/>
+          <Item Value="Amtapplied"/>
+          <Item Value="Balanceamt"/>
+          <Item Value="Overall"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="ReceiptLineMs_ROVO1Iterator" id="Select_trans"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Select_trans"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="RevisionNo">
+      <AttrNames>
+        <Item Value="RevisionNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator" id="GlDate">
+      <AttrNames>
+        <Item Value="GlDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="MaturityDate">
+      <AttrNames>
+        <Item Value="MaturityDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplReceiptHeaderView1Iterator" StaticList="false"
+          Uses="LOV_RevCategory" id="RevCategory1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XxplReceiptHeaderView1Iterator" StaticList="false"
+          Uses="LOV_RevReason" id="RevReason1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <action IterBinding="XxplReceiptHeaderView1Iterator" id="Execute"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action IterBinding="XxplReceiptLineView1Iterator" id="Execute1"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="SaasReceiptStatus">
+      <AttrNames>
+        <Item Value="SaasReceiptStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XXPL_TENANT_OPEN_INV_VROVO1Iterator"
+          id="XXPL_TENANT_OPEN_INV_VROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.XXPL_TENANT_OPEN_INV_VROVO"
+                      Name="XXPL_TENANT_OPEN_INV_VROVO10">
+        <AttrNames>
+          <Item Value="Type"/>
+          <Item Value="Name"/>
+          <Item Value="DtlId"/>
+          <Item Value="HdrId"/>
+          <Item Value="FuncId"/>
+          <Item Value="BookingId"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="PeriodDate"/>
+          <Item Value="InvoiceAmount"/>
+          <Item Value="PreviousAmountApplied"/>
+          <Item Value="BalanceAmt"/>
+          <Item Value="AmountApplied"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="XxplReceiptHeaderView1Iterator" id="Attribute4"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Attribute4"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Owner"/>
+        <Item Value="Tenant"/>
+      </ValueList>
+    </button>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73"
+                id="SearchCancellation_BTF_SearchCancellation_BTF_ExecutePageDef"
+                Package="TaskFlow" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="Root.Invoice_AM.SEARCH_CANCELLATION_ROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="SEARCH_CANCELLATION_ROVOIterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="SEARCH_CANCELLATION_ROVOIterator" id="Execute"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="LeaseRcptCollectionPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.Booking_AM.XxplReceiptTransaction_V_ROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplReceiptTransaction_V_ROVO1Iterator"/>
+    <iterator id="XxplBookingHeader_VOIterator"
+              Binds="Root.Booking_AM.XxplBookingHeader_VO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator id="XxplBookingCustomer_VOIterator"
+              Binds="Root.Booking_AM.XxplBookingCustomer_VO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator id="XxplReceiptHeaderView1Iterator"
+              Binds="Root.Booking_AM.XxplReceiptHeaderView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator id="XxplReceiptLineView2Iterator"
+              Binds="Root.Booking_AM.XxplReceiptLineView2"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="XxplReceiptTransaction_V_ROVO1Iterator"
+          id="XxplReceiptTransaction_V_ROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.XxplReceiptTransaction_V_ROVO"
+                      Name="XxplReceiptTransaction_V_ROVO10">
+        <AttrNames>
+          <Item Value="Receipt_Flag_Trans" Binds="Receipt_Flag_Trans"/>
+          <Item Value="PeriodDuration"/>
+          <Item Value="Amount"/>
+          <Item Value="Tax"/>
+          <Item Value="InvoiceAmt"/>
+          <Item Value="ReceiptAppliedAmt"/>
+          <Item Value="BalanceAmt"/>
+          <Item Value="Set_Amount_Trans"/>
+          <Item Value="ReceiptCategory"/>
+          <Item Value="SourcesRefDtlId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="XxplReceiptTransaction_V_ROVO1Iterator"
+            id="Receipt_Flag_Trans" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Receipt_Flag_Trans"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="True"/>
+        <Item Value="False"/>
+      </ValueList>
+    </button>
+    <action id="Commit" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

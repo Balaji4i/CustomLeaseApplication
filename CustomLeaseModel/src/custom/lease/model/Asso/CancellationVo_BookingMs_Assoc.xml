@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CancellationVo_BookingMs_Assoc"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="XxplCancellation_EO1"
+    Cardinality="1"
+    Source="true"
+    Owner="custom.lease.model.Entity.XxplCancellation_EO"
+    LockLevel="NONE">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="XxplCancellation_EO1"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.Entity.XxplCancellation_EO.BookingId"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="XxplBookingMilestones_EO1"
+    Cardinality="-1"
+    Owner="custom.lease.model.Entity.XxplBookingMilestones_EO">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="XxplBookingMilestones_EO1"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="custom.lease.model.Entity.XxplBookingMilestones_EO.BookingHdrId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

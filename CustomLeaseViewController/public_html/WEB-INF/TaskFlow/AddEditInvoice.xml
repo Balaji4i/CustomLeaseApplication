@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="AddEditInvoice">
+    <default-activity id="__1">router1</default-activity>
+    <transaction id="__46">
+      <requires-transaction/>
+    </transaction>
+    <input-parameter-definition id="__56">
+      <name id="__55">action</name>
+      <value>#{pageFlowScope.action}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__58">
+      <name id="__57">invoiceNumber</name>
+      <value>#{pageFlowScope.invoiceNumber}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__3">
+      <managed-bean-name id="__2">Film</managed-bean-name>
+      <managed-bean-class id="__4">custom.lease.custom.view.beans.filmStrip.FilmStripBean</managed-bean-class>
+      <managed-bean-scope id="__5">backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__52">
+      <managed-bean-name id="__54">AddEditInvoice</managed-bean-name>
+      <managed-bean-class id="__51">custom.lease.view.bean.backing.AddEditInvoice</managed-bean-class>
+      <managed-bean-scope id="__53">backingBean</managed-bean-scope>
+    </managed-bean>
+    <router id="router1">
+      <case>
+        <expression>#{pageFlowScope.action == 'Add'}</expression>
+        <outcome id="__49">To_Add</outcome>
+      </case>
+      <case>
+        <expression>#{pageFlowScope.action == 'edit'}</expression>
+        <outcome id="__50">toEdit</outcome>
+      </case>
+      <default-outcome>toEdit</default-outcome>
+    </router>
+    <method-call id="HideTS2">
+      <method>#{backingBeanScope.Film._hideFilmStrip}</method>
+      <outcome id="__48">
+        <fixed-outcome>To_Edit</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="HideTS1">
+      <method>#{backingBeanScope.Film._hideFilmStrip}</method>
+      <outcome id="__47">
+        <fixed-outcome>ToAdding</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="AddEditInvoicejsff">
+      <page>/Fragment/AddEditInvoice.jsff</page>
+    </view>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome id="__14">
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome id="__20">
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="commit">
+      <outcome id="__36">
+        <name>commit</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="rollback">
+      <outcome id="__37">
+        <name>rollback</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__6">
+      <from-activity-id id="__7">router1</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome id="__10">To_Add</from-outcome>
+        <to-activity-id id="__9">HideTS1</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__12">
+        <from-outcome id="__13">toEdit</from-outcome>
+        <to-activity-id id="__11">HideTS2</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id id="__16">HideTS1</from-activity-id>
+      <control-flow-case id="__17">
+        <from-outcome id="__19">ToAdding</from-outcome>
+        <to-activity-id id="__18">CreateInsert</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__21">
+      <from-activity-id id="__22">HideTS2</from-activity-id>
+      <control-flow-case id="__24">
+        <from-outcome id="__25">To_Edit</from-outcome>
+        <to-activity-id id="__23">ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__26">
+      <from-activity-id id="__27">ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__29">
+        <from-outcome id="__28">ExecuteWithParams</from-outcome>
+        <to-activity-id id="__30">AddEditInvoicejsff</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__31">
+      <from-activity-id id="__32">CreateInsert</from-activity-id>
+      <control-flow-case id="__34">
+        <from-outcome id="__33">CreateInsert</from-outcome>
+        <to-activity-id id="__35">AddEditInvoicejsff</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__38">
+      <from-activity-id id="__39">AddEditInvoicejsff</from-activity-id>
+      <control-flow-case id="__40">
+        <from-outcome id="__42">save</from-outcome>
+        <to-activity-id id="__41">commit</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__43">
+        <from-outcome id="__45">cancel</from-outcome>
+        <to-activity-id id="__44">rollback</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

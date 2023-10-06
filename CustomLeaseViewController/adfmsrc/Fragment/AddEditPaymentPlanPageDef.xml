@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="AddEditPaymentPlanPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="XxplPaymentPlanHeaderView1" RangeSize="25"
+              DataControl="PaymentPlanAMDataControl"
+              id="XxplPaymentPlanHeaderView1Iterator"/>
+    <iterator Binds="XxplPaymentPlanLineView1" RangeSize="10"
+              DataControl="PaymentPlanAMDataControl"
+              id="XxplPaymentPlanLineView1Iterator"/>
+    <iterator id="AppovalTypeROVO1Iterator"
+              Binds="Root.PaymentPlanAM1.AppovalTypeROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <taskFlow id="ApprovalHistory_BTF1"
+              taskFlowId="/WEB-INF/TaskFlow/ApprovalHistory_BTF.xml#ApprovalHistory_BTF"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="plid" value="#{sessionScope.msHdrid}"/>
+        <parameter id="fuctionid" value="#{sessionScope.fuctionid}"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings>
+    <listOfValues StaticList="false"
+                  IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                  Uses="LOV_BuNameTrans" id="BuNameTrans"/>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="MsHdrId">
+      <AttrNames>
+        <Item Value="MsHdrId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="MilestoneName">
+      <AttrNames>
+        <Item Value="MilestoneName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="MilestoneNumber">
+      <AttrNames>
+        <Item Value="MilestoneNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="MilestoneShortcode">
+      <AttrNames>
+        <Item Value="MilestoneShortcode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="RevisionNo">
+      <AttrNames>
+        <Item Value="RevisionNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="RevisedBy">
+      <AttrNames>
+        <Item Value="RevisedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="RevisionDate">
+      <AttrNames>
+        <Item Value="RevisionDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="OrgId">
+      <AttrNames>
+        <Item Value="OrgId"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplPaymentPlanHeaderView1Iterator" StaticList="false"
+          Uses="LOV_MilestoneType" id="MilestoneType" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="StartDate">
+      <AttrNames>
+        <Item Value="StartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="EndDate">
+      <AttrNames>
+        <Item Value="EndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="MilestoneDate">
+      <AttrNames>
+        <Item Value="MilestoneDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplPaymentPlanHeaderView1Iterator" StaticList="false"
+          Uses="LOV_ProjectId" id="ProjectId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="FuncId">
+      <AttrNames>
+        <Item Value="FuncId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="LastUpdateDate">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="LastUpdateLogin">
+      <AttrNames>
+        <Item Value="LastUpdateLogin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPaymentPlanHeaderView1Iterator"
+                     id="LastUpdatedBy">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="XxplPaymentPlanHeaderView1Iterator" id="ActiveYn"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ActiveYn"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="XxplPaymentPlanLineView1Iterator"
+          id="XxplPaymentPlanLineView1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplPaymentPlanLineView"
+                      Name="XxplPaymentPlanLineView10">
+        <AttrNames>
+          <Item Value="MsHdrId"/>
+          <Item Value="MsDtlId"/>
+          <Item Value="InstallmentPct"/>
+          <Item Value="ChargeType"/>
+          <Item Value="PaymentTerm"/>
+          <Item Value="NoOfDays"/>
+          <Item Value="InstallmentType"/>
+          <Item Value="Remarks"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplPaymentPlanLineView1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="XxplPaymentPlanLineView1Iterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" DataControl="PaymentPlanAMDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <methodAction id="callrevision" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="callrevision"
+                  IsViewObjectMethod="false"
+                  DataControl="customRootAppModuleDataControl"
+                  InstanceName="customRootAppModuleDataControl.dataProvider.Root.PaymentPlanAM1"
+                  ReturnName="data.customRootAppModuleDataControl.methodResults.callrevision_customRootAppModuleDataControl_dataProvider_Root_PaymentPlanAM1_callrevision_result">
+      <NamedData NDName="id" NDType="java.lang.String"/>
+      <NamedData NDName="revname" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

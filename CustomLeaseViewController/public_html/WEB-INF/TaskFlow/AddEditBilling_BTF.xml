@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="AddEditBilling_BTF">
+    <default-activity id="__5">router1</default-activity>
+    <transaction id="__54">
+      <requires-transaction/>
+    </transaction>
+    <input-parameter-definition id="__1">
+      <name id="__2">BillingNavigation</name>
+      <value>#{pageFlowScope.billNaviResult}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__4">
+      <name id="__3">billingId</name>
+      <value>#{pageFlowScope.billid}</value>
+    </input-parameter-definition>
+    <managed-bean id="__9">
+      <managed-bean-name id="__10">FlimStrip</managed-bean-name>
+      <managed-bean-class id="__11">com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope id="__8">backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__55">
+      <managed-bean-name id="__56">AddEditBilling</managed-bean-name>
+      <managed-bean-class id="__57">custom.lease.view.bean.backing.AddEditBilling</managed-bean-class>
+      <managed-bean-scope id="__58">backingBean</managed-bean-scope>
+    </managed-bean>
+    <router id="router1">
+      <case>
+        <expression>#{pageFlowScope.billNaviResult=='ADD'}</expression>
+        <outcome id="__6">AddBilling</outcome>
+      </case>
+      <case>
+        <expression>#{pageFlowScope.billNaviResult=='EDIT'}</expression>
+        <outcome id="__7">EditBilling</outcome>
+      </case>
+      <default-outcome>AddBilling</default-outcome>
+    </router>
+    <method-call id="HideFs">
+      <method>#{backingBeanScope.FlimStrip._hideFilmStrip}</method>
+      <outcome id="__42">
+        <fixed-outcome>toAddB</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="HideFs1">
+      <method>#{backingBeanScope.FlimStrip._hideFilmStrip}</method>
+      <outcome id="__43">
+        <fixed-outcome>toEditB</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome id="__12">
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome id="__13">
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="AddEditBilling">
+      <page>/Fragment/AddEditBilling.jsff</page>
+    </view>
+    <task-flow-return id="Cancel">
+      <outcome id="__44">
+        <name>Cancel</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="Save">
+      <outcome id="__45">
+        <name>Save</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__14">
+      <from-activity-id id="__15">router1</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome id="__18">AddBilling</from-outcome>
+        <to-activity-id id="__17">HideFs</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__19">
+        <from-outcome id="__21">EditBilling</from-outcome>
+        <to-activity-id id="__20">HideFs1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__22">
+      <from-activity-id id="__23">HideFs</from-activity-id>
+      <control-flow-case id="__25">
+        <from-outcome id="__26">toAddB</from-outcome>
+        <to-activity-id id="__24">CreateInsert</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__27">
+      <from-activity-id id="__28">HideFs1</from-activity-id>
+      <control-flow-case id="__30">
+        <from-outcome id="__31">toEditB</from-outcome>
+        <to-activity-id id="__29">ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__32">
+      <from-activity-id id="__33">ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__35">
+        <from-outcome id="__34">ExecuteWithParams</from-outcome>
+        <to-activity-id id="__36">AddEditBilling</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__37">
+      <from-activity-id id="__38">CreateInsert</from-activity-id>
+      <control-flow-case id="__39">
+        <from-outcome id="__41">CreateInsert</from-outcome>
+        <to-activity-id id="__40">AddEditBilling</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__46">
+      <from-activity-id id="__47">AddEditBilling</from-activity-id>
+      <control-flow-case id="__48">
+        <from-outcome id="__50">cancel</from-outcome>
+        <to-activity-id id="__49">Cancel</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__51">
+        <from-outcome id="__53">save</from-outcome>
+        <to-activity-id id="__52">Save</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

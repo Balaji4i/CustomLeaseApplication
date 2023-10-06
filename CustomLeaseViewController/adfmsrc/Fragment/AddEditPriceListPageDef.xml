@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="AddEditPriceListPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.PriceListAM1.XxplHeader1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplHeader1Iterator"/>
+    <iterator Binds="Root.PriceListAM1.XxplLineVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="10"
+              id="XxplLineVO1Iterator" Refresh="always"/>
+    <searchRegion Binds="XxplLineVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="XxplLineVO1Query"/>
+    <iterator Binds="Root.PriceListAM1.XxplOtherCharges"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplOtherChargesIterator"/>
+    <iterator id="AppovalTypeROVO1Iterator"
+              Binds="Root.Documents_AM.AppovalTypeROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <taskFlow id="ApprovalHistory_BTF1"
+              taskFlowId="/WEB-INF/TaskFlow/ApprovalHistory_BTF.xml#ApprovalHistory_BTF"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="plid" value="#{sessionScope.plid}"/>
+        <parameter id="fuctionid" value="#{sessionScope.fuctionid}"/>
+      </parameters>
+    </taskFlow>
+    <iterator id="GetID_Rovo1Iterator" Binds="Root.Documents_AM.GetID_Rovo1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="Root.PriceListAM1.SearchUnitFilterROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="10"
+              id="SearchUnitFilterROVO1Iterator"/>
+    <searchRegion Criteria="SearchUnit"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchUnitFilterROVO1Iterator" id="SearchUnitQuery"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="XxplHeader1Iterator" id="PlNumber">
+      <AttrNames>
+        <Item Value="PlNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplHeader1Iterator" id="PlName">
+      <AttrNames>
+        <Item Value="PlName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplHeader1Iterator" id="PlNameTl">
+      <AttrNames>
+        <Item Value="PlNameTl"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplHeader1Iterator" id="StartDate">
+      <AttrNames>
+        <Item Value="StartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplHeader1Iterator" id="EndDate">
+      <AttrNames>
+        <Item Value="EndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplHeader1Iterator" id="CurrencyCode">
+      <AttrNames>
+        <Item Value="CurrencyCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplHeader1Iterator" id="RevisionNo">
+      <AttrNames>
+        <Item Value="RevisionNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplHeader1Iterator" id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplHeader1Iterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="UnitTTypeTrans">
+      <AttrNames>
+        <Item Value="UnitTTypeTrans"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="MinPrice">
+      <AttrNames>
+        <Item Value="MinPrice"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="BasePrice">
+      <AttrNames>
+        <Item Value="BasePrice"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="PlAmount">
+      <AttrNames>
+        <Item Value="PlAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="StartDate1">
+      <AttrNames>
+        <Item Value="StartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="EndDate1">
+      <AttrNames>
+        <Item Value="EndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XxplLineVO1Iterator" id="XxplLineVO1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplLineVO"
+                      Name="XxplLineVO10">
+        <AttrNames>
+          <Item Value="UnitId"/>
+          <Item Value="UnitTTypeTrans"/>
+          <Item Value="BasePrice"/>
+          <Item Value="MinPrice"/>
+          <Item Value="StartDate"/>
+          <Item Value="EndDate"/>
+          <Item Value="RevisedBy"/>
+          <Item Value="MunicipalityCharges"/>
+          <Item Value="EjariPaymentCharge"/>
+          <Item Value="ElectricityCharges"/>
+          <Item Value="SecurityDeposite"/>
+          <Item Value="UnitNameTrans"/>
+          <Item Value="AdminFee"/>
+          <Item Value="OtherCharge"/>
+          <Item Value="Uom"/>
+          <Item Value="AreaSqFtTrans"/>
+          <Item Value="PlAmount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <listOfValues StaticList="false" IterBinding="XxplHeader1Iterator"
+                  Uses="LOV_OrgTransId" id="OrgTransId"/>
+    <listOfValues StaticList="false" IterBinding="XxplHeader1Iterator"
+                  Uses="LOV_PropertyIdTrans" id="PropertyIdTrans"/>
+    <listOfValues StaticList="false" IterBinding="XxplHeader1Iterator"
+                  Uses="LOV_BuildingTransID" id="BuildingTransID"/>
+    <list IterBinding="XxplHeader1Iterator" StaticList="false"
+          Uses="LOV_PltypeTrans" id="PltypeTrans" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues StaticList="false" IterBinding="XxplLineVO1Iterator"
+                  Uses="LOV_UnitTypeTrans" id="UnitNameTrans"/>
+    <attributeValues IterBinding="XxplHeader1Iterator" id="PlId">
+      <AttrNames>
+        <Item Value="PlId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="RevisedBy">
+      <AttrNames>
+        <Item Value="RevisedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="MunicipalityCharges">
+      <AttrNames>
+        <Item Value="MunicipalityCharges"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="EjariPaymentCharge">
+      <AttrNames>
+        <Item Value="EjariPaymentCharge"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="ElectricityCharges">
+      <AttrNames>
+        <Item Value="ElectricityCharges"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="SecurityDeposite">
+      <AttrNames>
+        <Item Value="SecurityDeposite"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="AreaSqFtTrans">
+      <AttrNames>
+        <Item Value="AreaSqFtTrans"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="Uom">
+      <AttrNames>
+        <Item Value="Uom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="AdminFee">
+      <AttrNames>
+        <Item Value="AdminFee"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="XxplLineVO1Iterator" id="Delete"
+            InstanceName="customRootAppModuleDataControl.Root.PriceListAM1.XxplLineVO1"
+            DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="XxplLineVO1Iterator" id="OtherCharge">
+      <AttrNames>
+        <Item Value="OtherCharge"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XxplOtherChargesIterator" id="XxplOtherCharges">
+      <nodeDefinition DefName="custom.lease.model.View.XxplOtherCharges"
+                      Name="XxplOtherCharges0">
+        <AttrNames>
+          <Item Value="ChargeType"/>
+          <Item Value="Amount"/>
+          <Item Value="Charges"/>
+          <Item Value="ChargeTypeTrans"/>
+          <Item Value="ChargeMethod"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplOtherChargesIterator" id="CreateInsert1"
+            InstanceName="customRootAppModuleDataControl.Root.PriceListAM1.XxplOtherCharges"
+            DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="XxplOtherChargesIterator" id="DeleteLine"
+            InstanceName="customRootAppModuleDataControl.Root.PriceListAM1.XxplOtherCharges"
+            DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="XxplHeader1Iterator" id="FuncId">
+      <AttrNames>
+        <Item Value="FuncId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="SearchUnitFilterROVO1Iterator"
+          id="SearchUnitFilterROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SearchUnitFilterROVO"
+                      Name="SearchUnitFilterROVO10">
+        <AttrNames>
+          <Item Value="CheckFlag"/>
+          <Item Value="SellingAmount"/>
+          <Item Value="UnitId"/>
+          <Item Value="PropertyId"/>
+          <Item Value="BuildId"/>
+          <Item Value="OrgName"/>
+          <Item Value="PropertyName"/>
+          <Item Value="PropertyNumber"/>
+          <Item Value="BuildName"/>
+          <Item Value="BuildNumber"/>
+          <Item Value="UnitNumber"/>
+          <Item Value="UnitName"/>
+          <Item Value="FuncId"/>
+          <Item Value="OrgId"/>
+          <Item Value="UnitTypeDisp"/>
+          <Item Value="AreaTypeDisp"/>
+          <Item Value="ViewTypeDisp"/>
+          <Item Value="Status"/>
+          <Item Value="AllotType"/>
+          <Item Value="Attribute2"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

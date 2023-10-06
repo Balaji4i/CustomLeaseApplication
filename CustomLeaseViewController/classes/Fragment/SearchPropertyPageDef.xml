@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="SearchPropertyPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.PropertyMasterAM1.SearchPropertyROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="6"
+              id="SearchPropertyROVO1Iterator"/>
+    <searchRegion Criteria="SearchProperty"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchPropertyROVO1Iterator" id="SearchPropertyQuery"/>
+    <iterator Binds="Root.ARSetup_AM1.XxplARSetupVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplARSetupVOIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SearchPropertyROVO1Iterator" id="SearchPropertyROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SearchPropertyROVO"
+                      Name="SearchPropertyROVO10">
+        <AttrNames>
+          <Item Value="PropertyId"/>
+          <Item Value="PropertyName"/>
+          <Item Value="PropertyNameTl"/>
+          <Item Value="PropertyNumber"/>
+          <Item Value="PropertyShortcode"/>
+          <Item Value="FuncId"/>
+          <Item Value="OrgId"/>
+          <Item Value="ProjectId"/>
+          <Item Value="LocationId"/>
+          <Item Value="PropertyType"/>
+          <Item Value="NoOfUnits"/>
+          <Item Value="ParentPropertyId"/>
+          <Item Value="PropertyClass"/>
+          <Item Value="PropertyCategory"/>
+          <Item Value="VendId"/>
+          <Item Value="Description"/>
+          <Item Value="ActiveYn"/>
+          <Item Value="AttributeCategory"/>
+          <Item Value="Attribute1"/>
+          <Item Value="Attribute2"/>
+          <Item Value="Attribute3"/>
+          <Item Value="Attribute4"/>
+          <Item Value="Attribute5"/>
+          <Item Value="Attribute6"/>
+          <Item Value="Attribute7"/>
+          <Item Value="Attribute8"/>
+          <Item Value="Attribute9"/>
+          <Item Value="Attribute10"/>
+          <Item Value="ObjectVersion"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="OrgName"/>
+          <Item Value="OrgNameTl"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SearchPropertyROVO1Iterator" id="PropertyId">
+      <AttrNames>
+        <Item Value="PropertyId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

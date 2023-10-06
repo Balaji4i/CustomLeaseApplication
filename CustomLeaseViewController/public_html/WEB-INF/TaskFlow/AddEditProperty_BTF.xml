@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="AddEditProperty_BTF">
+    <default-activity id="__2">router</default-activity>
+    <transaction id="__3">
+      <requires-transaction/>
+    </transaction>
+    <input-parameter-definition id="__50">
+      <name id="__51">propertyEditId</name>
+      <value>#{pageFlowScope.propertyEditId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__52">
+      <name id="__53">addEditMode</name>
+      <value>#{pageFlowScope.addEditMode}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__36">
+      <managed-bean-name id="__35">FlimStrip</managed-bean-name>
+      <managed-bean-class id="__37">com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope id="__34">backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__56">
+      <managed-bean-name id="__55">PropertyBB</managed-bean-name>
+      <managed-bean-class id="__57">custom.lease.view.bean.backing.AddEditPropertyBB</managed-bean-class>
+      <managed-bean-scope id="__54">backingBean</managed-bean-scope>
+    </managed-bean>
+    <router id="router">
+      <case>
+        <expression>#{pageFlowScope.addEditMode eq 'Add'}</expression>
+        <outcome id="__1">toAdd</outcome>
+      </case>
+      <default-outcome>toEdit</default-outcome>
+    </router>
+    <view id="AddEditProperty">
+      <page>/Fragment/AddEditProperty.jsff</page>
+    </view>
+    <task-flow-return id="commit">
+      <outcome id="__4">
+        <name>commit</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="rollBack">
+      <outcome id="__5">
+        <name>rollBack</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome id="__14">
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="hideFS1">
+      <method>#{backingBeanScope.FlimStrip._hideFilmStrip}</method>
+      <outcome id="__43">
+        <fixed-outcome>ToAdding</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="hideFs2">
+      <method>#{backingBeanScope.FlimStrip._hideFilmStrip}</method>
+      <outcome id="__49">
+        <fixed-outcome>ToEditing</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome id="__15">
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="Attachmnent_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/Attachmnent_BTF.xml</document>
+        <id>Attachmnent_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__421">
+        <name>funcId</name>
+        <value>#{pageFlowScope.FuncId}</value>
+      </input-parameter>
+      <input-parameter id="__431">
+        <name>funcRefId</name>
+        <value>#{pageFlowScope.FuncRefId}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type id="__411">
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <control-flow-rule id="__6">
+      <from-activity-id id="__7">AddEditProperty</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome id="__10">save</from-outcome>
+        <to-activity-id id="__8">commit</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__12">
+        <from-outcome id="__13">cancel</from-outcome>
+        <to-activity-id id="__11">rollBack</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__68">
+        <from-outcome id="__70">Attachments</from-outcome>
+        <to-activity-id id="__69">Attachmnent_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__16">
+      <from-activity-id id="__17">router</from-activity-id>
+      <control-flow-case id="__18">
+        <from-outcome id="__20">toAdd</from-outcome>
+        <to-activity-id id="__19">hideFS1</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__22">
+        <from-outcome id="__23">toEdit</from-outcome>
+        <to-activity-id id="__21">hideFs2</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__24">
+      <from-activity-id id="__25">CreateInsert</from-activity-id>
+      <control-flow-case id="__26">
+        <from-outcome id="__28">CreateInsert</from-outcome>
+        <to-activity-id id="__27">AddEditProperty</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__38">
+      <from-activity-id id="__39">hideFS1</from-activity-id>
+      <control-flow-case id="__40">
+        <from-outcome id="__42">ToAdding</from-outcome>
+        <to-activity-id id="__41">CreateInsert</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__44">
+      <from-activity-id id="__45">hideFs2</from-activity-id>
+      <control-flow-case id="__47">
+        <from-outcome id="__48">ToEditing</from-outcome>
+        <to-activity-id id="__46">ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__29">
+      <from-activity-id id="__30">ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__32">
+        <from-outcome id="__31">ExecuteWithParams</from-outcome>
+        <to-activity-id id="__33">AddEditProperty</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

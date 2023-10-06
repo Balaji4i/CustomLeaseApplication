@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="main_tf">
+    <default-activity id="__5">checkLoginUser</default-activity>
+    <input-parameter-definition id="__10">
+      <name id="__11">appType</name>
+      <value>#{pageFlowScope.appType}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__12">
+      <name id="__13">SCREEN_NAME</name>
+      <value>#{pageFlowScope.SCREEN_NAME}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__31">
+      <name id="__32">jwtToken</name>
+      <value>#{pageFlowScope.jwtToken}</value>
+    </input-parameter-definition>
+    <managed-bean id="__3">
+      <managed-bean-name id="__2">HomeUsers</managed-bean-name>
+      <managed-bean-class id="__1">custom.lease.custom.servlet.HomeUser</managed-bean-class>
+      <managed-bean-scope id="__4">backingBean</managed-bean-scope>
+    </managed-bean>
+    <method-call id="checkLoginUser">
+      <method>#{backingBeanScope.HomeUsers.checkLoginUserInfor}</method>
+      <outcome id="__27">
+        <fixed-outcome>toRouter</fixed-outcome>
+      </outcome>
+    </method-call>
+    <router id="router1">
+      <case>
+        <expression>#{pageFlowScope.val eq 'validUser'}</expression>
+        <outcome id="__28">home</outcome>
+      </case>
+      <case>
+        <expression>#{pageFlowScope.val eq 'invalidUser'}</expression>
+        <outcome id="__29">invalidUser</outcome>
+      </case>
+      <default-outcome>home</default-outcome>
+    </router>
+    <view id="Invalid">
+      <page>/Page/Invalid.jspx</page>
+    </view>
+    <view id="DashBoard">
+      <page>/Page/DashBoard.jspx</page>
+    </view>
+    <control-flow-rule id="__14">
+      <from-activity-id id="__15">router1</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome id="__18">home</from-outcome>
+        <to-activity-id id="__17">DashBoard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome id="__6">invalidUser</from-outcome>
+        <to-activity-id id="__7">Invalid</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__22">
+      <from-activity-id id="__23">checkLoginUser</from-activity-id>
+      <control-flow-case id="__24">
+        <from-outcome id="__26">toRouter</from-outcome>
+        <to-activity-id id="__25">router1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <visibility id="__30">
+      <url-invoke-allowed/>
+    </visibility>
+  </task-flow-definition>
+</adfc-config>

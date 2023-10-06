@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XxplInvoiceHeader"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  SelectList="XxplInvoiceHeader.ACNT_RULE, 
+       XxplInvoiceHeader.ATTRIBUTE1, 
+       XxplInvoiceHeader.ATTRIBUTE10, 
+       XxplInvoiceHeader.ATTRIBUTE2, 
+       XxplInvoiceHeader.ATTRIBUTE3, 
+       XxplInvoiceHeader.ATTRIBUTE4, 
+       XxplInvoiceHeader.ATTRIBUTE5, 
+       XxplInvoiceHeader.ATTRIBUTE6, 
+       XxplInvoiceHeader.ATTRIBUTE7, 
+       XxplInvoiceHeader.ATTRIBUTE8, 
+       XxplInvoiceHeader.ATTRIBUTE9, 
+       XxplInvoiceHeader.ATTRIBUTE_CATEGORY, 
+       XxplInvoiceHeader.BOOKING_ID, 
+       XxplInvoiceHeader.BOOKING_NUMBER, 
+       XxplInvoiceHeader.CREATED_BY, 
+       XxplInvoiceHeader.CREATION_DATE, 
+       XxplInvoiceHeader.CURRENCY_CODE, 
+       XxplInvoiceHeader.CUST_ID, 
+       XxplInvoiceHeader.CUST_SITE_ID, 
+       XxplInvoiceHeader.CUSTOMER_TRX_ID, 
+       XxplInvoiceHeader.CUSTOMER_TRX_NUMBER, 
+       XxplInvoiceHeader.DUE_DATE, 
+       XxplInvoiceHeader.EXCHANGE_RATE, 
+       XxplInvoiceHeader.FUNC_ID, 
+       XxplInvoiceHeader.GL_DATE, 
+       XxplInvoiceHeader.INTERFACE_ERROR_MSG, 
+       XxplInvoiceHeader.INTERFACE_STATUS, 
+       XxplInvoiceHeader.INVOICE_CLASS, 
+       XxplInvoiceHeader.INVOICE_DATE, 
+       XxplInvoiceHeader.INVOICE_ID, 
+       XxplInvoiceHeader.INVOICE_NUMBER, 
+       XxplInvoiceHeader.INVOICING_RULE, 
+       XxplInvoiceHeader.LAST_UPDATE_DATE, 
+       XxplInvoiceHeader.LAST_UPDATE_LOGIN, 
+       XxplInvoiceHeader.LAST_UPDATED_BY, 
+       XxplInvoiceHeader.OBJECT_VERSION, 
+       XxplInvoiceHeader.OFFER_ID, 
+       XxplInvoiceHeader.OFFER_NUMBER, 
+       XxplInvoiceHeader.ORG_ID, 
+       XxplInvoiceHeader.PAYMENT_TERMS, 
+       XxplInvoiceHeader.RULE_END_DATE, 
+       XxplInvoiceHeader.RULE_START_DATE, 
+       XxplInvoiceHeader.SALE_LEASE_NUMBER, 
+       XxplInvoiceHeader.STATUS, 
+       XxplInvoiceHeader.TRX_SOURCE, 
+       XxplInvoiceHeader.TRX_TYPE"
+  FromList="XXPL_INVOICE_HEADER XxplInvoiceHeader"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  RowClass="custom.lease.model.View.XxplInvoiceHeaderRowImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="custom.lease.model.View.XxplInvoiceHeader_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="p_invoice_number"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <ViewAccessor
+    Name="XXSTG_ORGANIZATIONS_ROVO"
+    ViewObjectName="custom.lease.model.ROVO.XXSTG_ORGANIZATIONS_ROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="XXSTG_CUSTOMER_V_ROVO"
+    ViewObjectName="custom.lease.model.ROVO.XXSTG_CUSTOMER_V_ROVO">
+    <ParameterMap>
+      <PIMap Variable="BV_ORG_ID">
+        <TransientExpression><![CDATA[OrgId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="XXFND_CURRENCY_ROVO"
+    ViewObjectName="custom.lease.model.ROVO.XXFND_CURRENCY_ROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="BookingROVOLOV"
+    ViewObjectName="custom.lease.model.ROVO.BookingROVOLOV">
+    <ViewCriteriaUsage
+      Name="FindByOrg"
+      FullName="custom.lease.model.ROVO.BookingROVOLOV.FindByOrg"/>
+    <ParameterMap>
+      <PIMap Variable="p_org">
+        <TransientExpression><![CDATA[OrgId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="InvoiceNumberROVO"
+    ViewObjectName="custom.lease.model.ROVO.InvoiceNumberROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="BookingBasedCustomerROVO"
+    ViewObjectName="custom.lease.model.ROVO.BookingBasedCustomerROVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_BusinessUnitTrans"
+    ListVOName="XXSTG_ORGANIZATIONS_ROVO"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_BusinessUnitTrans_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="BusinessUnitTrans"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="OrgId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="OrgName"/>
+      <Item Value="OrgId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="OrgName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="OrgNameFilter"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CustomerSIte"
+    ListVOName="XXSTG_CUSTOMER_V_ROVO"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_CustomerSIte_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CustomerSIte"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="CustId"/>
+      <Item Value="CustSiteId"/>
+      <Item Value="CustomerSiteIdTrans"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CustomerName"/>
+      <Item Value="CustId"/>
+      <Item Value="CustSiteId"/>
+      <Item Value="SiteNumber"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CustomerName"/>
+      <Item Value="SiteNumber"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="SearchCustomerAndSite"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CurrencyCodeTrans"
+    ListVOName="XXFND_CURRENCY_ROVO"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CurrencyCodeTrans"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="CurrencyCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CurrencyvalueNameDisp"/>
+      <Item Value="CurrencyValueName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CurrencyvalueNameDisp"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_BookingNumber"
+    ListVOName="BookingROVOLOV"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_BookingNumber_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="BookingNumber"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="BookingId"/>
+      <Item Value="CustId"/>
+      <Item Value="CustSiteId"/>
+      <Item Value="CustomerNameTrans"/>
+      <Item Value="ProjectIdTrans"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="BookingNumber"/>
+      <Item Value="BookingHdrId"/>
+      <Item Value="CustId"/>
+      <Item Value="ShipToSiteId"/>
+      <Item Value="CustomerName"/>
+      <Item Value="ProjectId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CustomerName"/>
+      <Item Value="BookingNumber"/>
+      <Item Value="UnitNumber"/>
+      <Item Value="Attribute1"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="FindbyBookingNumber"/>
+  </ListBinding>
+  <EntityUsage
+    Name="XxplInvoiceHeader"
+    Entity="custom.lease.model.Entity.XxplInvoiceHeader"/>
+  <ViewAttribute
+    Name="AcntRule"
+    PrecisionRule="true"
+    EntityAttrName="AcntRule"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="ACNT_RULE"/>
+  <ViewAttribute
+    Name="Attribute1"
+    PrecisionRule="true"
+    EntityAttrName="Attribute1"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="ATTRIBUTE1"/>
+  <ViewAttribute
+    Name="Attribute10"
+    PrecisionRule="true"
+    EntityAttrName="Attribute10"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="ATTRIBUTE10"/>
+  <ViewAttribute
+    Name="Attribute2"
+    PrecisionRule="true"
+    EntityAttrName="Attribute2"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="ATTRIBUTE2"/>
+  <ViewAttribute
+    Name="Attribute3"
+    PrecisionRule="true"
+    EntityAttrName="Attribute3"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="ATTRIBUTE3"/>
+  <ViewAttribute
+    Name="Attribute4"
+    PrecisionRule="true"
+    EntityAttrName="Attribute4"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="ATTRIBUTE4"/>
+  <ViewAttribute
+    Name="Attribute5"
+    PrecisionRule="true"
+    EntityAttrName="Attribute5"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="ATTRIBUTE5"/>
+  <ViewAttribute
+    Name="Attribute6"
+    PrecisionRule="true"
+    EntityAttrName="Attribute6"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="ATTRIBUTE6"/>
+  <ViewAttribute
+    Name="Attribute7"
+    PrecisionRule="true"
+    EntityAttrName="Attribute7"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="ATTRIBUTE7"/>
+  <ViewAttribute
+    Name="Attribute8"
+    PrecisionRule="true"
+    EntityAttrName="Attribute8"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="ATTRIBUTE8"/>
+  <ViewAttribute
+    Name="Attribute9"
+    PrecisionRule="true"
+    EntityAttrName="Attribute9"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="ATTRIBUTE9"/>
+  <ViewAttribute
+    Name="AttributeCategory"
+    PrecisionRule="true"
+    EntityAttrName="AttributeCategory"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="ATTRIBUTE_CATEGORY"/>
+  <ViewAttribute
+    Name="BookingId"
+    PrecisionRule="true"
+    EntityAttrName="BookingId"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="BOOKING_ID"/>
+  <ViewAttribute
+    Name="BookingNumber"
+    PrecisionRule="true"
+    EntityAttrName="BookingNumber"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="BOOKING_NUMBER"
+    LOVName="LOV_BookingNumber">
+    <Dependencies>
+      <Item
+        Value="BusinessUnitTrans"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="CREATED_BY"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="CreationDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="CREATION_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="CurrencyCode"
+    PrecisionRule="true"
+    EntityAttrName="CurrencyCode"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="CURRENCY_CODE"/>
+  <ViewAttribute
+    Name="CustId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CustId"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="CUST_ID"/>
+  <ViewAttribute
+    Name="CustSiteId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CustSiteId"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="CUST_SITE_ID"/>
+  <ViewAttribute
+    Name="CustomerTrxId"
+    PrecisionRule="true"
+    EntityAttrName="CustomerTrxId"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="CUSTOMER_TRX_ID"/>
+  <ViewAttribute
+    Name="CustomerTrxNumber"
+    PrecisionRule="true"
+    EntityAttrName="CustomerTrxNumber"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="CUSTOMER_TRX_NUMBER"/>
+  <ViewAttribute
+    Name="DueDate"
+    PrecisionRule="true"
+    EntityAttrName="DueDate"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="DUE_DATE"/>
+  <ViewAttribute
+    Name="ExchangeRate"
+    PrecisionRule="true"
+    EntityAttrName="ExchangeRate"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="EXCHANGE_RATE"/>
+  <ViewAttribute
+    Name="FuncId"
+    PrecisionRule="true"
+    EntityAttrName="FuncId"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="FUNC_ID"
+    DefaultValue="8"/>
+  <ViewAttribute
+    Name="GlDate"
+    PrecisionRule="true"
+    EntityAttrName="GlDate"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="GL_DATE"/>
+  <ViewAttribute
+    Name="InterfaceErrorMsg"
+    IsQueriable="false"
+    PrecisionRule="true"
+    EntityAttrName="InterfaceErrorMsg"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="INTERFACE_ERROR_MSG"/>
+  <ViewAttribute
+    Name="InterfaceStatus"
+    PrecisionRule="true"
+    EntityAttrName="InterfaceStatus"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="INTERFACE_STATUS"
+    DefaultValue="Draft"/>
+  <ViewAttribute
+    Name="InvoiceClass"
+    PrecisionRule="true"
+    EntityAttrName="InvoiceClass"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="INVOICE_CLASS"/>
+  <ViewAttribute
+    Name="InvoiceDate"
+    PrecisionRule="true"
+    EntityAttrName="InvoiceDate"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="INVOICE_DATE"/>
+  <ViewAttribute
+    Name="InvoiceId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="InvoiceId"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="INVOICE_ID"/>
+  <ViewAttribute
+    Name="InvoiceNumber"
+    PrecisionRule="true"
+    EntityAttrName="InvoiceNumber"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="INVOICE_NUMBER"/>
+  <ViewAttribute
+    Name="InvoicingRule"
+    PrecisionRule="true"
+    EntityAttrName="InvoicingRule"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="INVOICING_RULE"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="LAST_UPDATE_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateLogin"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="LAST_UPDATE_LOGIN"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="LAST_UPDATED_BY"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="ObjectVersion"
+    PrecisionRule="true"
+    EntityAttrName="ObjectVersion"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="OBJECT_VERSION"/>
+  <ViewAttribute
+    Name="OfferId"
+    PrecisionRule="true"
+    EntityAttrName="OfferId"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="OFFER_ID"/>
+  <ViewAttribute
+    Name="OfferNumber"
+    PrecisionRule="true"
+    EntityAttrName="OfferNumber"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="OFFER_NUMBER"/>
+  <ViewAttribute
+    Name="OrgId"
+    PrecisionRule="true"
+    EntityAttrName="OrgId"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="ORG_ID"/>
+  <ViewAttribute
+    Name="PaymentTerms"
+    PrecisionRule="true"
+    EntityAttrName="PaymentTerms"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="PAYMENT_TERMS"/>
+  <ViewAttribute
+    Name="RuleEndDate"
+    PrecisionRule="true"
+    EntityAttrName="RuleEndDate"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="RULE_END_DATE"/>
+  <ViewAttribute
+    Name="RuleStartDate"
+    PrecisionRule="true"
+    EntityAttrName="RuleStartDate"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="RULE_START_DATE"/>
+  <ViewAttribute
+    Name="SaleLeaseNumber"
+    PrecisionRule="true"
+    EntityAttrName="SaleLeaseNumber"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="SALE_LEASE_NUMBER"/>
+  <ViewAttribute
+    Name="Status"
+    PrecisionRule="true"
+    EntityAttrName="Status"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="STATUS"
+    DefaultValue="Draft"/>
+  <ViewAttribute
+    Name="TrxSource"
+    PrecisionRule="true"
+    EntityAttrName="TrxSource"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="TRX_SOURCE"/>
+  <ViewAttribute
+    Name="TrxType"
+    PrecisionRule="true"
+    EntityAttrName="TrxType"
+    EntityUsage="XxplInvoiceHeader"
+    AliasName="TRX_TYPE"/>
+  <ViewAttribute
+    Name="BusinessUnitTrans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_BusinessUnitTrans">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustomerSIte"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_CustomerSIte">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustomerSiteIdTrans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[if(CustSiteId!=null && XXSTG_CUSTOMER_V_ROVO.first()!=null)
+{
+return XXSTG_CUSTOMER_V_ROVO.first().getAttribute('SiteName');
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="CustSiteId"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CurrencyCodeTrans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_CurrencyCodeTrans">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProjectIdTrans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="BIGINT"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <TransientExpression><![CDATA[if(BookingId!=null && BookingROVOLOV.first()!=null) { return BookingROVOLOV.first().getAttribute('ProjectId');  }]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="BookingId"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <AUTOSUBMIT
+          Value="true"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalLineAmount"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="BIGINT"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[XxplInvoiceLineVO.sum('LineAmount')]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <AUTOSUBMIT
+          Value="true"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustomerNameTrans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[if(CustId!=null && BookingROVOLOV.first()!=null)
+{
+return BookingROVOLOV.first().getAttribute('CustomerName');
+}
+else
+{
+return null;
+}]]></TransientExpression>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="FindByInvoiceNumber"
+    ViewObjectName="custom.lease.model.View.XxplInvoiceHeader"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow76"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="InvoiceId"
+        ViewAttribute="InvoiceId"
+        Operator="="
+        Conjunction="AND"
+        Value=":p_invoice_number"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="XxplInvoiceLineVO"
+    ViewLink="custom.lease.model.VL.XxplInvoiceVL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="custom.lease.model.CustomLeaseModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

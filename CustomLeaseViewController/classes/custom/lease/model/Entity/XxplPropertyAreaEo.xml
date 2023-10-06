@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XxplPropertyAreaEo"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="XXPL_PROPERTY_AREA"
+  AliasName="XxplPropertyAreaEo"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="custom.lease.model.Entity.XxplPropertyAreaEoImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Access|DML"/>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="AreaId"
+    IsNotNull="true"
+    ColumnName="AREA_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="XXPL_PROPERTY_AREA"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="PropertyId"
+    ColumnName="PROPERTY_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BuildId"
+    ColumnName="BUILD_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UnitId"
+    ColumnName="UNIT_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Area"
+    IsNotNull="true"
+    Precision="60"
+    ColumnName="AREA"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Uom"
+    Precision="60"
+    ColumnName="UOM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Value"
+    ColumnName="VALUE"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Description"
+    Precision="4000"
+    ColumnName="DESCRIPTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ActiveYn"
+    Precision="1"
+    ColumnName="ACTIVE_YN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AttributeCategory"
+    Precision="240"
+    ColumnName="ATTRIBUTE_CATEGORY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute1"
+    Precision="240"
+    ColumnName="ATTRIBUTE1"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute2"
+    Precision="240"
+    ColumnName="ATTRIBUTE2"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute3"
+    Precision="240"
+    ColumnName="ATTRIBUTE3"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute4"
+    Precision="240"
+    ColumnName="ATTRIBUTE4"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute5"
+    Precision="240"
+    ColumnName="ATTRIBUTE5"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute6"
+    Precision="240"
+    ColumnName="ATTRIBUTE6"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute7"
+    Precision="240"
+    ColumnName="ATTRIBUTE7"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute8"
+    Precision="240"
+    ColumnName="ATTRIBUTE8"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute9"
+    Precision="240"
+    ColumnName="ATTRIBUTE9"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute10"
+    Precision="240"
+    ColumnName="ATTRIBUTE10"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjectVersion"
+    ColumnName="OBJECT_VERSION"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    IsNotNull="true"
+    Precision="60"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreationDate"
+    IsNotNull="true"
+    ColumnName="CREATION_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="TIMESTAMP"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="11"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedBy"
+    IsNotNull="true"
+    Precision="60"
+    ColumnName="LAST_UPDATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdateDate"
+    IsNotNull="true"
+    ColumnName="LAST_UPDATE_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="TIMESTAMP"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="11"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdateLogin"
+    IsNotNull="true"
+    Precision="150"
+    ColumnName="LAST_UPDATE_LOGIN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RowID"
+    IsUpdateable="false"
+    ColumnName="ROWID"
+    SQLType="VARCHAR"
+    Type="oracle.jbo.domain.RowID"
+    ColumnType="ROWID"
+    TableName="XXPL_PROPERTY_AREA"/>
+  <Attribute
+    Name="AreaType"
+    Precision="60"
+    ColumnName="AREA_TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_PROPERTY_AREA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="XxplPropertyMasterEO"
+    Association="custom.lease.model.Asso.PropertyMaster_Ass_PropertyArea"
+    AssociationEnd="custom.lease.model.Asso.PropertyMaster_Ass_PropertyArea.XxplPropertyMasterEO"
+    AssociationOtherEnd="custom.lease.model.Asso.PropertyMaster_Ass_PropertyArea.XxplPropertyAreaEo"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="XxplPropertyUnitsEO"
+    Association="custom.lease.model.Asso.PropertyUnit_Ass_PropertyArea"
+    AssociationEnd="custom.lease.model.Asso.PropertyUnit_Ass_PropertyArea.XxplPropertyUnitsEO"
+    AssociationOtherEnd="custom.lease.model.Asso.PropertyUnit_Ass_PropertyArea.XxplPropertyAreaEo"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="XxplPropertyBuildingEO"
+    Association="custom.lease.model.Asso.PropertyBuilding_Assc"
+    AssociationEnd="custom.lease.model.Asso.PropertyBuilding_Assc.XxplPropertyBuildingEO"
+    AssociationOtherEnd="custom.lease.model.Asso.PropertyBuilding_Assc.XxplPropertyAreaEo"
+    Type="custom.lease.model.Entity.XxplPropertyBuildingEOImpl"
+    IsUpdateable="true"/>
+  <ViewLinkAccessor
+    Name="XxplPropertyUnitsView"
+    ViewLink="custom.lease.model.VL.PropertyUnit_VL_PropertyArea"
+    ViewLinkEnd="custom.lease.model.VL.PropertyUnit_VL_PropertyArea.XxplPropertyUnitsView"
+    ViewLinkOtherEnd="custom.lease.model.VL.PropertyUnit_VL_PropertyArea.XxplPropertyAreaView"
+    Type="oracle.jbo.server.ViewRowImpl"
+    IsUpdateable="false"/>
+  <Key
+    Name="SysC00102691">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00102691"/>
+      <Attr Name="_checkCondition" Value='"AREA_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.Entity.XxplPropertyAreaEo.AreaId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC00102692">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00102692"/>
+      <Attr Name="_checkCondition" Value='"AREA" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.Entity.XxplPropertyAreaEo.Area"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC00102693">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00102693"/>
+      <Attr Name="_checkCondition" Value='"CREATED_BY" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.Entity.XxplPropertyAreaEo.CreatedBy"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC00102694">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00102694"/>
+      <Attr Name="_checkCondition" Value='"CREATION_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.Entity.XxplPropertyAreaEo.CreationDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC00102695">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00102695"/>
+      <Attr Name="_checkCondition" Value='"LAST_UPDATED_BY" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.Entity.XxplPropertyAreaEo.LastUpdatedBy"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC00102696">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00102696"/>
+      <Attr Name="_checkCondition" Value='"LAST_UPDATE_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="custom.lease.model.Entity.XxplPropertyAreaEo.LastUpdateDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC00102697">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00102697"/>
+      <Attr Name="_checkCondition" Value='"LAST_UPDATE_LOGIN" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="custom.lease.model.Entity.XxplPropertyAreaEo.LastUpdateLogin"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="XxplpropertyareaeoPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="XXPLPROPERTYAREAEO_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.Entity.XxplPropertyAreaEo.AreaId"/>
+    </AttrArray>
+  </Key>
+</Entity>

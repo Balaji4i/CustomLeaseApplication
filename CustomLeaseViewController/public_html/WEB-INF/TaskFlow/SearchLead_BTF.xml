@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SearchLead_BTF">
+    <default-activity id="__1">SearchLead</default-activity>
+    <managed-bean id="__2">
+      <managed-bean-name id="__5">mode</managed-bean-name>
+      <managed-bean-class id="__4">java.lang.String</managed-bean-class>
+      <managed-bean-scope id="__3">backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__6">
+      <managed-bean-name id="__9">headerId</managed-bean-name>
+      <managed-bean-class id="__7">oracle.jbo.domain.Number</managed-bean-class>
+      <managed-bean-scope id="__8">backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__10">
+      <managed-bean-name id="__13">filmStrip</managed-bean-name>
+      <managed-bean-class id="__12">com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope id="__11">backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__47">
+      <managed-bean-name id="__46">SearchLead</managed-bean-name>
+      <managed-bean-class id="__45">custom.lease.view.bean.backing.SearchLead</managed-bean-class>
+      <managed-bean-scope id="__44">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchLead">
+      <page>/Fragment/SearchLead.jsff</page>
+    </view>
+    <task-flow-call id="AddEditLead_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditLead_BTF.xml</document>
+        <id>AddEditLead_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__42">
+        <name>mode</name>
+        <value>#{pageFlowScope.mode}</value>
+      </input-parameter>
+      <input-parameter id="__43">
+        <name>headerId</name>
+        <value>#{pageFlowScope.headerId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="Hide_FS">
+      <method>#{backingBeanScope.filmStrip._hideFilmStrip}</method>
+      <outcome id="__40">
+        <fixed-outcome>hide</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Show_FS">
+      <method>#{backingBeanScope.filmStrip._showFilmStrip}</method>
+      <outcome id="__41">
+        <fixed-outcome>show</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome id="__14">
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__15">
+      <from-activity-id id="__16">SearchLead</from-activity-id>
+      <control-flow-case id="__17">
+        <from-outcome id="__19">addEdit</from-outcome>
+        <to-activity-id id="__18">Hide_FS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__20">
+      <from-activity-id id="__21">Hide_FS</from-activity-id>
+      <control-flow-case id="__23">
+        <from-outcome id="__24">hide</from-outcome>
+        <to-activity-id id="__22">AddEditLead_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__25">
+      <from-activity-id id="__26">AddEditLead_BTF</from-activity-id>
+      <control-flow-case id="__27">
+        <from-outcome id="__29">back</from-outcome>
+        <to-activity-id id="__28">Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__30">
+      <from-activity-id id="__31">Execute</from-activity-id>
+      <control-flow-case id="__33">
+        <from-outcome id="__32">Execute</from-outcome>
+        <to-activity-id id="__34">Show_FS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__35">
+      <from-activity-id id="__36">Show_FS</from-activity-id>
+      <control-flow-case id="__37">
+        <from-outcome id="__39">show</from-outcome>
+        <to-activity-id id="__38">SearchLead</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

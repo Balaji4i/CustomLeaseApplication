@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="AddEditCancellation_BTF">
+    <default-activity id="__1">AddOrEdit</default-activity>
+    <transaction id="__12">
+      <requires-transaction/>
+    </transaction>
+    <input-parameter-definition id="__20">
+      <name id="__19">editCancelId</name>
+      <value>#{pageFlowScope.editCancelId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__22">
+      <name id="__21">addEditMode</name>
+      <value>#{pageFlowScope.addEditMode}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__38">
+      <managed-bean-name id="__40">AddEditCancellationBB</managed-bean-name>
+      <managed-bean-class id="__39">custom.lease.view.bean.backing.AddEditCancellationBB</managed-bean-class>
+      <managed-bean-scope id="__41">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="AddEditCancellation">
+      <page>/Fragment/AddEditCancellation.jsff</page>
+    </view>
+    <task-flow-return id="Save">
+      <outcome id="__2">
+        <name>Save</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="RollBack">
+      <outcome id="__3">
+        <name>RollBack</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome id="__13">
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome id="__23">
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <router id="AddOrEdit">
+      <case>
+        <expression>#{pageFlowScope.addEditMode eq 'ADD'}</expression>
+        <outcome id="__37">toAdd</outcome>
+      </case>
+      <default-outcome>toEdit</default-outcome>
+    </router>
+      <task-flow-call id="Attachmnent_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/Attachmnent_BTF.xml</document>
+        <id>Attachmnent_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__421">
+        <name>funcId</name>
+        <value>#{pageFlowScope.FuncId}</value>
+      </input-parameter>
+      <input-parameter id="__431">
+        <name>funcRefId</name>
+        <value>#{pageFlowScope.FuncRefId}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type id="__411">
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <control-flow-rule id="__4">
+      <from-activity-id id="__5">AddEditCancellation</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome id="__8">toSave</from-outcome>
+        <to-activity-id id="__6">Save</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__10">
+        <from-outcome id="__11">toClose</from-outcome>
+        <to-activity-id id="__9">RollBack</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__42">
+        <from-outcome id="__44">Attachments</from-outcome>
+        <to-activity-id id="__43">Attachmnent_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
+      <from-activity-id id="__15">CreateInsert</from-activity-id>
+      <control-flow-case id="__18">
+        <from-outcome id="__16">CreateInsert</from-outcome>
+        <to-activity-id id="__17">AddEditCancellation</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__24">
+      <from-activity-id id="__25">ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__26">
+        <from-outcome id="__28">ExecuteWithParams</from-outcome>
+        <to-activity-id id="__27">AddEditCancellation</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__29">
+      <from-activity-id id="__30">AddOrEdit</from-activity-id>
+      <control-flow-case id="__31">
+        <from-outcome id="__33">toEdit</from-outcome>
+        <to-activity-id id="__32">ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__35">
+        <from-outcome id="__36">toAdd</from-outcome>
+        <to-activity-id id="__34">CreateInsert</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

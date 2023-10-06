@@ -1,0 +1,92 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<task-flow-registry xmlns="http://xmlns.oracle.com/adf/controller/rc">
+   <task-flow-descriptor path="WEB-INF/TaskFlow/Attachmnent_BTF.xml" id="Attachmnent_BTF" type="task-flow-definition" uses-page-fragments="false" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="funcId"/>
+      <input-parameter name="funcRefId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/SearchLead_BTF.xml" id="SearchLead_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/SearchProperty_BTF.xml" id="SearchProperty_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/SearchBooking_BTF.xml" id="SearchBooking_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/SearchBilling_BTF.xml" id="SearchBilling_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/AddEditInvoice.xml" id="AddEditInvoice" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="action"/>
+      <input-parameter name="invoiceNumber"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/ARSetup_BTF.xml" id="ARSetup_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/AddEditProperty_BTF.xml" id="AddEditProperty_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="addEditMode"/>
+      <input-parameter name="propertyEditId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/AddEditMoveInOut_BTF.xml" id="AddEditMoveInOut_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="MoveInOutId"/>
+      <input-parameter name="navigation"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/SearchMoveInOut_BTF.xml" id="SearchMoveInOut_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/CheckList_BTF.xml" id="CheckList_BTF" type="task-flow-definition" uses-page-fragments="false" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="funcId"/>
+      <input-parameter name="funcRefId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/AddEditLead_BTF.xml" id="AddEditLead_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="headerId"/>
+      <input-parameter name="mode"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/SearchPaymentPlan_BTF.xml" id="SearchPaymentPlan_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/Searchinvoice.xml" id="Searchinvoice" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/ApprovalHistory_BTF.xml" id="ApprovalHistory_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="fuctionid"/>
+      <input-parameter name="plid"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/main_tf.xml" id="main_tf" type="task-flow-definition" uses-page-fragments="false" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="SCREEN_NAME"/>
+      <input-parameter name="jwtToken"/>
+      <input-parameter name="appType"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="META-INF/adfc-config.xml" id="" type="" uses-page-fragments="false" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/AddEditBooking_BTF.xml" id="AddEditBooking_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="editBookingId"/>
+      <input-parameter name="showMSOC"/>
+      <input-parameter name="hdrSaved"/>
+      <input-parameter name="addEditMode"/>
+      <input-parameter name="EditMode"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/SearchUnit_BTF.xml" id="SearchUnit_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/SearchCancellation_BTF.xml" id="SearchCancellation_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/AddEditBilling_BTF.xml" id="AddEditBilling_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="BillingNavigation"/>
+      <input-parameter name="billingId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/AddEditPaymentPlan_BTF.xml" id="AddEditPaymentPlan_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="navigation"/>
+      <input-parameter name="MsHdrId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/AddEditARSetup_BTF.xml" id="AddEditARSetup_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="headerId"/>
+      <input-parameter name="mode"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/SearchBuilding_BTF.xml" id="SearchBuilding_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/AddEditReceipt.xml" id="AddEditReceipt" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="receiptid"/>
+      <input-parameter name="navigation"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/OtherCharges_BTF.xml" id="OtherCharges_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="BookingId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/AddEditBuilding_BTF.xml" id="AddEditBuilding_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="addEditMode"/>
+      <input-parameter name="editBuildId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/SearchReceipt_BTF.xml" id="SearchReceipt_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/AddEditUnit_BTF.xml" id="AddEditUnit_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="NavigationResult"/>
+      <input-parameter name="UnitId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/SearchPriceList_BTF.xml" id="SearchPriceList_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/AddEditPriceList_BTF.xml" id="AddEditPriceList_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="plid"/>
+      <input-parameter name="plnavi"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/TaskFlow/AddEditCancellation_BTF.xml" id="AddEditCancellation_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="editCancelId"/>
+      <input-parameter name="addEditMode"/>
+   </task-flow-descriptor>
+</task-flow-registry>

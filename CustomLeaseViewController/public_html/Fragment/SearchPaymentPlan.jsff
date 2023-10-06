@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+      <af:panelBox text="Manage Payment Plan" id="pb1" showDisclosure="false"
+                   styleClass="AFStretchWidth"
+                   inlineStyle="height:850px; border-color:transparent;">
+        <f:facet name="toolbar"/>
+        <af:query id="qryId1" headerText="Search"
+                  value="#{bindings.SearchPaymenPlanROVOCriteriaQuery.queryDescriptor}"
+                  model="#{bindings.SearchPaymenPlanROVOCriteriaQuery.queryModel}"
+                  queryListener="#{bindings.SearchPaymenPlanROVOCriteriaQuery.processQuery}"
+                  queryOperationListener="#{bindings.SearchPaymenPlanROVOCriteriaQuery.processQueryOperation}"
+                  resultComponentId="::pc1:resId1" rows="2" maxColumns="2"
+                  disclosed="true"/>
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar">
+            <af:toolbar id="t1" flex="100">
+              <af:commandImageLink id="cil1" icon="/images/func_add_16_ena.png"
+                                   disabledIcon="/images/func_add_16_dis.png"
+                                   hoverIcon="/images/func_add_16_hov.png"
+                                   depressedIcon="/images/func_add_16_act.png"
+                                   action="add_edit">
+                <af:setPropertyListener from="#{'add'}"
+                                        to="#{pageFlowScope.navigation}"
+                                        type="action"/>
+              </af:commandImageLink>
+              <af:spacer width="10" height="10" id="s1"/>
+              <af:commandImageLink id="cil2"
+                                   icon="/images/func_pencil_16_ena.png"
+                                   disabledIcon="/images/func_pencil_16_dis.png"
+                                   hoverIcon="/images/func_pencil_16_hov.png"
+                                   depressedIcon="/images/func_pencil_16_act.png"
+                                   action="add_edit">
+                <af:setPropertyListener from="#{'edit'}" type="action"
+                                        to="#{pageFlowScope.navigation}"/>
+                <af:setPropertyListener from="#{bindings.MsHdrId.inputValue}"
+                                        to="#{pageFlowScope.MsHdrId}"
+                                        type="action"/>
+              </af:commandImageLink>
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.SearchPaymenPlan_ROVO1.collectionModel}"
+                    var="row"
+                    rows="#{bindings.SearchPaymenPlan_ROVO1.rangeSize}"
+                    emptyText="#{bindings.SearchPaymenPlan_ROVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="12" rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.SearchPaymenPlan_ROVO1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.SearchPaymenPlan_ROVO1.collectionModel.makeCurrent}"
+                    rowSelection="single" id="resId1" width="AFStretchWidth"
+                    varStatus="vs" scrollPolicy="page" autoHeightRows="0"
+                    filterModel="#{bindings.SearchPaymenPlanROVOCriteriaQuery.queryDescriptor}"
+                    queryListener="#{bindings.SearchPaymenPlanROVOCriteriaQuery.processQuery}"
+                    filterVisible="true" columnBandingInterval="0"
+                    columnStretching="last">
+            <af:column id="c1" headerText="S.No" width="60" frozen="false"
+                       align="center">
+              <af:outputText value="#{vs.index+1}" id="ot5"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchPaymenPlan_ROVO1.hints.MsHdrId.name}"
+                       sortable="false"
+                       headerText="#{bindings.SearchPaymenPlan_ROVO1.hints.MsHdrId.label}"
+                       id="c2" rendered="false" frozen="false"
+                       filterable="true">
+              <af:outputText value="#{row.MsHdrId}" id="ot14">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.SearchPaymenPlan_ROVO1.hints.MsHdrId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchPaymenPlan_ROVO1.hints.MilestoneNumber.name}"
+                       sortable="true"
+                       headerText="#{bindings.SearchPaymenPlan_ROVO1.hints.MilestoneNumber.label}"
+                       id="resId1c4" frozen="false"
+                       filterable="true" width="250">
+              <af:outputText value="#{row.MilestoneNumber}" id="ot13"
+                             rendered="false"/>
+              <af:commandLink text="#{row.MilestoneNumber}" id="cl1"
+                              action="add_edit">
+                <af:setPropertyListener from="#{'edit'}" type="action"
+                                        to="#{pageFlowScope.navigation}"/>
+                <af:setPropertyListener from="#{row.MsHdrId}"
+                                        to="#{pageFlowScope.MsHdrId}"
+                                        type="action"/>
+              </af:commandLink>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchPaymenPlan_ROVO1.hints.MilestoneName.name}"
+                       sortable="true"
+                       headerText="#{bindings.SearchPaymenPlan_ROVO1.hints.MilestoneName.label}"
+                       id="resId1c1" frozen="false" width="250"
+                       filterable="true">
+              <af:outputText value="#{row.MilestoneName}" id="ot8"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchPaymenPlan_ROVO1.hints.MilestoneShortcode.name}"
+                       sortable="true"
+                       headerText="#{bindings.SearchPaymenPlan_ROVO1.hints.MilestoneShortcode.label}"
+                       id="resId1c5" frozen="false"
+                       rendered="false" filterable="true">
+              <af:outputText value="#{row.MilestoneShortcode}" id="ot9"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchPaymenPlan_ROVO1.hints.MilestoneDate.name}"
+                       sortable="true"
+                       headerText="#{bindings.SearchPaymenPlan_ROVO1.hints.MilestoneDate.label}"
+                       id="resId1c6" frozen="false"
+                       filterable="true">
+              <af:outputText value="#{row.MilestoneDate}" id="ot1">
+                <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+              </af:outputText>
+              <f:facet name="filter">
+                <af:inputDate value="#{vs.filterCriteria.MilestoneDate}"
+                              id="id3"/>
+              </f:facet>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchPaymenPlan_ROVO1.hints.MilestoneType.name}"
+                       sortable="true"
+                       headerText="#{bindings.SearchPaymenPlan_ROVO1.hints.MilestoneType.label}"
+                       id="resId1c7" frozen="false"
+                       rendered="false" filterable="true">
+              <af:outputText value="#{row.MilestoneType}" id="ot10"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchPaymenPlan_ROVO1.hints.ProjectName.name}"
+                       sortable="true"
+                       headerText="#{bindings.SearchPaymenPlan_ROVO1.hints.ProjectName.label}"
+                       id="resId1c8" frozen="false" width="250"
+                       filterable="true">
+              <af:outputText value="#{row.ProjectName}" id="ot2"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchPaymenPlan_ROVO1.hints.OrgName.name}"
+                       sortable="true"
+                       headerText="#{bindings.SearchPaymenPlan_ROVO1.hints.OrgName.label}"
+                       id="resId1c9" width="250"
+                       filterable="true">
+              <af:outputText value="#{row.OrgName}" id="ot3"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchPaymenPlan_ROVO1.hints.StartDate.name}"
+                       sortable="true"
+                       headerText="#{bindings.SearchPaymenPlan_ROVO1.hints.StartDate.label}"
+                       id="resId1c10" align="center" rendered="false"
+                       filterable="true">
+              <af:outputText value="#{row.StartDate}" id="ot6">
+                <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+              </af:outputText>
+              <f:facet name="filter">
+                <af:inputDate value="#{vs.filterCriteria.StartDate}" id="id1"/>
+              </f:facet>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchPaymenPlan_ROVO1.hints.EndDate.name}"
+                       sortable="true"
+                       headerText="#{bindings.SearchPaymenPlan_ROVO1.hints.EndDate.label}"
+                       id="resId1c11" align="center" rendered="false"
+                       filterable="true">
+              <af:outputText value="#{row.EndDate}" id="ot12">
+                <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+              </af:outputText>
+              <f:facet name="filter">
+                <af:inputDate value="#{vs.filterCriteria.EndDate}" id="id2"/>
+              </f:facet>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchPaymenPlan_ROVO1.hints.ActiveYn.name}"
+                       sortable="true"
+                       headerText="#{bindings.SearchPaymenPlan_ROVO1.hints.ActiveYn.label}"
+                       id="resId1c12" align="center" rendered="false"
+                       filterable="true">
+              <af:outputText value="#{row.ActiveYn}" id="ot11"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchPaymenPlan_ROVO1.hints.Status.name}"
+                       sortable="true"
+                       headerText="#{bindings.SearchPaymenPlan_ROVO1.hints.Status.label}"
+                       id="resId1c13" align="center" filterable="true">
+              <af:outputText value="#{row.Status}" id="ot4"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchPaymenPlan_ROVO1.hints.Description.name}"
+                       sortable="true"
+                       headerText="#{bindings.SearchPaymenPlan_ROVO1.hints.Description.label}"
+                       id="resId1c14" align="center" filterable="true">
+              <af:outputText value="#{row.Description}" id="ot7"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchPaymenPlan_ROVO1.hints.RevisedBy.name}"
+                       sortable="true"
+                       headerText="#{bindings.SearchPaymenPlan_ROVO1.hints.RevisedBy.label}"
+                       id="resId1c15" align="center" rendered="false"
+                       filterable="true">
+              <af:outputText value="#{row.RevisedBy}" id="ot15"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:panelBox>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MilestoneReceiptAmount_ROVO"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="BV_BOOK_MS_ID"
+    Kind="viewcriteria"
+    Type="oracle.jbo.domain.Number"/>
+  <Variable
+    Name="BV_BOOK_HDR_ID"
+    Kind="viewcriteria"
+    Type="oracle.jbo.domain.Number"/>
+  <SQLQuery>
+    <![CDATA[SELECT 
+    XXPL_BOOKING_MILESTONE_AMOUNT_V.TOTAL_AMT TOTAL_AMT, 
+    XXPL_BOOKING_MILESTONE_AMOUNT_V.APPLIED_AMT APPLIED_AMT, 
+    XXPL_BOOKING_MILESTONE_AMOUNT_V.BALANCE_AMT BALANCE_AMT, 
+    XXPL_BOOKING_MILESTONE_AMOUNT_V.OVER_ALL_AMT OVER_ALL_AMT, 
+    XXPL_BOOKING_MILESTONE_AMOUNT_V.BOOKING_MS_DTL_ID BOOKING_MS_DTL_ID ,
+    XXPL_BOOKING_MILESTONE_AMOUNT_V.BOOKING_HDR_ID BOOKING_HDR_ID,
+    XXPL_BOOKING_MILESTONE_AMOUNT_V.SAAS_AMT_APPLIED SAAS_AMT_APPLIED,
+    XXPL_BOOKING_MILESTONE_AMOUNT_V.SAAS_AMT_BALANCE SAAS_AMT_BALANCE
+FROM 
+    XXPL_BOOKING_MILESTONE_AMOUNT_V]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="TotalAmt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="BIGINT"
+    AliasName="TOTAL_AMT"
+    Expression="TOTAL_AMT"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AppliedAmt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="APPLIED_AMT"
+    Expression="APPLIED_AMT"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BalanceAmt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BALANCE_AMT"
+    Expression="BALANCE_AMT"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OverAllAmt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="OVER_ALL_AMT"
+    Expression="OVER_ALL_AMT"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BookingMsDtlId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="BOOKING_MS_DTL_ID"
+    Expression="BOOKING_MS_DTL_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BookingHdrId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="BOOKING_HDR_ID"
+    Expression="BOOKING_HDR_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SaasAmtApplied"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SAAS_AMT_APPLIED"
+    Expression="SAAS_AMT_APPLIED"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SaasAmtBalance"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SAAS_AMT_BALANCE"
+    Expression="SAAS_AMT_BALANCE"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="findByBookMsId"
+    ViewObjectName="custom.lease.model.ROVO.MilestoneReceiptAmount_ROVO"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow309"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="BookingMsDtlId"
+        ViewAttribute="BookingMsDtlId"
+        Operator="="
+        Conjunction="AND"
+        Value=":BV_BOOK_MS_ID"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="findByBookHdrID"
+    ViewObjectName="custom.lease.model.ROVO.MilestoneReceiptAmount_ROVO"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow273"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="BookingHdrId"
+        ViewAttribute="BookingHdrId"
+        Operator="="
+        Conjunction="AND"
+        Value=":BV_BOOK_HDR_ID"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="BookingMsDtlId"/>
+  </AttrArray>
+</ViewObject>

@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="AddEditBookingPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.Booking_AM.XxplBookingHeader_VO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplBookingHeader_VOIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="Root.Booking_AM.XxplBookingDetail_VO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplBookingDetail_VOIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="Root.Booking_AM.XxplBookingMilestones_MS"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplBookingMilestones_MSIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="Root.Booking_AM.XxplBookingMilestones_OC"
+              DataControl="customRootAppModuleDataControl" RangeSize="10"
+              id="XxplBookingMilestones_OCIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="Root.Booking_AM.BOOKING_UNIT_OWNER_ROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="2"
+              id="BOOKING_UNIT_OWNER_ROVOIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="Root.Booking_AM.XxplBookingCustomer_VO"
+              DataControl="customRootAppModuleDataControl" RangeSize="3"
+              id="XxplBookingCustomer_VOIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="Root.Booking_AM.XxplBookingCarParkingFREE"
+              DataControl="customRootAppModuleDataControl" RangeSize="2"
+              id="XxplBookingCarParkingFREEIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="Root.Booking_AM.XxplBookingCarParkingPAID"
+              DataControl="customRootAppModuleDataControl" RangeSize="5"
+              id="XxplBookingCarParkingPAIDIterator" ChangeEventPolicy="ppr"/>
+    <iterator id="MilestoneReceiptAmount_ROVOIterator"
+              Binds="Root.BillingAppModule1.MilestoneReceiptAmount_ROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator id="AppovalTypeROVO1Iterator"
+              Binds="Root.Documents_AM.AppovalTypeROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="Root.Booking_AM.FreeCarparkingsROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="FreeCarparkingsROVOIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="Root.Booking_AM.BookingAmount_ROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="BookingAmount_ROVOIterator" ChangeEventPolicy="ppr"/>
+    <taskFlow id="ApprovalHistory_BTF1"
+              taskFlowId="/WEB-INF/TaskFlow/ApprovalHistory_BTF.xml#ApprovalHistory_BTF"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="plid" value="#{sessionScope.plid}"/>
+        <parameter id="fuctionid" value="#{sessionScope.fuctionid}"/>
+      </parameters>
+    </taskFlow>
+    <iterator id="GetID_Rovo1Iterator" Binds="Root.Documents_AM.GetID_Rovo1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="Root.Booking_AM.XxplLeaseInsurance_View1" RangeSize="25"
+              DataControl="customRootAppModuleDataControl"
+              id="XxplLeaseInsurance_View1Iterator" ChangeEventPolicy="ppr"/>
+    <searchRegion Binds="XxplLeaseInsurance_View1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="XxplLeaseInsurance_View1Query"/>
+    <iterator Binds="Root.Booking_AM.BookingReceiptROVO1" RangeSize="25"
+              DataControl="customRootAppModuleDataControl"
+              id="BookingReceiptROVO1Iterator" ChangeEventPolicy="ppr"/>
+    <searchRegion Binds="BookingReceiptROVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="BookingReceiptROVO1Query"/>
+    <iterator id="XxplPropertyUnitsView1Iterator"
+              Binds="Root.PropertyUnitAM1.XxplPropertyUnitsView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="Root.Booking_AM.CarParkingROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="CarParkingROVOIterator"/>
+    <searchRegion Binds="CarParkingROVOIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="CarParkingROVOQuery"/>
+    <iterator id="MilestoneValidateROVO1Iterator"
+              Binds="Root.Booking_AM.MilestoneValidateROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="Root.Booking_AM.XxplReceiptHeaderView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="6"
+              id="XxplReceiptHeaderView1Iterator" ChangeEventPolicy="ppr"/>
+    <iterator id="XxplReceiptTransaction_V_ROVO1Iterator"
+              Binds="Root.Booking_AM.XxplReceiptTransaction_V_ROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              ChangeEventPolicy="ppr"/>
+    <iterator id="XxplReceiptLineView2Iterator"
+              Binds="Root.Booking_AM.XxplReceiptLineView2"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="Root.Booking_AM.LeaseSendMailDetails_V_ROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="LeaseSendMailDetails_V_ROVO1Iterator"
+              ChangeEventPolicy="ppr"/>
+    <iterator Binds="Root.Booking_AM.XxplBookingMultiUnit_VO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplBookingMultiUnit_VO1Iterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="Root.Booking_AM.XxplMultiUnitBooking_V_ROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplMultiUnitBooking_V_ROVO1Iterator"
+              ChangeEventPolicy="ppr"/>
+    <iterator Binds="Root.Booking_AM.XxplMultiUnitBooking_V_ROVO2"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplMultiUnitBooking_V_ROVO2Iterator"/>
+    <searchRegion Criteria="SearchUnit_VC"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="XxplMultiUnitBooking_V_ROVO2Iterator"
+                  id="SearchUnitVCQuery"/>
+    <iterator Binds="Root.Booking_AM.XxplTenantMaintenanceChargesVROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplTenantMaintenanceChargesVROVO1Iterator"
+              ChangeEventPolicy="ppr"/>
+    <iterator Binds="XxplBookingMilestones_OC" RangeSize="25"
+              DataControl="Booking_AMDataControl"
+              id="XxplBookingMilestones_OCIterator1"/>
+  </executables>
+  <bindings>
+    <listOfValues StaticList="false" IterBinding="XxplBookingHeader_VOIterator"
+                  Uses="LOV_MsPlMap_Trans" id="MsPlMap_Trans"/>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator"
+                     id="BookingHdrId">
+      <AttrNames>
+        <Item Value="BookingHdrId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator"
+                     id="BookingNumber">
+      <AttrNames>
+        <Item Value="BookingNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator"
+                     id="BookingDate">
+      <AttrNames>
+        <Item Value="BookingDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplBookingHeader_VOIterator" StaticList="false"
+          Uses="LOV_OrgId" id="OrgId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator"
+                     id="BookingLeaseStartDate">
+      <AttrNames>
+        <Item Value="BookingLeaseStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator"
+                     id="BookingLeaseEndDate">
+      <AttrNames>
+        <Item Value="BookingLeaseEndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator" id="NoOfDays">
+      <AttrNames>
+        <Item Value="NoOfDays"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator"
+                     id="CusReqMoveInDate">
+      <AttrNames>
+        <Item Value="CusReqMoveInDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator"
+                     id="CusReqMoveOutDate">
+      <AttrNames>
+        <Item Value="CusReqMoveOutDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplBookingHeader_VOIterator" StaticList="false"
+          Uses="LOV_CurrencyCode" id="CurrencyCode" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator"
+                     id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplBookingHeader_VOIterator" StaticList="false"
+          Uses="LOV_PropertyId" id="PropertyId" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XxplBookingHeader_VOIterator" StaticList="false"
+          Uses="LOV_MsHdrId" id="MsHdrId" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XxplBookingHeader_VOIterator" StaticList="false"
+          Uses="LOV_PlId" id="PlId" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <action id="Commit" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <tree IterBinding="XxplBookingDetail_VOIterator" id="XxplBookingDetail_VO">
+      <nodeDefinition DefName="custom.lease.model.View.XxplBookingDetail_VO"
+                      Name="XxplBookingDetail_VO0">
+        <AttrNames>
+          <Item Value="BuildingId"/>
+          <Item Value="UnitNameTrans"/>
+          <Item Value="AreaInSqft"/>
+          <Item Value="BasePrice"/>
+          <Item Value="BookingAmount"/>
+          <Item Value="DiscountType"/>
+          <Item Value="DiscPct"/>
+          <Item Value="DiscAmount"/>
+          <Item Value="TaxCode"/>
+          <Item Value="TaxRate"/>
+          <Item Value="TaxAmount"/>
+          <Item Value="TotalAmount"/>
+          <Item Value="BuildIdTrans"/>
+          <Item Value="PLIdTrans"/>
+          <Item Value="Attribute1"/>
+          <Item Value="Attribute2"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplBookingDetail_VOIterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <list IterBinding="XxplBookingHeader_VOIterator" StaticList="false"
+          Uses="LOV_Building" id="Building" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <tree IterBinding="XxplBookingMilestones_MSIterator"
+          id="XxplBookingMilestones_MS">
+      <nodeDefinition DefName="custom.lease.model.View.XxplBookingMilestones_VO"
+                      Name="XxplBookingMilestones_MS0">
+        <AttrNames>
+          <Item Value="SeqNumber"/>
+          <Item Value="InstallmentPct"/>
+          <Item Value="ChargeType"/>
+          <Item Value="PaymentTerm"/>
+          <Item Value="NoOfDays"/>
+          <Item Value="DueDate"/>
+          <Item Value="Baseamount"/>
+          <Item Value="TaxCode"/>
+          <Item Value="TaxRate"/>
+          <Item Value="TaxAmount"/>
+          <Item Value="InstallmentAmount"/>
+          <Item Value="BillingId"/>
+          <Item Value="InvoiceId"/>
+          <Item Value="Remarks"/>
+          <Item Value="InstallmentNameTrans"/>
+          <Item Value="BookingMsDtlId"/>
+          <Item Value="AppliedAmountTrans"/>
+          <Item Value="BalanceAmountTrans"/>
+          <Item Value="PdcNumber"/>
+          <Item Value="ArInterfaceStatus"/>
+          <Item Value="ErrorMsg"/>
+          <Item Value="StartDate"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="IntegrationFlag"/>
+          <Item Value="SaasAmtApplied"/>
+          <Item Value="SaasAmtBalance"/>
+          <Item Value="InstallmentType"/>
+          <Item Value="OwnerPaymentFlagTrans" Binds="OwnerPaymentFlagTrans"/>
+          <Item Value="Attribute4" Binds="Attribute4"/>
+          <Item Value="ReceiptCount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="XxplBookingMilestones_OCIterator"
+          id="XxplBookingMilestones_OC">
+      <nodeDefinition DefName="custom.lease.model.View.XxplBookingMilestones_VO"
+                      Name="XxplBookingMilestones_OC0">
+        <AttrNames>
+          <Item Value="SeqNumber"/>
+          <Item Value="ChargeName"/>
+          <Item Value="ChargeType"/>
+          <Item Value="Baseamount"/>
+          <Item Value="TaxCode"/>
+          <Item Value="TaxRate"/>
+          <Item Value="TaxAmount"/>
+          <Item Value="InstallmentAmount"/>
+          <Item Value="Remarks"/>
+          <Item Value="BillingId"/>
+          <Item Value="InvoiceId"/>
+          <Item Value="ChargeMethod" Binds="ChargeMethod1"/>
+          <Item Value="Charges"/>
+          <Item Value="DueDate"/>
+          <Item Value="BookingMsDtlId"/>
+          <Item Value="AppliedAmountTrans"/>
+          <Item Value="BalanceAmountTrans"/>
+          <Item Value="PaymentTerm"/>
+          <Item Value="PdcNumber"/>
+          <Item Value="StartDate"/>
+          <Item Value="ArInterfaceStatus"/>
+          <Item Value="ErrorMsg"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="IntegrationFlag"/>
+          <Item Value="SaasAmtApplied"/>
+          <Item Value="SaasAmtBalance"/>
+          <Item Value="Attribute4" Binds="Attribute41"/>
+          <Item Value="ReceiptCount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="BOOKING_UNIT_OWNER_ROVOIterator"
+          id="BOOKING_UNIT_OWNER_ROVO">
+      <nodeDefinition DefName="custom.lease.model.ROVO.BOOKING_UNIT_OWNER_ROVO"
+                      Name="BOOKING_UNIT_OWNER_ROVO0">
+        <AttrNames>
+          <Item Value="VendorName"/>
+          <Item Value="SiteNumber"/>
+          <Item Value="Address1"/>
+          <Item Value="Address2"/>
+          <Item Value="PrimaryYn"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="XxplBookingCustomer_VOIterator"
+          id="XxplBookingCustomer_VO">
+      <nodeDefinition DefName="custom.lease.model.View.XxplBookingCustomer_VO"
+                      Name="XxplBookingCustomer_VO0">
+        <AttrNames>
+          <Item Value="Customer_Trans"/>
+          <Item Value="BillToSiteId"/>
+          <Item Value="CustContactId"/>
+          <Item Value="PrimaryYn"/>
+          <Item Value="PrimaryFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplBookingCustomer_VOIterator" id="CreatePrimaryCustomer"
+            RequiresUpdateModel="true" Action="createWithParams">
+        <NamedData NDName="PrimaryYn" NDValue="Y" NDType="java.lang.String"/> 
+    </action>
+    <action IterBinding="XxplBookingCustomer_VOIterator" id="CreateCustomer"
+            RequiresUpdateModel="true" Action="createWithParams">
+        <NamedData NDName="PrimaryYn" NDValue="N" NDType="java.lang.String"/> 
+    </action>
+    <action IterBinding="XxplBookingCustomer_VOIterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="XxplBookingDetail_VOIterator" id="Delete1"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="XxplBookingMilestones_OCIterator" id="CreateWithParams"
+            RequiresUpdateModel="true" Action="createWithParams">
+        <NamedData NDName="MilestoneType" NDValue="OC" NDType="java.lang.String"/> 
+        <NamedData NDName="ChargeType" NDValue="OTHER_CHARGE" NDType="java.lang.String"/> 
+        <NamedData NDName="SeqNumber" NDValue="#{bindings.XxplBookingMilestones_OC.estimatedRowCount+1}" NDType="java.math.BigDecimal"/> 
+    </action>
+    <action IterBinding="XxplBookingMilestones_MSIterator"
+            id="CreateWithParams1" RequiresUpdateModel="true"
+            Action="createWithParams">
+            <NamedData NDName="MilestoneType" NDValue="MS" NDType="java.lang.String"/> 
+            </action>
+    <tree IterBinding="XxplBookingCarParkingFREEIterator"
+          id="XxplBookingCarParkingFREE">
+      <nodeDefinition DefName="custom.lease.model.View.XxplBookingMilestones_VO"
+                      Name="XxplBookingCarParkingFREE0">
+        <AttrNames>
+          <Item Value="CpUnitName"/>
+          <Item Value="CarparkingId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="XxplBookingCarParkingPAIDIterator"
+          id="XxplBookingCarParkingPAID">
+      <nodeDefinition DefName="custom.lease.model.View.XxplBookingMilestones_VO"
+                      Name="XxplBookingCarParkingPAID0">
+        <AttrNames>
+          <Item Value="CarparkingId"/>
+          <Item Value="CpUnitName"/>
+          <Item Value="Baseamount"/>
+          <Item Value="ChargeType"/>
+          <Item Value="DueDate"/>
+          <Item Value="PaymentTerm"/>
+          <Item Value="TaxCode"/>
+          <Item Value="TaxRate"/>
+          <Item Value="TaxAmount"/>
+          <Item Value="InstallmentAmount"/>
+          <Item Value="Remarks"/>
+          <Item Value="BillingId"/>
+          <Item Value="InvoiceId"/>
+          <Item Value="MsDtlId"/>
+          <Item Value="BookingMsDtlId"/>
+          <Item Value="AppliedAmountTrans"/>
+          <Item Value="BalanceAmountTrans"/>
+          <Item Value="PdcNumber"/>
+          <Item Value="StartDate"/>
+          <Item Value="ArInterfaceStatus"/>
+          <Item Value="ErrorMsg"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="IntegrationFlag"/>
+          <Item Value="SaasAmtApplied"/>
+          <Item Value="SaasAmtBalance"/>
+          <Item Value="CarParkingLeaseNumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplBookingCarParkingPAIDIterator"
+            id="CreateWithParams2" RequiresUpdateModel="true"
+            Action="createWithParams">
+        <NamedData NDName="MilestoneType" NDValue="CP" NDType="java.lang.String"/> 
+        <NamedData NDName="ChargeType" NDValue="CP" NDType="java.lang.String"/> 
+    </action>
+    <action IterBinding="XxplBookingMilestones_MSIterator" id="Delete2"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="XxplBookingMilestones_OCIterator" id="Delete3"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <list IterBinding="XxplBookingMilestones_OCIterator" StaticList="false"
+          Uses="LOV_ChargeName" id="ChargeName" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplBookingMilestones_OCIterator"
+                     id="ChargeMethod">
+      <AttrNames>
+        <Item Value="ChargeMethod"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_OCIterator"
+                     id="Charges">
+      <AttrNames>
+        <Item Value="Charges"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_MSIterator"
+                     id="Baseamount">
+      <AttrNames>
+        <Item Value="Baseamount"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplBookingMilestones_MSIterator" StaticList="false"
+          Uses="LOV_TaxCode" id="TaxCode" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplBookingMilestones_MSIterator"
+                     id="TaxRate">
+      <AttrNames>
+        <Item Value="TaxRate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_MSIterator"
+                     id="TaxAmount">
+      <AttrNames>
+        <Item Value="TaxAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_MSIterator"
+                     id="InstallmentAmount">
+      <AttrNames>
+        <Item Value="InstallmentAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_MSIterator"
+                     id="Remarks">
+      <AttrNames>
+        <Item Value="Remarks"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_OCIterator"
+                     id="BookingMsDtlId">
+      <AttrNames>
+        <Item Value="BookingMsDtlId"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="XxplBookingMilestones_OCIterator" id="First"
+            RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="XxplBookingMilestones_OCIterator" id="Previous"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="XxplBookingMilestones_OCIterator" id="Next"
+            RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="XxplBookingMilestones_OCIterator" id="Last"
+            RequiresUpdateModel="true" Action="last"/>
+    <list IterBinding="XxplBookingMilestones_OCIterator" StaticList="false"
+          Uses="LOV_ChargeMethod" id="ChargeMethod1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplBookingMilestones_MSIterator"
+                     id="DueDate">
+      <AttrNames>
+        <Item Value="DueDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplBookingMilestones_OCIterator" StaticList="false"
+          Uses="LOV_PaymentTerm" id="PaymentTerm" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplBookingDetail_VOIterator"
+                     id="TotalAmount">
+      <AttrNames>
+        <Item Value="TotalAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="FreeCarparkingsROVOIterator" id="FreeCarparkingsROVO">
+      <nodeDefinition DefName="custom.lease.model.ROVO.FreeCarparkingsROVO"
+                      Name="FreeCarparkingsROVO0">
+        <AttrNames>
+          <Item Value="AllotType"/>
+          <Item Value="Carunitnumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="BookingAmount_ROVOIterator" id="Totalamt">
+      <AttrNames>
+        <Item Value="Totalamt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BookingAmount_ROVOIterator" id="Amtapplied">
+      <AttrNames>
+        <Item Value="Amtapplied"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator" id="FuncId">
+      <AttrNames>
+        <Item Value="FuncId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BookingAmount_ROVOIterator" id="Balanceamt">
+      <AttrNames>
+        <Item Value="Balanceamt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingCustomer_VOIterator"
+                     id="PrimaryFlag">
+      <AttrNames>
+        <Item Value="PrimaryFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_MSIterator"
+                     id="StartDate">
+      <AttrNames>
+        <Item Value="StartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator" id="Attribute1">
+      <AttrNames>
+        <Item Value="Attribute1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator"
+                     id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator"
+                     id="LastUpdateDate">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator"
+                     id="LastUpdatedBy">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XxplLeaseInsurance_View1Iterator"
+          id="XxplLeaseInsurance_View1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplLeaseInsurance_View"
+                      Name="XxplLeaseInsurance_View10">
+        <AttrNames>
+          <Item Value="InsuranceId"/>
+          <Item Value="BookingId"/>
+          <Item Value="InsuranceType"/>
+          <Item Value="InsuranceDate"/>
+          <Item Value="Amount"/>
+          <Item Value="CheckBoxTrans"/>
+          <Item Value="ActiveYn"/>
+          <Item Value="StartDate"/>
+          <Item Value="ExpirationDate"/>
+          <Item Value="CoverageAmountRequired"/>
+          <Item Value="CoverageAmountPurchased"/>
+          <Item Value="InsurancesCertificationNum"/>
+          <Item Value="EnterableFields"/>
+          <Item Value="InsStartDate"/>
+          <Item Value="InsEndDate"/>
+          <Item Value="Note"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplLeaseInsurance_View1Iterator" id="CreateInsert1"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="XxplLeaseInsurance_View1Iterator" id="Delete4"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="BookingReceiptROVO1Iterator" id="BookingReceiptROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.BookingReceiptROVO"
+                      Name="BookingReceiptROVO10">
+        <AttrNames>
+          <Item Value="ReceiptId"/>
+          <Item Value="FuncId"/>
+          <Item Value="SourceFuncId"/>
+          <Item Value="SourceFuncRefId"/>
+          <Item Value="ReceiptNumber"/>
+          <Item Value="ReceiptDate"/>
+          <Item Value="ReceiptTypeDisp"/>
+          <Item Value="PropertyName"/>
+          <Item Value="BuildName"/>
+          <Item Value="UnitNumber"/>
+          <Item Value="OrgName"/>
+          <Item Value="CustId"/>
+          <Item Value="CustSiteId"/>
+          <Item Value="CustomerName"/>
+          <Item Value="CustomerNumber"/>
+          <Item Value="SiteNumber"/>
+          <Item Value="Address1"/>
+          <Item Value="Address2"/>
+          <Item Value="Address3"/>
+          <Item Value="Address4"/>
+          <Item Value="City"/>
+          <Item Value="PostalCode"/>
+          <Item Value="State"/>
+          <Item Value="ReceiptMethodName"/>
+          <Item Value="RecBankAccNum"/>
+          <Item Value="RecBankName"/>
+          <Item Value="RecBankBranchName"/>
+          <Item Value="ReceivedAmount"/>
+          <Item Value="ReceiptAmount"/>
+          <Item Value="PdcNumber"/>
+          <Item Value="InterfaceStatus"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator"
+                     id="ContractNumber">
+      <AttrNames>
+        <Item Value="ContractNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="BookingReceiptROVO1Iterator" id="Execute"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <tree IterBinding="CarParkingROVOIterator" id="CarParkingROVO">
+      <nodeDefinition DefName="custom.lease.model.ROVO.CarParkingROVO"
+                      Name="CarParkingROVO0">
+        <AttrNames>
+          <Item Value="UnitNumber"/>
+          <Item Value="UnitName"/>
+          <Item Value="UnitShortcode"/>
+          <Item Value="AllotType"/>
+          <Item Value="SelectAll_Trans"/>
+          <Item Value="FuncId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplBookingMilestones_MSIterator" id="Execute1"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action IterBinding="XxplBookingMilestones_OCIterator" id="Execute2"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action IterBinding="XxplBookingCarParkingPAIDIterator" id="Execute3"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action IterBinding="FreeCarparkingsROVOIterator" id="Execute4"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action IterBinding="XxplLeaseInsurance_View1Iterator" id="Execute5"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues IterBinding="XxplBookingMilestones_OCIterator"
+                     id="ErrorMsg">
+      <AttrNames>
+        <Item Value="ErrorMsg"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingCarParkingPAIDIterator"
+                     id="ErrorMsg1">
+      <AttrNames>
+        <Item Value="ErrorMsg"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_MSIterator"
+                     id="ErrorMsg2">
+      <AttrNames>
+        <Item Value="ErrorMsg"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="XxplBookingHeader_VOIterator" id="PmFeeFlag"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="PmFeeFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="XxplReceiptHeaderView1Iterator"
+          id="XxplReceiptHeaderView1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplReceiptHeaderView"
+                      Name="XxplReceiptHeaderView10">
+        <AttrNames>
+          <Item Value="GlDate"/>
+          <Item Value="ReceiptNumber"/>
+          <Item Value="ReceiptDate"/>
+          <Item Value="ReceiptMethodTrans"/>
+          <Item Value="MaturityDate"/>
+          <Item Value="PdcNumber"/>
+          <Item Value="BankName"/>
+          <Item Value="BankBranchName"/>
+          <Item Value="BankAccountNum"/>
+          <Item Value="SourcesRefDtlId_Trans"/>
+          <Item Value="ReceivedAmount"/>
+          <Item Value="ReceiptAmount"/>
+          <Item Value="ReceiptType"/>
+          <Item Value="Description"/>
+          <Item Value="Status"/>
+          <Item Value="InterfaceStatus"/>
+          <Item Value="InterfaceErrorMsg"/>
+          <Item Value="ReceiptId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="XxplReceiptHeaderView1Iterator"
+                     id="InterfaceStatus">
+      <AttrNames>
+        <Item Value="InterfaceStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingDetail_VOIterator" id="UnitId">
+      <AttrNames>
+        <Item Value="UnitId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingDetail_VOIterator"
+                     id="UnitNameTrans">
+      <AttrNames>
+        <Item Value="UnitNameTrans"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator" id="Attribute2">
+      <AttrNames>
+        <Item Value="Attribute2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="LeaseSendMailDetails_V_ROVO1Iterator"
+                     id="ToAddress">
+      <AttrNames>
+        <Item Value="ToAddress"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="LeaseSendMailDetails_V_ROVO1Iterator"
+          id="LeaseSendMailDetails_V_ROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.LeaseSendMailDetails_V_ROVO"
+                      Name="LeaseSendMailDetails_V_ROVO10">
+        <AttrNames>
+          <Item Value="TxNumber"/>
+          <Item Value="TxDate"/>
+          <Item Value="LeaseNumber"/>
+          <Item Value="CustomerName"/>
+          <Item Value="Status"/>
+          <Item Value="Attribute1"/>
+          <Item Value="Attribute2"/>
+          <Item Value="Attribute3"/>
+          <Item Value="MailId"/>
+          <Item Value="CustId"/>
+          <Item Value="CustSiteId"/>
+          <Item Value="PkId"/>
+          <Item Value="FunId"/>
+          <Item Value="TxId"/>
+          <Item Value="OrgId"/>
+          <Item Value="PType"/>
+          <Item Value="SelectTrans" Binds="SelectTrans"/>
+          <Item Value="ReceiptList"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="LeaseSendMailDetails_V_ROVO1Iterator" id="SelectTrans"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SelectTrans"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="XxplBookingMultiUnit_VO1Iterator"
+          id="XxplBookingMultiUnit_VO1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplBookingMultiUnit_VO"
+                      Name="XxplBookingMultiUnit_VO10">
+        <AttrNames>
+          <Item Value="BookingMulUnitId"/>
+          <Item Value="BookingHdrId"/>
+          <Item Value="PropertyId"/>
+          <Item Value="BuildingId"/>
+          <Item Value="UnitId"/>
+          <Item Value="UnitType"/>
+          <Item Value="AreaInSqft"/>
+          <Item Value="Uom"/>
+          <Item Value="BasePrice"/>
+          <Item Value="BookingAmount"/>
+          <Item Value="PropertyName_Trans"/>
+          <Item Value="BuildingName_Trans"/>
+          <Item Value="UnitName_Trans"/>
+          <Item Value="UnitType_Trans"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="XxplMultiUnitBooking_V_ROVO1Iterator"
+            id="SelectTrans1" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SelectTrans"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="XxplMultiUnitBooking_V_ROVO2Iterator"
+          id="XxplMultiUnitBooking_V_ROVO2">
+      <nodeDefinition DefName="custom.lease.model.ROVO.XxplMultiUnitBooking_V_ROVO"
+                      Name="XxplMultiUnitBooking_V_ROVO20">
+        <AttrNames>
+          <Item Value="SelectTrans"/>
+          <Item Value="UnitName"/>
+          <Item Value="BuildName"/>
+          <Item Value="PropertyName"/>
+          <Item Value="UnitTypeDisp"/>
+          <Item Value="AreaVales"/>
+          <Item Value="Uom"/>
+          <Item Value="UnitId"/>
+          <Item Value="FloorNumber"/>
+          <Item Value="NoOfRooms"/>
+          <Item Value="AreaType"/>
+          <Item Value="Status"/>
+          <Item Value="UnitCategory"/>
+          <Item Value="Description"/>
+          <Item Value="AreaTypeDisp"/>
+          <Item Value="ViewTypeDisp"/>
+          <Item Value="UnitNumber"/>
+          <Item Value="BuildNumber"/>
+          <Item Value="PropertyNumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="XxplTenantMaintenanceChargesVROVO1Iterator"
+          id="XxplTenantMaintenanceChargesVROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.XxplTenantMaintenanceChargesVROVO"
+                      Name="XxplTenantMaintenanceChargesVROVO10">
+        <AttrNames>
+          <Item Value="Attribute11"/>
+          <Item Value="Attribute12"/>
+          <Item Value="OcChargeNumber"/>
+          <Item Value="OcAmount"/>
+          <Item Value="TaxRate"/>
+          <Item Value="TaxCode"/>
+          <Item Value="OcTaxAmount"/>
+          <Item Value="OcTotalAmount"/>
+          <Item Value="Status"/>
+          <Item Value="DueDate"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="IntegrationStatus"/>
+          <Item Value="ErrorMsg"/>
+          <Item Value="IntegrationFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="XxplBookingHeader_VOIterator" StaticList="false"
+          Uses="LOV_ContractSignBy" id="ContractSignBy" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplBookingHeader_VOIterator" id="FlowWith">
+      <AttrNames>
+        <Item Value="FlowWith"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="XxplBookingMilestones_MSIterator"
+            id="OwnerPaymentFlagTrans" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="OwnerPaymentFlagTrans"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Owner"/>
+        <Item Value="Tenant"/>
+      </ValueList>
+    </button>
+    <button IterBinding="XxplBookingMilestones_MSIterator" id="Attribute4"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Attribute4"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Owner"/>
+        <Item Value="Tenant"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="XxplBookingMilestones_MSIterator"
+                     id="InvoiceNumber">
+      <AttrNames>
+        <Item Value="InvoiceNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_OCIterator"
+                     id="InvoiceNumber1">
+      <AttrNames>
+        <Item Value="InvoiceNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_OCIterator"
+                     id="Remarks1">
+      <AttrNames>
+        <Item Value="Remarks"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_OCIterator"
+                     id="StartDate1">
+      <AttrNames>
+        <Item Value="StartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_OCIterator1"
+                     id="DueDate1">
+      <AttrNames>
+        <Item Value="DueDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_OCIterator"
+                     id="Baseamount1">
+      <AttrNames>
+        <Item Value="Baseamount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_OCIterator"
+                     id="InstallmentAmount1">
+      <AttrNames>
+        <Item Value="InstallmentAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_OCIterator"
+                     id="DueDate2">
+      <AttrNames>
+        <Item Value="DueDate"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="XxplBookingMilestones_OCIterator" id="Attribute41"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Attribute4"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Owner"/>
+        <Item Value="Tenant"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="XxplBookingMilestones_OCIterator"
+                     id="TaxRate1">
+      <AttrNames>
+        <Item Value="TaxRate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBookingMilestones_OCIterator"
+                     id="TaxAmount1">
+      <AttrNames>
+        <Item Value="TaxAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplBookingMilestones_OCIterator" StaticList="false"
+          Uses="LOV_TaxCode" id="TaxCode2" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

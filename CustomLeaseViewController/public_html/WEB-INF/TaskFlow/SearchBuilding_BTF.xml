@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SearchBuilding_BTF">
+    <default-activity id="__1">SearchBuilding</default-activity>
+    <managed-bean id="__10">
+      <managed-bean-name id="__9">FlimStripBean</managed-bean-name>
+      <managed-bean-class id="__12">com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope id="__11">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchBuilding">
+      <page>/Fragment/SearchBuilding.jsff</page>
+    </view>
+    <task-flow-call id="AddEditBuilding_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditBuilding_BTF.xml</document>
+        <id>AddEditBuilding_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>addEditMode</name>
+        <value>#{pageFlowScope.addEditMode}</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>editBuildId</name>
+        <value>#{pageFlowScope.editBuildId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="hideFS">
+      <method>#{backingBeanScope.FlimStripBean._hideFilmStrip}</method>
+      <outcome id="__27">
+        <fixed-outcome>toaddedit</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="showFS">
+      <method>#{backingBeanScope.FlimStripBean._showFilmStrip}</method>
+      <outcome id="__38">
+        <fixed-outcome>toSearch</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome id="__42">
+        <fixed-outcome>toExecute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__15">
+      <from-activity-id id="__16">SearchBuilding</from-activity-id>
+      <control-flow-case id="__20">
+        <from-outcome id="__21">toBuilding</from-outcome>
+        <to-activity-id id="__19">hideFS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__22">
+      <from-activity-id id="__23">hideFS</from-activity-id>
+      <control-flow-case id="__25">
+        <from-outcome id="__26">toaddedit</from-outcome>
+        <to-activity-id id="__24">AddEditBuilding_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__28">
+      <from-activity-id id="__29">AddEditBuilding_BTF</from-activity-id>
+      <control-flow-case id="__31">
+        <from-outcome id="__30">Commit</from-outcome>
+        <to-activity-id id="__32">showFS</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__39">
+        <from-outcome id="__41">Rollback</from-outcome>
+        <to-activity-id id="__40">showFS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__43">
+      <from-activity-id id="__44">Execute</from-activity-id>
+      <control-flow-case id="__47">
+        <from-outcome id="__45">toExecute</from-outcome>
+        <to-activity-id id="__46">SearchBuilding</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__2">
+      <from-activity-id id="__3">showFS</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome id="__6">toSearch</from-outcome>
+        <to-activity-id id="__4">Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

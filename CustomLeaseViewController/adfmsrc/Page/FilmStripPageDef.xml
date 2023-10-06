@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="FilmStripPageDef" Package="Page"
+                ControllerClass="custom.lease.custom.view.beans.filmStrip.FilmStripPhaseListener">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="dynamicRegion1"
+    taskFlowId="#{backingBeanScope.FilmStripBean.dynamicTaskFlowId}"
+    xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings>
+    <methodAction id="CheckUserNaname" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="CheckUserNaname"
+                  IsViewObjectMethod="false"
+                  DataControl="customRootAppModuleDataControl"
+                  InstanceName="customRootAppModuleDataControl.dataProvider.Root.Documents_AM"
+                  ReturnName="data.customRootAppModuleDataControl.methodResults.CheckUserNaname_customRootAppModuleDataControl_dataProvider_Root_Documents_AM_CheckUserNaname_result">
+      <NamedData NDName="userName" NDValue="#{sessionScope.userName}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

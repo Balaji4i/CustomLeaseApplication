@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73"
+                id="AddEditReceipt_AddEditReceipt_ExecuteWithParamsPageDef"
+                Package="TaskFlow" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="XxplReceiptHeaderView1" RangeSize="25"
+              DataControl="Receipt_AMDataControl"
+              id="XxplReceiptHeaderView1Iterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="XxplReceiptHeaderView1Iterator" id="ExecuteWithParams"
+            RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="BV_ReceiptId" NDValue="#{pageFlowScope.receiptid}"
+                 NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

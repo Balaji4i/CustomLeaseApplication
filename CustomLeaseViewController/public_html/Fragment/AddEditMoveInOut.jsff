@@ -1,0 +1,783 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+      <af:panelBox text="Manage #{sessionScope.ScreenName}" id="pb1"
+                   showDisclosure="false"
+                   inlineStyle="border-color:transparent; height:auto;">
+        <f:facet name="toolbar">
+           
+            <af:menuBar id="mb1">
+             <af:menu text="Print" id="m1">
+             <af:goMenuItem text="Move In" id="gmi2" targetFrame="_blank"  visible="#{sessionScope.ScreenName eq 'Move In'}"
+	 destination="#{backingBeanScope.FilmStripBean.ipAddress}/LeaseReports/webresources/lease/movein/?P_BOOKING_ID=#{bindings.BookingId.inputValue}&amp;P_LEASE_NUMBER=#{bindings.BookingIdTrans.inputValue}&amp;P_FILE_TYPE=pdf"/>
+              
+              </af:menu>
+                 <af:spacer width="10" height="10" id="s8"/>
+            <af:menu text="Action" id="m2">
+            
+              <af:commandMenuItem text="Attachments" id="cmi1"
+                                  windowHeight="380" windowWidth="1100"
+                                  useWindow="true"
+                                  actionListener="#{MoveInOutBean.onClickAttachment}"
+                                  action="Attachment"/>
+                <af:commandMenuItem text="Approval History" id="cmi5"
+                                    actionListener="#{MoveInOutBean.onClickAprovalHis}"/>
+              </af:menu>
+              <af:spacer width="10" height="10" id="s5"/>
+              <af:commandMenuItem text="Submit" id="cmi2" action="toSave"
+                                  actionListener="#{MoveInOutBean.onClickSubmit}"
+                                  visible="#{bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision'}"
+                                  disabled="#{bindings.MoveIoNumber.inputValue eq null}"
+                                  partialTriggers="cb1 it9"/>
+              <af:spacer width="10" height="10" id="s10"/>
+              <af:menu text="Approval Action"
+                       rendered="#{MoveInOutBean.approvalUser}" id="m3">
+                <af:commandMenuItem text="Approve" id="cmi3">
+                  <af:showPopupBehavior popupId="p1" triggerType="action"/>
+                </af:commandMenuItem>
+                <af:commandMenuItem text="Reject" id="cmi4">
+                  <af:showPopupBehavior popupId="p2" triggerType="action"/>
+                </af:commandMenuItem>
+              </af:menu>
+            <af:spacer width="10" height="10" id="s9"/>
+              <af:commandButton text="Save and Close" id="cb2" action="toSave"
+                                actionListener="#{MoveInOutBean.onClickSave}">
+                <f:attribute name="buttonType" value="saveandclose"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s6"/>
+              <af:commandButton text="Save" id="cb1"
+                                actionListener="#{MoveInOutBean.onClickSave}">
+                <f:attribute name="buttonType" value="save"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s7"/>
+              <af:commandButton text="Cancel" id="cb3" action="toCancel"
+                                immediate="true"/>
+            </af:menuBar>
+           
+        </f:facet>
+        <af:panelFormLayout id="pfl1" maxColumns="3" rows="6"
+                            styleClass="width:200px;" labelWidth="260">
+          <af:inputText value="#{bindings.MoveIoId.inputValue}"
+                        label="#{bindings.MoveIoId.hints.label}"
+                        required="#{bindings.MoveIoId.hints.mandatory}"
+                        columns="#{bindings.MoveIoId.hints.displayWidth}"
+                        maximumLength="#{bindings.MoveIoId.hints.precision}"
+                        shortDesc="#{bindings.MoveIoId.hints.tooltip}" id="it6"
+                        contentStyle="width:200px;" rendered="false">
+            <f:validator binding="#{bindings.MoveIoId.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.MoveIoId.format}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.MoveIoNumber.inputValue}"
+                        label="#{bindings.MoveIoNumber.hints.label}"
+                        required="false"
+                        columns="#{bindings.MoveIoNumber.hints.displayWidth}"
+                        maximumLength="#{bindings.MoveIoNumber.hints.precision}"
+                        shortDesc="#{bindings.MoveIoNumber.hints.tooltip}"
+                        id="it9"
+                        contentStyle="width:200px;font-size:medium; font-weight:bold;color:#1367ae;" autoSubmit="true"
+                        readOnly="true" partialTriggers="cb1">
+            <f:validator binding="#{bindings.MoveIoNumber.validator}"/>
+          </af:inputText>
+          <af:inputDate value="#{bindings.MoveIoDate.inputValue}"
+                        label="#{bindings.MoveIoDate.hints.label}"
+                        required="#{bindings.MoveIoDate.hints.mandatory}"
+                        shortDesc="#{bindings.MoveIoDate.hints.tooltip}"
+                        id="id1" contentStyle="width:200px;" autoSubmit="true"
+                       disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+            <f:validator binding="#{bindings.MoveIoDate.validator}"/>
+            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+          </af:inputDate>
+          <af:selectOneChoice value="#{bindings.OrgId.inputValue}"
+                              label="#{bindings.OrgId.label}"
+                              required="#{bindings.OrgId.hints.mandatory}"
+                              shortDesc="#{bindings.OrgId.hints.tooltip}"
+                              id="soc1" contentStyle="width:200px;"
+                              autoSubmit="true"
+                              disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+            <f:selectItems value="#{bindings.OrgId.items}" id="si1"/>
+          </af:selectOneChoice>
+          <af:inputText value="#{bindings.leaseenddate_trans.inputValue}"
+                        label="#{bindings.leaseenddate_trans.hints.label}"
+                        required="#{bindings.leaseenddate_trans.hints.mandatory}"
+                        columns="#{bindings.leaseenddate_trans.hints.displayWidth}"
+                        maximumLength="#{bindings.leaseenddate_trans.hints.precision}"
+                        shortDesc="#{bindings.leaseenddate_trans.hints.tooltip}"
+                        id="it7" partialTriggers="bookingIdTransId"
+                        rendered="false">
+            <f:validator binding="#{bindings.leaseenddate_trans.validator}"/>
+            <af:convertDateTime pattern="#{bindings.leaseenddate_trans.format}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.leasestartdate_trans.inputValue}"
+                        label="#{bindings.leasestartdate_trans.hints.label}"
+                        required="#{bindings.leasestartdate_trans.hints.mandatory}"
+                        columns="#{bindings.leasestartdate_trans.hints.displayWidth}"
+                        maximumLength="#{bindings.leasestartdate_trans.hints.precision}"
+                        shortDesc="#{bindings.leasestartdate_trans.hints.tooltip}"
+                        id="it16" partialTriggers="bookingIdTransId"
+                        rendered="false">
+            <f:validator binding="#{bindings.leasestartdate_trans.validator}"/>
+            <af:convertDateTime pattern="#{bindings.leasestartdate_trans.format}"/>
+          </af:inputText>
+          <af:inputComboboxListOfValues id="bookingIdTransId"
+                                        popupTitle="Search and Select: #{bindings.BookingIdTrans.hints.label}"
+                                        value="#{bindings.BookingIdTrans.inputValue}"
+                                        label="#{bindings.BookingIdTrans.hints.label}"
+                                        model="#{bindings.BookingIdTrans.listOfValuesModel}"
+                                        required="#{bindings.BookingIdTrans.hints.mandatory}"
+                                        columns="#{bindings.BookingIdTrans.hints.displayWidth}"
+                                        shortDesc="#{bindings.BookingIdTrans.hints.tooltip}"
+                                        contentStyle="width:160px;"
+                                        partialTriggers="soc1"
+                                        autoSubmit="true"
+                                        disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+            <f:validator binding="#{bindings.BookingIdTrans.validator}"/>
+          </af:inputComboboxListOfValues>
+          <af:inputComboboxListOfValues id="resourceNameId"
+                                        popupTitle="Search and Select: #{bindings.ResourceName.hints.label}"
+                                        value="#{bindings.ResourceName.inputValue}"
+                                        label="#{bindings.ResourceName.hints.label}"
+                                        model="#{bindings.ResourceName.listOfValuesModel}"
+                                        required="#{bindings.ResourceName.hints.mandatory}"
+                                        columns="#{bindings.ResourceName.hints.displayWidth}"
+                                        shortDesc="#{bindings.ResourceName.hints.tooltip}"
+                                        contentStyle="width:160px;"
+                                        autoSubmit="true"
+                                        disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+            <f:validator binding="#{bindings.ResourceName.validator}"/>
+          </af:inputComboboxListOfValues>
+          <af:inputText value="#{bindings.BookingId.inputValue}"
+                        label="#{bindings.BookingId.hints.label}"
+                        required="false"
+                        columns="#{bindings.BookingId.hints.displayWidth}"
+                        maximumLength="#{bindings.BookingId.hints.precision}"
+                        shortDesc="#{bindings.BookingId.hints.tooltip}"
+                        partialTriggers="bookingIdTransId" id="it5"
+                        contentStyle="width:200px;" rendered="false">
+            <f:validator binding="#{bindings.BookingId.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.AssistedBy.inputValue}"
+                        label="#{bindings.AssistedBy.hints.label}"
+                        required="#{bindings.AssistedBy.hints.mandatory}"
+                        columns="#{bindings.AssistedBy.hints.displayWidth}"
+                        maximumLength="#{bindings.AssistedBy.hints.precision}"
+                        shortDesc="#{bindings.AssistedBy.hints.tooltip}"
+                        partialTriggers="resourceNameId" id="it8"
+                        contentStyle="width:200px;" rendered="false">
+            <f:validator binding="#{bindings.AssistedBy.validator}"/>
+          </af:inputText>
+          <af:inputDate value="#{bindings.CertDate.inputValue}"
+                        label="#{bindings.CertDate.hints.label}"
+                        required="#{bindings.CertDate.hints.mandatory}"
+                        shortDesc="#{bindings.CertDate.hints.tooltip}" id="id2"
+                        contentStyle="width:200px;" autoSubmit="true"
+                        disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+            <f:validator binding="#{bindings.CertDate.validator}"/>
+            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+          </af:inputDate>
+          <af:inputText value="#{bindings.CertNumber.inputValue}"
+                        label="#{bindings.CertNumber.hints.label}"
+                        required="#{bindings.CertNumber.hints.mandatory}"
+                        columns="#{bindings.CertNumber.hints.displayWidth}"
+                        maximumLength="#{bindings.CertNumber.hints.precision}"
+                        shortDesc="#{bindings.CertNumber.hints.tooltip}"
+                        id="it4" contentStyle="width:200px;" autoSubmit="true"
+                        disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+            <f:validator binding="#{bindings.CertNumber.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.FuncId.inputValue}"
+                        label="#{bindings.FuncId.hints.label}"
+                        required="#{bindings.FuncId.hints.mandatory}"
+                        columns="#{bindings.FuncId.hints.displayWidth}"
+                        maximumLength="#{bindings.FuncId.hints.precision}"
+                        shortDesc="#{bindings.FuncId.hints.tooltip}" id="it1"
+                        contentStyle="width:200px;" rendered="false">
+            <f:validator binding="#{bindings.FuncId.validator}"/>
+          </af:inputText>
+          <af:selectBooleanCheckbox value="#{bindings.CertReceived.inputValue}"
+                                    label="#{bindings.CertReceived.label}"
+                                    shortDesc="#{bindings.CertReceived.hints.tooltip}"
+                                    id="sbc4" autoSubmit="true"
+                                    disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}"/>
+          <af:inputText value="#{bindings.HandoverType.inputValue}"
+                        label="#{bindings.HandoverType.hints.label}"
+                        required="#{bindings.HandoverType.hints.mandatory}"
+                        columns="#{bindings.HandoverType.hints.displayWidth}"
+                        maximumLength="#{bindings.HandoverType.hints.precision}"
+                        shortDesc="#{bindings.HandoverType.hints.tooltip}"
+                        id="it3" contentStyle="width:200px;" autoSubmit="true"
+                        rendered="false">
+            <f:validator binding="#{bindings.HandoverType.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.IoFlag.inputValue}"
+                        label="#{bindings.IoFlag.hints.label}"
+                        required="#{bindings.IoFlag.hints.mandatory}"
+                        columns="#{bindings.IoFlag.hints.displayWidth}"
+                        maximumLength="#{bindings.IoFlag.hints.precision}"
+                        shortDesc="#{bindings.IoFlag.hints.tooltip}" id="it2"
+                        contentStyle="width:200px;" autoSubmit="true"
+                        rendered="false">
+            <f:validator binding="#{bindings.IoFlag.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.Status.inputValue}"
+                        label="#{bindings.Status.hints.label}"
+                        required="#{bindings.Status.hints.mandatory}"
+                        columns="#{bindings.Status.hints.displayWidth}"
+                        maximumLength="#{bindings.Status.hints.precision}"
+                        shortDesc="#{bindings.Status.hints.tooltip}" id="it10"
+                        contentStyle="width:200px;" disabled="true"
+                        autoSubmit="true">
+            <f:validator binding="#{bindings.Status.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.Description.inputValue}"
+                        label="#{bindings.Description.hints.label}"
+                        required="#{bindings.Description.hints.mandatory}"
+                        columns="#{bindings.Description.hints.displayWidth}"
+                        maximumLength="#{bindings.Description.hints.precision}"
+                        shortDesc="#{bindings.Description.hints.tooltip}"
+                        id="it11" contentStyle="width:200px;" autoSubmit="true"
+                        rows="4"
+                        disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+            <f:validator binding="#{bindings.Description.validator}"/>
+          </af:inputText>
+        </af:panelFormLayout>
+        <af:spacer width="10" height="30" id="s4"/>
+        <af:panelTabbed position="above" id="pt2" styleClass="AFStretchWidth">
+          <af:showDetailItem id="tab1" text="Key"
+                             styleClass="AFStretchWidth">
+            <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t5" flex="100">
+                  <af:commandImageLink actionListener="#{bindings.CreateInsert.execute}"
+                                       icon="/images/func_add_16_ena.png"
+disabledIcon="/images/func_add_16_dis.png"
+hoverIcon="/images/func_add_16_hov.png"
+depressedIcon="/images/func_add_16_act.png "
+                                       disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}"
+                                       id="cil1"/>
+                  <af:spacer width="10" height="10" id="s1"/>
+                  <af:commandImageLink actionListener="#{bindings.Delete.execute}"
+                                       disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}"
+                                       id="cil2"
+                                       icon="/images/func_remove_16_ena.png"
+                                       disabledIcon="/images/func_remove_16_dis.png"
+                                       hoverIcon="/images/func_remove_16_hov.png"
+                                       depressedIcon="/images/func_remove_16_act.png"/>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.XxplMoveIoKeysView1.collectionModel}"
+                        var="row"
+                        rows="#{bindings.XxplMoveIoKeysView1.rangeSize}"
+                        emptyText="#{bindings.XxplMoveIoKeysView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="5"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.XxplMoveIoKeysView1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.XxplMoveIoKeysView1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t2" varStatus="vs"
+                        autoHeightRows="0" columnStretching="column:c3"
+                        scrollPolicy="page">
+                <af:column id="c27" headerText="S.No" width="50" align="center">
+                  <af:outputText value="#{vs.index+1}" id="ot1"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoKeysView1.hints.KeyId.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoKeysView1.hints.KeyId.label}"
+                           id="c7" rendered="false" align="center">
+                  <af:inputText value="#{row.bindings.KeyId.inputValue}"
+                                label="#{bindings.XxplMoveIoKeysView1.hints.KeyId.label}"
+                                required="#{bindings.XxplMoveIoKeysView1.hints.KeyId.mandatory}"
+                                columns="#{bindings.XxplMoveIoKeysView1.hints.KeyId.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoKeysView1.hints.KeyId.precision}"
+                                shortDesc="#{bindings.XxplMoveIoKeysView1.hints.KeyId.tooltip}"
+                                id="it12">
+                    <f:validator binding="#{row.bindings.KeyId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxplMoveIoKeysView1.hints.KeyId.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoKeysView1.hints.MoveIoId.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoKeysView1.hints.MoveIoId.label}"
+                           id="c4" rendered="false" align="center">
+                  <af:inputText value="#{row.bindings.MoveIoId.inputValue}"
+                                label="#{bindings.XxplMoveIoKeysView1.hints.MoveIoId.label}"
+                                required="#{bindings.XxplMoveIoKeysView1.hints.MoveIoId.mandatory}"
+                                columns="#{bindings.XxplMoveIoKeysView1.hints.MoveIoId.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoKeysView1.hints.MoveIoId.precision}"
+                                shortDesc="#{bindings.XxplMoveIoKeysView1.hints.MoveIoId.tooltip}"
+                                id="it18">
+                    <f:validator binding="#{row.bindings.MoveIoId.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoKeysView1.hints.KeyQty.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoKeysView1.hints.KeyQty.label}"
+                           id="c8" align="center">
+                  <af:inputText value="#{row.bindings.KeyQty.inputValue}"
+                                label="#{bindings.XxplMoveIoKeysView1.hints.KeyQty.label}"
+                                required="#{bindings.XxplMoveIoKeysView1.hints.KeyQty.mandatory}"
+                                columns="#{bindings.XxplMoveIoKeysView1.hints.KeyQty.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoKeysView1.hints.KeyQty.precision}"
+                                shortDesc="#{bindings.XxplMoveIoKeysView1.hints.KeyQty.tooltip}"
+                                id="it14"
+                                disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+                    <f:validator binding="#{row.bindings.KeyQty.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoKeysView1.hints.BookingId.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoKeysView1.hints.BookingId.label}"
+                           id="c2" rendered="false" align="center">
+                  <af:inputText value="#{row.bindings.BookingId.inputValue}"
+                                label="#{bindings.XxplMoveIoKeysView1.hints.BookingId.label}"
+                                required="#{bindings.XxplMoveIoKeysView1.hints.BookingId.mandatory}"
+                                columns="#{bindings.XxplMoveIoKeysView1.hints.BookingId.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoKeysView1.hints.BookingId.precision}"
+                                shortDesc="#{bindings.XxplMoveIoKeysView1.hints.BookingId.tooltip}"
+                                id="it17">
+                    <f:validator binding="#{row.bindings.BookingId.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoKeysView1.hints.KeyCode.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoKeysView1.hints.KeyCode.label}"
+                           id="c9" width="150" align="center">
+                  <af:selectOneChoice value="#{row.bindings.KeyCode.inputValue}"
+                                      label="#{row.bindings.KeyCode.label}"
+                                      required="#{bindings.XxplMoveIoKeysView1.hints.KeyCode.mandatory}"
+                                      shortDesc="#{bindings.XxplMoveIoKeysView1.hints.KeyCode.tooltip}"
+                                      id="soc2"
+                                      disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+                    <f:selectItems value="#{row.bindings.KeyCode.items}"
+                                   id="si2"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoKeysView1.hints.EmployeeName.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoKeysView1.hints.EmployeeName.label}"
+                           id="c1" width="150" align="center">
+                  <af:inputComboboxListOfValues id="employeeNameId"
+                                                popupTitle="Search and Select: #{bindings.XxplMoveIoKeysView1.hints.EmployeeName.label}"
+                                                value="#{row.bindings.EmployeeName.inputValue}"
+                                                model="#{row.bindings.EmployeeName.listOfValuesModel}"
+                                                required="#{bindings.XxplMoveIoKeysView1.hints.EmployeeName.mandatory}"
+                                                columns="#{bindings.XxplMoveIoKeysView1.hints.EmployeeName.displayWidth}"
+                                                shortDesc="#{bindings.XxplMoveIoKeysView1.hints.EmployeeName.tooltip}"
+                                                autoSubmit="true"
+                                                disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+                    <f:validator binding="#{row.bindings.EmployeeName.validator}"/>
+                  </af:inputComboboxListOfValues>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoKeysView1.hints.AssistedBy.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoKeysView1.hints.AssistedBy.label}"
+                           id="c6" rendered="false" align="center">
+                  <af:inputText value="#{row.bindings.AssistedBy.inputValue}"
+                                label="#{bindings.XxplMoveIoKeysView1.hints.AssistedBy.label}"
+                                required="#{bindings.XxplMoveIoKeysView1.hints.AssistedBy.mandatory}"
+                                columns="#{bindings.XxplMoveIoKeysView1.hints.AssistedBy.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoKeysView1.hints.AssistedBy.precision}"
+                                shortDesc="#{bindings.XxplMoveIoKeysView1.hints.AssistedBy.tooltip}"
+                                id="it15" partialTriggers="employeeNameId">
+                    <f:validator binding="#{row.bindings.AssistedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.XxplMoveIoKeysView1.hints.KeyStatus.label}"
+                           id="c5" align="center">
+                  <af:selectBooleanCheckbox value="#{row.bindings.KeyStatus.inputValue}"
+                                            label="#{row.bindings.KeyStatus.label}"
+                                            shortDesc="#{bindings.XxplMoveIoKeysView1.hints.KeyStatus.tooltip}"
+                                            id="sbc1"
+                                            disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoKeysView1.hints.KeyDescription.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoKeysView1.hints.KeyDescription.label}"
+                           id="c3" align="center">
+                  <af:inputText value="#{row.bindings.KeyDescription.inputValue}"
+                                label="#{bindings.XxplMoveIoKeysView1.hints.KeyDescription.label}"
+                                required="#{bindings.XxplMoveIoKeysView1.hints.KeyDescription.mandatory}"
+                                columns="#{bindings.XxplMoveIoKeysView1.hints.KeyDescription.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoKeysView1.hints.KeyDescription.precision}"
+                                shortDesc="#{bindings.XxplMoveIoKeysView1.hints.KeyDescription.tooltip}"
+                                id="it13"
+                                disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+                    <f:validator binding="#{row.bindings.KeyDescription.validator}"/>
+                  </af:inputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailItem>
+          <af:showDetailItem text="Meter" id="sdi1"
+                             styleClass="AFStretchWidth">
+            <af:panelCollection id="pc2" styleClass="AFStretchWidth">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t6" flex="100">
+                  <af:commandImageLink actionListener="#{bindings.CreateInsert1.execute}"
+                                       icon="/images/func_add_16_ena.png"
+disabledIcon="/images/func_add_16_dis.png"
+hoverIcon="/images/func_add_16_hov.png"
+depressedIcon="/images/func_add_16_act.png "
+                                       disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}"
+                                       id="cil3"/>
+                  <af:spacer width="10" height="10" id="s2"/>
+                  <af:commandImageLink actionListener="#{bindings.Delete1.execute}"
+                                       icon="/images/func_remove_16_ena.png"
+disabledIcon="/images/func_remove_16_dis.png"
+hoverIcon="/images/func_remove_16_hov.png"
+depressedIcon="/images/func_remove_16_act.png"
+                                       disabled="#{!bindings.Delete1.enabled}"
+                                       id="cil4"/>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.XxplMoveIoMetersView1.collectionModel}"
+                        var="row"
+                        rows="#{bindings.XxplMoveIoMetersView1.rangeSize}"
+                        emptyText="#{bindings.XxplMoveIoMetersView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="5"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.XxplMoveIoMetersView1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.XxplMoveIoMetersView1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t3" varStatus="vs"
+                        autoHeightRows="0" columnStretching="column:c16"
+                        scrollPolicy="page">
+                <af:column id="c28" headerText="S.No" width="50" align="center">
+                  <af:outputText value="#{vs.index+1}" id="outputText1"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoMetersView1.hints.MoveIoId.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoMetersView1.hints.MoveIoId.label}"
+                           id="c14" rendered="false">
+                  <af:inputText value="#{row.bindings.MoveIoId.inputValue}"
+                                label="#{bindings.XxplMoveIoMetersView1.hints.MoveIoId.label}"
+                                required="#{bindings.XxplMoveIoMetersView1.hints.MoveIoId.mandatory}"
+                                columns="#{bindings.XxplMoveIoMetersView1.hints.MoveIoId.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoMetersView1.hints.MoveIoId.precision}"
+                                shortDesc="#{bindings.XxplMoveIoMetersView1.hints.MoveIoId.tooltip}"
+                                id="it20">
+                    <f:validator binding="#{row.bindings.MoveIoId.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoMetersView1.hints.MeterId.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoMetersView1.hints.MeterId.label}"
+                           id="c15" rendered="false" align="center">
+                  <af:inputText value="#{row.bindings.MeterId.inputValue}"
+                                label="#{bindings.XxplMoveIoMetersView1.hints.MeterId.label}"
+                                required="#{bindings.XxplMoveIoMetersView1.hints.MeterId.mandatory}"
+                                columns="#{bindings.XxplMoveIoMetersView1.hints.MeterId.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoMetersView1.hints.MeterId.precision}"
+                                shortDesc="#{bindings.XxplMoveIoMetersView1.hints.MeterId.tooltip}"
+                                id="it21">
+                    <f:validator binding="#{row.bindings.MeterId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxplMoveIoMetersView1.hints.MeterId.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoMetersView1.hints.MeterValue.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoMetersView1.hints.MeterValue.label}"
+                           id="c10" align="center">
+                  <af:inputText value="#{row.bindings.MeterValue.inputValue}"
+                                label="#{bindings.XxplMoveIoMetersView1.hints.MeterValue.label}"
+                                required="#{bindings.XxplMoveIoMetersView1.hints.MeterValue.mandatory}"
+                                columns="#{bindings.XxplMoveIoMetersView1.hints.MeterValue.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoMetersView1.hints.MeterValue.precision}"
+                                shortDesc="#{bindings.XxplMoveIoMetersView1.hints.MeterValue.tooltip}"
+                                id="it25"
+                                disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+                    <f:validator binding="#{row.bindings.MeterValue.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoMetersView1.hints.MeterCode.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoMetersView1.hints.MeterCode.label}"
+                           id="c13" width="150" align="center">
+                  <af:selectOneChoice value="#{row.bindings.MeterCode.inputValue}"
+                                      label="#{row.bindings.MeterCode.label}"
+                                      required="#{bindings.XxplMoveIoMetersView1.hints.MeterCode.mandatory}"
+                                      shortDesc="#{bindings.XxplMoveIoMetersView1.hints.MeterCode.tooltip}"
+                                      id="soc3"
+                                      disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+                    <f:selectItems value="#{row.bindings.MeterCode.items}"
+                                   id="si3"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoMetersView1.hints.EmployeeName.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoMetersView1.hints.EmployeeName.label}"
+                           id="c18" width="150" align="center">
+                  <af:inputComboboxListOfValues id="inputComboboxListOfValues1"
+                                                popupTitle="Search and Select: #{bindings.XxplMoveIoMetersView1.hints.EmployeeName.label}"
+                                                value="#{row.bindings.EmployeeName.inputValue}"
+                                                model="#{row.bindings.EmployeeName.listOfValuesModel}"
+                                                required="#{bindings.XxplMoveIoMetersView1.hints.EmployeeName.mandatory}"
+                                                columns="#{bindings.XxplMoveIoMetersView1.hints.EmployeeName.displayWidth}"
+                                                shortDesc="#{bindings.XxplMoveIoMetersView1.hints.EmployeeName.tooltip}"
+                                                autoSubmit="true"
+                                                disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+                    <f:validator binding="#{row.bindings.EmployeeName.validator}"/>
+                  </af:inputComboboxListOfValues>
+                </af:column>
+                <af:column headerText="#{bindings.XxplMoveIoMetersView1.hints.ViewStatus.label}"
+                           id="c11" align="center">
+                  <af:selectBooleanCheckbox value="#{row.bindings.ViewStatus.inputValue}"
+                                            label="#{row.bindings.ViewStatus.label}"
+                                            shortDesc="#{bindings.XxplMoveIoMetersView1.hints.ViewStatus.tooltip}"
+                                            id="sbc2"
+                                            disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoMetersView1.hints.AssistedBy.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoMetersView1.hints.AssistedBy.label}"
+                           id="c12" rendered="false" align="center">
+                  <af:inputText value="#{row.bindings.AssistedBy.inputValue}"
+                                label="#{bindings.XxplMoveIoMetersView1.hints.AssistedBy.label}"
+                                required="#{bindings.XxplMoveIoMetersView1.hints.AssistedBy.mandatory}"
+                                columns="#{bindings.XxplMoveIoMetersView1.hints.AssistedBy.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoMetersView1.hints.AssistedBy.precision}"
+                                shortDesc="#{bindings.XxplMoveIoMetersView1.hints.AssistedBy.tooltip}"
+                                id="it22"
+                                partialTriggers="inputComboboxListOfValues1">
+                    <f:validator binding="#{row.bindings.AssistedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoMetersView1.hints.BookingId.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoMetersView1.hints.BookingId.label}"
+                           id="c17" rendered="false" align="center">
+                  <af:inputText value="#{row.bindings.BookingId.inputValue}"
+                                label="#{bindings.XxplMoveIoMetersView1.hints.BookingId.label}"
+                                required="#{bindings.XxplMoveIoMetersView1.hints.BookingId.mandatory}"
+                                columns="#{bindings.XxplMoveIoMetersView1.hints.BookingId.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoMetersView1.hints.BookingId.precision}"
+                                shortDesc="#{bindings.XxplMoveIoMetersView1.hints.BookingId.tooltip}"
+                                id="it23">
+                    <f:validator binding="#{row.bindings.BookingId.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoMetersView1.hints.ViewDescription.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoMetersView1.hints.ViewDescription.label}"
+                           id="c16" align="center">
+                  <af:inputText value="#{row.bindings.ViewDescription.inputValue}"
+                                label="#{bindings.XxplMoveIoMetersView1.hints.ViewDescription.label}"
+                                required="#{bindings.XxplMoveIoMetersView1.hints.ViewDescription.mandatory}"
+                                columns="#{bindings.XxplMoveIoMetersView1.hints.ViewDescription.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoMetersView1.hints.ViewDescription.precision}"
+                                shortDesc="#{bindings.XxplMoveIoMetersView1.hints.ViewDescription.tooltip}"
+                                id="it19"
+                                disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+                    <f:validator binding="#{row.bindings.ViewDescription.validator}"/>
+                  </af:inputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailItem>
+          <af:showDetailItem text="Visitor Log" id="sdi2"
+                             styleClass="AFStretchWidth">
+            <af:panelCollection id="pc3" styleClass="AFStretchWidth">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t7" flex="100">
+                  <af:commandImageLink actionListener="#{bindings.CreateInsert2.execute}"
+                                       icon="/images/func_add_16_ena.png"
+disabledIcon="/images/func_add_16_dis.png"
+hoverIcon="/images/func_add_16_hov.png"
+depressedIcon="/images/func_add_16_act.png "
+                                       disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}"
+                                       id="cil5"/>
+                  <af:spacer width="10" height="10" id="s3"/>
+                  <af:commandImageLink actionListener="#{bindings.Delete2.execute}"
+                                       icon="/images/func_remove_16_ena.png"
+disabledIcon="/images/func_remove_16_dis.png"
+hoverIcon="/images/func_remove_16_hov.png"
+depressedIcon="/images/func_remove_16_act.png"
+                                       disabled="#{!bindings.Delete2.enabled}"
+                                       id="cil6"/>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.XxplMoveIoCustVisitView1.collectionModel}"
+                        var="row"
+                        rows="#{bindings.XxplMoveIoCustVisitView1.rangeSize}"
+                        emptyText="#{bindings.XxplMoveIoCustVisitView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="5"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.XxplMoveIoCustVisitView1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.XxplMoveIoCustVisitView1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t4"
+                        columnStretching="column:c19" varStatus="vs"
+                        autoHeightRows="0" scrollPolicy="page">
+                <af:column sortProperty="#{bindings.XxplMoveIoCustVisitView1.hints.MoveIoId.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoCustVisitView1.hints.MoveIoId.label}"
+                           id="c25" rendered="false">
+                  <af:inputText value="#{row.bindings.MoveIoId.inputValue}"
+                                label="#{bindings.XxplMoveIoCustVisitView1.hints.MoveIoId.label}"
+                                required="#{bindings.XxplMoveIoCustVisitView1.hints.MoveIoId.mandatory}"
+                                columns="#{bindings.XxplMoveIoCustVisitView1.hints.MoveIoId.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoCustVisitView1.hints.MoveIoId.precision}"
+                                shortDesc="#{bindings.XxplMoveIoCustVisitView1.hints.MoveIoId.tooltip}"
+                                id="it30">
+                    <f:validator binding="#{row.bindings.MoveIoId.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="column1" headerText="S.No" width="50"
+                           align="center">
+                  <af:outputText value="#{vs.index+1}" id="outputText2"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoCustVisitView1.hints.BookingId.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoCustVisitView1.hints.BookingId.label}"
+                           id="c22" rendered="false" align="center">
+                  <af:inputText value="#{row.bindings.BookingId.inputValue}"
+                                label="#{bindings.XxplMoveIoCustVisitView1.hints.BookingId.label}"
+                                required="#{bindings.XxplMoveIoCustVisitView1.hints.BookingId.mandatory}"
+                                columns="#{bindings.XxplMoveIoCustVisitView1.hints.BookingId.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoCustVisitView1.hints.BookingId.precision}"
+                                shortDesc="#{bindings.XxplMoveIoCustVisitView1.hints.BookingId.tooltip}"
+                                id="it27">
+                    <f:validator binding="#{row.bindings.BookingId.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoCustVisitView1.hints.EmployeeName.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoCustVisitView1.hints.EmployeeName.label}"
+                           id="c26" width="150" align="center">
+                  <af:inputComboboxListOfValues id="inputComboboxListOfValues2"
+                                                popupTitle="Search and Select: #{bindings.XxplMoveIoCustVisitView1.hints.EmployeeName.label}"
+                                                value="#{row.bindings.EmployeeName.inputValue}"
+                                                model="#{row.bindings.EmployeeName.listOfValuesModel}"
+                                                required="#{bindings.XxplMoveIoCustVisitView1.hints.EmployeeName.mandatory}"
+                                                columns="#{bindings.XxplMoveIoCustVisitView1.hints.EmployeeName.displayWidth}"
+                                                shortDesc="#{bindings.XxplMoveIoCustVisitView1.hints.EmployeeName.tooltip}"
+                                                autoSubmit="true"
+                                                disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+                    <f:validator binding="#{row.bindings.EmployeeName.validator}"/>
+                  </af:inputComboboxListOfValues>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoCustVisitView1.hints.VisitId.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoCustVisitView1.hints.VisitId.label}"
+                           id="c23" rendered="false" align="center">
+                  <af:inputText value="#{row.bindings.VisitId.inputValue}"
+                                label="#{bindings.XxplMoveIoCustVisitView1.hints.VisitId.label}"
+                                required="#{bindings.XxplMoveIoCustVisitView1.hints.VisitId.mandatory}"
+                                columns="#{bindings.XxplMoveIoCustVisitView1.hints.VisitId.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoCustVisitView1.hints.VisitId.precision}"
+                                shortDesc="#{bindings.XxplMoveIoCustVisitView1.hints.VisitId.tooltip}"
+                                id="it31">
+                    <f:validator binding="#{row.bindings.VisitId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XxplMoveIoCustVisitView1.hints.VisitId.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoCustVisitView1.hints.VisitDate.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoCustVisitView1.hints.VisitDate.label}"
+                           id="c24" align="center">
+                  <af:inputDate value="#{row.bindings.VisitDate.inputValue}"
+                                label="#{bindings.XxplMoveIoCustVisitView1.hints.VisitDate.label}"
+                                required="#{bindings.XxplMoveIoCustVisitView1.hints.VisitDate.mandatory}"
+                                shortDesc="#{bindings.XxplMoveIoCustVisitView1.hints.VisitDate.tooltip}"
+                                id="id3"
+                                disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+                    <f:validator binding="#{row.bindings.VisitDate.validator}"/>
+                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column headerText="Accept"
+                           id="c21" align="center">
+                  <af:selectBooleanCheckbox value="#{row.bindings.AcceptFlag.inputValue}"
+                                            label="#{row.bindings.AcceptFlag.label}"
+                                            shortDesc="#{bindings.XxplMoveIoCustVisitView1.hints.AcceptFlag.tooltip}"
+                                            id="sbc3"
+                                            disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoCustVisitView1.hints.AssistedBy.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoCustVisitView1.hints.AssistedBy.label}"
+                           id="c20" rendered="false" align="center">
+                  <af:inputText value="#{row.bindings.AssistedBy.inputValue}"
+                                label="#{bindings.XxplMoveIoCustVisitView1.hints.AssistedBy.label}"
+                                required="#{bindings.XxplMoveIoCustVisitView1.hints.AssistedBy.mandatory}"
+                                columns="#{bindings.XxplMoveIoCustVisitView1.hints.AssistedBy.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoCustVisitView1.hints.AssistedBy.precision}"
+                                shortDesc="#{bindings.XxplMoveIoCustVisitView1.hints.AssistedBy.tooltip}"
+                                id="it26"
+                                partialTriggers="inputComboboxListOfValues2">
+                    <f:validator binding="#{row.bindings.AssistedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplMoveIoCustVisitView1.hints.VisitDescription.name}"
+                           sortable="false"
+                           headerText="#{bindings.XxplMoveIoCustVisitView1.hints.VisitDescription.label}"
+                           id="c19" align="center">
+                  <af:inputText value="#{row.bindings.VisitDescription.inputValue}"
+                                label="#{bindings.XxplMoveIoCustVisitView1.hints.VisitDescription.label}"
+                                required="#{bindings.XxplMoveIoCustVisitView1.hints.VisitDescription.mandatory}"
+                                columns="#{bindings.XxplMoveIoCustVisitView1.hints.VisitDescription.displayWidth}"
+                                maximumLength="#{bindings.XxplMoveIoCustVisitView1.hints.VisitDescription.precision}"
+                                shortDesc="#{bindings.XxplMoveIoCustVisitView1.hints.VisitDescription.tooltip}"
+                                id="it29"
+                                disabled="#{(bindings.Status.inputValue eq 'Draft' || bindings.Status.inputValue eq 'Rejected'||bindings.Status.inputValue eq 'Revision')?false:true}">
+                    <f:validator binding="#{row.bindings.VisitDescription.validator}"/>
+                  </af:inputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailItem>
+        </af:panelTabbed>
+        <af:popup id="p1" binding="#{MoveInOutBean.p1}">
+        <af:dialog id="d2" type="none" title="Approve"
+                           titleIconSource="/images/available_lg_qualifer.png">
+                  <af:inputText label="Comments" id="it32" rows="3"
+                                contentStyle="width:200px;"
+                                binding="#{MoveInOutBean.approveComments}"/>
+                  <f:facet name="buttonBar">
+                    <af:group id="g3">
+                      <af:commandButton text="Ok" id="cb5"
+                                        action="toSave"
+                                        actionListener="#{MoveInOutBean.onClickApprove}"/>
+                      <af:commandButton text="Cancel" id="cb6"
+                                        actionListener="#{MoveInOutBean.onClickp1Cancel}"/>
+                    </af:group>
+                  </f:facet>
+                </af:dialog>
+        </af:popup>
+        <af:popup id="p2" binding="#{MoveInOutBean.p2}">
+        <af:dialog id="d3" type="none" title="Reject"
+                           titleIconSource="/images/alert_qualifier.png">
+                  <af:inputText label="Comments" id="it33" rows="3"
+                                contentStyle="width:200px;"/>
+                  <f:facet name="buttonBar">
+                    <af:group id="g4">
+                      <af:commandButton text="Ok" id="cb7"
+                                        action="toSave"
+                                        actionListener="#{MoveInOutBean.onClickRejected}"/>
+                      <af:commandButton text="Cancel" id="cb8"
+                                        actionListener="#{MoveInOutBean.onClickp2Cancel}"/>
+                    </af:group>
+                  </f:facet>
+                </af:dialog>
+        </af:popup>
+        <af:popup id="p3" contentDelivery="lazyUncached"
+                  binding="#{MoveInOutBean.p3}">
+          <af:dialog id="d1" type="none">
+            <af:region value="#{bindings.ApprovalHistory_BTF1.regionModel}"
+                       id="r1"/>
+          </af:dialog>
+        </af:popup>
+      </af:panelBox>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

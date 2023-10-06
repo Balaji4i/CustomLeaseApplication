@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1" title="Manage Check List"
+                 inlineStyle="background-color:White;height:300.0px;">
+      <af:form id="f1">
+        <af:panelBox id="pb1" showDisclosure="false">
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+            <f:facet name="menus"/>
+            <f:facet name="toolbar">
+              <af:toolbar id="t2" flex="10">
+                <af:commandImageLink actionListener="#{bindings.CreateWithParams.execute}"
+                                     icon="/images/func_add_16_ena.png"
+                                     hoverIcon="/images/func_add_16_hov.png"
+                                     depressedIcon="/images/func_add_16_act.png"
+                                     disabledIcon="/images/func_add_16_dis.png"
+                                     text="Add"
+                                     disabled="#{!bindings.CreateWithParams.enabled}"
+                                     id="cil1"/>
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:commandImageLink actionListener="#{bindings.Delete.execute}"
+                                     text="Delete"
+                                     icon="/images/func_remove_16_ena.png"
+                                     hoverIcon="/images/func_remove_16_hov.png"
+                                     depressedIcon="/images/func_remove_16_act.png"
+                                     disabledIcon="/images/func_remove_16_dis.png"
+                                     disabled="#{!bindings.Delete.enabled}"
+                                     id="cil2"/>
+              </af:toolbar>
+            </f:facet>
+            <f:facet name="statusbar">
+              <af:toolbar id="t3">
+                <af:commandButton text="OK" id="cb1" action="close"/>
+              </af:toolbar>
+            </f:facet>
+            <af:table value="#{bindings.XxplChecklist_VO.collectionModel}"
+                      var="row" rows="#{bindings.XxplChecklist_VO.rangeSize}"
+                      emptyText="#{bindings.XxplChecklist_VO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="5" editingMode="clickToEdit"
+                      rowBandingInterval="0" varStatus="vs"
+                      selectedRowKeys="#{bindings.XxplChecklist_VO.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.XxplChecklist_VO.collectionModel.makeCurrent}"
+                      rowSelection="single" id="t1"
+                      columnStretching="column:c10" autoHeightRows="0">
+             <af:column id="c73" width="50" headerText="S.No" align="center" frozen="true">
+                      <af:outputText value="#{vs.index+1}" id="ot23"/>
+             </af:column>
+              <af:column sortProperty="#{bindings.XxplChecklist_VO.hints.ClId.name}"
+                         sortable="false"
+                         headerText="#{bindings.XxplChecklist_VO.hints.ClId.label}"
+                         id="c6" rendered="false">
+                <af:outputText value="#{row.ClId}" id="ot3">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.XxplChecklist_VO.hints.ClId.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplChecklist_VO.hints.FuncId.name}"
+                         sortable="false"
+                         headerText="#{bindings.XxplChecklist_VO.hints.FuncId.label}"
+                         id="c1" rendered="false">
+                <af:outputText value="#{row.FuncId}" id="ot2"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplChecklist_VO.hints.FuncRefId.name}"
+                         sortable="false"
+                         headerText="#{bindings.XxplChecklist_VO.hints.FuncRefId.label}"
+                         id="c2" rendered="false">
+                <af:outputText value="#{row.FuncRefId}" id="ot5"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplChecklist_VO.hints.ClCode.name}"
+                         sortable="false" headerText="Check List Name" id="c9"
+                         width="200">
+                <af:selectOneChoice value="#{row.bindings.ClCode.inputValue}"
+                                    label="#{row.bindings.ClCode.label}"
+                                    autoSubmit="true"
+                                    required="#{bindings.XxplChecklist_VO.hints.ClCode.mandatory}"
+                                    shortDesc="#{bindings.XxplChecklist_VO.hints.ClCode.tooltip}"
+                                    id="soc1">
+                  <f:selectItems value="#{row.bindings.ClCode.items}" id="si1"/>
+                </af:selectOneChoice>
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplChecklist_VO.hints.Description.name}"
+                         sortable="false" headerText="Remarks" id="c10">
+                <af:inputText value="#{row.bindings.Description.inputValue}"
+                              autoSubmit="true"
+                              label="#{bindings.XxplChecklist_VO.hints.Description.label}"
+                              required="#{bindings.XxplChecklist_VO.hints.Description.mandatory}"
+                              columns="#{bindings.XxplChecklist_VO.hints.Description.displayWidth}"
+                              maximumLength="#{bindings.XxplChecklist_VO.hints.Description.precision}"
+                              shortDesc="#{bindings.XxplChecklist_VO.hints.Description.tooltip}"
+                              id="it1">
+                  <f:validator binding="#{row.bindings.Description.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplChecklist_VO.hints.ActiveFlag.name}"
+                         sortable="false" headerText="Active ?" id="c8">
+                <af:selectBooleanCheckbox value="#{row.bindings.ActiveFlag.inputValue}"
+                                          label="#{row.bindings.ActiveFlag.label}"
+                                          shortDesc="#{bindings.XxplChecklist_VO.hints.ActiveFlag.tooltip}"
+                                          id="sbc1" autoSubmit="true"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplChecklist_VO.hints.CreatedBy.name}"
+                         sortable="false" visible="false"
+                         headerText="Created By" id="c5">
+                <af:outputText value="#{row.CreatedBy}" id="ot7"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplChecklist_VO.hints.CreationDate.name}"
+                         sortable="false" visible="false"
+                         headerText="Created On" id="c7">
+                <af:outputText value="#{row.CreationDate}" id="ot6">
+                  <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplChecklist_VO.hints.LastUpdateDate.name}"
+                         sortable="false" visible="false"
+                         headerText="Last Updated On" id="c4">
+                <af:outputText value="#{row.LastUpdateDate}" id="ot4">
+                  <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplChecklist_VO.hints.LastUpdatedBy.name}"
+                         sortable="false" visible="false"
+                         headerText="Last Updated By" id="c3">
+                <af:outputText value="#{row.LastUpdatedBy}" id="ot1"/>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </af:panelBox>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

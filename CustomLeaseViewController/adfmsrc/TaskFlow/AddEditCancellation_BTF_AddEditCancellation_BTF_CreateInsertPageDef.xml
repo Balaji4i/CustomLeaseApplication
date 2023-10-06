@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73"
+                id="AddEditCancellation_BTF_AddEditCancellation_BTF_CreateInsertPageDef"
+                Package="TaskFlow" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="Root.Invoice_AM.XxplCancellation_VO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplCancellation_VOIterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="XxplCancellation_VOIterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

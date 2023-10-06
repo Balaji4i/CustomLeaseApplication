@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+      <af:panelBox text="Manage Receipt" id="pb1" showDisclosure="false"
+                   styleClass="AFStretchWidth"
+                   inlineStyle="height:750.0px;border-color:transparent;">
+        <f:facet name="toolbar"/>
+        <af:panelGroupLayout layout="vertical" id="pgl1"
+                             styleClass="AFStretchWidth">
+          <af:query id="qryId1" headerText="Search" disclosed="true"
+                    value="#{bindings.SearchReceiptROVOCriteriaQuery.queryDescriptor}"
+                    model="#{bindings.SearchReceiptROVOCriteriaQuery.queryModel}"
+                    queryListener="#{bindings.SearchReceiptROVOCriteriaQuery.processQuery}"
+                    queryOperationListener="#{bindings.SearchReceiptROVOCriteriaQuery.processQueryOperation}"
+                    resultComponentId="::pc1:resId1" rows="2" maxColumns="2"/>
+          <af:spacer width="10" height="10" id="s2"/>
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+            <f:facet name="menus"/>
+            <f:facet name="toolbar">
+              <af:toolbar id="t1" flex="100">
+                <af:commandImageLink id="cil1"
+                                     icon="/images/func_add_16_ena.png"
+                                     disabledIcon="/images/func_add_16_dis.png"
+                                     hoverIcon="/images/func_add_16_hov.png"
+                                     depressedIcon="/images/func_add_16_act.png"
+                                     action="AddEdit">
+                  <af:setPropertyListener from="#{'add'}"
+                                          to="#{pageFlowScope.navigation}"
+                                          type="action"/>
+                </af:commandImageLink>
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:commandImageLink id="cil2"
+                                     icon="/images/func_pencil_16_ena.png"
+                                     disabledIcon="/images/func_pencil_16_dis.png"
+                                     hoverIcon="/images/func_pencil_16_hov.png"
+                                     depressedIcon="/images/func_pencil_16_act.png"
+                                     action="AddEdit">
+                  <af:setPropertyListener from="#{'edit'}"
+                                          to="#{pageFlowScope.navigation}"
+                                          type="action"/>
+                  <af:setPropertyListener from="#{bindings.ReceiptId.inputValue}"
+                                          to="#{pageFlowScope.receiptid}"
+                                          type="action"/>
+                </af:commandImageLink>
+              </af:toolbar>
+            </f:facet>
+            <f:facet name="statusbar"/>
+            <af:table value="#{bindings.SearchReceiptROVO1.collectionModel}"
+                      var="row" rows="#{bindings.SearchReceiptROVO1.rangeSize}"
+                      emptyText="#{bindings.SearchReceiptROVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="10"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.SearchReceiptROVO1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.SearchReceiptROVO1.collectionModel.makeCurrent}"
+                      rowSelection="single" id="resId1" varStatus="vs"
+                      styleClass="AFStretchWidth"
+                      columnStretching="last" autoHeightRows="0"
+                      scrollPolicy="page" columnBandingInterval="0">
+              <af:column id="c1" headerText="S.No" width="60" align="center">
+                <af:outputText value="#{vs.index+1}" id="ot9"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchReceiptROVO1.hints.ReceiptId.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchReceiptROVO1.hints.ReceiptId.label}"
+                         id="c2" rendered="false">
+                <af:outputText value="#{row.ReceiptId}" id="ot10"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchReceiptROVO1.hints.ReceiptNumber.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchReceiptROVO1.hints.ReceiptNumber.label}"
+                         id="resId1c1" width="100">
+                <af:outputText value="#{row.ReceiptNumber}" id="ot7"
+                               rendered="false"/>
+                <af:commandImageLink text="#{row.ReceiptNumber}" id="cil3"
+                                     action="AddEdit">
+                  <af:setPropertyListener from="#{'edit'}"
+                                          to="#{pageFlowScope.navigation}"
+                                          type="action"/>
+                  <af:setPropertyListener from="#{row.ReceiptId}"
+                                          to="#{pageFlowScope.receiptid}"
+                                          type="action"/>
+                </af:commandImageLink>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchReceiptROVO1.hints.OrgName.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchReceiptROVO1.hints.OrgName.label}"
+                         id="resId1c2" width="200" align="center">
+                <af:outputText value="#{row.OrgName}" id="ot6"/>
+              </af:column>
+              <af:column headerText="#{bindings.SearchReceiptROVO1.hints.Attribute1.label}"
+                         id="c6">
+                <af:outputText value="#{row.Attribute1}" id="ot13"/>
+              </af:column>
+              <af:column headerText="#{bindings.SearchReceiptROVO1.hints.Attribute2.label}"
+                         id="c7" width="120">
+                <af:outputText value="#{row.Attribute2}" id="ot14"/>
+              </af:column>
+              <af:column headerText="#{bindings.SearchReceiptROVO1.hints.Attribute3.label}"
+                         id="c8" width="160">
+                <af:outputText value="#{row.Attribute3}" id="ot15"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchReceiptROVO1.hints.ReceiptDate.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchReceiptROVO1.hints.ReceiptDate.label}"
+                         id="resId1c3" align="center">
+                <af:outputText value="#{row.ReceiptDate}" id="ot5">
+                  <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchReceiptROVO1.hints.CustomerName.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchReceiptROVO1.hints.CustomerName.label}"
+                         id="resId1c4" width="200" align="center">
+                <af:outputText value="#{row.CustomerName}" id="ot4"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchReceiptROVO1.hints.ReceivedAmount.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchReceiptROVO1.hints.ReceivedAmount.label}"
+                         id="resId1c5" width="120" align="center"
+                         rendered="false">
+                <af:outputText value="#{row.ReceivedAmount}" id="ot8"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchReceiptROVO1.hints.Receipttype1.name}"
+                         sortable="false"
+                         headerText="Receipt Type"
+                         id="c5">
+                <af:outputText value="#{row.Receipttype1}" id="ot12"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchReceiptROVO1.hints.ReceiptAmount.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchReceiptROVO1.hints.ReceiptAmount.label}"
+                         id="resId1c6" width="120" align="center"
+                         rendered="false">
+                <af:outputText value="#{row.ReceiptAmount}" id="ot1"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchReceiptROVO1.hints.ReceiptMethodName.name}"
+                         sortable="false"
+                         headerText="Receipt Method"
+                         id="c4" width="120">
+                <af:outputText value="#{row.ReceiptMethodName}" id="ot11"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchReceiptROVO1.hints.InterfaceStatus.name}"
+                         sortable="false" headerText="Status" id="c3"
+                         align="center" width="80">
+                <af:outputText value="#{row.InterfaceStatus}" id="ot3"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchReceiptROVO1.hints.Description.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchReceiptROVO1.hints.Description.label}"
+                         id="resId1c8" align="center" width="90"
+                         minimumWidth="100" visible="false">
+                <af:outputText value="#{row.Description}" id="ot2"/>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </af:panelGroupLayout>
+      </af:panelBox>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

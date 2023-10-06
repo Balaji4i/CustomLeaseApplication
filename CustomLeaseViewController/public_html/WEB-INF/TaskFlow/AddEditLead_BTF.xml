@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="AddEditLead_BTF">
+    <default-activity id="__1">decider</default-activity>
+    <input-parameter-definition id="__31">
+      <name id="__30">mode</name>
+      <value>#{pageFlowScope.mode}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__33">
+      <name id="__32">headerId</name>
+      <value>#{pageFlowScope.headerId}</value>
+      <class>oracle.jbo.domain.Number</class>
+    </input-parameter-definition>
+    <managed-bean id="__34">
+      <managed-bean-name id="__36">AddEditLead</managed-bean-name>
+      <managed-bean-class id="__37">custom.lease.view.bean.backing.AddEditLead</managed-bean-class>
+      <managed-bean-scope id="__35">backingBean</managed-bean-scope>
+    </managed-bean>
+    <router id="decider">
+      <case>
+        <expression>#{pageFlowScope.mode eq 'add'}</expression>
+        <outcome id="__28">add</outcome>
+      </case>
+      <case>
+        <expression>#{pageFlowScope.mode eq 'edit'}</expression>
+        <outcome id="__29">edit</outcome>
+      </case>
+      <default-outcome>add</default-outcome>
+    </router>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome id="__2">
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome id="__3">
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="AddEditLead">
+      <page>/Fragment/AddEditLead.jsff</page>
+    </view>
+    <task-flow-return id="back">
+      <outcome id="__22">
+        <name>back</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-call id="Attachmnent_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/Attachmnent_BTF.xml</document>
+        <id>Attachmnent_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__42">
+        <name>funcId</name>
+        <value>#{pageFlowScope.FuncId}</value>
+      </input-parameter>
+      <input-parameter id="__43">
+        <name>funcRefId</name>
+        <value>#{pageFlowScope.FuncRefId}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type id="__38">
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <control-flow-rule id="__4">
+      <from-activity-id id="__5">decider</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome id="__8">add</from-outcome>
+        <to-activity-id id="__7">CreateInsert</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__10">
+        <from-outcome id="__11">edit</from-outcome>
+        <to-activity-id id="__9">ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__12">
+      <from-activity-id id="__13">CreateInsert</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome id="__14">CreateInsert</from-outcome>
+        <to-activity-id id="__16">AddEditLead</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__17">
+      <from-activity-id id="__18">ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__20">
+        <from-outcome id="__19">ExecuteWithParams</from-outcome>
+        <to-activity-id id="__21">AddEditLead</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id id="__24">AddEditLead</from-activity-id>
+      <control-flow-case id="__25">
+        <from-outcome id="__27">back</from-outcome>
+        <to-activity-id id="__26">back</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__39">
+        <from-outcome id="__41">toAttachment</from-outcome>
+        <to-activity-id id="__40">Attachmnent_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

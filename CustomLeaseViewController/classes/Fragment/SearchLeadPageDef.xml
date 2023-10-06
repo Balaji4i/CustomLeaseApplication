@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="SearchLeadPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.LeadAM1.XxplLead_V_ROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="10"
+              id="XxplLead_V_ROVOIterator"/>
+    <searchRegion Criteria="XxplLead_V_ROVOCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="XxplLead_V_ROVOIterator"
+                  id="XxplLeadVROVOCriteriaQuery"/>
+    <iterator id="XxplLeadVOIterator" Binds="Root.LeadAM1.XxplLeadVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="XxplLead_V_ROVOIterator" id="XxplLead_V_ROVO">
+      <nodeDefinition DefName="custom.lease.model.ROVO.XxplLead_V_ROVO"
+                      Name="XxplLead_V_ROVO0">
+        <AttrNames>
+          <Item Value="LeadId"/>
+          <Item Value="LeadNumber"/>
+          <Item Value="LeadName"/>
+          <Item Value="OrgName"/>
+          <Item Value="Status"/>
+          <Item Value="EmailId"/>
+          <Item Value="MobileNumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="XxplLead_V_ROVOIterator" id="LeadId">
+      <AttrNames>
+        <Item Value="LeadId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

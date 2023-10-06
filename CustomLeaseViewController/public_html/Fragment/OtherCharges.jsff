@@ -1,0 +1,617 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+      <af:group id="g1">
+        <af:panelBox text="Manage Other Charges" id="pb1"
+                     showDisclosure="false">
+          <f:facet name="toolbar">
+            <af:toolbar id="t1">
+              <af:commandButton text="Save" id="cb1"
+                                actionListener="#{backingBeanScope.ChargeBean.onClickSaveAL}"/>
+              <af:commandButton text="Save and close" id="cb2" action="toSave"
+                                actionListener="#{backingBeanScope.ChargeBean.onClickSaveAL}"/>
+              <af:commandButton text="Close" id="cb3" action="toClose"/>
+            </af:toolbar>
+          </f:facet>
+          <af:panelFormLayout id="pfl1" rows="2" maxColumns="2"
+                              labelWidth="200">
+            <af:panelLabelAndMessage label="Booking No" id="plam2">
+              <af:outputText value="#{bindings.BookingNumber.inputValue}"
+                             id="ot2"/>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="Status" id="plam4">
+              <af:outputText value="#{bindings.Status.inputValue}" id="ot1"/>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="Business Unit" id="plam1">
+              <af:outputText value="#{bindings.OrgName.inputValue}" id="ot5"/>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="Customer Name" id="plam3">
+              <af:outputText value="#{bindings.CustomerName.inputValue}"
+                             id="ot4"/>
+            </af:panelLabelAndMessage>
+          </af:panelFormLayout>
+          <af:spacer width="10" height="20" id="s1"/>
+          <af:panelSplitter id="ps1" styleClass="AFStretchWidth" disabled="true"
+                            inlineStyle="height:15.0cm;">
+            <f:facet name="first">
+              <af:panelBox text="Select Unit" id="pb2" showDisclosure="false">
+                <f:facet name="toolbar"/>
+                <af:table value="#{bindings.BookingLineForChargeROVO.collectionModel}"
+                          var="row" styleClass="AFStretchWidth"
+                          rows="#{bindings.BookingLineForChargeROVO.rangeSize}"
+                          emptyText="#{bindings.BookingLineForChargeROVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.BookingLineForChargeROVO.rangeSize}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.BookingLineForChargeROVO.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.BookingLineForChargeROVO.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t2"
+                          columnStretching="column:c1">
+                  <af:column sortProperty="#{bindings.BookingLineForChargeROVO.hints.Attribute1.name}"
+                             sortable="false" headerText="Unit Number" id="c1">
+                    <af:outputText value="#{row.Attribute1}" id="ot3"/>
+                  </af:column>
+                </af:table>
+              </af:panelBox>
+            </f:facet>
+            <f:facet name="second">
+              <af:panelBox text="Charges" id="pb3" showDisclosure="false">
+                <f:facet name="toolbar">
+                  <af:toolbar id="t4">
+                    <af:commandImageLink actionListener="#{backingBeanScope.ChargeBean.editChargeAL}"
+                                         icon="/images/func_pencil_16_ena.png"
+                                         hoverIcon="/images/func_pencil_16_hov.png"
+                                         depressedIcon="/images/func_pencil_16_act.png"
+                                         disabledIcon="/images/func_pencil_16_dis.png"
+                                         text="Add / Edit" id="cil2"></af:commandImageLink>
+                    <af:spacer width="10" height="10" id="s2"/>
+                    <af:commandImageLink actionListener="#{backingBeanScope.ChargeBean.deleteChargeAL}"
+                                         icon="/images/func_remove_16_ena.png"
+                                         hoverIcon="/images/func_remove_16_hov.png"
+                                         depressedIcon="/images/func_remove_16_act.png"
+                                         disabledIcon="/images/func_remove_16_dis.png"
+                                         disabled="#{bindings.XxplBookingOtherCharges.estimatedRowCount eq 0}"
+                                         text="Remove" id="cil1"
+                                         immediate="true"></af:commandImageLink>
+                    <af:spacer width="10" height="10" id="s4"/>
+                    <af:commandImageLink text="Create Receipt" id="cil6"
+                                         icon="/images/addfile_qualifier.png"
+                                         disabledIcon="/images/addfile_dis.png"
+                                         actionListener="#{backingBeanScope.ChargeBean.onClickAddReceipt}">
+                      <af:setPropertyListener from="OC"
+                                              to="#{pageFlowScope.milestoneType}"
+                                              type="action"/>
+                      <af:setPropertyListener from="G"
+                                              to="#{pageFlowScope.receiptType}"
+                                              type="action"/>
+                    </af:commandImageLink>
+                  </af:toolbar>
+                </f:facet>
+                <af:table value="#{bindings.XxplBookingOtherCharges.collectionModel}"
+                          var="row" editingMode="clickToEdit"
+                          rows="#{bindings.XxplBookingOtherCharges.rangeSize}"
+                          emptyText="#{bindings.XxplBookingOtherCharges.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="7" autoHeightRows="0" varStatus="vs"
+                          rowBandingInterval="0" id="t3" scrollPolicy="page"
+                          selectedRowKeys="#{bindings.XxplBookingOtherCharges.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.XxplBookingOtherCharges.collectionModel.makeCurrent}"
+                          rowSelection="single"
+                          partialTriggers="::cil2 ::cil1 ::cb14">
+                  <af:column id="c73" width="50" headerText="S.No"
+                             align="center" frozen="true">
+                    <af:outputText value="#{vs.index+1}" id="ot23"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.MilestoneType.name}"
+                             sortable="false"
+                             headerText="#{bindings.XxplBookingOtherCharges.hints.MilestoneType.label}"
+                             id="c15" rendered="false">
+                    <af:outputText value="#{row.MilestoneType}" id="ot18"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.MilestonesStatus.name}"
+                             sortable="false"
+                             headerText="#{bindings.XxplBookingOtherCharges.hints.MilestonesStatus.label}"
+                             id="c11" rendered="false">
+                    <af:outputText value="#{row.MilestonesStatus}" id="ot22"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.BookingHdrId.name}"
+                             sortable="false"
+                             headerText="#{bindings.XxplBookingOtherCharges.hints.BookingHdrId.label}"
+                             id="c4" rendered="false">
+                    <af:outputText value="#{row.BookingHdrId}" id="ot13"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.ChargeName.name}"
+                             sortable="false" frozen="true"
+                             headerText="Charge Name" id="c8" width="150">
+                    <af:selectOneChoice value="#{row.bindings.ChargeName.inputValue}"
+                                        label="#{row.bindings.ChargeName.label}"
+                                        readOnly="true"
+                                        required="#{bindings.XxplBookingOtherCharges.hints.ChargeName.mandatory}"
+                                        shortDesc="#{bindings.XxplBookingOtherCharges.hints.ChargeName.tooltip}"
+                                        id="soc5">
+                      <f:selectItems value="#{row.bindings.ChargeName.items}"
+                                     id="si5"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.ChargeMethod.name}"
+                             sortable="false" headerText="Type" id="c9">
+                    <af:outputText value="#{row.ChargeMethod eq '%' ? 'Percentage' : 'Amount'}"
+                                   id="ot9"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.Charges.name}"
+                             sortable="false" headerText="Value" id="c10"
+                             align="right">
+                    <af:outputText value="#{row.Charges}" id="ot8">
+                      <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                        maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                        pattern="#{sessionScope.NumberFormat}"
+                                        minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.Baseamount.name}"
+                             sortable="false" headerText="Amount" id="c3"
+                             align="right">
+                    <af:outputText value="#{row.Baseamount}" id="ot20">
+                      <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                        maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                        pattern="#{sessionScope.NumberFormat}"
+                                        minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.PaymentTerm.name}"
+                             sortable="false" headerText="Payment Term"
+                             id="c16">
+                    <af:selectOneChoice value="#{row.bindings.PaymentTerm.inputValue}"
+                                        label="#{row.bindings.PaymentTerm.label}"
+                                        readOnly="true"
+                                        required="#{bindings.XxplBookingOtherCharges.hints.PaymentTerm.mandatory}"
+                                        shortDesc="#{bindings.XxplBookingOtherCharges.hints.PaymentTerm.tooltip}"
+                                        id="soc7">
+                      <f:selectItems value="#{row.bindings.PaymentTerm.items}"
+                                     id="si8"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.DueDate.name}"
+                             sortable="false" headerText="Due Date" id="c17">
+                    <af:outputText value="#{row.DueDate}" id="ot19">
+                      <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.ChargeType.name}"
+                             sortable="false" headerText="Charge Type" id="c6">
+                    <af:selectOneChoice value="#{row.bindings.ChargeType.inputValue}"
+                                        label="#{row.bindings.ChargeType.label}"
+                                        readOnly="true"
+                                        required="#{bindings.XxplBookingOtherCharges.hints.ChargeType.mandatory}"
+                                        shortDesc="#{bindings.XxplBookingOtherCharges.hints.ChargeType.tooltip}"
+                                        id="soc8">
+                      <f:selectItems value="#{row.bindings.ChargeType.items}"
+                                     id="si7"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.Remarks.name}"
+                             sortable="false" headerText="Remarks" id="c12">
+                    <af:outputText value="#{row.Remarks}" id="ot11"/>
+                  </af:column>
+                  <af:column id="c19" headerText="Tax Details" align="center">
+                    <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.TaxCode.name}"
+                               sortable="false" headerText="Code" id="c18">
+                      <af:selectOneChoice value="#{row.bindings.TaxCode.inputValue}"
+                                          label="#{row.bindings.TaxCode.label}"
+                                          readOnly="true"
+                                          required="#{bindings.XxplBookingOtherCharges.hints.TaxCode.mandatory}"
+                                          shortDesc="#{bindings.XxplBookingOtherCharges.hints.TaxCode.tooltip}"
+                                          id="soc6">
+                        <f:selectItems value="#{row.bindings.TaxCode.items}"
+                                       id="si6"/>
+                      </af:selectOneChoice>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.TaxRate.name}"
+                               sortable="false" headerText="Rate" id="c13"
+                               align="right">
+                      <af:outputText value="#{row.TaxRate}" id="ot7">
+                        <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                          maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                          pattern="#{sessionScope.NumberFormat}"
+                                          minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.TaxAmount.name}"
+                               sortable="false" headerText="Amount" id="c14"
+                               align="right">
+                      <af:outputText value="#{row.TaxAmount}" id="ot10">
+                        <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                          maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                          pattern="#{sessionScope.NumberFormat}"
+                                          minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                      </af:outputText>
+                    </af:column>
+                  </af:column>
+                  <af:column id="c20" headerText="Amount Details"
+                             align="center">
+                    <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.InstallmentAmount.name}"
+                               sortable="false" headerText="Total" id="c7"
+                               align="right">
+                      <af:outputText value="#{row.InstallmentAmount}" id="ot21">
+                        <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                          maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                          pattern="#{sessionScope.NumberFormat}"
+                                          minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.AppliedAmountTrans.name}"
+                               sortable="false" headerText="Applied" id="c5"
+                               align="right">
+                      <af:outputText value="#{row.AppliedAmountTrans}" id="ot6">
+                        <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                          maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                          pattern="#{sessionScope.NumberFormat}"
+                                          minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.BalanceAmountTrans.name}"
+                               sortable="false" headerText="Balance" id="c2"
+                               align="right">
+                      <af:outputText value="#{row.BalanceAmountTrans}"
+                                     id="ot17">
+                        <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                          maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                          pattern="#{sessionScope.NumberFormat}"
+                                          minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                      </af:outputText>
+                    </af:column>
+                  </af:column>
+                  <af:column id="c78" headerText="Create Receipt"
+                             rendered="true" align="center">
+                    <af:commandImageLink id="cil4"
+                                         disabled="#{row.BalanceAmountTrans eq '0'}"
+                                         icon="/images/addfile_qualifier.png"
+                                         disabledIcon="/images/addfile_dis.png"
+                                         actionListener="#{backingBeanScope.ChargeBean.onClickAddReceipt}">
+                      <af:setPropertyListener from="OC"
+                                              to="#{pageFlowScope.milestoneType}"
+                                              type="action"/>
+                      <af:setPropertyListener from="S"
+                                              to="#{pageFlowScope.receiptType}"
+                                              type="action"/>
+                    </af:commandImageLink>
+                  </af:column>
+                </af:table>
+              </af:panelBox>
+            </f:facet>
+          </af:panelSplitter>
+          <af:popup id="p1"
+                    binding="#{backingBeanScope.ChargeBean.addEditPopup}"
+                    partialTriggers="t3 cil2 cil1" autoCancel="disabled">
+            <af:dialog id="d1" title="Add Edit " closeIconVisible="false"
+                       type="none">
+              <af:panelFormLayout id="pfl2" maxColumns="3" rows="5"
+                                  partialTriggers="cil2 cil1 cb14 cb20 cb16 cb19 cb18 cb17">
+                <af:selectOneChoice value="#{bindings.ChargeName.inputValue}"
+                                    label="#{bindings.ChargeName.label}"
+                                    required="true"
+                                    shortDesc="#{bindings.ChargeName.hints.tooltip}"
+                                    id="soc3" contentStyle="width:200px;"
+                                    autoSubmit="true">
+                  <f:selectItems value="#{bindings.ChargeName.items}" id="si3"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.ChargeMethod.inputValue}"
+                                    label="#{bindings.ChargeMethod.label}"
+                                    required="true"
+                                    shortDesc="#{bindings.ChargeMethod.hints.tooltip}"
+                                    id="soc4" contentStyle="width:200px;"
+                                    autoSubmit="true"
+                                    valueChangeListener="#{backingBeanScope.ChargeBean.onChangeChargeType}">
+                  <f:selectItems value="#{bindings.ChargeMethod.items}"
+                                 id="si4"/>
+                </af:selectOneChoice>
+                <af:inputText value="#{bindings.Charges.inputValue}"
+                              label="#{bindings.Charges.hints.label}"
+                              required="true"
+                              visible="#{bindings.ChargeMethod.attributeValue eq 'AMOUNT'}"
+                              disabled="#{bindings.ChargeMethod.attributeValue ne 'AMOUNT'}"
+                              columns="#{bindings.Charges.hints.displayWidth}"
+                              maximumLength="#{bindings.Charges.hints.precision}"
+                              shortDesc="#{bindings.Charges.hints.tooltip}"
+                              id="it2" contentStyle="width:200px;"
+                              autoSubmit="true" partialTriggers="soc4"
+                              valueChangeListener="#{backingBeanScope.ChargeBean.onChangeChargeAmt}">
+                  <f:validator binding="#{bindings.Charges.validator}"/>
+                  <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                    maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                    pattern="#{sessionScope.NumberFormat}"
+                                    minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                </af:inputText>
+                <af:inputNumberSpinbox value="#{bindings.Charges.inputValue}"
+                                       label="#{bindings.Charges.hints.label}"
+                                       required="true"
+                                       visible="#{bindings.ChargeMethod.attributeValue eq '%'}"
+                                       disabled="#{bindings.ChargeMethod.attributeValue ne '%'}"
+                                       columns="#{bindings.Charges.hints.displayWidth}"
+                                       shortDesc="#{bindings.Charges.hints.tooltip}"
+                                       id="it9" autoSubmit="true"
+                                       partialTriggers="soc4"
+                                       valueChangeListener="#{backingBeanScope.ChargeBean.onChangeChargeAmt}"
+                                       minimum="0" maximum="100" stepSize="5">
+                  <f:validator binding="#{bindings.Charges.validator}"/>
+                  <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                    maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                    pattern="#{sessionScope.NumberFormat}"
+                                    minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                </af:inputNumberSpinbox>
+                <af:inputText value="#{bindings.Baseamount.inputValue}"
+                              label="#{bindings.Baseamount.hints.label}"
+                              required="#{bindings.Baseamount.hints.mandatory}"
+                              columns="#{bindings.Baseamount.hints.displayWidth}"
+                              maximumLength="#{bindings.Baseamount.hints.precision}"
+                              shortDesc="#{bindings.Baseamount.hints.tooltip}"
+                              id="it4" contentStyle="width:200px;"
+                              disabled="true" autoSubmit="true"
+                              partialTriggers="it2 it9">
+                  <f:validator binding="#{bindings.Baseamount.validator}"/>
+                  <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                    maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                    pattern="#{sessionScope.NumberFormat}"
+                                    minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                </af:inputText>
+                <af:inputDate value="#{bindings.DueDate.inputValue}"
+                              label="#{bindings.DueDate.hints.label}"
+                              shortDesc="#{bindings.DueDate.hints.tooltip}"
+                              id="id1" contentStyle="width:200px;"
+                              autoSubmit="true" required="true">
+                  <f:validator binding="#{bindings.DueDate.validator}"/>
+                  <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                </af:inputDate>
+                <af:selectOneChoice value="#{bindings.PaymentTerm.inputValue}"
+                                    label="#{bindings.PaymentTerm.label}"
+                                    required="true"
+                                    shortDesc="#{bindings.PaymentTerm.hints.tooltip}"
+                                    id="soc2" contentStyle="width:200px;"
+                                    autoSubmit="true">
+                  <f:selectItems value="#{bindings.PaymentTerm.items}"
+                                 id="si2"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.TaxCode.inputValue}"
+                                    label="#{bindings.TaxCode.label}"
+                                    required="#{bindings.TaxCode.hints.mandatory}"
+                                    shortDesc="#{bindings.TaxCode.hints.tooltip}"
+                                    id="soc1" contentStyle="width:200px;"
+                                    autoSubmit="true">
+                  <f:selectItems value="#{bindings.TaxCode.items}" id="si1"/>
+                </af:selectOneChoice>
+                <af:inputText value="#{bindings.TaxRate.inputValue}"
+                              label="#{bindings.TaxRate.hints.label}"
+                              disabled="true"
+                              required="#{bindings.TaxRate.hints.mandatory}"
+                              columns="#{bindings.TaxRate.hints.displayWidth}"
+                              maximumLength="#{bindings.TaxRate.hints.precision}"
+                              shortDesc="#{bindings.TaxRate.hints.tooltip}"
+                              id="it3" contentStyle="width:200px;"
+                              autoSubmit="true">
+                  <f:validator binding="#{bindings.TaxRate.validator}"/>
+                  <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                    maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                    pattern="#{sessionScope.NumberFormat}"
+                                    minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                </af:inputText>
+                <af:spacer width="10" height="10" id="s3"/>
+                <af:inputText value="#{bindings.TaxAmount.inputValue}"
+                              label="#{bindings.TaxAmount.hints.label}"
+                              required="#{bindings.TaxAmount.hints.mandatory}"
+                              columns="#{bindings.TaxAmount.hints.displayWidth}"
+                              maximumLength="#{bindings.TaxAmount.hints.precision}"
+                              shortDesc="#{bindings.TaxAmount.hints.tooltip}"
+                              id="it5" contentStyle="width:200px;"
+                              disabled="true" autoSubmit="true"
+                              partialTriggers="it2 soc4 it9">
+                  <f:validator binding="#{bindings.TaxAmount.validator}"/>
+                  <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                    maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                    pattern="#{sessionScope.NumberFormat}"
+                                    minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.InstallmentAmount.inputValue}"
+                              label="#{bindings.InstallmentAmount.hints.label}"
+                              required="#{bindings.InstallmentAmount.hints.mandatory}"
+                              columns="#{bindings.InstallmentAmount.hints.displayWidth}"
+                              maximumLength="#{bindings.InstallmentAmount.hints.precision}"
+                              shortDesc="#{bindings.InstallmentAmount.hints.tooltip}"
+                              id="it8" contentStyle="width:200px;"
+                              disabled="true" autoSubmit="true"
+                              partialTriggers="it2 soc4 it9">
+                  <f:validator binding="#{bindings.InstallmentAmount.validator}"/>
+                  <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                    maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                    pattern="#{sessionScope.NumberFormat}"
+                                    minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.Remarks.inputValue}"
+                              label="#{bindings.Remarks.hints.label}"
+                              required="#{bindings.Remarks.hints.mandatory}"
+                              columns="#{bindings.Remarks.hints.displayWidth}"
+                              maximumLength="#{bindings.Remarks.hints.precision}"
+                              shortDesc="#{bindings.Remarks.hints.tooltip}"
+                              id="it6" contentStyle="width:200px;"
+                              autoSubmit="true" rows="3">
+                  <f:validator binding="#{bindings.Remarks.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.MilestoneType.inputValue}"
+                              label="#{bindings.MilestoneType.hints.label}"
+                              required="#{bindings.MilestoneType.hints.mandatory}"
+                              columns="#{bindings.MilestoneType.hints.displayWidth}"
+                              maximumLength="#{bindings.MilestoneType.hints.precision}"
+                              shortDesc="#{bindings.MilestoneType.hints.tooltip}"
+                              id="it7" contentStyle="width:200px;"
+                              disabled="true" autoSubmit="true"
+                              rendered="false">
+                  <f:validator binding="#{bindings.MilestoneType.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.MilestonesStatus.inputValue}"
+                              label="#{bindings.MilestonesStatus.hints.label}"
+                              required="#{bindings.MilestonesStatus.hints.mandatory}"
+                              columns="#{bindings.MilestonesStatus.hints.displayWidth}"
+                              maximumLength="#{bindings.MilestonesStatus.hints.precision}"
+                              shortDesc="#{bindings.MilestonesStatus.hints.tooltip}"
+                              id="it1" contentStyle="width:200px;"
+                              disabled="true" autoSubmit="true"
+                              rendered="false">
+                  <f:validator binding="#{bindings.MilestonesStatus.validator}"/>
+                </af:inputText>
+              </af:panelFormLayout>
+              <af:spacer width="10" height="20" id="s24"/>
+              <af:panelGroupLayout layout="horizontal" id="pgl14" halign="right"
+                                   valign="baseline">
+                <af:commandButton actionListener="#{bindings.CreateOtherCharge.execute}"
+                                  icon="/images/func_add_16_ena.png"
+                                  shortDesc="Add New" id="cb20"/>
+                <af:spacer width="10" height="10" id="s29"/>
+                <af:commandButton actionListener="#{bindings.FirstOC.execute}"
+                                  icon="/images/func_arrowheadlast_16_rtl_ena.png"
+                                  disabled="#{!bindings.FirstOC.enabled}"
+                                  partialSubmit="true" id="cb16"
+                                  shortDesc="First"/>
+                <af:spacer width="10" height="10" id="s26"/>
+                <af:commandButton actionListener="#{bindings.PreviousOC.execute}"
+                                  icon="/images/func_arrowheadright_16_rtl_ena.png"
+                                  disabled="#{!bindings.PreviousOC.enabled}"
+                                  partialSubmit="true" id="cb19"
+                                  shortDesc="Previous"/>
+                <af:spacer width="10" height="10" id="s27"/>
+                <af:commandButton actionListener="#{bindings.NextOC.execute}"
+                                  icon="/images/func_arrowheadleft_16_rtl_ena.png"
+                                  disabled="#{!bindings.NextOC.enabled}"
+                                  partialSubmit="true" id="cb18"
+                                  shortDesc="Next"/>
+                <af:spacer width="10" height="10" id="s28"/>
+                <af:commandButton actionListener="#{bindings.LastOC.execute}"
+                                  icon="/images/func_arrowheadlast_16_ena.png"
+                                  disabled="#{!bindings.LastOC.enabled}"
+                                  partialSubmit="true" id="cb17"
+                                  shortDesc="Last"/>
+              </af:panelGroupLayout>
+              <af:spacer width="10" height="20" id="s25"/>
+              <af:table value="#{bindings.XxplBookingOtherCharges.collectionModel}"
+                        var="row" editingMode="clickToEdit"
+                        styleClass="AFStretchWidth"
+                        rows="#{bindings.XxplBookingOtherCharges.rangeSize}"
+                        emptyText="#{bindings.XxplBookingOtherCharges.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="5" autoHeightRows="0" varStatus="vs"
+                        rowBandingInterval="0" id="t5" scrollPolicy="page"
+                        selectedRowKeys="#{bindings.XxplBookingOtherCharges.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.XxplBookingOtherCharges.collectionModel.makeCurrent}"
+                        rowSelection="single" columnStretching="column:c21"
+                        partialTriggers="::cb20 ::cb16 ::cb19 ::cb18 ::cb17 ::soc3 ::soc4 ::it2 ::soc2 ::id1 ::it9">
+                <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.ChargeName.name}"
+                           sortable="false" headerText="Charge Name" id="c21"
+                           width="150">
+                  <af:selectOneChoice value="#{row.bindings.ChargeName.inputValue}"
+                                      label="#{row.bindings.ChargeName.label}"
+                                      readOnly="true"
+                                      required="#{bindings.XxplBookingOtherCharges.hints.ChargeName.mandatory}"
+                                      shortDesc="#{bindings.XxplBookingOtherCharges.hints.ChargeName.tooltip}"
+                                      id="soc9">
+                    <f:selectItems value="#{row.bindings.ChargeName.items}"
+                                   id="si9"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.ChargeMethod.name}"
+                           sortable="false" headerText="Type" id="c22"
+                           width="80">
+                  <af:outputText value="#{row.ChargeMethod eq '%' ? 'Percentage' : 'Amount'}"
+                                 id="ot12"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.Charges.name}"
+                           sortable="false" headerText="Value" id="c23"
+                           align="right">
+                  <af:outputText value="#{row.Charges}" id="ot14">
+                    <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                      maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                      pattern="#{sessionScope.NumberFormat}"
+                                      minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.Baseamount.name}"
+                           sortable="false" headerText="Amount" id="c24"
+                           align="right">
+                  <af:outputText value="#{row.Baseamount}" id="ot15">
+                    <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                      maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                      pattern="#{sessionScope.NumberFormat}"
+                                      minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.PaymentTerm.name}"
+                           sortable="false" headerText="Payment Term" id="c25">
+                  <af:selectOneChoice value="#{row.bindings.PaymentTerm.inputValue}"
+                                      label="#{row.bindings.PaymentTerm.label}"
+                                      readOnly="true"
+                                      required="#{bindings.XxplBookingOtherCharges.hints.PaymentTerm.mandatory}"
+                                      shortDesc="#{bindings.XxplBookingOtherCharges.hints.PaymentTerm.tooltip}"
+                                      id="soc10">
+                    <f:selectItems value="#{row.bindings.PaymentTerm.items}"
+                                   id="si10"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.DueDate.name}"
+                           sortable="false" headerText="Due Date" id="c26">
+                  <af:outputText value="#{row.DueDate}" id="ot16">
+                    <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.TaxAmount.name}"
+                           sortable="false" headerText="Tax Amount" id="column2"
+                           align="right">
+                  <af:outputText value="#{row.TaxAmount}" id="outputText2">
+                    <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                      maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                      pattern="#{sessionScope.NumberFormat}"
+                                      minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XxplBookingOtherCharges.hints.InstallmentAmount.name}"
+                           sortable="false" headerText="Total Amount"
+                           id="column1" align="right">
+                  <af:outputText value="#{row.InstallmentAmount}"
+                                 id="outputText1">
+                    <af:convertNumber minFractionDigits="#{sessionScope.MinFractionDigits}"
+                                      maxFractionDigits="#{sessionScope.MaxFractionDigits}"
+                                      pattern="#{sessionScope.NumberFormat}"
+                                      minIntegerDigits="#{sessionScope.MinIntegerDigits}"/>
+                  </af:outputText>
+                </af:column>
+              </af:table>
+              <f:facet name="buttonBar">
+                <af:panelGroupLayout id="pgl13">
+                  <af:commandButton text="OK" id="cb14"
+                                    actionListener="#{backingBeanScope.ChargeBean.onClickOkPopup}"/>
+                  <af:spacer width="10" height="10" id="s23"/>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:dialog>
+          </af:popup>
+          <af:popup id="p3"
+                    binding="#{backingBeanScope.ChargeBean.receiptConformPop}">
+            <af:dialog id="d3" type="none" title="Confirmation"
+                       closeIconVisible="false"
+                       titleIconSource="/images/qual_question_16.png"
+                       contentWidth="400" resize="on">
+              <af:outputText value="Are you sure want to create receipt ?"
+                             id="ot24" inlineStyle="font-weight:bolder;"/>
+              <f:facet name="buttonBar">
+                <af:panelGroupLayout id="pgl12">
+                  <af:commandButton text="Yes, Generate Receipt" id="cb8"
+                                    action="#{backingBeanScope.ChargeBean.onCreateReceipt}"/>
+                  <af:spacer width="10" height="10" id="s22"/>
+                  <af:commandButton text="Cancel" id="cb13"
+                                    actionListener="#{backingBeanScope.ChargeBean.onCancelReceiptCreate}"/>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:dialog>
+          </af:popup>
+        </af:panelBox>
+      </af:group>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

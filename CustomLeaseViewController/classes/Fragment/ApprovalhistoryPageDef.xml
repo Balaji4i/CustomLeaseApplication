@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="ApprovalhistoryPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.ApprovalHistory_AM1.ApprovalHistoryRovo1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="ApprovalHistoryRovo1Iterator"/>
+    <searchRegion Binds="ApprovalHistoryRovo1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ApprovalHistoryRovo1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ApprovalHistoryRovo1Iterator" id="ApprovalHistoryRovo1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.ApprovalHistoryRovo"
+                      Name="ApprovalHistoryRovo10">
+        <AttrNames>
+          <Item Value="ApprRole"/>
+          <Item Value="ApproverId"/>
+          <Item Value="UserName"/>
+          <Item Value="UserEmailId"/>
+          <Item Value="CycleNo"/>
+          <Item Value="CycleFlag"/>
+          <Item Value="SubmissionDate"/>
+          <Item Value="ActionDate"/>
+          <Item Value="Description"/>
+          <Item Value="Status"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

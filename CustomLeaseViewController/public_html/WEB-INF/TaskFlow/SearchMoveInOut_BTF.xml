@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SearchMoveInOut_BTF">
+    <default-activity id="__1">SearchMoveInOut</default-activity>
+    <managed-bean id="__5">
+      <managed-bean-name id="__3">filmStrip</managed-bean-name>
+      <managed-bean-class id="__4">com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope id="__2">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchMoveInOut">
+      <page>/Fragment/SearchMoveInOut.jsff</page>
+    </view>
+    <task-flow-call id="AddEditMoveInOut_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditMoveInOut_BTF.xml</document>
+        <id>AddEditMoveInOut_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__21">
+        <name>MoveInOutId</name>
+        <value>#{pageFlowScope.MoveInOutId}</value>
+      </input-parameter>
+      <input-parameter id="__22">
+        <name>navigation</name>
+        <value>#{pageFlowScope.navigation}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="Hide_FS">
+      <method>#{backingBeanScope.filmStrip._hideFilmStrip}</method>
+      <outcome id="__16">
+        <fixed-outcome>Hide</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Show_FS">
+      <method>#{backingBeanScope.filmStrip._showFilmStrip}</method>
+      <outcome id="__37">
+        <fixed-outcome>show</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome id="__11">
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__6">
+      <from-activity-id id="__7">SearchMoveInOut</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome id="__10">AddEdit</from-outcome>
+        <to-activity-id id="__8">Hide_FS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id id="__24">Hide_FS</from-activity-id>
+      <control-flow-case id="__26">
+        <from-outcome id="__25">Hide</from-outcome>
+        <to-activity-id id="__27">AddEditMoveInOut_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__28">
+      <from-activity-id id="__29">AddEditMoveInOut_BTF</from-activity-id>
+      <control-flow-case id="__32">
+        <to-activity-id id="__31">Show_FS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__33">
+      <from-activity-id id="__34">Show_FS</from-activity-id>
+      <control-flow-case id="__36">
+        <from-outcome id="__38">show</from-outcome>
+        <to-activity-id id="__35">Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__12">
+      <from-activity-id id="__13">Execute</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome id="__14">Execute</from-outcome>
+        <to-activity-id id="__17">SearchMoveInOut</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

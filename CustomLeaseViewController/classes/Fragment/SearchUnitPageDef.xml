@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="SearchUnitPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.PropertyUnitAM1.SearchPropertyUnitROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="20"
+              id="SearchPropertyUnitROVO1Iterator"/>
+    <searchRegion Criteria="SearchUnit"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchPropertyUnitROVO1Iterator" id="SearchUnitQuery"/>
+    <iterator Binds="Root.PropertyUnitAM1.UnitCountByStatusROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="UnitCountByStatusROVOIterator"/>
+    <taskFlow id="ExcelUpload_BTF1"
+              taskFlowId="/WEB-INF/taskFlow/ExcelUpload_BTF.xml#ExcelUpload_BTF"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="parentInterfaceName" value="UNITS"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings>
+    <tree IterBinding="SearchPropertyUnitROVO1Iterator"
+          id="SearchPropertyUnitROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SearchPropertyUnitROVO"
+                      Name="SearchPropertyUnitROVO10">
+        <AttrNames>
+          <Item Value="UnitId"/>
+          <Item Value="PropertyId"/>
+          <Item Value="BuildId"/>
+          <Item Value="UnitName"/>
+          <Item Value="UnitNameTl"/>
+          <Item Value="PropertyName"/>
+          <Item Value="PropertyNumber"/>
+          <Item Value="BuildName"/>
+          <Item Value="BuildNumber"/>
+          <Item Value="OrgName"/>
+          <Item Value="UnitTypeDisp"/>
+          <Item Value="AreaTypeDisp"/>
+          <Item Value="ViewTypeDisp"/>
+          <Item Value="UnitNumber"/>
+          <Item Value="UnitShortcode"/>
+          <Item Value="FuncId"/>
+          <Item Value="OrgId"/>
+          <Item Value="DocRefNumber1"/>
+          <Item Value="DocRefNumber2"/>
+          <Item Value="DocRefNumber3"/>
+          <Item Value="FloorNumber"/>
+          <Item Value="NoOfRooms"/>
+          <Item Value="UnitType"/>
+          <Item Value="AreaType"/>
+          <Item Value="ViewType"/>
+          <Item Value="Status"/>
+          <Item Value="UnitClass"/>
+          <Item Value="UnitCategory"/>
+          <Item Value="Description"/>
+          <Item Value="ActiveYn"/>
+          <Item Value="AllotType"/>
+          <Item Value="AttributeCategory"/>
+          <Item Value="Attribute1"/>
+          <Item Value="Attribute2"/>
+          <Item Value="Attribute3"/>
+          <Item Value="Attribute4"/>
+          <Item Value="Attribute5"/>
+          <Item Value="Attribute6"/>
+          <Item Value="Attribute7"/>
+          <Item Value="Attribute8"/>
+          <Item Value="Attribute9"/>
+          <Item Value="Attribute10"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SearchPropertyUnitROVO1Iterator" id="UnitId">
+      <AttrNames>
+        <Item Value="UnitId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UnitCountByStatusROVOIterator" id="AllUnit">
+      <AttrNames>
+        <Item Value="AllUnit"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UnitCountByStatusROVOIterator" id="AvailUnit">
+      <AttrNames>
+        <Item Value="AvailUnit"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UnitCountByStatusROVOIterator"
+                     id="LeasedUnit">
+      <AttrNames>
+        <Item Value="LeasedUnit"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UnitCountByStatusROVOIterator"
+                     id="AllottedUnit">
+      <AttrNames>
+        <Item Value="AllottedUnit"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

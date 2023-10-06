@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SearchProperty_BTF">
+    <default-activity id="__1">SearchProperty</default-activity>
+    <managed-bean id="__32">
+      <managed-bean-name id="__30">Filmstrip</managed-bean-name>
+      <managed-bean-class id="__29">com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope id="__31">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchProperty">
+      <page>/Fragment/SearchProperty.jsff</page>
+    </view>
+    <task-flow-call id="AddEditProperty_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditProperty_BTF.xml</document>
+        <id>AddEditProperty_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>propertyEditId</name>
+        <value>#{pageFlowScope.propertyEditId}</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>addEditMode</name>
+        <value>#{pageFlowScope.addEditMode}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="showFS">
+      <method>#{backingBeanScope.Filmstrip._showFilmStrip}</method>
+      <outcome id="__28">
+        <fixed-outcome>toExecute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome id="__9">
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id id="__3">SearchProperty</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome id="__6">toProperty</from-outcome>
+        <to-activity-id id="__4">AddEditProperty_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id id="__11">Execute</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome id="__12">Execute</from-outcome>
+        <to-activity-id id="__13">SearchProperty</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id id="__16">showFS</from-activity-id>
+      <control-flow-case id="__17">
+        <from-outcome id="__19">toExecute</from-outcome>
+        <to-activity-id id="__18">Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__20">
+      <from-activity-id id="__21">AddEditProperty_BTF</from-activity-id>
+      <control-flow-case id="__23">
+        <from-outcome id="__22">commit</from-outcome>
+        <to-activity-id id="__24">showFS</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__27">
+        <from-outcome id="__25">rollBack</from-outcome>
+        <to-activity-id id="__26">showFS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PropertyUnitAM"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true">
+  <DesignTime>
+    <Attr Name="_deployType" Value="0"/>
+  </DesignTime>
+  <ViewUsage
+    Name="XxplPropertyUnitsView1"
+    ViewObjectName="custom.lease.model.View.XxplPropertyUnitsView">
+    <ViewCriteriaUsage
+      Name="findById"
+      FullName="custom.lease.model.View.XxplPropertyUnitsView.findById"/>
+    <ParameterMap>
+      <PIMap Variable="BV_UNIT_ID">
+        <TransientExpression><![CDATA[adf.context.pageFlowScope.uid]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewUsage>
+  <ViewUsage
+    Name="XxplPropertyAreaView1"
+    ViewObjectName="custom.lease.model.View.XxplPropertyAreaView"/>
+  <ViewUsage
+    Name="SearchPropertyUnitROVO1"
+    ViewObjectName="custom.lease.model.ROVO.SearchPropertyUnitROVO"/>
+  <ViewUsage
+    Name="XxplPropertyCarparksView1"
+    ViewObjectName="custom.lease.model.View.XxplPropertyCarparksView"/>
+  <ViewUsage
+    Name="XxplPropertyFeaturesView1"
+    ViewObjectName="custom.lease.model.View.XxplPropertyFeaturesView"/>
+  <ViewUsage
+    Name="ActivityLogROVO1"
+    ViewObjectName="custom.lease.model.ROVO.ActivityLogROVO"/>
+  <ViewUsage
+    Name="CarParkingROVO1"
+    ViewObjectName="custom.lease.model.ROVO.CarParkingROVO"/>
+  <ViewUsage
+    Name="XxplPropertyCarparksView2"
+    ViewObjectName="custom.lease.model.View.XxplPropertyCarparksView"/>
+  <ViewUsage
+    Name="XxplPropertyUnitsView2"
+    ViewObjectName="custom.lease.model.View.XxplPropertyUnitsView"/>
+  <ViewUsage
+    Name="UnitCountByStatusROVO"
+    ViewObjectName="custom.lease.model.ROVO.UnitCountByStatusROVO"/>
+  <ViewUsage
+    Name="XxplOwnerDtleView1"
+    ViewObjectName="custom.lease.model.View.XxplOwnerDtleView"/>
+  <ViewLinkUsage
+    Name="PropertyUnit_VL_PropertyArea1"
+    ViewLinkObjectName="custom.lease.model.VL.PropertyUnit_VL_PropertyArea"
+    SrcViewUsageName="custom.lease.model.AM.PropertyUnitAM.XxplPropertyUnitsView1"
+    DstViewUsageName="custom.lease.model.AM.PropertyUnitAM.XxplPropertyAreaView1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="PropertyUnit_VL_PropertyCarparking1"
+    ViewLinkObjectName="custom.lease.model.VL.PropertyUnit_VL_PropertyCarparking"
+    SrcViewUsageName="custom.lease.model.AM.PropertyUnitAM.XxplPropertyUnitsView1"
+    DstViewUsageName="custom.lease.model.AM.PropertyUnitAM.XxplPropertyCarparksView1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="PropertyUnit_VL_PropertyFeature1"
+    ViewLinkObjectName="custom.lease.model.VL.PropertyUnit_VL_PropertyFeature"
+    SrcViewUsageName="custom.lease.model.AM.PropertyUnitAM.XxplPropertyUnitsView1"
+    DstViewUsageName="custom.lease.model.AM.PropertyUnitAM.XxplPropertyFeaturesView1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="PropertyUnit_VL_ActivityLog1"
+    ViewLinkObjectName="custom.lease.model.VL.PropertyUnit_VL_ActivityLog"
+    SrcViewUsageName="custom.lease.model.AM.PropertyUnitAM.XxplPropertyUnitsView1"
+    DstViewUsageName="custom.lease.model.AM.PropertyUnitAM.ActivityLogROVO1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="Unit_VL_PropertyOwner1"
+    ViewLinkObjectName="custom.lease.model.VL.Unit_VL_PropertyOwner"
+    SrcViewUsageName="custom.lease.model.AM.PropertyUnitAM.XxplPropertyUnitsView1"
+    DstViewUsageName="custom.lease.model.AM.PropertyUnitAM.XxplOwnerDtleView1"
+    Reversed="false"/>
+</AppModule>

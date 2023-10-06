@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XxplBookingDetail_VO"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  SelectList="XxplBookingDetail_EO.AREA_IN_SQFT, 
+       XxplBookingDetail_EO.ATTRIBUTE1, 
+       XxplBookingDetail_EO.ATTRIBUTE10, 
+       XxplBookingDetail_EO.ATTRIBUTE2, 
+       XxplBookingDetail_EO.ATTRIBUTE3, 
+       XxplBookingDetail_EO.ATTRIBUTE4, 
+       XxplBookingDetail_EO.ATTRIBUTE5, 
+       XxplBookingDetail_EO.ATTRIBUTE6, 
+       XxplBookingDetail_EO.ATTRIBUTE7, 
+       XxplBookingDetail_EO.ATTRIBUTE8, 
+       XxplBookingDetail_EO.ATTRIBUTE9, 
+       XxplBookingDetail_EO.BASE_PRICE, 
+       XxplBookingDetail_EO.BOOKING_AMOUNT, 
+       XxplBookingDetail_EO.BOOKING_DTL_ID, 
+       XxplBookingDetail_EO.BOOKING_HDR_ID, 
+       XxplBookingDetail_EO.BUILDING_ID, 
+       XxplBookingDetail_EO.CREATED_BY, 
+       XxplBookingDetail_EO.CREATION_DATE, 
+       XxplBookingDetail_EO.DISC_AMOUNT, 
+       XxplBookingDetail_EO.DISC_PCT, 
+       XxplBookingDetail_EO.DISCOUNT_TYPE, 
+       XxplBookingDetail_EO.LAST_UPDATE_DATE, 
+       XxplBookingDetail_EO.LAST_UPDATE_LOGIN, 
+       XxplBookingDetail_EO.LAST_UPDATED_BY, 
+       XxplBookingDetail_EO.OBJECT_VERSION, 
+       XxplBookingDetail_EO.PL_MOD_ID, 
+       XxplBookingDetail_EO.PROPERTY_ID, 
+       XxplBookingDetail_EO.TAX_AMOUNT, 
+       XxplBookingDetail_EO.TAX_CODE, 
+       XxplBookingDetail_EO.TAX_RATE, 
+       XxplBookingDetail_EO.TOTAL_AMOUNT, 
+       XxplBookingDetail_EO.UNIT_ID, 
+       XxplBookingDetail_EO.UOM"
+  FromList="XXPL_BOOKING_DETAIL XxplBookingDetail_EO"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  RowClass="custom.lease.model.View.XxplBookingDetail_VORowImpl"
+  ComponentClass="custom.lease.model.View.XxplBookingDetail_VOImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="BV_BOOK_ID"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <ViewAccessor
+    Name="TAX_LOOKUP"
+    ViewObjectName="custom.lease.model.ROVO.XXFND_LOOKUP_V_ROVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="findByTAX"
+      FullName="custom.lease.model.ROVO.XXFND_LOOKUP_V_ROVO.findByTAX"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="DiscountType_LOOKUP"
+    ViewObjectName="custom.lease.model.ROVO.XXFND_LOOKUP_V_ROVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="FindByDiscountType"
+      FullName="custom.lease.model.ROVO.XXFND_LOOKUP_V_ROVO.FindByDiscountType"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="BuildingROVO"
+    ViewObjectName="custom.lease.model.ROVO.SearchBuildingFilterROVO">
+    <ViewCriteriaUsage
+      Name="FilterByProperty"
+      FullName="custom.lease.model.ROVO.SearchBuildingFilterROVO.FilterByProperty"/>
+    <ParameterMap>
+      <PIMap Variable="BV_PROPERTY">
+        <TransientExpression><![CDATA[PropertyId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="UNIT_FOR_BOOKING_ROVO"
+    ViewObjectName="custom.lease.model.ROVO.UNIT_FOR_BOOKING_ROVO">
+    <ViewCriteriaUsage
+      Name="findByUnitStatusAvail"
+      FullName="custom.lease.model.ROVO.UNIT_FOR_BOOKING_ROVO.findByUnitStatusAvail"/>
+    <ParameterMap>
+      <PIMap Variable="BV_BUILD_ID">
+        <TransientExpression><![CDATA[BuildIdTrans]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="BV_PL_ID">
+        <TransientExpression><![CDATA[PLIdTrans]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="UNIT_FOR_BOOKING_Ref"
+    ViewObjectName="custom.lease.model.ROVO.UNIT_FOR_BOOKING_ROVO">
+    <ViewCriteriaUsage
+      Name="findByUnitID"
+      FullName="custom.lease.model.ROVO.UNIT_FOR_BOOKING_ROVO.findByUnitID"/>
+    <ParameterMap>
+      <PIMap Variable="BV_BUILD_ID">
+        <TransientExpression><![CDATA[BuildingId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="BV_PL_ID">
+        <TransientExpression><![CDATA[PLIdTrans]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="BV_UNIT_ID">
+        <TransientExpression><![CDATA[UnitId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_TaxCode"
+    ListVOName="TAX_LOOKUP"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TaxCode"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TaxRate"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValueNameDisp"/>
+      <Item Value="LookupValueName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupAddlValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DiscountType"
+    ListVOName="DiscountType_LOOKUP"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DiscountType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValueName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValueNameDisp"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_BuildingId"
+    ListVOName="BuildingROVO"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="BuildingId"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="PropertyId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="BuildId"/>
+      <Item Value="PropertyId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="BuildName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_UnitNameTrans"
+    ListVOName="UNIT_FOR_BOOKING_ROVO"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_UnitNameTrans_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="UnitNameTrans"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="UnitId"/>
+      <Item Value="AreaInSqft"/>
+      <Item Value="BookingAmount"/>
+      <Item Value="BuildingId"/>
+      <Item Value="PropertyId"/>
+      <Item Value="TaxCode"/>
+      <Item Value="Attribute1"/>
+      <Item Value="Attribute2"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UnitNumber"/>
+      <Item Value="UnitId"/>
+      <Item Value="AreaSqFt"/>
+      <Item Value="PlAmount"/>
+      <Item Value="BuildId"/>
+      <Item Value="PropertyId"/>
+      <Item Value="TaxCode"/>
+      <Item Value="PlAmount"/>
+      <Item Value="UnitCategoryDisp"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="UnitNumber"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="SearchByUnitName"/>
+  </ListBinding>
+  <EntityUsage
+    Name="XxplBookingDetail_EO"
+    Entity="custom.lease.model.Entity.XxplBookingDetail_EO"/>
+  <ViewAttribute
+    Name="AreaInSqft"
+    PrecisionRule="true"
+    EntityAttrName="AreaInSqft"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="AREA_IN_SQFT"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="Attribute1"
+    PrecisionRule="true"
+    EntityAttrName="Attribute1"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="ATTRIBUTE1"/>
+  <ViewAttribute
+    Name="Attribute10"
+    PrecisionRule="true"
+    EntityAttrName="Attribute10"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="ATTRIBUTE10"/>
+  <ViewAttribute
+    Name="Attribute2"
+    PrecisionRule="true"
+    EntityAttrName="Attribute2"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="ATTRIBUTE2"/>
+  <ViewAttribute
+    Name="Attribute3"
+    PrecisionRule="true"
+    EntityAttrName="Attribute3"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="ATTRIBUTE3"/>
+  <ViewAttribute
+    Name="Attribute4"
+    PrecisionRule="true"
+    EntityAttrName="Attribute4"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="ATTRIBUTE4"/>
+  <ViewAttribute
+    Name="Attribute5"
+    PrecisionRule="true"
+    EntityAttrName="Attribute5"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="ATTRIBUTE5"/>
+  <ViewAttribute
+    Name="Attribute6"
+    PrecisionRule="true"
+    EntityAttrName="Attribute6"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="ATTRIBUTE6"/>
+  <ViewAttribute
+    Name="Attribute7"
+    PrecisionRule="true"
+    EntityAttrName="Attribute7"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="ATTRIBUTE7"/>
+  <ViewAttribute
+    Name="Attribute8"
+    PrecisionRule="true"
+    EntityAttrName="Attribute8"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="ATTRIBUTE8"/>
+  <ViewAttribute
+    Name="Attribute9"
+    PrecisionRule="true"
+    EntityAttrName="Attribute9"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="ATTRIBUTE9"/>
+  <ViewAttribute
+    Name="BasePrice"
+    PrecisionRule="true"
+    EntityAttrName="BasePrice"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="BASE_PRICE"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="BookingAmount"
+    PrecisionRule="true"
+    EntityAttrName="BookingAmount"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="BOOKING_AMOUNT"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="BookingDtlId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="BookingDtlId"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="BOOKING_DTL_ID"/>
+  <ViewAttribute
+    Name="BookingHdrId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="BookingHdrId"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="BOOKING_HDR_ID"/>
+  <ViewAttribute
+    Name="BuildingId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="BuildingId"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="BUILDING_ID"
+    LOVName="LOV_BuildingId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="CREATION_DATE"/>
+  <ViewAttribute
+    Name="DiscAmount"
+    PrecisionRule="true"
+    EntityAttrName="DiscAmount"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="DISC_AMOUNT"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="DiscPct"
+    PrecisionRule="true"
+    EntityAttrName="DiscPct"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="DISC_PCT"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="DiscountType"
+    PrecisionRule="true"
+    EntityAttrName="DiscountType"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="DISCOUNT_TYPE"
+    LOVName="LOV_DiscountType"
+    DefaultValue="%">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="LAST_UPDATE_DATE"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateLogin"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="LAST_UPDATE_LOGIN"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="ObjectVersion"
+    PrecisionRule="true"
+    EntityAttrName="ObjectVersion"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="OBJECT_VERSION"/>
+  <ViewAttribute
+    Name="PlModId"
+    PrecisionRule="true"
+    EntityAttrName="PlModId"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="PL_MOD_ID"/>
+  <ViewAttribute
+    Name="PropertyId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="PropertyId"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="PROPERTY_ID"/>
+  <ViewAttribute
+    Name="TaxAmount"
+    PrecisionRule="true"
+    EntityAttrName="TaxAmount"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="TAX_AMOUNT"/>
+  <ViewAttribute
+    Name="TaxCode"
+    PrecisionRule="true"
+    EntityAttrName="TaxCode"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="TAX_CODE"
+    LOVName="LOV_TaxCode">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TaxRate"
+    PrecisionRule="true"
+    EntityAttrName="TaxRate"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="TAX_RATE"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="TotalAmount"
+    PrecisionRule="true"
+    EntityAttrName="TotalAmount"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="TOTAL_AMOUNT"/>
+  <ViewAttribute
+    Name="UnitId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="UnitId"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="UNIT_ID"/>
+  <ViewAttribute
+    Name="Uom"
+    PrecisionRule="true"
+    EntityAttrName="Uom"
+    EntityUsage="XxplBookingDetail_EO"
+    AliasName="UOM"/>
+  <ViewAttribute
+    Name="UnitNameTrans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_UnitNameTrans">
+    <RecalcCondition><![CDATA[false]]></RecalcCondition>
+    <TransientExpression><![CDATA[if(UNIT_FOR_BOOKING_Ref.first() !=null && UnitId !=null)
+{
+UNIT_FOR_BOOKING_Ref.first().getAttribute("UnitNumber");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="BuildIdTrans"/>
+      <Item
+        Value="PLIdTrans"/>
+      <Item
+        Value="UnitId"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <AUTOSUBMIT
+          Value="true"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BuildIdTrans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="PLIdTrans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewCriteria
+    Name="findByBookingId"
+    ViewObjectName="custom.lease.model.View.XxplBookingDetail_VO"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow212"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="BookingHdrId"
+        ViewAttribute="BookingHdrId"
+        Operator="="
+        Conjunction="AND"
+        Value=":BV_BOOK_ID"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="XxplBookingHeader_VO"
+    ViewLink="custom.lease.model.VL.Booking_Hdr_Dtl_VL"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="XxplBookingMilestones_VO"
+    ViewLink="custom.lease.model.VL.Booking_Dtl_MilesOC_VL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="BOOKING_UNIT_OWNER_ROVO"
+    ViewLink="custom.lease.model.VL.Booking_Owner_VL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="FreeCarparkingsROVO"
+    ViewLink="custom.lease.model.VL.BookingLine_FreeCarParks_VL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

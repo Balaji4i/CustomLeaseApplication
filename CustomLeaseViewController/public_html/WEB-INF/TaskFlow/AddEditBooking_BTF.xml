@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="AddEditBooking_BTF">
+    <default-activity id="__1">CheckAddEdit</default-activity>
+    <transaction id="__12">
+      <requires-transaction/>
+    </transaction>
+    <input-parameter-definition id="__21">
+      <name id="__20">editBookingId</name>
+      <value>#{pageFlowScope.editBookingId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__27">
+      <name id="__28">addEditMode</name>
+      <value>#{pageFlowScope.addEditMode}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__42">
+      <name id="__43">hdrSaved</name>
+      <value>#{pageFlowScope.hdrSaved}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__58">
+      <name id="__57">EditMode</name>
+      <value>#{pageFlowScope.EditMode}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__60">
+      <name id="__59">showMSOC</name>
+      <value>#{pageFlowScope.showMSOC}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__38">
+      <managed-bean-name id="__41">AddEditBooking</managed-bean-name>
+      <managed-bean-class id="__39">custom.lease.view.bean.backing.AddEditBookingBB</managed-bean-class>
+      <managed-bean-scope id="__40">backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__79">
+      <managed-bean-name id="__82">LeaseRcptCollectionMb</managed-bean-name>
+      <managed-bean-class id="__81">custom.lease.view.bean.backing.LeaseRcptCollectionBb</managed-bean-class>
+      <managed-bean-scope id="__80">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="AddEditBooking">
+      <page>/Fragment/AddEditBooking.jsff</page>
+    </view>
+    <task-flow-return id="Save">
+      <outcome id="__2">
+        <name>Save</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="Rollback">
+      <outcome id="__3">
+        <name>Rollback</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome id="__13">
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome id="__19">
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <router id="CheckAddEdit">
+      <case>
+        <expression>#{pageFlowScope.addEditMode eq 'Create'}</expression>
+        <outcome id="__37">toAdd</outcome>
+      </case>
+      <default-outcome>toEdit</default-outcome>
+    </router>
+    <task-flow-call id="AddEditReceipt">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditReceipt.xml</document>
+        <id>AddEditReceipt</id>
+      </task-flow-reference>
+      <input-parameter id="__47">
+        <name>navigation</name>
+        <value>edit</value>
+      </input-parameter>
+      <input-parameter id="__48">
+        <name>receiptid</name>
+        <value>#{pageFlowScope.receiptId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <task-flow-call id="Attachmnent_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/Attachmnent_BTF.xml</document>
+        <id>Attachmnent_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__421">
+        <name>funcId</name>
+        <value>#{pageFlowScope.FuncId}</value>
+      </input-parameter>
+      <input-parameter id="__431">
+        <name>funcRefId</name>
+        <value>#{pageFlowScope.FuncRefId}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type id="__411">
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <task-flow-call id="CheckList_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/CheckList_BTF.xml</document>
+        <id>CheckList_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__55">
+        <name>funcId</name>
+        <value>#{pageFlowScope.funcId}</value>
+      </input-parameter>
+      <input-parameter id="__56">
+        <name>funcRefId</name>
+        <value>#{pageFlowScope.funcRefId}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type id="__412">
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <view id="LeaseRcptCollection">
+      <page>/Fragment/LeaseRcptCollection.jsff</page>
+    </view>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome id="__64">
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="AddEditMoveInOut_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditMoveInOut_BTF.xml</document>
+        <id>AddEditMoveInOut_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__85">
+        <name>navigation</name>
+        <value>#{pageFlowScope.navigation}</value>
+      </input-parameter>
+      <input-parameter id="__86">
+        <name>MoveInOutId</name>
+        <value>#{pageFlowScope.MoveInOutId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <task-flow-call id="AddEditCancellation_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditCancellation_BTF.xml</document>
+        <id>AddEditCancellation_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__87">
+        <name>editCancelId</name>
+        <value>#{pageFlowScope.editCancelId}</value>
+      </input-parameter>
+      <input-parameter id="__88">
+        <name>addEditMode</name>
+        <value>#{pageFlowScope.addEditMode}</value>
+      </input-parameter>
+    </task-flow-call>
+    <control-flow-rule id="__4">
+      <from-activity-id id="__5">AddEditBooking</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome id="__8">toSave</from-outcome>
+        <to-activity-id id="__7">Save</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__10">
+        <from-outcome id="__11">toCancel</from-outcome>
+        <to-activity-id id="__9">Rollback</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__44">
+        <from-outcome id="__46">toReceipt</from-outcome>
+        <to-activity-id id="__45">AddEditReceipt</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__49">
+        <from-outcome id="__51">Attachments</from-outcome>
+        <to-activity-id id="__50">Attachmnent_BTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__52">
+        <from-outcome id="__54">toCheckList</from-outcome>
+        <to-activity-id id="__53">CheckList_BTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__62">
+        <from-outcome id="__63">createLeaseRcpt</from-outcome>
+        <to-activity-id id="__61">LeaseRcptCollection</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__75">
+        <from-outcome id="__77">toMoveInOutScreen</from-outcome>
+        <to-activity-id id="__76">AddEditMoveInOut_BTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__78">
+        <from-outcome id="__84">toCancelScreen</from-outcome>
+        <to-activity-id id="__83">AddEditCancellation_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
+      <from-activity-id id="__15">CreateInsert</from-activity-id>
+      <control-flow-case id="__17">
+        <from-outcome id="__16">CreateInsert</from-outcome>
+        <to-activity-id id="__18">AddEditBooking</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__22">
+      <from-activity-id id="__23">ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__26">
+        <from-outcome id="__25">ExecuteWithParams</from-outcome>
+        <to-activity-id id="__24">AddEditBooking</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__29">
+      <from-activity-id id="__30">CheckAddEdit</from-activity-id>
+      <control-flow-case id="__32">
+        <from-outcome id="__33">toAdd</from-outcome>
+        <to-activity-id id="__31">CreateInsert</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__34">
+        <from-outcome id="__36">toEdit</from-outcome>
+        <to-activity-id id="__35">ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__65">
+      <from-activity-id id="__66">LeaseRcptCollection</from-activity-id>
+      <control-flow-case id="__67">
+        <from-outcome id="__69">bckToRcpt</from-outcome>
+        <to-activity-id id="__68">Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__70">
+      <from-activity-id id="__71">Execute</from-activity-id>
+      <control-flow-case id="__73">
+        <from-outcome id="__72">Execute</from-outcome>
+        <to-activity-id id="__74">AddEditBooking</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

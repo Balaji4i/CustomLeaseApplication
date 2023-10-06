@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="SetUpARPageDef" Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.ARSetup_AM1.SearchARSetupROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="8"
+              id="SearchARSetupROVOIterator"/>
+    <searchRegion Criteria="SearchARSetupROVOCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchARSetupROVOIterator"
+                  id="SearchARSetupROVOCriteriaQuery"/>
+    <iterator id="XxplARSetupVOIterator" Binds="Root.ARSetup_AM1.XxplARSetupVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <searchRegion Criteria="SearchARSetupROVOCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchARSetupROVOIterator"
+                  id="SearchARSetupROVOCriteriaQuery1"/>
+    <iterator Binds="Root.ARSetup_AM1.Searchtax"
+              DataControl="customRootAppModuleDataControl" RangeSize="8"
+              id="SearchtaxIterator"/>
+    <searchRegion Criteria="SearchARSetupROVOCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchtaxIterator"
+                  id="SearchARSetupROVOCriteriaQuery2"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SearchARSetupROVOIterator" id="SearchARSetupROVO">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SearchARSetupROVO"
+                      Name="SearchARSetupROVO0">
+        <AttrNames>
+          <Item Value="OrgName"/>
+          <Item Value="ChargeTypeDisp"/>
+          <Item Value="TxnType"/>
+          <Item Value="TxnSource"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SearchARSetupROVOIterator" id="ArSetupId">
+      <AttrNames>
+        <Item Value="ArSetupId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="SearchARSetupROVOIterator" id="SearchARSetupROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SearchARSetupROVO"
+                      Name="SearchARSetupROVO10">
+        <AttrNames>
+          <Item Value="OrgName"/>
+          <Item Value="UnitCategory"/>
+          <Item Value="TaxCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="SearchtaxIterator" id="Searchtax">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SearchARSetupROVO"
+                      Name="Searchtax0">
+        <AttrNames>
+          <Item Value="OrgName"/>
+          <Item Value="UnitCategoryDisp"/>
+          <Item Value="TaxCodeDisp"/>
+          <Item Value="ArSetupId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SearchtaxIterator" id="ArSetupId1">
+      <AttrNames>
+        <Item Value="ArSetupId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

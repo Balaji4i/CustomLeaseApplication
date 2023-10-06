@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="AddEditARSetup_BTF">
+    <default-activity id="__1">router1</default-activity>
+    <transaction id="__58">
+      <requires-transaction/>
+    </transaction>
+    <input-parameter-definition id="__30">
+      <name id="__31">mode</name>
+      <value>#{pageFlowScope.mode}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__33">
+      <name id="__32">headerId</name>
+      <value>#{pageFlowScope.headerId}</value>
+      <class>oracle.jbo.domain.Number</class>
+    </input-parameter-definition>
+    <managed-bean id="__35">
+      <managed-bean-name id="__34">AddEditARSetup</managed-bean-name>
+      <managed-bean-class id="__37">custom.lease.view.bean.backing.AddEditARSetup</managed-bean-class>
+      <managed-bean-scope id="__36">backingBean</managed-bean-scope>
+    </managed-bean>
+    <router id="router1">
+      <case>
+        <expression>#{pageFlowScope.mode eq 'addTax'}</expression>
+        <outcome id="__28">addTax</outcome>
+      </case>
+      <case>
+        <expression>#{pageFlowScope.mode eq 'editSetup'}</expression>
+        <outcome id="__29">edit</outcome>
+      </case>
+      <case>
+        <expression>#{pageFlowScope.mode eq 'addSetup'}</expression>
+        <outcome id="__56">addSetup</outcome>
+      </case>
+      <case>
+        <expression>#{pageFlowScope.mode eq 'editTax'}</expression>
+        <outcome id="__57">edit</outcome>
+      </case>
+      <default-outcome>add</default-outcome>
+    </router>
+    <view id="AddEditARSetup">
+      <page>/Fragment/AddEditARSetup.jsff</page>
+    </view>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome id="__2">
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome id="__3">
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="back">
+      <outcome id="__4">
+        <name>back</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <method-call id="CreateWithParameters">
+      <method>#{bindings.CreateWithParams.execute}</method>
+      <outcome id="__38">
+        <fixed-outcome>CreateWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="CreateWithParameters1">
+      <method>#{bindings.CreateWithParams.execute}</method>
+      <outcome id="__42">
+        <fixed-outcome>CreateWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="save">
+      <outcome id="__59">
+        <name>save</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__5">
+      <from-activity-id id="__6">router1</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome id="__9">add</from-outcome>
+        <to-activity-id id="__7">CreateInsert</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__11">
+        <from-outcome id="__12">edit</from-outcome>
+        <to-activity-id id="__10">ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__39">
+        <from-outcome id="__41">addSetup</from-outcome>
+        <to-activity-id id="__40">CreateWithParameters</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__43">
+        <from-outcome id="__45">addTax</from-outcome>
+        <to-activity-id id="__44">CreateWithParameters1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id id="__14">CreateInsert</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome id="__15">CreateInsert</from-outcome>
+        <to-activity-id id="__17">AddEditARSetup</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__18">
+      <from-activity-id id="__19">ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__20">
+        <from-outcome id="__22">ExecuteWithParams</from-outcome>
+        <to-activity-id id="__21">AddEditARSetup</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id id="__24">AddEditARSetup</from-activity-id>
+      <control-flow-case id="__26">
+        <from-outcome id="__27">back</from-outcome>
+        <to-activity-id id="__25">back</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__61">
+        <from-outcome id="__62">save</from-outcome>
+        <to-activity-id id="__60">save</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__46">
+      <from-activity-id id="__47">CreateWithParameters1</from-activity-id>
+      <control-flow-case id="__49">
+        <from-outcome id="__50">CreateWithParams</from-outcome>
+        <to-activity-id id="__48">AddEditARSetup</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__51">
+      <from-activity-id id="__52">CreateWithParameters</from-activity-id>
+      <control-flow-case id="__54">
+        <from-outcome id="__53">CreateWithParams</from-outcome>
+        <to-activity-id id="__55">AddEditARSetup</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

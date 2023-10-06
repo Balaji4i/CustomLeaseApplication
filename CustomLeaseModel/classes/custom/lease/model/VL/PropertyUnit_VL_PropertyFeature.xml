@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PropertyUnit_VL_PropertyFeature"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  EntityAssociation="custom.lease.model.Asso.PropertyUnit_Ass_PropertyFeature">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="custom.lease.model.VL.PropertyUnit_VL_PropertyFeature_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="XxplPropertyUnitsView"
+    Cardinality="1"
+    Owner="custom.lease.model.View.XxplPropertyUnitsView"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XxplPropertyUnitsView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.View.XxplPropertyUnitsView.UnitId"/>
+      <Item Value="custom.lease.model.View.XxplPropertyUnitsView.PropertyId"/>
+      <Item Value="custom.lease.model.View.XxplPropertyUnitsView.BuildId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="XxplPropertyFeaturesView"
+    Cardinality="-1"
+    Owner="custom.lease.model.View.XxplPropertyFeaturesView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XxplPropertyFeaturesView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.View.XxplPropertyFeaturesView.UnitId"/>
+      <Item
+        Value="custom.lease.model.View.XxplPropertyFeaturesView.PropertyId"/>
+      <Item Value="custom.lease.model.View.XxplPropertyFeaturesView.BuildId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="custom.lease.model.CustomLeaseModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

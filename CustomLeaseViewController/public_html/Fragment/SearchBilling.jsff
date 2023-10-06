@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+      <af:panelGroupLayout id="pgl2">
+        <af:panelBox id="pb1" showDisclosure="false"
+                     styleClass="AFStretchWidth"
+                     inlineStyle="height:850px; border-color:transparent;">
+          <f:facet name="toolbar">
+            <af:toolbar id="t1">
+            <af:panelGroupLayout id="pgl3" layout="horizontal" halign="end">
+                  <af:commandImageLink id="bl2"
+                           actionListener="#{backingBeanScope.FilmStripBean.hideFSDropDown}"
+                           visible="#{sessionScope.hideStrip ne true}"
+                           shortDesc="Hide the Film Strip"
+                           icon="/images/func_arrowheadup_16_act.png"/>
+                  <af:commandImageLink id="bl1"
+                           actionListener="#{backingBeanScope.FilmStripBean.showFSDropDown}"
+                           visible="#{sessionScope.hideStrip eq true}"
+                           shortDesc="Show Film Strip"
+                           icon="/images/func_arrowheaddown_16_act.png"/>
+                </af:panelGroupLayout>
+            </af:toolbar>
+          </f:facet>
+          <af:panelGroupLayout layout="vertical" id="pgl1"
+                               styleClass="AFStretchWidth">
+            <af:panelHeader text="Search Billing" id="ph1">
+              <f:facet name="context"/>
+              <f:facet name="menuBar"/>
+              <f:facet name="toolbar"/>
+              <f:facet name="legend"/>
+              <f:facet name="info"/>
+              <af:query id="qryId1" headerText="Search" disclosed="true"
+                        value="#{bindings.SearchBillingQuery.queryDescriptor}"
+                        model="#{bindings.SearchBillingQuery.queryModel}"
+                        queryListener="#{bindings.SearchBillingQuery.processQuery}"
+                        queryOperationListener="#{bindings.SearchBillingQuery.processQueryOperation}"
+                        resultComponentId="::pc1:resId1" rows="3"
+                        maxColumns="3"/>
+            </af:panelHeader>
+            <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t2" flex="100">
+                  <af:commandImageLink id="cil1"
+                                       icon="/images/func_add_16_ena.png"
+                                       disabledIcon="/images/func_add_16_dis.png"
+                                       hoverIcon="/images/func_add_16_hov.png"
+                                       depressedIcon="/images/func_add_16_act.png"
+                                       action="toBilling">
+                    <af:setPropertyListener from="#{'ADD'}"
+                                            to="#{pageFlowScope.billNaviResult}"
+                                            type="action"/>
+                  </af:commandImageLink>
+                  <af:spacer width="10" height="10" id="s1"/>
+                  <af:commandImageLink id="cil2"
+                                       icon="/images/func_pencil_16_ena.png"
+                                       disabledIcon="/images/func_pencil_16_dis.png"
+                                       hoverIcon="/images/func_pencil_16_hov.png"
+                                       depressedIcon="/images/func_pencil_16_act.png"
+                                       action="toBilling">
+                    <af:setPropertyListener from="#{'EDIT'}"
+                                            to="#{pageFlowScope.billNaviResult}"
+                                            type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.BillingId.inputValue}"
+                                            to="#{pageFlowScope.billid}"
+                                            type="action"/>
+                  </af:commandImageLink>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.SearachBillingROVO1.collectionModel}"
+                        var="row"
+                        rows="#{bindings.SearachBillingROVO1.rangeSize}"
+                        emptyText="#{bindings.SearachBillingROVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="10"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.SearchBillingQuery.queryDescriptor}"
+                        queryListener="#{bindings.SearchBillingQuery.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.SearachBillingROVO1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.SearachBillingROVO1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="resId1" scrollPolicy="page"
+                        autoHeightRows="0" columnStretching="last">
+                <af:column id="c1" headerText="S.No" width="60" align="center">
+                  <af:activeOutputText value="#{vs.index+1}" id="aot1"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.BillingId.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.BillingId.label}"
+                           id="resId1c1" rendered="false">
+                  <af:outputText value="#{row.BillingId}" id="ot10"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.BillingNumber.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.BillingNumber.label}"
+                           id="resId1c2" width="150">
+                  <af:outputText value="#{row.BillingNumber}" id="ot8"
+                                 rendered="false"/>
+                  <af:commandLink text="#{row.BillingNumber}" id="cl1"
+                                  inlineStyle="font-weight:bolder; font-size:small; color:#1367AE;"
+                                  action="toBilling">
+                    <af:setPropertyListener to="#{pageFlowScope.billNaviResult}"
+                                            from="#{'EDIT'}" type="action"/>
+                    <af:setPropertyListener from="#{row.BillingId}"
+                                            to="#{pageFlowScope.billid}"
+                                            type="action"/>
+                  </af:commandLink>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.BillingDate.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.BillingDate.label}"
+                           id="resId1c3" width="150">
+                  <f:facet name="filter">
+                    <af:inputDate value="#{vs.filterCriteria.BillingDate}"
+                                  id="id1"/>
+                  </f:facet>
+                  <af:outputText value="#{row.BillingDate}" id="ot3">
+                    <af:convertDateTime pattern="#{bindings.SearachBillingROVO1.hints.BillingDate.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.BookingHdrId.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.BookingHdrId.label}"
+                           id="resId1c4" rendered="false">
+                  <af:outputText value="#{row.BookingHdrId}" id="ot11"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.ChargeTypeDisp.name}"
+                           filterable="true" sortable="true"
+                           headerText="Charge Type"
+                           id="resId1c17" width="170">
+                  <af:outputText value="#{row.ChargeTypeDisp}" id="ot17"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.BookingNumber.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.BookingNumber.label}"
+                           id="resId1c6" width="150">
+                  <af:outputText value="#{row.BookingNumber}" id="ot9"/>
+                </af:column>
+                <af:column headerText="#{bindings.SearachBillingROVO1.hints.OrgId.label}"
+                           id="c2" width="180">
+                  <af:selectOneChoice value="#{row.bindings.OrgId.inputValue}"
+                                      label="#{row.bindings.OrgId.label}"
+                                      required="#{bindings.SearachBillingROVO1.hints.OrgId.mandatory}"
+                                      shortDesc="#{bindings.SearachBillingROVO1.hints.OrgId.tooltip}"
+                                      id="soc1" readOnly="true">
+                    <f:selectItems value="#{row.bindings.OrgId.items}"
+                                   id="si1"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.PropertyId.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.PropertyId.label}"
+                           id="resId1c7" rendered="false">
+                  <af:outputText value="#{row.PropertyId}" id="ot4"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.BuildingId.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.BuildingId.label}"
+                           id="resId1c8" rendered="false">
+                  <af:outputText value="#{row.BuildingId}" id="ot6"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.UnitId.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.UnitId.label}"
+                           id="resId1c13" rendered="false">
+                  <af:outputText value="#{row.UnitId}" id="ot5"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.PropertyName.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.PropertyName.label}"
+                           id="resId1c9" width="180">
+                  <af:outputText value="#{row.PropertyName}" id="ot1"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.PropertyNumber.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.PropertyNumber.label}"
+                           id="resId1c10" rendered="false">
+                  <af:outputText value="#{row.PropertyNumber}" id="ot15"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.BuildName.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.BuildName.label}"
+                           id="resId1c11" width="180">
+                  <af:outputText value="#{row.BuildName}" id="ot12"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.BuildNumber.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.BuildNumber.label}"
+                           id="resId1c12" rendered="false">
+                  <af:outputText value="#{row.BuildNumber}" id="ot13"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.UnitNumber.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.UnitNumber.label}"
+                           id="resId1c14" width="160">
+                  <af:outputText value="#{row.UnitNumber}" id="ot7"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.MilestoneType.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.MilestoneType.label}"
+                           id="resId1c15" rendered="false">
+                  <af:outputText value="#{row.MilestoneType}" id="ot16"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.SearachBillingROVO1.hints.ChargeType.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.SearachBillingROVO1.hints.ChargeType.label}"
+                           id="resId1c16" rendered="false">
+                  <af:outputText value="#{row.ChargeType}" id="ot2"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelGroupLayout>
+        </af:panelBox>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

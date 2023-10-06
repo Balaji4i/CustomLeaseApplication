@@ -1,0 +1,1834 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+      <af:panelBox text="Property Unit" id="pb1" showDisclosure="false"
+                   styleClass="AFStretchWidth"
+                   inlineStyle="height:auto;border-color:transparent;">
+        <f:facet name="toolbar">
+          <af:toolbar id="t1" flex="100">
+            <af:menuBar id="mb1" flex="100">
+              <af:menu text="Action" id="m1"
+                       disabled="#{bindings.UnitTypeTrans.inputValue eq 'Car Parking'?'true':'false'}"
+                       rendered="false">
+                <af:commandMenuItem text="Add Free Car Parking" id="cmi1"
+                                    icon="/images/func_add_16_ena.png"
+                                    actionListener="#{backingBeanScope.AddEditUnit.onClickAddFreeCarParking}"/>
+                <af:commandMenuItem text="Add Paid Car Parking" id="cmi2"
+                                    icon="/images/func_add_16_ena.png"
+                                    actionListener="#{backingBeanScope.AddEditUnit.onClickAddPaidCarParking}"/>
+              </af:menu>
+              <af:spacer width="10" height="10" id="s7"/>
+              <af:menu text="Print" id="m4">
+                <af:goMenuItem text="Multi Units Report" id="gmi1" targetFrame="_blank"
+                               destination="#{backingBeanScope.FilmStripBean.ipAddress}/LeaseReports/webresources/lease/multiUnits/?P_UNIT_ID=#{bindings.UnitId.inputValue}&amp;P_UNIT_NUMBER=#{bindings.UnitNumber.inputValue}&amp;P_FILE_TYPE=pdf"/>
+             </af:menu>
+              <af:spacer width="10" height="10" id="s16"/>
+              <af:commandButton text="Save" id="cb1"
+                                actionListener="#{backingBeanScope.AddEditUnit.onClickSave}"
+                                partialTriggers="pc1:cil1 pc1:t2"/>
+              <af:spacer width="10" height="10" id="s8"/>
+              <af:commandButton text="Save and Close" id="cb2" action="save"
+                                actionListener="#{backingBeanScope.AddEditUnit.onClickSave}"
+                                partialTriggers="pc1:cil1 pc1:t2"/>
+              <af:spacer width="10" height="10" id="s9"/>
+              <af:commandButton text="Cancel" id="cb3"
+                                actionListener="#{bindings.Rollback.execute}"
+                                immediate="true" action="cancel">
+                <af:resetActionListener/>
+              </af:commandButton>
+            </af:menuBar>
+          </af:toolbar>
+        </f:facet>
+        <af:spacer width="10" height="20" id="s3"/>
+        <af:panelSplitter id="ps1" splitterPosition="550"
+                          orientation="horizontal" styleClass="AFStretchWidth" secondBorder="none"
+                          positionedFromEnd="true" firstLandmark="main"
+                          inlineStyle="height:24.0cm;" firstBorder="none"
+                          disabled="true">
+          <f:facet name="first">
+            <af:panelGroupLayout layout="scroll"
+                                 xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                 id="pgl2">
+              <af:panelBox text="Unit Header Information" id="pb3"
+                           showDisclosure="false"
+                           inlineStyle="border-color:transparent;">
+                <f:facet name="toolbar"/>
+                <af:panelFormLayout id="pfl2" maxColumns="2" rows="4">
+                  <f:facet name="footer"/>
+                  <af:inputText value="#{bindings.UnitId.inputValue}"
+                                label="#{bindings.UnitId.hints.label}"  disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                required="#{bindings.UnitId.hints.mandatory}"
+                                columns="#{bindings.UnitId.hints.displayWidth}"
+                                maximumLength="#{bindings.UnitId.hints.precision}"
+                                shortDesc="#{bindings.UnitId.hints.tooltip}"
+                                id="it41" contentStyle="width:200px;"
+                                rendered="false">
+                    <f:validator binding="#{bindings.UnitId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.UnitId.format}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.UnitNumber.inputValue}"
+                                label="#{bindings.UnitNumber.hints.label}"
+                                required="#{bindings.UnitNumber.hints.mandatory}"
+                                columns="#{bindings.UnitNumber.hints.displayWidth}"
+                                maximumLength="#{bindings.UnitNumber.hints.precision}"
+                                shortDesc="#{bindings.UnitNumber.hints.tooltip}"
+                                id="it44" disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                contentStyle="width:200px;font-weight:bolder;font-size:small;color:#1367AE;"
+                                autoSubmit="true">
+                    <f:validator binding="#{bindings.UnitNumber.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.UnitName.inputValue}"
+                                label="#{bindings.UnitName.hints.label}"
+                                required="#{bindings.UnitName.hints.mandatory}"
+                                columns="#{bindings.UnitName.hints.displayWidth}"
+                                maximumLength="#{bindings.UnitName.hints.precision}"
+                                shortDesc="#{bindings.UnitName.hints.tooltip}"
+                                id="it3" contentStyle="width:200px;" disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                autoSubmit="true">
+                    <f:validator binding="#{bindings.UnitName.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.UnitNameTl.inputValue}"
+                                label="#{bindings.UnitNameTl.hints.label}"
+                                 disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                required="#{bindings.UnitNameTl.hints.mandatory}"
+                                columns="#{bindings.UnitNameTl.hints.displayWidth}"
+                                maximumLength="#{bindings.UnitNameTl.hints.precision}"
+                                shortDesc="#{bindings.UnitNameTl.hints.tooltip}"
+                                id="it7" contentStyle="width:200px;"
+                                autoSubmit="true">
+                    <f:validator binding="#{bindings.UnitNameTl.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.UnitShortcode.inputValue}"
+                                label="#{bindings.UnitShortcode.hints.label}"
+                                disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                required="#{bindings.UnitShortcode.hints.mandatory}"
+                                columns="#{bindings.UnitShortcode.hints.displayWidth}"
+                                maximumLength="#{bindings.UnitShortcode.hints.precision}"
+                                shortDesc="#{bindings.UnitShortcode.hints.tooltip}"
+                                id="it17" contentStyle="width:200px;"
+                                autoSubmit="true">
+                    <f:validator binding="#{bindings.UnitShortcode.validator}"/>
+                  </af:inputText>
+                  <af:inputComboboxListOfValues id="orgNameId"
+                                                popupTitle="Search and Select: #{bindings.OrgName.hints.label}"
+                                                value="#{bindings.OrgName.inputValue}"
+                                                label="#{bindings.OrgName.hints.label}"
+                                                disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                                model="#{bindings.OrgName.listOfValuesModel}"
+                                                required="#{bindings.OrgName.hints.mandatory}"
+                                                columns="#{bindings.OrgName.hints.displayWidth}"
+                                                shortDesc="#{bindings.OrgName.hints.tooltip}"
+                                                contentStyle="width:180px;"
+                                                autoSubmit="true">
+                    <f:validator binding="#{bindings.OrgName.validator}"/>
+                  </af:inputComboboxListOfValues>
+                  <af:inputText value="#{bindings.OrgId.inputValue}"
+                                label="#{bindings.OrgId.hints.label}"
+                                disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                required="#{bindings.OrgId.hints.mandatory}"
+                                columns="#{bindings.OrgId.hints.displayWidth}"
+                                maximumLength="#{bindings.OrgId.hints.precision}"
+                                shortDesc="#{bindings.OrgId.hints.tooltip}"
+                                partialTriggers="orgNameId" id="it20"
+                                contentStyle="width:200px;" autoSubmit="true"
+                                rendered="false">
+                    <f:validator binding="#{bindings.OrgId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.OrgId.format}"/>
+                  </af:inputText>
+                  <af:inputComboboxListOfValues id="propertynameTransId"
+                                                popupTitle="Search and Select: #{bindings.PropertynameTrans.hints.label}"
+                                                value="#{bindings.PropertynameTrans.inputValue}"
+                                                label="#{bindings.PropertynameTrans.hints.label}"
+                                                disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                                model="#{bindings.PropertynameTrans.listOfValuesModel}"
+                                                required="#{bindings.PropertynameTrans.hints.mandatory}"
+                                                columns="#{bindings.PropertynameTrans.hints.displayWidth}"
+                                                shortDesc="#{bindings.PropertynameTrans.hints.tooltip}"
+                                                contentStyle="width:180px;"
+                                                autoSubmit="true"
+                                                partialTriggers="orgNameId it50">
+                    <f:validator binding="#{bindings.PropertynameTrans.validator}"/>
+                  </af:inputComboboxListOfValues>
+                  <af:inputText value="#{bindings.PropertyId.inputValue}"
+                                label="#{bindings.PropertyId.hints.label}"
+                                disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                columns="#{bindings.PropertyId.hints.displayWidth}"
+                                maximumLength="#{bindings.PropertyId.hints.precision}"
+                                shortDesc="#{bindings.PropertyId.hints.tooltip}"
+                                partialTriggers="propertynameTransId it20"
+                                id="it50" contentStyle="width:200px;"
+                                autoSubmit="true" required="false"
+                                rendered="false">
+                    <f:validator binding="#{bindings.PropertyId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.PropertyId.format}"/>
+                  </af:inputText>
+                  <af:inputComboboxListOfValues id="buildingNameTransId"
+                                                popupTitle="Search and Select: #{bindings.BuildingNameTrans.hints.label}"
+                                                value="#{bindings.BuildingNameTrans.inputValue}"
+                                                label="#{bindings.BuildingNameTrans.hints.label}"
+                                                disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                                model="#{bindings.BuildingNameTrans.listOfValuesModel}"
+                                                required="#{bindings.BuildingNameTrans.hints.mandatory}"
+                                                columns="#{bindings.BuildingNameTrans.hints.displayWidth}"
+                                                shortDesc="#{bindings.BuildingNameTrans.hints.tooltip}"
+                                                contentStyle="width:180px;"
+                                                autoSubmit="true"
+                                                partialTriggers="propertynameTransId orgNameId">
+                    <f:validator binding="#{bindings.BuildingNameTrans.validator}"/>
+                  </af:inputComboboxListOfValues>
+                  <af:inputText value="#{bindings.BuildId.inputValue}"
+                                label="#{bindings.BuildId.hints.label}"
+                                disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                required="#{bindings.BuildId.hints.mandatory}"
+                                columns="#{bindings.BuildId.hints.displayWidth}"
+                                maximumLength="#{bindings.BuildId.hints.precision}"
+                                shortDesc="#{bindings.BuildId.hints.tooltip}"
+                                partialTriggers="orgNameId it20 propertynameTransId it50 buildingNameTransId"
+                                id="it37" contentStyle="width:200px;"
+                                autoSubmit="true" rendered="false">
+                    <f:validator binding="#{bindings.BuildId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.BuildId.format}"/>
+                  </af:inputText>
+                  <af:panelLabelAndMessage label="Status" id="plam1">
+                  <af:outputText value="#{bindings.Status.inputValue}" id="ot4"
+                                 inlineStyle="color:#{bindings.Status.inputValue eq 'Leased' ? 'Blue' : bindings.Status.inputValue eq 'Allotted' ? 'Red' : bindings.Status.inputValue eq 'Available' ? 'Green' : 'Black'}; font-weight:bold;"/>
+                    <af:selectOneChoice value="#{bindings.Status_Trans.inputValue}"
+                                        label="Change Status"
+                                        required="#{bindings.Status_Trans.hints.mandatory}"
+                                        shortDesc="#{bindings.Status_Trans.hints.tooltip}"
+                                        id="soc14" autoSubmit="true"
+                                        visible="#{bindings.Status.inputValue eq 'SOLD'}">
+                      <f:selectItems value="#{bindings.Status_Trans.items}"
+                                     id="si14"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                </af:panelFormLayout>
+              </af:panelBox>
+              <af:panelBox text="Detail Information" id="pb2"
+                           showDisclosure="false"
+                           inlineStyle="border-color:transparent;">
+                <f:facet name="toolbar"/>
+                <af:panelFormLayout id="pfl3" maxColumns="2" rows="5"
+                                    fieldWidth="110">
+                  <f:facet name="footer"/>
+                  <af:inputComboboxListOfValues id="unitTypeTransId"
+                                                popupTitle="Search and Select: #{bindings.UnitTypeTrans.hints.label}"
+                                                value="#{bindings.UnitTypeTrans.inputValue}"
+                                                label="#{bindings.UnitTypeTrans.hints.label}"
+                                                model="#{bindings.UnitTypeTrans.listOfValuesModel}"
+                                                required="true"
+                                                disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                                columns="#{bindings.UnitTypeTrans.hints.displayWidth}"
+                                                shortDesc="#{bindings.UnitTypeTrans.hints.tooltip}"
+                                                contentStyle="width:160px;"
+                                                autoSubmit="true"
+                                                valueChangeListener="#{backingBeanScope.AddEditUnit.onChangeUnitType}">
+                    <f:validator binding="#{bindings.UnitTypeTrans.validator}"/>
+                  </af:inputComboboxListOfValues>
+                  <af:selectOneChoice value="#{bindings.AllotType.inputValue}"
+                                      label="#{bindings.AllotType.label}"
+                                      required="#{bindings.UnitTypeTrans.inputValue eq 'Car Parking'?'true':false}"
+                                      shortDesc="#{bindings.AllotType.hints.tooltip}"
+                                      id="soc5" contentStyle="width:200px;"
+                                      autoSubmit="true"
+                                      disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                      visible="#{bindings.UnitTypeTrans.inputValue eq 'Car Parking'?'true':false}"
+                                      partialTriggers="unitTypeTransId">
+                    <f:selectItems value="#{bindings.AllotType.items}"
+                                   id="si5"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{bindings.UnitType.inputValue}"
+                                label="#{bindings.UnitType.hints.label}"
+                                disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                required="#{bindings.UnitType.hints.mandatory}"
+                                columns="#{bindings.UnitType.hints.displayWidth}"
+                                maximumLength="#{bindings.UnitType.hints.precision}"
+                                shortDesc="#{bindings.UnitType.hints.tooltip}"
+                                partialTriggers="unitTypeTransId" id="it49"
+                                contentStyle="width:200px;" rendered="false">
+                    <f:validator binding="#{bindings.UnitType.validator}"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.AreaType.inputValue}"
+                                      label="#{bindings.AreaType.label}"
+                                      disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                      required="#{bindings.AreaType.hints.mandatory}"
+                                      shortDesc="#{bindings.AreaType.hints.tooltip}"
+                                      id="soc4" contentStyle="width:200px;"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{bindings.AreaType.items}" id="si1"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.ViewType.inputValue}"
+                                      label="#{bindings.ViewType.label}"
+                                      disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                      required="#{bindings.ViewType.hints.mandatory}"
+                                      shortDesc="#{bindings.ViewType.hints.tooltip}"
+                                      id="soc2" contentStyle="width:200px;"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{bindings.ViewType.items}" id="si2"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.UnitClass.inputValue}"
+                                      label="#{bindings.UnitClass.label}"
+                                      disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                      required="#{bindings.UnitClass.hints.mandatory}"
+                                      shortDesc="#{bindings.UnitClass.hints.tooltip}"
+                                      id="soc3" contentStyle="width:200px;"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{bindings.UnitClass.items}"
+                                   id="si4"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.UnitCategory.inputValue}"
+                                      label="#{bindings.UnitCategory.label}"
+                                      disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                      shortDesc="#{bindings.UnitCategory.hints.tooltip}"
+                                      id="soc1" contentStyle="width:200px;"
+                                      required="true" autoSubmit="true">
+                    <f:selectItems value="#{bindings.UnitCategory.items}"
+                                   id="si3"/>
+                  </af:selectOneChoice>
+                  <af:inputComboboxListOfValues id="floorTransId"
+                                                popupTitle="Search and Select: #{bindings.FloorTrans.hints.label}"
+                                                value="#{bindings.FloorTrans.inputValue}"
+                                                label="#{bindings.FloorTrans.hints.label}"
+                                                model="#{bindings.FloorTrans.listOfValuesModel}"
+                                                required="#{bindings.FloorTrans.hints.mandatory}"
+                                                columns="#{bindings.FloorTrans.hints.displayWidth}"
+                                                shortDesc="#{bindings.FloorTrans.hints.tooltip}"
+                                                contentStyle="width:160px;"
+                                                disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                                autoSubmit="true">
+                    <f:validator binding="#{bindings.FloorTrans.validator}"/>
+                  </af:inputComboboxListOfValues>
+                  <af:inputText value="#{bindings.FloorNumber.inputValue}"
+                                label="#{bindings.FloorNumber.hints.label}"
+                                disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                required="#{bindings.FloorNumber.hints.mandatory}"
+                                columns="#{bindings.FloorNumber.hints.displayWidth}"
+                                maximumLength="#{bindings.FloorNumber.hints.precision}"
+                                shortDesc="#{bindings.FloorNumber.hints.tooltip}"
+                                partialTriggers="floorTransId" id="it12"
+                                contentStyle="width:200px;" rendered="false">
+                    <f:validator binding="#{bindings.FloorNumber.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.DocRefNumber1.inputValue}"
+                                label="#{bindings.DocRefNumber1.hints.label}"
+                                disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                required="#{bindings.DocRefNumber1.hints.mandatory}"
+                                columns="#{bindings.DocRefNumber1.hints.displayWidth}"
+                                maximumLength="#{bindings.DocRefNumber1.hints.precision}"
+                                shortDesc="#{bindings.DocRefNumber1.hints.tooltip}"
+                                id="it39" contentStyle="width:200px;"
+                                autoSubmit="true">
+                    <f:validator binding="#{bindings.DocRefNumber1.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.DocRefNumber2.inputValue}"
+                                label="#{bindings.DocRefNumber2.hints.label}"
+                                required="#{bindings.DocRefNumber2.hints.mandatory}"
+                                columns="#{bindings.DocRefNumber2.hints.displayWidth}"
+                                maximumLength="#{bindings.DocRefNumber2.hints.precision}"
+                                shortDesc="#{bindings.DocRefNumber2.hints.tooltip}"
+                                id="it15" contentStyle="width:200px;"
+                                autoSubmit="true"
+                                disabled="#{bindings.Status.inputValue ne 'Available' || bindings.UnitType.inputValue eq 'CAR_PARKING' || bindings.UnitType.inputValue eq 'CAR_PRK_SLOT'}"
+                                partialTriggers="unitTypeTransId">
+                    <f:validator binding="#{bindings.DocRefNumber2.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.DocRefNumber3.inputValue}"
+                                label="#{bindings.DocRefNumber3.hints.label}"
+                                required="#{bindings.DocRefNumber3.hints.mandatory}"
+                                columns="#{bindings.DocRefNumber3.hints.displayWidth}"
+                                maximumLength="#{bindings.DocRefNumber3.hints.precision}"
+                                shortDesc="#{bindings.DocRefNumber3.hints.tooltip}"
+                                id="it34" contentStyle="width:200px;"
+                                autoSubmit="true" 
+                                disabled="#{bindings.Status.inputValue ne 'Available' || bindings.UnitType.inputValue eq 'CAR_PARKING' || bindings.UnitType.inputValue eq 'CAR_PRK_SLOT'}"
+                                partialTriggers="unitTypeTransId">
+                    <f:validator binding="#{bindings.DocRefNumber3.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.DocRefNumber4.inputValue}"
+                                label="#{bindings.DocRefNumber4.hints.label}"
+                                required="#{bindings.DocRefNumber4.hints.mandatory}"
+                                columns="#{bindings.DocRefNumber4.hints.displayWidth}"
+                                maximumLength="#{bindings.DocRefNumber4.hints.precision}"
+                                shortDesc="#{bindings.DocRefNumber4.hints.tooltip}"
+                                id="it78" contentStyle="width:200px;"
+                                autoSubmit="true"
+                                partialTriggers="unitTypeTransId">
+                    <f:validator binding="#{bindings.DocRefNumber4.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.NoOfRooms.inputValue}"
+                                label="#{bindings.NoOfRooms.hints.label}"
+                                required="#{bindings.NoOfRooms.hints.mandatory}"
+                                columns="#{bindings.NoOfRooms.hints.displayWidth}"
+                                maximumLength="#{bindings.NoOfRooms.hints.precision}"
+                                shortDesc="#{bindings.NoOfRooms.hints.tooltip}"
+                                id="it22" contentStyle="width:200px;"
+                                autoSubmit="true"
+                                disabled="#{bindings.Status.inputValue ne 'Available' || bindings.UnitType.inputValue eq 'CAR_PARKING' || bindings.UnitType.inputValue eq 'CAR_PRK_SLOT'}"
+                                partialTriggers="unitTypeTransId">
+                    <f:validator binding="#{bindings.NoOfRooms.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.NoOfRooms.format}"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.UnitMethod.inputValue}"
+                                      label="#{bindings.UnitMethod.label}"
+                                      shortDesc="#{bindings.UnitMethod.hints.tooltip}"
+                                      id="soc12" autoSubmit="true"
+                                      disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                      contentStyle="width:200px;"
+                                      required="true">
+                    <f:selectItems value="#{bindings.UnitMethod.items}"
+                                   id="si12"/>
+                  </af:selectOneChoice>
+                  <af:selectBooleanCheckbox value="#{bindings.LeaseableYn.inputValue}"
+                                            label="Leaseable"
+                                            disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                            shortDesc="#{bindings.LeaseableYn.hints.tooltip}"
+                                            id="sbc3"/>
+                </af:panelFormLayout>
+              </af:panelBox>
+              <af:spacer width="10" height="20" id="s1"/>
+              <af:inputText value="#{bindings.Description.inputValue}"
+                            label="#{bindings.Description.hints.label}"
+                            disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                            required="#{bindings.Description.hints.mandatory}"
+                            columns="#{bindings.Description.hints.displayWidth}"
+                            maximumLength="#{bindings.Description.hints.precision}"
+                            shortDesc="#{bindings.Description.hints.tooltip}"
+                            id="it6" contentStyle="width:400px;" rows="6"
+                            autoSubmit="true">
+                <f:validator binding="#{bindings.Description.validator}"/>
+              </af:inputText>
+              <af:spacer width="10" height="30" id="s11"/>
+              <af:panelBox text="Area" id="pb7"
+                           inlineStyle="border-color:transparent;"
+                           showDisclosure="false">
+                <f:facet name="toolbar"/>
+                <af:panelCollection id="pc1" styleClass="AFStretchWidth"
+                                    featuresOff="detachToolbarItem">
+                  <f:facet name="menus"/>
+                  <f:facet name="toolbar">
+                    <af:toolbar id="t3" flex="10">
+                      <af:commandImageLink id="cil1"
+                                           icon="/images/func_add_16_ena.png"
+                                           disabledIcon="/images/func_add_16_dis.png"
+                                           hoverIcon="/images/func_add_16_hov.png"
+                                           depressedIcon="/images/func_add_16_act.png"
+                                           actionListener="#{backingBeanScope.AddEditUnit.onClickCreateArea}"/>
+                      <af:spacer width="10" height="10" id="s17"/>
+                      <af:commandImageLink id="cil8"
+                                           icon="/images/func_remove_16_ena.png"
+                                           actionListener="#{bindings.Delete2.execute}"/>
+                    </af:toolbar>
+                  </f:facet>
+                  <f:facet name="statusbar"/>
+                  <af:table value="#{bindings.XxplPropertyAreaView1.collectionModel}"
+                            var="row"
+                            rows="#{bindings.XxplPropertyAreaView1.rangeSize}"
+                            emptyText="#{bindings.XxplPropertyAreaView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="4" rowBandingInterval="0"
+                            filterModel="#{bindings.XxplPropertyAreaView1Query.queryDescriptor}"
+                            queryListener="#{bindings.XxplPropertyAreaView1Query.processQuery}"
+                            filterVisible="true" varStatus="vs" columnStretching="column:c8"
+                            selectedRowKeys="#{bindings.XxplPropertyAreaView1.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.XxplPropertyAreaView1.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t2" autoHeightRows="0"
+                            binding="#{backingBeanScope.AddEditUnit.t1}">
+                    <af:column id="c15" headerText="S.No" width="50">
+                      <af:outputText value="#{vs.index+1}" id="ot1"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyAreaView1.hints.AreaId.name}"
+                               filterable="true" sortable="false"
+                               headerText="AreaId" id="c13" rendered="false">
+                      <af:inputText value="#{row.bindings.AreaId.inputValue}"
+                      disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                    label="#{bindings.XxplPropertyAreaView1.hints.AreaId.label}"
+                                    required="#{bindings.XxplPropertyAreaView1.hints.AreaId.mandatory}"
+                                    columns="#{bindings.XxplPropertyAreaView1.hints.AreaId.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyAreaView1.hints.AreaId.precision}"
+                                    shortDesc="#{bindings.XxplPropertyAreaView1.hints.AreaId.tooltip}"
+                                    id="it16">
+                        <f:validator binding="#{row.bindings.AreaId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XxplPropertyAreaView1.hints.AreaId.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyAreaView1.hints.PropertyId.name}"
+                               filterable="true" sortable="false"
+                               headerText="PropertyId" id="c3" rendered="false">
+                      <af:inputText value="#{row.bindings.PropertyId.inputValue}"
+                      disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                    label="#{bindings.XxplPropertyAreaView1.hints.PropertyId.label}"
+                                    required="#{bindings.XxplPropertyAreaView1.hints.PropertyId.mandatory}"
+                                    columns="#{bindings.XxplPropertyAreaView1.hints.PropertyId.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyAreaView1.hints.PropertyId.precision}"
+                                    shortDesc="#{bindings.XxplPropertyAreaView1.hints.PropertyId.tooltip}"
+                                    id="it9">
+                        <f:validator binding="#{row.bindings.PropertyId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XxplPropertyAreaView1.hints.PropertyId.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyAreaView1.hints.BuildId.name}"
+                               filterable="true" sortable="false"
+                               headerText="build id" id="c7" rendered="false">
+                      <af:inputText value="#{row.bindings.BuildId.inputValue}"
+                      disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                    label="#{bindings.XxplPropertyAreaView1.hints.BuildId.label}"
+                                    required="#{bindings.XxplPropertyAreaView1.hints.BuildId.mandatory}"
+                                    columns="#{bindings.XxplPropertyAreaView1.hints.BuildId.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyAreaView1.hints.BuildId.precision}"
+                                    shortDesc="#{bindings.XxplPropertyAreaView1.hints.BuildId.tooltip}"
+                                    id="it2">
+                        <f:validator binding="#{row.bindings.BuildId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XxplPropertyAreaView1.hints.BuildId.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyAreaView1.hints.UnitId.name}"
+                               filterable="true" sortable="false"
+                               headerText="unit id" id="c6" rendered="false">
+                      <af:inputText value="#{row.bindings.UnitId.inputValue}"
+                                    label="#{bindings.XxplPropertyAreaView1.hints.UnitId.label}"
+                                    required="#{bindings.XxplPropertyAreaView1.hints.UnitId.mandatory}"
+                                    columns="#{bindings.XxplPropertyAreaView1.hints.UnitId.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyAreaView1.hints.UnitId.precision}"
+                                    shortDesc="#{bindings.XxplPropertyAreaView1.hints.UnitId.tooltip}"
+                                    id="it8">
+                        <f:validator binding="#{row.bindings.UnitId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XxplPropertyAreaView1.hints.UnitId.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyAreaView1.hints.Area.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplPropertyAreaView1.hints.Area.label}"
+                               id="c11" width="100">
+                      <af:selectOneChoice value="#{row.bindings.Area.inputValue}"
+                                          label="#{row.bindings.Area.label}"
+                                          
+                                          required="#{bindings.XxplPropertyAreaView1.hints.Area.mandatory}"
+                                          shortDesc="#{bindings.XxplPropertyAreaView1.hints.Area.tooltip}"
+                                          id="soc7" autoSubmit="true"
+                                          disabled="true">
+                        <f:selectItems value="#{row.bindings.Area.items}"
+                                       id="si6"/>
+                      </af:selectOneChoice>
+                    </af:column>
+                    <af:column headerText="#{bindings.XxplPropertyAreaView1.hints.AreaType.label}"
+                               id="c70" sortable="false" filterable="true"
+                               sortProperty="#{bindings.XxplPropertyAreaView1.hints.AreaType.name}">
+                      <af:selectOneChoice value="#{row.bindings.AreaType.inputValue}"
+                                          label="#{row.bindings.AreaType.label}"
+                                          required="#{bindings.XxplPropertyAreaView1.hints.AreaType.mandatory}"
+                                          shortDesc="#{bindings.XxplPropertyAreaView1.hints.AreaType.tooltip}"
+                                          id="soc13">
+                        <f:selectItems value="#{row.bindings.AreaType.items}"
+                                       id="si13"/>
+                      </af:selectOneChoice>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyAreaView1.hints.Uom.name}"
+                               filterable="true" sortable="false" visible="false"
+                               headerText="#{bindings.XxplPropertyAreaView1.hints.Uom.label}"
+                               id="c5" width="100">
+                      <af:selectOneChoice value="#{row.bindings.Uom.inputValue}"
+                                          label="#{row.bindings.Uom.label}"
+                                        
+                                          required="#{bindings.XxplPropertyAreaView1.hints.Uom.mandatory}"
+                                          shortDesc="#{bindings.XxplPropertyAreaView1.hints.Uom.tooltip}"
+                                          id="soc6" disabled="true">
+                        <f:selectItems value="#{row.bindings.Uom.items}"
+                                       id="si7"/>
+                      </af:selectOneChoice>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyAreaView1.hints.Value.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplPropertyAreaView1.hints.Value.label}"
+                               id="c4" width="130">
+                      <af:inputText value="#{row.bindings.Value.inputValue}"
+                                    label="#{bindings.XxplPropertyAreaView1.hints.Value.label}"
+                                    required="#{bindings.XxplPropertyAreaView1.hints.Value.mandatory}"
+                                    columns="#{bindings.XxplPropertyAreaView1.hints.Value.displayWidth}"
+                                    disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                    maximumLength="#{bindings.XxplPropertyAreaView1.hints.Value.precision}"
+                                    shortDesc="#{bindings.XxplPropertyAreaView1.hints.Value.tooltip}"
+                                    id="it14" autoSubmit="true">
+                        <f:validator binding="#{row.bindings.Value.validator}"/>
+                        <af:convertNumber pattern="#{bindings.XxplPropertyAreaView1.hints.Value.format}"
+                                          minFractionDigits="2"/>
+                        <af:validateDoubleRange minimum="0.0"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyAreaView1.hints.Description.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplPropertyAreaView1.hints.Description.label}"
+                               id="c8" width="80">
+                      <af:inputText value="#{row.bindings.Description.inputValue}"
+                                    label="#{bindings.XxplPropertyAreaView1.hints.Description.label}"
+                                    disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                    required="#{bindings.XxplPropertyAreaView1.hints.Description.mandatory}"
+                                    columns="#{bindings.XxplPropertyAreaView1.hints.Description.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyAreaView1.hints.Description.precision}"
+                                    shortDesc="#{bindings.XxplPropertyAreaView1.hints.Description.tooltip}"
+                                    id="it11" autoSubmit="true">
+                        <f:validator binding="#{row.bindings.Description.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyAreaView1.hints.CreatedBy.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplPropertyAreaView1.hints.CreatedBy.label}"
+                               id="c1" rendered="false">
+                      <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                                    label="#{bindings.XxplPropertyAreaView1.hints.CreatedBy.label}"
+                                    required="#{bindings.XxplPropertyAreaView1.hints.CreatedBy.mandatory}"
+                                    columns="#{bindings.XxplPropertyAreaView1.hints.CreatedBy.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyAreaView1.hints.CreatedBy.precision}"
+                                    shortDesc="#{bindings.XxplPropertyAreaView1.hints.CreatedBy.tooltip}"
+                                    id="it10">
+                        <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyAreaView1.hints.CreationDate.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplPropertyAreaView1.hints.CreationDate.label}"
+                               id="c2" rendered="false">
+                      <f:facet name="filter">
+                        <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                      id="id3"/>
+                      </f:facet>
+                      <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                      disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                    label="#{bindings.XxplPropertyAreaView1.hints.CreationDate.label}"
+                                    required="#{bindings.XxplPropertyAreaView1.hints.CreationDate.mandatory}"
+                                    shortDesc="#{bindings.XxplPropertyAreaView1.hints.CreationDate.tooltip}"
+                                    id="id6">
+                        <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                        <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                      </af:inputDate>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyAreaView1.hints.LastUpdatedBy.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplPropertyAreaView1.hints.LastUpdatedBy.label}"
+                               id="c14" rendered="false">
+                      <af:inputText value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                    label="#{bindings.XxplPropertyAreaView1.hints.LastUpdatedBy.label}"
+                                    required="#{bindings.XxplPropertyAreaView1.hints.LastUpdatedBy.mandatory}"
+                                    columns="#{bindings.XxplPropertyAreaView1.hints.LastUpdatedBy.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyAreaView1.hints.LastUpdatedBy.precision}"
+                                    shortDesc="#{bindings.XxplPropertyAreaView1.hints.LastUpdatedBy.tooltip}"
+                                    id="it4">
+                        <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyAreaView1.hints.LastUpdateDate.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplPropertyAreaView1.hints.LastUpdateDate.label}"
+                               id="c10" rendered="false">
+                      <f:facet name="filter">
+                        <af:inputDate value="#{vs.filterCriteria.LastUpdateDate}"
+                                      id="id5"/>
+                      </f:facet>
+                      <af:inputDate value="#{row.bindings.LastUpdateDate.inputValue}"
+                                    label="#{bindings.XxplPropertyAreaView1.hints.LastUpdateDate.label}"
+                                    required="#{bindings.XxplPropertyAreaView1.hints.LastUpdateDate.mandatory}"
+                                    shortDesc="#{bindings.XxplPropertyAreaView1.hints.LastUpdateDate.tooltip}"
+                                    id="id4">
+                        <f:validator binding="#{row.bindings.LastUpdateDate.validator}"/>
+                        <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                      </af:inputDate>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyAreaView1.hints.LastUpdateLogin.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplPropertyAreaView1.hints.LastUpdateLogin.label}"
+                               id="c9" rendered="false">
+                      <af:inputText value="#{row.bindings.LastUpdateLogin.inputValue}"
+                                    label="#{bindings.XxplPropertyAreaView1.hints.LastUpdateLogin.label}"
+                                    required="#{bindings.XxplPropertyAreaView1.hints.LastUpdateLogin.mandatory}"
+                                    columns="#{bindings.XxplPropertyAreaView1.hints.LastUpdateLogin.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyAreaView1.hints.LastUpdateLogin.precision}"
+                                    shortDesc="#{bindings.XxplPropertyAreaView1.hints.LastUpdateLogin.tooltip}"
+                                    id="it13">
+                        <f:validator binding="#{row.bindings.LastUpdateLogin.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                  </af:table>
+                </af:panelCollection>
+              </af:panelBox>
+            </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="second">
+            <af:panelGroupLayout id="pgl1" layout="scroll">
+              <af:panelBox text="Owner Details" id="pb8"
+                           styleClass="AFStretchWidth" showDisclosure="false"
+                           inlineStyle="border-color:transparent; height:480px;">
+                <f:facet name="toolbar"/>
+                <af:panelCollection id="pc6" styleClass="AFStretchWidth">
+                  <f:facet name="menus"/>
+                  <f:facet name="toolbar">
+                    <af:toolbar id="t12" flex="10">
+                      <af:commandImageLink actionListener="#{bindings.CreateInsert1.execute}"
+                                           id="cil6"
+                                           icon="/images/func_add_16_ena.png"
+                                           disabledIcon="/images/func_add_16_dis.png"
+                                           hoverIcon="/images/func_add_16_hov.png"
+                                           disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                           depressedIcon="/images/func_add_16_act.png"
+                                           partialSubmit="false"/>
+                      <af:spacer width="10" height="10" id="s12"/>
+                      <af:commandImageLink actionListener="#{bindings.Delete1.execute}"
+                                           
+                                           id="cil7"
+                                           icon="/images/func_remove_16_ena.png"
+                                           disabledIcon="/images/func_remove_16_dis.png"
+                                           disabled="#{!bindings.Delete1.enabled || bindings.Status.inputValue ne 'Available' ? true : false}"
+                                           hoverIcon="/images/func_remove_16_hov.png"
+                                           depressedIcon="/images/func_remove_16_act.png"/>
+                    </af:toolbar>
+                  </f:facet>
+                  <f:facet name="statusbar"/>
+                  <af:table value="#{bindings.XxplOwnerDtleView1.collectionModel}"
+                            var="row"
+                            rows="#{bindings.XxplOwnerDtleView1.rangeSize}"
+                            emptyText="#{bindings.XxplOwnerDtleView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="5"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.XxplOwnerDtleView1Query.queryDescriptor}"
+                            queryListener="#{bindings.XxplOwnerDtleView1Query.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.XxplOwnerDtleView1.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.XxplOwnerDtleView1.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t11" scrollPolicy="page"
+                            autoHeightRows="0"
+                            binding="#{backingBeanScope.AddEditUnit.t11}"
+                            rowDisclosureListener="#{backingBeanScope.AddEditUnit.rowDisclosureListener}">
+                    <af:column sortProperty="#{bindings.XxplOwnerDtleView1.hints.OwnerId.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplOwnerDtleView1.hints.OwnerId.label}"
+                               id="c61" rendered="false">
+                      <af:inputText value="#{row.bindings.OwnerId.inputValue}"
+                      disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                    label="#{bindings.XxplOwnerDtleView1.hints.OwnerId.label}"
+                                    required="#{bindings.XxplOwnerDtleView1.hints.OwnerId.mandatory}"
+                                    columns="#{bindings.XxplOwnerDtleView1.hints.OwnerId.displayWidth}"
+                                    maximumLength="#{bindings.XxplOwnerDtleView1.hints.OwnerId.precision}"
+                                    shortDesc="#{bindings.XxplOwnerDtleView1.hints.OwnerId.tooltip}"
+                                    id="it63">
+                        <f:validator binding="#{row.bindings.OwnerId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XxplOwnerDtleView1.hints.OwnerId.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplOwnerDtleView1.hints.PropertyId.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplOwnerDtleView1.hints.PropertyId.label}"
+                               id="c65" rendered="false">
+                      <af:inputText value="#{row.bindings.PropertyId.inputValue}"
+                                    label="#{bindings.XxplOwnerDtleView1.hints.PropertyId.label}"
+                                    disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                    required="#{bindings.XxplOwnerDtleView1.hints.PropertyId.mandatory}"
+                                    columns="#{bindings.XxplOwnerDtleView1.hints.PropertyId.displayWidth}"
+                                    maximumLength="#{bindings.XxplOwnerDtleView1.hints.PropertyId.precision}"
+                                    shortDesc="#{bindings.XxplOwnerDtleView1.hints.PropertyId.tooltip}"
+                                    id="it31">
+                        <f:validator binding="#{row.bindings.PropertyId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XxplOwnerDtleView1.hints.PropertyId.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplOwnerDtleView1.hints.BuildId.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplOwnerDtleView1.hints.BuildId.label}"
+                               id="c67" rendered="false">
+                      <af:inputText value="#{row.bindings.BuildId.inputValue}"
+                                    label="#{bindings.XxplOwnerDtleView1.hints.BuildId.label}"
+                                    disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                    required="#{bindings.XxplOwnerDtleView1.hints.BuildId.mandatory}"
+                                    columns="#{bindings.XxplOwnerDtleView1.hints.BuildId.displayWidth}"
+                                    maximumLength="#{bindings.XxplOwnerDtleView1.hints.BuildId.precision}"
+                                    shortDesc="#{bindings.XxplOwnerDtleView1.hints.BuildId.tooltip}"
+                                    id="it67">
+                        <f:validator binding="#{row.bindings.BuildId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XxplOwnerDtleView1.hints.BuildId.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplOwnerDtleView1.hints.UnitId.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplOwnerDtleView1.hints.UnitId.label}"
+                               id="c69" rendered="false">
+                      <af:inputText value="#{row.bindings.UnitId.inputValue}"
+                                    label="#{bindings.XxplOwnerDtleView1.hints.UnitId.label}"
+                                    required="#{bindings.XxplOwnerDtleView1.hints.UnitId.mandatory}"
+                                    columns="#{bindings.XxplOwnerDtleView1.hints.UnitId.displayWidth}"
+                                    maximumLength="#{bindings.XxplOwnerDtleView1.hints.UnitId.precision}"
+                                    shortDesc="#{bindings.XxplOwnerDtleView1.hints.UnitId.tooltip}"
+                                    id="it64">
+                        <f:validator binding="#{row.bindings.UnitId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XxplOwnerDtleView1.hints.UnitId.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplOwnerDtleView1.hints.OrgId.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplOwnerDtleView1.hints.OrgId.label}"
+                               id="c64" rendered="false">
+                      <af:inputText value="#{row.bindings.OrgId.inputValue}"
+                                    label="#{bindings.XxplOwnerDtleView1.hints.OrgId.label}"
+                                    required="#{bindings.XxplOwnerDtleView1.hints.OrgId.mandatory}"
+                                    columns="#{bindings.XxplOwnerDtleView1.hints.OrgId.displayWidth}"
+                                    maximumLength="#{bindings.XxplOwnerDtleView1.hints.OrgId.precision}"
+                                    shortDesc="#{bindings.XxplOwnerDtleView1.hints.OrgId.tooltip}"
+                                    id="it68">
+                        <f:validator binding="#{row.bindings.OrgId.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplOwnerDtleView1.hints.VendId.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplOwnerDtleView1.hints.VendId.label}"
+                               id="c66" width="40" rendered="false">
+                      <af:inputText value="#{row.bindings.VendId.inputValue}"
+                                    label="#{bindings.XxplOwnerDtleView1.hints.VendId.label}"
+                                    required="#{bindings.XxplOwnerDtleView1.hints.VendId.mandatory}"
+                                    columns="#{bindings.XxplOwnerDtleView1.hints.VendId.displayWidth}"
+                                    maximumLength="#{bindings.XxplOwnerDtleView1.hints.VendId.precision}"
+                                    shortDesc="#{bindings.XxplOwnerDtleView1.hints.VendId.tooltip}"
+                                    id="it66"
+                                    partialTriggers="transVendorNameId">
+                        <f:validator binding="#{row.bindings.VendId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XxplOwnerDtleView1.hints.VendId.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplOwnerDtleView1.hints.TransVendorName.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplOwnerDtleView1.hints.TransVendorName.label}"
+                               id="c57" width="270">
+                      <af:inputComboboxListOfValues id="transVendorNameId"
+                                                    popupTitle="Search and Select: #{bindings.XxplOwnerDtleView1.hints.TransVendorName.label}"
+                                                    value="#{row.bindings.TransVendorName.inputValue}"
+                                                    model="#{row.bindings.TransVendorName.listOfValuesModel}"
+                                                    required="#{bindings.XxplOwnerDtleView1.hints.TransVendorName.mandatory}"
+                                                    columns="#{bindings.XxplOwnerDtleView1.hints.TransVendorName.displayWidth}"
+                                                    shortDesc="#{bindings.XxplOwnerDtleView1.hints.TransVendorName.tooltip}"
+                                                    autoSubmit="true"
+                                                    disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                                    contentStyle="width:220px;">
+                        <f:validator binding="#{row.bindings.TransVendorName.validator}"/>
+                      </af:inputComboboxListOfValues>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplOwnerDtleView1.hints.VendSiteId.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplOwnerDtleView1.hints.VendSiteId.label}"
+                               id="c62" width="40" rendered="false">
+                      <af:inputText value="#{row.bindings.VendSiteId.inputValue}"
+                                    label="#{bindings.XxplOwnerDtleView1.hints.VendSiteId.label}"
+                                    disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                    required="#{bindings.XxplOwnerDtleView1.hints.VendSiteId.mandatory}"
+                                    columns="#{bindings.XxplOwnerDtleView1.hints.VendSiteId.displayWidth}"
+                                    maximumLength="#{bindings.XxplOwnerDtleView1.hints.VendSiteId.precision}"
+                                    shortDesc="#{bindings.XxplOwnerDtleView1.hints.VendSiteId.tooltip}"
+                                    id="it59"
+                                    partialTriggers="transVendorNameId">
+                        <f:validator binding="#{row.bindings.VendSiteId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XxplOwnerDtleView1.hints.VendSiteId.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplOwnerDtleView1.hints.TransVendorSite.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplOwnerDtleView1.hints.TransVendorSite.label}"
+                               id="c52" width="100" displayIndex="-1">
+                      <af:inputText value="#{row.bindings.TransVendorSite.inputValue}"
+                      
+                                    label="#{bindings.XxplOwnerDtleView1.hints.TransVendorSite.label}"
+                                    required="#{bindings.XxplOwnerDtleView1.hints.TransVendorSite.mandatory}"
+                                    columns="#{bindings.XxplOwnerDtleView1.hints.TransVendorSite.displayWidth}"
+                                    maximumLength="#{bindings.XxplOwnerDtleView1.hints.TransVendorSite.precision}"
+                                    shortDesc="#{bindings.XxplOwnerDtleView1.hints.TransVendorSite.tooltip}"
+                                    id="it60"
+                                    partialTriggers="transVendorNameId"
+                                    disabled="true">
+                        <f:validator binding="#{row.bindings.TransVendorSite.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column headerText="Contact Number" visible="false"
+                               id="c56" width="140">
+                      <af:inputText value="#{row.bindings.TransMobileNumber.inputValue}"
+                
+                                    label="#{bindings.XxplOwnerDtleView1.hints.TransMobileNumber.label}"
+                                    required="#{bindings.XxplOwnerDtleView1.hints.TransMobileNumber.mandatory}"
+                                    columns="#{bindings.XxplOwnerDtleView1.hints.TransMobileNumber.displayWidth}"
+                                    maximumLength="#{bindings.XxplOwnerDtleView1.hints.TransMobileNumber.precision}"
+                                    shortDesc="#{bindings.XxplOwnerDtleView1.hints.TransMobileNumber.tooltip}"
+                                    id="it18" disabled="true"
+                                    partialTriggers="transVendorNameId"
+                                    autoSubmit="true">
+                        <f:validator binding="#{row.bindings.TransMobileNumber.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplOwnerDtleView1.hints.TransientCheckBox.name}"
+                               filterable="true" sortable="false"
+                               headerText="Primary"
+                               id="c59" width="60" align="center">
+                      <af:selectBooleanCheckbox value="#{row.bindings.TransientCheckBox.inputValue}"
+                                                label="#{row.bindings.TransientCheckBox.label}"
+                                                disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                                shortDesc="#{bindings.XxplOwnerDtleView1.hints.TransientCheckBox.tooltip}"
+                                                id="sbc2" autoSubmit="true"
+                                                valueChangeListener="#{backingBeanScope.AddEditUnit.onChangePrimaryOwner}"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplOwnerDtleView1.hints.PrimaryYn.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplOwnerDtleView1.hints.PrimaryYn.label}"
+                               id="c63" rendered="false">
+                      <af:inputText value="#{row.bindings.PrimaryYn.inputValue}"
+                                    label="#{bindings.XxplOwnerDtleView1.hints.PrimaryYn.label}"
+                                    required="#{bindings.XxplOwnerDtleView1.hints.PrimaryYn.mandatory}"
+                                    columns="#{bindings.XxplOwnerDtleView1.hints.PrimaryYn.displayWidth}"
+                                    maximumLength="#{bindings.XxplOwnerDtleView1.hints.PrimaryYn.precision}"
+                                    shortDesc="#{bindings.XxplOwnerDtleView1.hints.PrimaryYn.tooltip}"
+                                    id="it65">
+                        <f:validator binding="#{row.bindings.PrimaryYn.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplOwnerDtleView1.hints.Description.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplOwnerDtleView1.hints.Description.label}"
+                               id="c60" width="100" rendered="false">
+                      <af:inputText value="#{row.bindings.Description.inputValue}"
+                                    label="#{bindings.XxplOwnerDtleView1.hints.Description.label}"
+                                    required="#{bindings.XxplOwnerDtleView1.hints.Description.mandatory}"
+                                    columns="#{bindings.XxplOwnerDtleView1.hints.Description.displayWidth}"
+                                    maximumLength="#{bindings.XxplOwnerDtleView1.hints.Description.precision}"
+                                    shortDesc="#{bindings.XxplOwnerDtleView1.hints.Description.tooltip}"
+                                    id="it61">
+                        <f:validator binding="#{row.bindings.Description.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <f:facet name="detailStamp">
+                      <af:panelFormLayout id="pfl4" maxColumns="2" rows="6"
+                                          labelWidth="100">
+                        <af:inputText value="#{row.bindings.TransContractname.inputValue}"
+                                      label="Contact Name"
+                                     
+                                      required="#{bindings.XxplOwnerDtleView1.hints.TransContractname.mandatory}"
+                                      columns="#{bindings.XxplOwnerDtleView1.hints.TransContractname.displayWidth}"
+                                      maximumLength="#{bindings.XxplOwnerDtleView1.hints.TransContractname.precision}"
+                                      shortDesc="#{bindings.XxplOwnerDtleView1.hints.TransContractname.tooltip}"
+                                      id="it73" disabled="true">
+                          <f:validator binding="#{row.bindings.TransContractname.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{row.bindings.TransAddress1.inputValue}"
+                                      label="Address 1"
+                                      required="#{bindings.XxplOwnerDtleView1.hints.TransAddress1.mandatory}"
+                                      columns="#{bindings.XxplOwnerDtleView1.hints.TransAddress1.displayWidth}"
+                                      maximumLength="#{bindings.XxplOwnerDtleView1.hints.TransAddress1.precision}"
+                                      shortDesc="#{bindings.XxplOwnerDtleView1.hints.TransAddress1.tooltip}"
+                                      id="it69" disabled="true">
+                          <f:validator binding="#{row.bindings.TransAddress1.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{row.bindings.TransAddress2.inputValue}"
+                                      label="Address 2"
+                                      required="#{bindings.XxplOwnerDtleView1.hints.TransAddress2.mandatory}"
+                                      columns="#{bindings.XxplOwnerDtleView1.hints.TransAddress2.displayWidth}"
+                                      maximumLength="#{bindings.XxplOwnerDtleView1.hints.TransAddress2.precision}"
+                                      shortDesc="#{bindings.XxplOwnerDtleView1.hints.TransAddress2.tooltip}"
+                                      id="it62" disabled="true">
+                          <f:validator binding="#{row.bindings.TransAddress2.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{row.bindings.TransAddress3.inputValue}"
+                                      label="Address 3"
+                                      required="#{bindings.XxplOwnerDtleView1.hints.TransAddress3.mandatory}"
+                                      columns="#{bindings.XxplOwnerDtleView1.hints.TransAddress3.displayWidth}"
+                                      maximumLength="#{bindings.XxplOwnerDtleView1.hints.TransAddress3.precision}"
+                                      shortDesc="#{bindings.XxplOwnerDtleView1.hints.TransAddress3.tooltip}"
+                                      id="it75" disabled="true">
+                          <f:validator binding="#{row.bindings.TransAddress3.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{row.bindings.TransAddress4.inputValue}"
+                                      label="Address 4"
+                                      required="#{bindings.XxplOwnerDtleView1.hints.TransAddress4.mandatory}"
+                                      columns="#{bindings.XxplOwnerDtleView1.hints.TransAddress4.displayWidth}"
+                                      maximumLength="#{bindings.XxplOwnerDtleView1.hints.TransAddress4.precision}"
+                                      shortDesc="#{bindings.XxplOwnerDtleView1.hints.TransAddress4.tooltip}"
+                                      id="it72" disabled="true">
+                          <f:validator binding="#{row.bindings.TransAddress4.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{row.bindings.TransPostalCode.inputValue}"
+                                      label="Postal Code"
+                                      required="#{bindings.XxplOwnerDtleView1.hints.TransPostalCode.mandatory}"
+                                      columns="#{bindings.XxplOwnerDtleView1.hints.TransPostalCode.displayWidth}"
+                                      maximumLength="#{bindings.XxplOwnerDtleView1.hints.TransPostalCode.precision}"
+                                      shortDesc="#{bindings.XxplOwnerDtleView1.hints.TransPostalCode.tooltip}"
+                                      id="it77" disabled="true">
+                          <f:validator binding="#{row.bindings.TransPostalCode.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{row.bindings.City.inputValue}"
+                                      label="#{bindings.XxplOwnerDtleView1.hints.City.label}"
+                                      required="#{bindings.XxplOwnerDtleView1.hints.City.mandatory}"
+                                      columns="#{bindings.XxplOwnerDtleView1.hints.City.displayWidth}"
+                                      maximumLength="#{bindings.XxplOwnerDtleView1.hints.City.precision}"
+                                      shortDesc="#{bindings.XxplOwnerDtleView1.hints.City.tooltip}"
+                                      id="it76" disabled="true">
+                          <f:validator binding="#{row.bindings.City.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{row.bindings.Country.inputValue}"
+                                      label="#{bindings.XxplOwnerDtleView1.hints.Country.label}"
+                                      required="#{bindings.XxplOwnerDtleView1.hints.Country.mandatory}"
+                                      columns="#{bindings.XxplOwnerDtleView1.hints.Country.displayWidth}"
+                                      maximumLength="#{bindings.XxplOwnerDtleView1.hints.Country.precision}"
+                                      shortDesc="#{bindings.XxplOwnerDtleView1.hints.Country.tooltip}"
+                                      id="it70" disabled="true">
+                          <f:validator binding="#{row.bindings.Country.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{row.bindings.TransMobileNumber.inputValue}"
+                                      label="Mobile Number"
+                                      required="#{bindings.XxplOwnerDtleView1.hints.TransMobileNumber.mandatory}"
+                                      columns="#{bindings.XxplOwnerDtleView1.hints.TransMobileNumber.displayWidth}"
+                                      maximumLength="#{bindings.XxplOwnerDtleView1.hints.TransMobileNumber.precision}"
+                                      shortDesc="#{bindings.XxplOwnerDtleView1.hints.TransMobileNumber.tooltip}"
+                                      id="it79" disabled="true">
+                          <f:validator binding="#{row.bindings.TransMobileNumber.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{row.bindings.TransPhoneNumber.inputValue}"
+                                      label="Phone Number"
+                                      required="#{bindings.XxplOwnerDtleView1.hints.TransPhoneNumber.mandatory}"
+                                      columns="#{bindings.XxplOwnerDtleView1.hints.TransPhoneNumber.displayWidth}"
+                                      maximumLength="#{bindings.XxplOwnerDtleView1.hints.TransPhoneNumber.precision}"
+                                      shortDesc="#{bindings.XxplOwnerDtleView1.hints.TransPhoneNumber.tooltip}"
+                                      id="it74" disabled="true">
+                          <f:validator binding="#{row.bindings.TransPhoneNumber.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{row.bindings.TransEmailId.inputValue}"
+                                      label="Email Id"
+                                      required="#{bindings.XxplOwnerDtleView1.hints.TransEmailId.mandatory}"
+                                      columns="#{bindings.XxplOwnerDtleView1.hints.TransEmailId.displayWidth}"
+                                      maximumLength="#{bindings.XxplOwnerDtleView1.hints.TransEmailId.precision}"
+                                      shortDesc="#{bindings.XxplOwnerDtleView1.hints.TransEmailId.tooltip}"
+                                      id="it71" disabled="true">
+                          <f:validator binding="#{row.bindings.TransEmailId.validator}"/>
+                        </af:inputText>
+                      </af:panelFormLayout>
+                    </f:facet>
+                  </af:table>
+                </af:panelCollection>
+              </af:panelBox>
+              <af:panelBox text="Car Parking Details" id="pb4"
+                           styleClass="AFStretchWidth"
+                           inlineStyle=" border-color:transparent;"
+                           showDisclosure="false">
+                <f:facet name="toolbar"/>
+                <af:panelCollection id="pc2" styleClass="AFStretchWidth">
+                  <f:facet name="menus"/>
+                  <f:facet name="toolbar">
+                    <af:toolbar id="t5" flex="100">
+                      <af:menuBar id="mb2">
+                        <af:commandMenuItem text="Add Free Car Parking"
+                                            id="cmi3"
+                                            icon="/images/func_add_16_ena.png"
+                                            actionListener="#{backingBeanScope.AddEditUnit.onClickAddFreeCarParking}"
+                                            disabled="#{bindings.Status.inputValue ne 'Available' || bindings.UnitTypeTrans.inputValue eq 'Car Parking'?'true':'false'}"
+                                            partialTriggers="::unitTypeTransId"/>
+                        <af:spacer width="10" height="10" id="s14"/>
+                        <af:commandMenuItem text="Add Paid Car Parking"
+                                            id="cmi4"
+                                            icon="/images/func_add_16_ena.png"
+                                            actionListener="#{backingBeanScope.AddEditUnit.onClickAddPaidCarParking}"
+                                            disabled="#{bindings.Status.inputValue ne 'Available' || bindings.UnitTypeTrans.inputValue eq 'Car Parking'?'true':'false'}"/>
+                        <af:spacer width="10" height="10" id="s15"/>
+                        <af:commandImageLink id="cil3"
+                                             icon="/images/func_add_16_ena.png"
+                                             disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                             disabledIcon="/images/func_add_16_dis.png"
+                                             hoverIcon="/images/func_add_16_hov.png"
+                                             depressedIcon="/images/func_add_16_act.png"
+                                             rendered="false"/>
+                        <af:spacer width="10" height="10" id="s5"/>
+                        <af:commandImageLink id="cil2"
+                                             icon="/images/func_remove_16_ena.png"
+                                             disabledIcon="/images/func_remove_16_dis.png"
+                                             hoverIcon="/images/func_remove_16_hov.png"
+                                             depressedIcon="/images/func_remove_16_act.png"
+                                             disabled="#{bindings.Status.inputValue eq 'Available' || bindings.XxplPropertyCarparksView1Iterator.estimatedRowCount>0?'false':'true'}"
+                                             actionListener="#{backingBeanScope.AddEditUnit.onClickDelete}"/>
+                        <af:spacer width="10" height="10" id="s13"/>
+                      </af:menuBar>
+                    </af:toolbar>
+                  </f:facet>
+                  <f:facet name="statusbar"/>
+                  <af:table value="#{bindings.XxplPropertyCarparksView1.collectionModel}"
+                            var="row"
+                            rows="#{bindings.XxplPropertyCarparksView1.rangeSize}"
+                            emptyText="#{bindings.XxplPropertyCarparksView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="5" rowBandingInterval="0"
+                            filterModel="#{bindings.XxplPropertyCarparksView1Query.queryDescriptor}"
+                            queryListener="#{bindings.XxplPropertyCarparksView1Query.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.XxplPropertyCarparksView1.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.XxplPropertyCarparksView1.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t4" autoHeightRows="0"
+                            scrollPolicy="page">
+                    <af:column id="c27" headerText="S.No" width="60"
+                               align="center">
+                      <af:outputText value="#{vs.index+1}" id="ot2"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyCarparksView1.hints.CarparkId.name}"
+                               filterable="true" sortable="false"
+                               headerText="Car Park Id" id="c26"
+                               rendered="false">
+                      <af:inputText value="#{row.bindings.CarparkId.inputValue}"
+                                    label="#{bindings.XxplPropertyCarparksView1.hints.CarparkId.label}"
+                                    required="#{bindings.XxplPropertyCarparksView1.hints.CarparkId.mandatory}"
+                                    columns="#{bindings.XxplPropertyCarparksView1.hints.CarparkId.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyCarparksView1.hints.CarparkId.precision}"
+                                    shortDesc="#{bindings.XxplPropertyCarparksView1.hints.CarparkId.tooltip}"
+                                    id="it19">
+                        <f:validator binding="#{row.bindings.CarparkId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XxplPropertyCarparksView1.hints.CarparkId.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyCarparksView1.hints.UnitId.name}"
+                               filterable="true" sortable="false"
+                               headerText="Unit Id" id="c16" rendered="false">
+                      <af:inputText value="#{row.bindings.UnitId.inputValue}"
+                                    label="#{bindings.XxplPropertyCarparksView1.hints.UnitId.label}"
+                                    required="#{bindings.XxplPropertyCarparksView1.hints.UnitId.mandatory}"
+                                    columns="#{bindings.XxplPropertyCarparksView1.hints.UnitId.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyCarparksView1.hints.UnitId.precision}"
+                                    shortDesc="#{bindings.XxplPropertyCarparksView1.hints.UnitId.tooltip}"
+                                    id="it25">
+                        <f:validator binding="#{row.bindings.UnitId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XxplPropertyCarparksView1.hints.UnitId.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyCarparksView1.hints.CpUnitId.name}"
+                               filterable="true" sortable="false"
+                               headerText="Car Park Unit Id" id="c12"
+                               rendered="false">
+                      <af:inputText value="#{row.bindings.CpUnitId.inputValue}"
+                                    label="#{bindings.XxplPropertyCarparksView1.hints.CpUnitId.label}"
+                                    required="#{bindings.XxplPropertyCarparksView1.hints.CpUnitId.mandatory}"
+                                    columns="#{bindings.XxplPropertyCarparksView1.hints.CpUnitId.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyCarparksView1.hints.CpUnitId.precision}"
+                                    shortDesc="#{bindings.XxplPropertyCarparksView1.hints.CpUnitId.tooltip}"
+                                    id="it1">
+                        <f:validator binding="#{row.bindings.CpUnitId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XxplPropertyCarparksView1.hints.CpUnitId.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyCarparksView1.hints.UnitNumberTrans.name}"
+                               filterable="true" sortable="false" visible="false"
+                               headerText="Unit Number" id="c25" width="130">
+                      <af:inputText value="#{row.bindings.UnitNumberTrans.inputValue}"
+                          disabled="#{bindings.Status.inputValue ne 'Available' ? true : false}"
+                                    label="#{bindings.XxplPropertyCarparksView1.hints.UnitNumberTrans.label}"
+                                    required="#{bindings.XxplPropertyCarparksView1.hints.UnitNumberTrans.mandatory}"
+                                    columns="#{bindings.XxplPropertyCarparksView1.hints.UnitNumberTrans.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyCarparksView1.hints.UnitNumberTrans.precision}"
+                                    shortDesc="#{bindings.XxplPropertyCarparksView1.hints.UnitNumberTrans.tooltip}"
+                                    id="it21" readOnly="true">
+                        <f:validator binding="#{row.bindings.UnitNumberTrans.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyCarparksView1.hints.CarParkingUnitNumber.name}"
+                               filterable="true" sortable="false"
+                               headerText="Car Parking Number" id="c23"
+                               width="130">
+                      <af:inputText value="#{row.bindings.CarParkingUnitNumber.inputValue}"
+                                    label="#{bindings.XxplPropertyCarparksView1.hints.CarParkingUnitNumber.label}"
+                                    required="#{bindings.XxplPropertyCarparksView1.hints.CarParkingUnitNumber.mandatory}"
+                                    columns="#{bindings.XxplPropertyCarparksView1.hints.CarParkingUnitNumber.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyCarparksView1.hints.CarParkingUnitNumber.precision}"
+                                    shortDesc="#{bindings.XxplPropertyCarparksView1.hints.CarParkingUnitNumber.tooltip}"
+                                    id="it24" readOnly="true">
+                        <f:validator binding="#{row.bindings.CarParkingUnitNumber.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyCarparksView1.hints.AllotType.name}"
+                               filterable="true" sortable="false"
+                               headerText="Allot Type" id="c24" width="130">
+                      <af:selectOneChoice value="#{row.bindings.AllotType.inputValue}"
+                                          label="#{row.bindings.AllotType.label}"
+                                          required="#{bindings.XxplPropertyCarparksView1.hints.AllotType.mandatory}"
+                                          shortDesc="#{bindings.XxplPropertyCarparksView1.hints.AllotType.tooltip}"
+                                          id="soc8" disabled="true">
+                        <f:selectItems value="#{row.bindings.AllotType.items}"
+                                       id="si8"/>
+                      </af:selectOneChoice>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyCarparksView1.hints.Value.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplPropertyCarparksView1.hints.Value.label}"
+                               id="c19" width="130">
+                      <af:inputText value="#{row.bindings.Value.inputValue}"
+                                    label="#{bindings.XxplPropertyCarparksView1.hints.Value.label}"
+                                    required="#{bindings.XxplPropertyCarparksView1.hints.Value.mandatory}"
+                                    columns="#{bindings.XxplPropertyCarparksView1.hints.Value.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyCarparksView1.hints.Value.precision}"
+                                    shortDesc="#{bindings.XxplPropertyCarparksView1.hints.Value.tooltip}"
+                                    id="it27"
+                                    disabled="#{row.bindings.AllotType.inputValue eq '2'?true:false}"
+                                    autoSubmit="true">
+                        <f:validator binding="#{row.bindings.Value.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XxplPropertyCarparksView1.hints.Value.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyCarparksView1.hints.CreatedBy.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplPropertyCarparksView1.hints.CreatedBy.label}"
+                               id="c17" rendered="false">
+                      <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                                    label="#{bindings.XxplPropertyCarparksView1.hints.CreatedBy.label}"
+                                    required="#{bindings.XxplPropertyCarparksView1.hints.CreatedBy.mandatory}"
+                                    columns="#{bindings.XxplPropertyCarparksView1.hints.CreatedBy.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyCarparksView1.hints.CreatedBy.precision}"
+                                    shortDesc="#{bindings.XxplPropertyCarparksView1.hints.CreatedBy.tooltip}"
+                                    id="it26">
+                        <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyCarparksView1.hints.CreationDate.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplPropertyCarparksView1.hints.CreationDate.label}"
+                               id="c21" rendered="false">
+                      <f:facet name="filter">
+                        <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                      id="id7"/>
+                      </f:facet>
+                      <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                                    label="#{bindings.XxplPropertyCarparksView1.hints.CreationDate.label}"
+                                    required="#{bindings.XxplPropertyCarparksView1.hints.CreationDate.mandatory}"
+                                    shortDesc="#{bindings.XxplPropertyCarparksView1.hints.CreationDate.tooltip}"
+                                    id="id10">
+                        <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                        <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                      </af:inputDate>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyCarparksView1.hints.LastUpdatedBy.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplPropertyCarparksView1.hints.LastUpdatedBy.label}"
+                               id="c18" rendered="false">
+                      <af:inputText value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                    label="#{bindings.XxplPropertyCarparksView1.hints.LastUpdatedBy.label}"
+                                    required="#{bindings.XxplPropertyCarparksView1.hints.LastUpdatedBy.mandatory}"
+                                    columns="#{bindings.XxplPropertyCarparksView1.hints.LastUpdatedBy.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyCarparksView1.hints.LastUpdatedBy.precision}"
+                                    shortDesc="#{bindings.XxplPropertyCarparksView1.hints.LastUpdatedBy.tooltip}"
+                                    id="it28">
+                        <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyCarparksView1.hints.LastUpdateDate.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplPropertyCarparksView1.hints.LastUpdateDate.label}"
+                               id="c20" rendered="false">
+                      <f:facet name="filter">
+                        <af:inputDate value="#{vs.filterCriteria.LastUpdateDate}"
+                                      id="id8"/>
+                      </f:facet>
+                      <af:inputDate value="#{row.bindings.LastUpdateDate.inputValue}"
+                                    label="#{bindings.XxplPropertyCarparksView1.hints.LastUpdateDate.label}"
+                                    required="#{bindings.XxplPropertyCarparksView1.hints.LastUpdateDate.mandatory}"
+                                    shortDesc="#{bindings.XxplPropertyCarparksView1.hints.LastUpdateDate.tooltip}"
+                                    id="id9">
+                        <f:validator binding="#{row.bindings.LastUpdateDate.validator}"/>
+                        <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                      </af:inputDate>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.XxplPropertyCarparksView1.hints.LastUpdateLogin.name}"
+                               filterable="true" sortable="false"
+                               headerText="#{bindings.XxplPropertyCarparksView1.hints.LastUpdateLogin.label}"
+                               id="c22" rendered="false">
+                      <af:inputText value="#{row.bindings.LastUpdateLogin.inputValue}"
+                                    label="#{bindings.XxplPropertyCarparksView1.hints.LastUpdateLogin.label}"
+                                    required="#{bindings.XxplPropertyCarparksView1.hints.LastUpdateLogin.mandatory}"
+                                    columns="#{bindings.XxplPropertyCarparksView1.hints.LastUpdateLogin.displayWidth}"
+                                    maximumLength="#{bindings.XxplPropertyCarparksView1.hints.LastUpdateLogin.precision}"
+                                    shortDesc="#{bindings.XxplPropertyCarparksView1.hints.LastUpdateLogin.tooltip}"
+                                    id="it23">
+                        <f:validator binding="#{row.bindings.LastUpdateLogin.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                  </af:table>
+                </af:panelCollection>
+              </af:panelBox>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:panelSplitter>
+        <af:spacer width="10" height="20" id="s2"/>
+        <af:panelFormLayout id="pfl1" maxColumns="2" rows="7" rendered="false">
+          <af:inputText value="#{bindings.CreatedBy.inputValue}"
+                        label="#{bindings.CreatedBy.hints.label}"
+                        required="#{bindings.CreatedBy.hints.mandatory}"
+                        columns="#{bindings.CreatedBy.hints.displayWidth}"
+                        maximumLength="#{bindings.CreatedBy.hints.precision}"
+                        shortDesc="#{bindings.CreatedBy.hints.tooltip}"
+                        id="it5" contentStyle="width:200px;" rendered="false">
+            <f:validator binding="#{bindings.CreatedBy.validator}"/>
+          </af:inputText>
+          <af:inputDate value="#{bindings.CreationDate.inputValue}"
+                        label="#{bindings.CreationDate.hints.label}"
+                        required="#{bindings.CreationDate.hints.mandatory}"
+                        shortDesc="#{bindings.CreationDate.hints.tooltip}"
+                        id="id2" contentStyle="width:200px;" rendered="false">
+            <f:validator binding="#{bindings.CreationDate.validator}"/>
+            <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+          </af:inputDate>
+          <af:inputText value="#{bindings.LastUpdatedBy.inputValue}"
+                        label="#{bindings.LastUpdatedBy.hints.label}"
+                        required="#{bindings.LastUpdatedBy.hints.mandatory}"
+                        columns="#{bindings.LastUpdatedBy.hints.displayWidth}"
+                        maximumLength="#{bindings.LastUpdatedBy.hints.precision}"
+                        shortDesc="#{bindings.LastUpdatedBy.hints.tooltip}"
+                        id="it43" contentStyle="width:200px;" rendered="false">
+            <f:validator binding="#{bindings.LastUpdatedBy.validator}"/>
+          </af:inputText>
+          <af:inputDate value="#{bindings.LastUpdateDate.inputValue}"
+                        label="#{bindings.LastUpdateDate.hints.label}"
+                        required="#{bindings.LastUpdateDate.hints.mandatory}"
+                        shortDesc="#{bindings.LastUpdateDate.hints.tooltip}"
+                        id="id1" contentStyle="width:200px;" rendered="false">
+            <f:validator binding="#{bindings.LastUpdateDate.validator}"/>
+            <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+          </af:inputDate>
+          <af:inputText value="#{bindings.LastUpdateLogin.inputValue}"
+                        label="#{bindings.LastUpdateLogin.hints.label}"
+                        required="#{bindings.LastUpdateLogin.hints.mandatory}"
+                        columns="#{bindings.LastUpdateLogin.hints.displayWidth}"
+                        maximumLength="#{bindings.LastUpdateLogin.hints.precision}"
+                        shortDesc="#{bindings.LastUpdateLogin.hints.tooltip}"
+                        id="it52" contentStyle="width:200px;" rendered="false">
+            <f:validator binding="#{bindings.LastUpdateLogin.validator}"/>
+          </af:inputText>
+        </af:panelFormLayout>
+        <af:spacer width="10" height="50" id="s4" rendered="false"/>
+        <af:panelSplitter id="ps2" splitterPosition="800"
+                          styleClass="AFStretchWidth"
+                          inlineStyle="height:650.0px;" disabled="true">
+          <f:facet name="first">
+            <af:panelBox text="Additional Charge" id="pb5"
+                         styleClass="AFStretchWidth"
+                         inlineStyle="width:800px; border-color:transparent;"
+                         showDisclosure="false">
+              <f:facet name="toolbar"/>
+              <af:panelCollection id="pc4" styleClass="AFStretchWidth">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar">
+                  <af:toolbar id="t9" flex="100">
+                    <af:commandImageLink actionListener="#{bindings.CreateInsert.execute}"
+                                         disabled="#{bindings.UnitTypeTrans.inputValue eq 'Car Parking'?'true':'false'}"
+                                         id="cil4"
+                                         icon="/images/func_add_16_ena.png"
+                                         disabledIcon="/images/func_add_16_dis.png"
+                                         hoverIcon="/images/func_add_16_hov.png"
+                                         depressedIcon="/images/func_add_16_act.png"/>
+                    <af:spacer width="10" height="10" id="s6"/>
+                    <af:commandImageLink actionListener="#{bindings.Delete.execute}"
+                                         disabled="#{bindings.UnitTypeTrans.inputValue eq 'Car Parking'?'true':'false'}"
+                                         id="cil5"
+                                         icon="/images/func_remove_16_ena.png"
+                                         disabledIcon="/images/func_remove_16_dis.png"
+                                         hoverIcon="/images/func_remove_16_hov.png"
+                                         depressedIcon="/images/func_remove_16_act.png"/>
+                  </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.XxplPropertyFeaturesView1.collectionModel}"
+                          var="row"
+                          rows="#{bindings.XxplPropertyFeaturesView1.rangeSize}"
+                          emptyText="#{bindings.XxplPropertyFeaturesView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="10" rowBandingInterval="0"
+                          filterModel="#{bindings.XxplPropertyFeaturesView1Query.queryDescriptor}"
+                          queryListener="#{bindings.XxplPropertyFeaturesView1Query.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.XxplPropertyFeaturesView1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.XxplPropertyFeaturesView1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t8" scrollPolicy="page"
+                          autoHeightRows="0">
+                  <af:column id="c55" headerText="S.No" width="70"
+                             align="center">
+                    <af:outputText value="#{vs.index+1}" id="ot3"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.FeatureId.name}"
+                             filterable="true" sortable="false"
+                             headerText="#{bindings.XxplPropertyFeaturesView1.hints.FeatureId.label}"
+                             id="c38" rendered="false">
+                    <af:inputText value="#{row.bindings.FeatureId.inputValue}"
+                                  label="#{bindings.XxplPropertyFeaturesView1.hints.FeatureId.label}"
+                                  required="#{bindings.XxplPropertyFeaturesView1.hints.FeatureId.mandatory}"
+                                  columns="#{bindings.XxplPropertyFeaturesView1.hints.FeatureId.displayWidth}"
+                                  maximumLength="#{bindings.XxplPropertyFeaturesView1.hints.FeatureId.precision}"
+                                  shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.FeatureId.tooltip}"
+                                  id="it36">
+                      <f:validator binding="#{row.bindings.FeatureId.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.XxplPropertyFeaturesView1.hints.FeatureId.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.PropertyId.name}"
+                             filterable="true" sortable="false"
+                             headerText="#{bindings.XxplPropertyFeaturesView1.hints.PropertyId.label}"
+                             id="c42" rendered="false">
+                    <af:inputText value="#{row.bindings.PropertyId.inputValue}"
+                                  label="#{bindings.XxplPropertyFeaturesView1.hints.PropertyId.label}"
+                                  required="#{bindings.XxplPropertyFeaturesView1.hints.PropertyId.mandatory}"
+                                  columns="#{bindings.XxplPropertyFeaturesView1.hints.PropertyId.displayWidth}"
+                                  maximumLength="#{bindings.XxplPropertyFeaturesView1.hints.PropertyId.precision}"
+                                  shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.PropertyId.tooltip}"
+                                  id="it46">
+                      <f:validator binding="#{row.bindings.PropertyId.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.XxplPropertyFeaturesView1.hints.PropertyId.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.BuildId.name}"
+                             filterable="true" sortable="false"
+                             headerText="#{bindings.XxplPropertyFeaturesView1.hints.BuildId.label}"
+                             id="c50" rendered="false">
+                    <af:inputText value="#{row.bindings.BuildId.inputValue}"
+                                  label="#{bindings.XxplPropertyFeaturesView1.hints.BuildId.label}"
+                                  required="#{bindings.XxplPropertyFeaturesView1.hints.BuildId.mandatory}"
+                                  columns="#{bindings.XxplPropertyFeaturesView1.hints.BuildId.displayWidth}"
+                                  maximumLength="#{bindings.XxplPropertyFeaturesView1.hints.BuildId.precision}"
+                                  shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.BuildId.tooltip}"
+                                  id="it57">
+                      <f:validator binding="#{row.bindings.BuildId.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.XxplPropertyFeaturesView1.hints.BuildId.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.UnitId.name}"
+                             filterable="true" sortable="false"
+                             headerText="#{bindings.XxplPropertyFeaturesView1.hints.UnitId.label}"
+                             id="c35" rendered="false">
+                    <af:inputText value="#{row.bindings.UnitId.inputValue}"
+                                  label="#{bindings.XxplPropertyFeaturesView1.hints.UnitId.label}"
+                                  required="#{bindings.XxplPropertyFeaturesView1.hints.UnitId.mandatory}"
+                                  columns="#{bindings.XxplPropertyFeaturesView1.hints.UnitId.displayWidth}"
+                                  maximumLength="#{bindings.XxplPropertyFeaturesView1.hints.UnitId.precision}"
+                                  shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.UnitId.tooltip}"
+                                  id="it55">
+                      <f:validator binding="#{row.bindings.UnitId.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.XxplPropertyFeaturesView1.hints.UnitId.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.FeatureType.name}"
+                             filterable="true" sortable="false"
+                             headerText="Feature Type" id="c54" width="150">
+                    <af:selectOneChoice value="#{row.bindings.FeatureType.inputValue}"
+                                        label="#{row.bindings.FeatureType.label}"
+                                        required="#{bindings.XxplPropertyFeaturesView1.hints.FeatureType.mandatory}"
+                                        shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.FeatureType.tooltip}"
+                                        id="soc9" autoSubmit="true">
+                      <f:selectItems value="#{row.bindings.FeatureType.items}"
+                                     id="si9"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column headerText="Feature Condition" id="c31"
+                             width="150">
+                    <af:selectOneChoice value="#{row.bindings.FeatureCondition.inputValue}"
+                                        label="#{row.bindings.FeatureCondition.label}"
+                                        required="#{bindings.XxplPropertyFeaturesView1.hints.FeatureCondition.mandatory}"
+                                        shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.FeatureCondition.tooltip}"
+                                        id="soc11" autoSubmit="true">
+                      <f:selectItems value="#{row.bindings.FeatureCondition.items}"
+                                     id="si11"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.Uom.name}"
+                             filterable="true" sortable="false"
+                             headerText="#{bindings.XxplPropertyFeaturesView1.hints.Uom.label}"
+                             id="c41" width="90">
+                    <af:selectOneChoice value="#{row.bindings.Uom.inputValue}"
+                                        label="#{row.bindings.Uom.label}"
+                                        required="#{bindings.XxplPropertyFeaturesView1.hints.Uom.mandatory}"
+                                        shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.Uom.tooltip}"
+                                        id="soc10" autoSubmit="true">
+                      <f:selectItems value="#{row.bindings.Uom.items}"
+                                     id="si10"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.Quantity.name}"
+                             filterable="true" sortable="false"
+                             headerText="#{bindings.XxplPropertyFeaturesView1.hints.Quantity.label}"
+                             id="c32" rendered="false">
+                    <af:inputText value="#{row.bindings.Quantity.inputValue}"
+                                  label="#{bindings.XxplPropertyFeaturesView1.hints.Quantity.label}"
+                                  required="#{bindings.XxplPropertyFeaturesView1.hints.Quantity.mandatory}"
+                                  columns="#{bindings.XxplPropertyFeaturesView1.hints.Quantity.displayWidth}"
+                                  maximumLength="#{bindings.XxplPropertyFeaturesView1.hints.Quantity.precision}"
+                                  shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.Quantity.tooltip}"
+                                  id="it45" autoSubmit="true">
+                      <f:validator binding="#{row.bindings.Quantity.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.XxplPropertyFeaturesView1.hints.Quantity.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.Rate.name}"
+                             filterable="true" sortable="false"
+                             headerText="#{bindings.XxplPropertyFeaturesView1.hints.Rate.label}"
+                             id="c47" rendered="false">
+                    <af:inputText value="#{row.bindings.Rate.inputValue}"
+                                  label="#{bindings.XxplPropertyFeaturesView1.hints.Rate.label}"
+                                  required="#{bindings.XxplPropertyFeaturesView1.hints.Rate.mandatory}"
+                                  columns="#{bindings.XxplPropertyFeaturesView1.hints.Rate.displayWidth}"
+                                  maximumLength="#{bindings.XxplPropertyFeaturesView1.hints.Rate.precision}"
+                                  shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.Rate.tooltip}"
+                                  id="it48" autoSubmit="true">
+                      <f:validator binding="#{row.bindings.Rate.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.XxplPropertyFeaturesView1.hints.Rate.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.Value.name}"
+                             filterable="true" sortable="false"
+                             headerText="#{bindings.XxplPropertyFeaturesView1.hints.Value.label}"
+                             id="c36">
+                    <af:inputText value="#{row.bindings.Value.inputValue}"
+                                  label="#{bindings.XxplPropertyFeaturesView1.hints.Value.label}"
+                                  required="#{bindings.XxplPropertyFeaturesView1.hints.Value.mandatory}"
+                                  columns="#{bindings.XxplPropertyFeaturesView1.hints.Value.displayWidth}"
+                                  maximumLength="#{bindings.XxplPropertyFeaturesView1.hints.Value.precision}"
+                                  shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.Value.tooltip}"
+                                  id="it38" autoSubmit="true">
+                      <f:validator binding="#{row.bindings.Value.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.XxplPropertyFeaturesView1.hints.Value.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.Description.name}"
+                             filterable="true" sortable="false"
+                             headerText="#{bindings.XxplPropertyFeaturesView1.hints.Description.label}"
+                             id="c44" width="120">
+                    <af:inputText value="#{row.bindings.Description.inputValue}"
+                                  label="#{bindings.XxplPropertyFeaturesView1.hints.Description.label}"
+                                  required="#{bindings.XxplPropertyFeaturesView1.hints.Description.mandatory}"
+                                  columns="#{bindings.XxplPropertyFeaturesView1.hints.Description.displayWidth}"
+                                  maximumLength="#{bindings.XxplPropertyFeaturesView1.hints.Description.precision}"
+                                  shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.Description.tooltip}"
+                                  id="it35" autoSubmit="true">
+                      <f:validator binding="#{row.bindings.Description.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.CreatedBy.name}"
+                             filterable="true" sortable="false"
+                             headerText="#{bindings.XxplPropertyFeaturesView1.hints.CreatedBy.label}"
+                             id="c53" rendered="false">
+                    <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                                  label="#{bindings.XxplPropertyFeaturesView1.hints.CreatedBy.label}"
+                                  required="#{bindings.XxplPropertyFeaturesView1.hints.CreatedBy.mandatory}"
+                                  columns="#{bindings.XxplPropertyFeaturesView1.hints.CreatedBy.displayWidth}"
+                                  maximumLength="#{bindings.XxplPropertyFeaturesView1.hints.CreatedBy.precision}"
+                                  shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.CreatedBy.tooltip}"
+                                  id="it53">
+                      <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.CreationDate.name}"
+                             filterable="true" sortable="false"
+                             headerText="#{bindings.XxplPropertyFeaturesView1.hints.CreationDate.label}"
+                             id="c33" rendered="false">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                    id="id11"/>
+                    </f:facet>
+                    <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                                  label="#{bindings.XxplPropertyFeaturesView1.hints.CreationDate.label}"
+                                  required="#{bindings.XxplPropertyFeaturesView1.hints.CreationDate.mandatory}"
+                                  shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.CreationDate.tooltip}"
+                                  id="id12">
+                      <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                      <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                    </af:inputDate>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdatedBy.name}"
+                             filterable="true" sortable="false"
+                             headerText="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdatedBy.label}"
+                             id="c34" rendered="false">
+                    <af:inputText value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                  label="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdatedBy.label}"
+                                  required="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdatedBy.mandatory}"
+                                  columns="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdatedBy.displayWidth}"
+                                  maximumLength="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdatedBy.precision}"
+                                  shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdatedBy.tooltip}"
+                                  id="it33">
+                      <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdateDate.name}"
+                             filterable="true" sortable="false"
+                             headerText="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdateDate.label}"
+                             id="c46" rendered="false">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.LastUpdateDate}"
+                                    id="id13"/>
+                    </f:facet>
+                    <af:inputDate value="#{row.bindings.LastUpdateDate.inputValue}"
+                                  label="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdateDate.label}"
+                                  required="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdateDate.mandatory}"
+                                  shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdateDate.tooltip}"
+                                  id="id14">
+                      <f:validator binding="#{row.bindings.LastUpdateDate.validator}"/>
+                      <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                    </af:inputDate>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdateLogin.name}"
+                             filterable="true" sortable="false"
+                             headerText="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdateLogin.label}"
+                             id="c51" rendered="false">
+                    <af:inputText value="#{row.bindings.LastUpdateLogin.inputValue}"
+                                  label="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdateLogin.label}"
+                                  required="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdateLogin.mandatory}"
+                                  columns="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdateLogin.displayWidth}"
+                                  maximumLength="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdateLogin.precision}"
+                                  shortDesc="#{bindings.XxplPropertyFeaturesView1.hints.LastUpdateLogin.tooltip}"
+                                  id="it51">
+                      <f:validator binding="#{row.bindings.LastUpdateLogin.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </af:panelBox>
+          </f:facet>
+          <f:facet name="second">
+            <af:panelBox text="Activity Log" id="pb6"
+                         styleClass="AFStretchWidth"
+                         inlineStyle="width:800px; border-color:transparent;"
+                         showDisclosure="false">
+              <f:facet name="toolbar"/>
+              <af:panelCollection id="pc5" styleClass="AFStretchWidth">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.ActivityLogROVO1.collectionModel}"
+                          var="row"
+                          rows="#{bindings.ActivityLogROVO1.rangeSize}"
+                          emptyText="#{bindings.ActivityLogROVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.ActivityLogROVO1.rangeSize}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.ActivityLogROVO1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.ActivityLogROVO1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t10" columnStretching="last"
+                          scrollPolicy="page" autoHeightRows="0">
+                  <af:column sortProperty="#{bindings.ActivityLogROVO1.hints.ActivityId.name}"
+                             sortable="false" headerText="ActivityId" id="c88"
+                             rendered="false">
+                    <af:outputText value="#{row.ActivityId}" id="ot32">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.ActivityLogROVO1.hints.ActivityId.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.ActivityLogROVO1.hints.ActivityNumber.name}"
+                             sortable="false" headerText="Activity Number"
+                             id="c90" width="130">
+                    <af:outputText value="#{row.ActivityNumber}" id="ot34"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.ActivityLogROVO1.hints.ActivityDate.name}"
+                             sortable="false" headerText="Date" id="c73"
+                             width="130">
+                    <af:outputText value="#{row.ActivityDate}" id="ot17">
+                      <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.ActivityLogROVO1.hints.Status.name}"
+                             sortable="false" headerText="Status" id="c68"
+                             width="130">
+                    <af:outputText value="#{row.Status}" id="ot6"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.ActivityLogROVO1.hints.Description.name}"
+                             sortable="false" headerText="Description" id="c58">
+                    <af:outputText value="#{row.Description}" id="ot7"/>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </af:panelBox>
+          </f:facet>
+        </af:panelSplitter>
+        <af:spacer width="10" height="10" id="s10" rendered="false"/>
+        <af:popup id="p1" binding="#{backingBeanScope.AddEditUnit.p1}">
+          <af:dialog id="d1" styleClass="AFStretchWidth"
+                     inlineStyle="width:550.0px;" type="none"
+                     title="Car Parking Details">
+            <af:panelCollection id="pc3">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar"/>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.CarParkingROVO1.collectionModel}"
+                        var="row" rows="#{bindings.CarParkingROVO1.rangeSize}"
+                        emptyText="#{bindings.CarParkingROVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="6"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.CarParkingROVO1Query.queryDescriptor}"
+                        queryListener="#{bindings.CarParkingROVO1Query.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.CarParkingROVO1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.CarParkingROVO1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t6" scrollPolicy="page"
+                        autoHeightRows="0">
+                <af:column sortProperty="#{bindings.CarParkingROVO1.hints.PropertyId.name}"
+                           filterable="true" sortable="true"
+                           headerText="PropertyId"
+                           id="c30" width="70" rendered="false">
+                  <af:inputText value="#{row.bindings.PropertyId.inputValue}"
+                                label="#{bindings.CarParkingROVO1.hints.PropertyId.label}"
+                                required="#{bindings.CarParkingROVO1.hints.PropertyId.mandatory}"
+                                columns="#{bindings.CarParkingROVO1.hints.PropertyId.displayWidth}"
+                                maximumLength="#{bindings.CarParkingROVO1.hints.PropertyId.precision}"
+                                shortDesc="#{bindings.CarParkingROVO1.hints.PropertyId.tooltip}"
+                                id="it32">
+                    <f:validator binding="#{row.bindings.PropertyId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.CarParkingROVO1.hints.PropertyId.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.CarParkingROVO1.hints.BuildId.name}"
+                           filterable="true" sortable="true"
+                           headerText="BuildId"
+                           id="c43" width="70" rendered="false">
+                  <af:inputText value="#{row.bindings.BuildId.inputValue}"
+                                label="#{bindings.CarParkingROVO1.hints.BuildId.label}"
+                                required="#{bindings.CarParkingROVO1.hints.BuildId.mandatory}"
+                                columns="#{bindings.CarParkingROVO1.hints.BuildId.displayWidth}"
+                                maximumLength="#{bindings.CarParkingROVO1.hints.BuildId.precision}"
+                                shortDesc="#{bindings.CarParkingROVO1.hints.BuildId.tooltip}"
+                                id="it58">
+                    <f:validator binding="#{row.bindings.BuildId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.CarParkingROVO1.hints.BuildId.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.CarParkingROVO1.hints.UnitId.name}"
+                           filterable="true" sortable="true" headerText="UnitId"
+                           id="c45" width="70" rendered="false">
+                  <af:inputText value="#{row.bindings.UnitId.inputValue}"
+                                label="#{bindings.CarParkingROVO1.hints.UnitId.label}"
+                                required="#{bindings.CarParkingROVO1.hints.UnitId.mandatory}"
+                                columns="#{bindings.CarParkingROVO1.hints.UnitId.displayWidth}"
+                                maximumLength="#{bindings.CarParkingROVO1.hints.UnitId.precision}"
+                                shortDesc="#{bindings.CarParkingROVO1.hints.UnitId.tooltip}"
+                                id="it47">
+                    <f:validator binding="#{row.bindings.UnitId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.CarParkingROVO1.hints.UnitId.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.CarParkingROVO1.hints.SelectAll_Trans.name}"
+                           filterable="true" sortable="true"
+                           headerText="Select"
+                           id="c29" width="50" align="center">
+                  <af:selectBooleanCheckbox value="#{row.bindings.SelectAll_Trans.inputValue}"
+                                            label="#{row.bindings.SelectAll_Trans.label}"
+                                            shortDesc="#{bindings.CarParkingROVO1.hints.SelectAll_Trans.tooltip}"
+                                            id="sbc1" autoSubmit="true"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.CarParkingROVO1.hints.UnitName.name}"
+                           filterable="true" sortable="true"
+                           headerText="Unit Name"
+                           id="c48">
+                  <af:inputText value="#{row.bindings.UnitName.inputValue}"
+                                label="#{bindings.CarParkingROVO1.hints.UnitName.label}"
+                                required="#{bindings.CarParkingROVO1.hints.UnitName.mandatory}"
+                                columns="#{bindings.CarParkingROVO1.hints.UnitName.displayWidth}"
+                                maximumLength="#{bindings.CarParkingROVO1.hints.UnitName.precision}"
+                                shortDesc="#{bindings.CarParkingROVO1.hints.UnitName.tooltip}"
+                                id="it42" readOnly="true">
+                    <f:validator binding="#{row.bindings.UnitName.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.CarParkingROVO1.hints.UnitNumber.name}"
+                           filterable="true" sortable="true"
+                           headerText="Unit Number"
+                           id="c49">
+                  <af:inputText value="#{row.bindings.UnitNumber.inputValue}"
+                                label="#{bindings.CarParkingROVO1.hints.UnitNumber.label}"
+                                required="#{bindings.CarParkingROVO1.hints.UnitNumber.mandatory}"
+                                columns="#{bindings.CarParkingROVO1.hints.UnitNumber.displayWidth}"
+                                maximumLength="#{bindings.CarParkingROVO1.hints.UnitNumber.precision}"
+                                shortDesc="#{bindings.CarParkingROVO1.hints.UnitNumber.tooltip}"
+                                id="it56" readOnly="true">
+                    <f:validator binding="#{row.bindings.UnitNumber.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.CarParkingROVO1.hints.UnitType.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.CarParkingROVO1.hints.UnitType.label}"
+                           id="c40" rendered="false">
+                  <af:inputText value="#{row.bindings.UnitType.inputValue}"
+                                label="#{bindings.CarParkingROVO1.hints.UnitType.label}"
+                                required="#{bindings.CarParkingROVO1.hints.UnitType.mandatory}"
+                                columns="#{bindings.CarParkingROVO1.hints.UnitType.displayWidth}"
+                                maximumLength="#{bindings.CarParkingROVO1.hints.UnitType.precision}"
+                                shortDesc="#{bindings.CarParkingROVO1.hints.UnitType.tooltip}"
+                                id="it40" readOnly="true">
+                    <f:validator binding="#{row.bindings.UnitType.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column headerText="Car Parking Type"
+                           id="c28" width="130">
+                  <af:inputText value="#{row.bindings.AllotType.inputValue}"
+                                label="#{bindings.CarParkingROVO1.hints.AllotType.label}"
+                                required="#{bindings.CarParkingROVO1.hints.AllotType.mandatory}"
+                                columns="#{bindings.CarParkingROVO1.hints.AllotType.displayWidth}"
+                                maximumLength="#{bindings.CarParkingROVO1.hints.AllotType.precision}"
+                                shortDesc="#{bindings.CarParkingROVO1.hints.AllotType.tooltip}"
+                                id="it30" readOnly="true">
+                    <f:validator binding="#{row.bindings.AllotType.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.CarParkingROVO1.hints.FuncId.name}"
+                           filterable="true" sortable="true"
+                           headerText="Amount"
+                           id="c37">
+                  <af:inputText value="#{row.bindings.FuncId.inputValue}"
+                                label="#{bindings.CarParkingROVO1.hints.FuncId.label}"
+                                required="#{bindings.CarParkingROVO1.hints.FuncId.mandatory}"
+                                columns="#{bindings.CarParkingROVO1.hints.FuncId.displayWidth}"
+                                maximumLength="#{bindings.CarParkingROVO1.hints.FuncId.precision}"
+                                shortDesc="#{bindings.CarParkingROVO1.hints.FuncId.tooltip}"
+                                id="it54"
+                                disabled="#{row.bindings.AllotType.inputValue eq 'FREE'?true:false}">
+                    <f:validator binding="#{row.bindings.FuncId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.CarParkingROVO1.hints.FuncId.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.CarParkingROVO1.hints.Status.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.CarParkingROVO1.hints.Status.label}"
+                           id="c39" rendered="false">
+                  <af:inputText value="#{row.bindings.Status.inputValue}"
+                                label="#{bindings.CarParkingROVO1.hints.Status.label}"
+                                required="#{bindings.CarParkingROVO1.hints.Status.mandatory}"
+                                columns="#{bindings.CarParkingROVO1.hints.Status.displayWidth}"
+                                maximumLength="#{bindings.CarParkingROVO1.hints.Status.precision}"
+                                shortDesc="#{bindings.CarParkingROVO1.hints.Status.tooltip}"
+                                id="it29">
+                    <f:validator binding="#{row.bindings.Status.validator}"/>
+                  </af:inputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+            <f:facet name="buttonBar">
+              <af:toolbox id="t7">
+                <af:commandButton text="Ok" id="cb4"
+                                  actionListener="#{backingBeanScope.AddEditUnit.onClickFreeOk}"/>
+              </af:toolbox>
+            </f:facet>
+          </af:dialog>
+        </af:popup>
+      </af:panelBox>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

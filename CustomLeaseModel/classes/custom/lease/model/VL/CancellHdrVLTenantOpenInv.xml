@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CancellHdrVLTenantOpenInv"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="custom.lease.model.VL.CancellHdrVLTenantOpenInv_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="XxplCancellation_VO"
+    Cardinality="1"
+    Owner="custom.lease.model.View.XxplCancellation_VO"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XxplCancellation_VO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.View.XxplCancellation_VO.BookingId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="TenantOpenInvROVO"
+    Cardinality="-1"
+    Owner="custom.lease.model.ROVO.TenantOpenInvROVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="TenantOpenInvROVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.ROVO.TenantOpenInvROVO.BookingId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="custom.lease.model.CustomLeaseModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

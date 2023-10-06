@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Booking_Cust_JoinCust_Assoc"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="XxplBookingCustomer_EO"
+    Cardinality="1"
+    Source="true"
+    Owner="custom.lease.model.Entity.XxplBookingCustomer_EO"
+    LockLevel="NONE">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="XxplBookingCustomer_EO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="custom.lease.model.Entity.XxplBookingCustomer_EO.BookingCustId"/>
+      <Item
+        Value="custom.lease.model.Entity.XxplBookingCustomer_EO.BookingHdrId"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="XxplBookingJoinCustomer_EO"
+    Cardinality="-1"
+    Owner="custom.lease.model.Entity.XxplBookingJoinCustomer_EO">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="XxplBookingJoinCustomer_EO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="custom.lease.model.Entity.XxplBookingJoinCustomer_EO.BookingCustId"/>
+      <Item
+        Value="custom.lease.model.Entity.XxplBookingJoinCustomer_EO.BookingHdrId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

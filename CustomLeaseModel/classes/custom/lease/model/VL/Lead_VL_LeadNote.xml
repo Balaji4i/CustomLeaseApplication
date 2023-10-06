@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Lead_VL_LeadNote"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  EntityAssociation="custom.lease.model.Asso.Lead_Ass_LeadNote">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="custom.lease.model.VL.Lead_VL_LeadNote_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="XxplLeadVO"
+    Cardinality="1"
+    Owner="custom.lease.model.View.XxplLeadVO"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XxplLeadVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.View.XxplLeadVO.LeadId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="XxplLeadNoteView"
+    Cardinality="-1"
+    Owner="custom.lease.model.View.XxplLeadNoteView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XxplLeadNoteView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.View.XxplLeadNoteView.LeadId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="custom.lease.model.CustomLeaseModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

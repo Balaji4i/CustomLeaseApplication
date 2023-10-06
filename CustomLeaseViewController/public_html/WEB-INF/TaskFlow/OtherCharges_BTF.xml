@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="OtherCharges_BTF">
+    <default-activity id="__1">OtherCharges</default-activity>
+    <transaction id="__4">
+      <requires-transaction/>
+    </transaction>
+    <input-parameter-definition id="__18">
+      <name id="__17">BookingId</name>
+      <value>#{pageFlowScope.BookingId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__15">
+      <managed-bean-name id="__14">ChargeBean</managed-bean-name>
+      <managed-bean-class id="__13">custom.lease.view.bean.backing.OtherChargesBB</managed-bean-class>
+      <managed-bean-scope id="__16">backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__31">
+      <managed-bean-name id="__33">FilmStripBean</managed-bean-name>
+      <managed-bean-class id="__32">com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope id="__30">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="OtherCharges">
+      <page>/Fragment/OtherCharges.jsff</page>
+    </view>
+    <task-flow-return id="Save">
+      <outcome id="__2">
+        <name>Save</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="Rollback">
+      <outcome id="__3">
+        <name>Rollback</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome id="__19">
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="AddEditReceipt">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditReceipt.xml</document>
+        <id>AddEditReceipt</id>
+      </task-flow-reference>
+      <input-parameter id="__28">
+        <name>navigation</name>
+        <value>edit</value>
+      </input-parameter>
+      <input-parameter id="__29">
+        <name>receiptid</name>
+        <value>#{pageFlowScope.receiptId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="hideFS">
+      <method>#{backingBeanScope.FilmStripBean._hideFilmStrip}</method>
+      <outcome id="__39">
+        <fixed-outcome>next</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__5">
+      <from-activity-id id="__6">OtherCharges</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome id="__9">toSave</from-outcome>
+        <to-activity-id id="__8">Save</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__11">
+        <from-outcome id="__12">toClose</from-outcome>
+        <to-activity-id id="__10">Rollback</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__26">
+        <from-outcome id="__27">toReceipt</from-outcome>
+        <to-activity-id id="__25">AddEditReceipt</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__20">
+      <from-activity-id id="__21">ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__22">
+        <from-outcome id="__23">ExecuteWithParams</from-outcome>
+        <to-activity-id id="__24">OtherCharges</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__34">
+      <from-activity-id id="__35">hideFS</from-activity-id>
+      <control-flow-case id="__36">
+        <from-outcome id="__38">next</from-outcome>
+        <to-activity-id id="__37">ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XxplLeaseInsurance_EO"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="XXPL_LEASE_INSURANCE"
+  AliasName="XxplLeaseInsurance_EO"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="custom.lease.model.Entity.XxplLeaseInsurance_EOImpl">
+  <DesignTime>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_codeGenFlag2" Value="Init|Access|DML"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="InsuranceId"
+    IsNotNull="true"
+    ColumnName="INSURANCE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="BIGINT"
+    TableName="XXPL_LEASE_INSURANCE"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BookingId"
+    IsNotNull="true"
+    ColumnName="BOOKING_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="BIGINT"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="InsuranceType"
+    Precision="240"
+    ColumnName="INSURANCE_TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="InsuranceDate"
+    ColumnName="INSURANCE_DATE"
+    SQLType="TIMESTAMP"
+    Type="java.sql.Date"
+    ColumnType="DATE"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Amount"
+    ColumnName="AMOUNT"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="BIGINT"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ActiveYn"
+    Precision="1"
+    ColumnName="ACTIVE_YN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StartDate"
+    IsNotNull="true"
+    ColumnName="START_DATE"
+    SQLType="TIMESTAMP"
+    Type="java.sql.Date"
+    ColumnType="DATE"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ExpirationDate"
+    IsNotNull="true"
+    ColumnName="EXPIRATION_DATE"
+    SQLType="TIMESTAMP"
+    Type="java.sql.Date"
+    ColumnType="DATE"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CoverageAmountRequired"
+    ColumnName="COVERAGE_AMOUNT_REQUIRED"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="BIGINT"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CoverageAmountPurchased"
+    ColumnName="COVERAGE_AMOUNT_PURCHASED"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="BIGINT"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="InsurancesCertificationNum"
+    Precision="240"
+    ColumnName="INSURANCES_CERTIFICATION_NUM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="EnterableFields"
+    Precision="240"
+    ColumnName="ENTERABLE_FIELDS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="InsStartDate"
+    ColumnName="INS_START_DATE"
+    SQLType="TIMESTAMP"
+    Type="java.sql.Date"
+    ColumnType="DATE"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="InsEndDate"
+    ColumnName="INS_END_DATE"
+    SQLType="TIMESTAMP"
+    Type="java.sql.Date"
+    ColumnType="DATE"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Note"
+    Precision="240"
+    ColumnName="NOTE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AttributeCategory"
+    Precision="240"
+    ColumnName="ATTRIBUTE_CATEGORY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute1"
+    Precision="240"
+    ColumnName="ATTRIBUTE1"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute2"
+    Precision="240"
+    ColumnName="ATTRIBUTE2"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute3"
+    Precision="240"
+    ColumnName="ATTRIBUTE3"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute4"
+    Precision="240"
+    ColumnName="ATTRIBUTE4"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute5"
+    Precision="240"
+    ColumnName="ATTRIBUTE5"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute6"
+    Precision="240"
+    ColumnName="ATTRIBUTE6"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute7"
+    Precision="240"
+    ColumnName="ATTRIBUTE7"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute8"
+    Precision="240"
+    ColumnName="ATTRIBUTE8"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute9"
+    Precision="240"
+    ColumnName="ATTRIBUTE9"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Attribute10"
+    Precision="240"
+    ColumnName="ATTRIBUTE10"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjectVersion"
+    ColumnName="OBJECT_VERSION"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="BIGINT"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    IsNotNull="true"
+    Precision="60"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreationDate"
+    IsNotNull="true"
+    ColumnName="CREATION_DATE"
+    SQLType="TIMESTAMP"
+    Type="java.sql.Timestamp"
+    ColumnType="TIMESTAMP"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="11"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedBy"
+    IsNotNull="true"
+    Precision="60"
+    ColumnName="LAST_UPDATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdateDate"
+    IsNotNull="true"
+    ColumnName="LAST_UPDATE_DATE"
+    SQLType="TIMESTAMP"
+    Type="java.sql.Timestamp"
+    ColumnType="TIMESTAMP"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="11"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdateLogin"
+    IsNotNull="true"
+    Precision="150"
+    ColumnName="LAST_UPDATE_LOGIN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XXPL_LEASE_INSURANCE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RowID"
+    IsUpdateable="false"
+    ColumnName="ROWID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="ROWID"
+    TableName="XXPL_LEASE_INSURANCE"/>
+  <AccessorAttribute
+    Name="XxplBookingHeader_EO"
+    Association="custom.lease.model.Asso.Booking_Ass_Insurances"
+    AssociationEnd="custom.lease.model.Asso.Booking_Ass_Insurances.XxplBookingHeader_EO"
+    AssociationOtherEnd="custom.lease.model.Asso.Booking_Ass_Insurances.XxplLeaseInsurance_EO"
+    Type="custom.lease.model.Entity.XxplBookingHeader_EOImpl"
+    IsUpdateable="true"/>
+  <ViewLinkAccessor
+    Name="XxplBookingHeader_VO"
+    ViewLink="custom.lease.model.VL.Booking_VL_Insurances"
+    ViewLinkEnd="custom.lease.model.VL.Booking_VL_Insurances.XxplBookingHeader_VO"
+    ViewLinkOtherEnd="custom.lease.model.VL.Booking_VL_Insurances.XxplLeaseInsurance_View"
+    Type="custom.lease.model.View.XxplBookingHeader_VORowImpl"
+    IsUpdateable="false"/>
+  <Key
+    Name="SysC00112564">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00112564"/>
+      <Attr Name="_checkCondition" Value='"INSURANCE_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="custom.lease.model.Entity.XxplLeaseInsurance_EO.InsuranceId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC00112565">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00112565"/>
+      <Attr Name="_checkCondition" Value='"BOOKING_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.Entity.XxplLeaseInsurance_EO.BookingId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC00112566">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00112566"/>
+      <Attr Name="_checkCondition" Value='"START_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.Entity.XxplLeaseInsurance_EO.StartDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC00112567">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00112567"/>
+      <Attr Name="_checkCondition" Value='"EXPIRATION_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="custom.lease.model.Entity.XxplLeaseInsurance_EO.ExpirationDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC00112568">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00112568"/>
+      <Attr Name="_checkCondition" Value='"CREATED_BY" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.Entity.XxplLeaseInsurance_EO.CreatedBy"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC00112569">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00112569"/>
+      <Attr Name="_checkCondition" Value='"CREATION_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="custom.lease.model.Entity.XxplLeaseInsurance_EO.CreationDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC00112570">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00112570"/>
+      <Attr Name="_checkCondition" Value='"LAST_UPDATED_BY" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="custom.lease.model.Entity.XxplLeaseInsurance_EO.LastUpdatedBy"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC00112571">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00112571"/>
+      <Attr Name="_checkCondition" Value='"LAST_UPDATE_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="custom.lease.model.Entity.XxplLeaseInsurance_EO.LastUpdateDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC00112572">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C00112572"/>
+      <Attr Name="_checkCondition" Value='"LAST_UPDATE_LOGIN" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="custom.lease.model.Entity.XxplLeaseInsurance_EO.LastUpdateLogin"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="XxplleaseinsuranceEoPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="XXPLLEASEINSURANCE_EO_PRIMARY_"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="custom.lease.model.Entity.XxplLeaseInsurance_EO.InsuranceId"/>
+    </AttrArray>
+  </Key>
+</Entity>

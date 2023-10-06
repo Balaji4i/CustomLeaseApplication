@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+Copyright (c) 2017, Oracle and/or its affiliates. All rights reserved.
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1" title="Omniyat Lease">
+      <af:switcher id="s12"
+                  facetName="#{pageFlowScope.redirect}" rendered="true"
+                   defaultFacet="Error">
+        <f:facet name="Dashboard">
+          <af:form id="f1" usesUpload="true">
+            <af:resource type="javascript" source="js/jquery-3.1.1.js"/>
+            <af:resource type="javascript" source="js/svgIcons.js"/>
+            <af:resource type="javascript" source="js/filmStrip.js"/>
+            <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/SimpleUIShell.jspx"
+                             id="pt1">
+              <f:facet name="pageContents">
+                <af:panelGroupLayout id="pgl2" layout="vertical">
+                  <af:commandButton id="amHidden" clientComponent="true"
+                                    visible="false" shortDesc="Hidden">
+                    <af:serverListener type="iconClicked"
+                                       method="#{backingBeanScope.FilmStripBean.handleFilmStripCardClick}"/>
+                  </af:commandButton>
+                  <af:panelGroupLayout id="filmStripPG" layout="vertical">
+                    <af:spacer height="10" rendered="#{sessionScope.hideStrip}"
+                               id="s2"/>
+                    <af:panelGroupLayout id="pgl2Film" halign="center"
+                                         layout="vertical"
+                                         rendered="#{!sessionScope.hideStrip}">
+                      <af:outputText id="ot2"
+                                     value="#{backingBeanScope.FilmStripBean.filmStripLayout[sessionScope.selectedItemId]}"/>
+                      <af:conveyorBelt id="cb2" clientComponent="true">
+                        <f:verbatim>
+                          <div class="strip-container AFStretchWidth"
+                               id="app-strip"/>
+                        </f:verbatim>
+                      </af:conveyorBelt>
+                    </af:panelGroupLayout>
+                    <af:spacer height="30" id="s1"
+                               rendered="false"/>
+                     <af:panelGroupLayout id="pgl3" layout="horizontal"
+                                       halign="end" rendered="false">
+                    <af:commandImageLink id="bl1"
+                                         actionListener="#{backingBeanScope.FilmStripBean.showFSDropDown}"
+                                         rendered="#{sessionScope.hideStrip eq true and sessionScope.screenName eq 'Booking'}"
+                                         shortDesc="Show Film Strip"
+                                         icon="/images/func_arrowheaddown_16_act.png"/>
+                  </af:panelGroupLayout>
+                  </af:panelGroupLayout>
+                  <af:region value="#{bindings.dynamicRegion1.regionModel}"
+                             id="r1"
+                             binding="#{backingBeanScope.FilmStripBean.dynamicRegionBinding}"/>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:pageTemplate>
+          </af:form>
+        </f:facet>
+        <f:facet name="Error">
+        <af:richTextEditor 
+                               id="rte1"
+                               readOnly="true" editMode="source" rows="25"
+                               columns="50"
+                             value="&lt;html> &lt;head> &lt;title>&lt;/title> &lt;style> body{ background-color:#1C4E89; font-family: verdana; } .container{     position: fixed;     top: 40%;     left: 38%;     width: 300px;     background-color: white;     border-radius: 10px;     opacity: 0.85;     border: 3px solid white; } h2{ position:relative; left:2%; font-family:Arial Black; } .words{     padding-left: 40px; } &lt;/style> &lt;/head> &lt;body> &lt;div class=container> &lt;div class=words> &lt;h2>Authentication failed&lt;/h2> &lt;p>&lt;/p> &lt;/div> &lt;/div> &lt;/body> &lt;/html>">
+              <f:facet name="footer"/>
+            </af:richTextEditor>
+        </f:facet>
+      </af:switcher>
+    </af:document>
+  </f:view>
+</jsp:root>

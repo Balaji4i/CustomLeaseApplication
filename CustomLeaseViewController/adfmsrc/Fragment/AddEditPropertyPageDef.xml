@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="AddEditPropertyPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.PropertyMasterAM1.XxplPropertyMasterView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplPropertyMasterView1Iterator"/>
+    <iterator Binds="Root.PropertyMasterAM1.XxplPropertyAreaView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplPropertyAreaView1Iterator"/>
+    <iterator Binds="Root.PropertyMasterAM1.XxplPropertyMilestoneVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="6"
+              id="XxplPropertyMilestoneVOIterator"/>
+    <iterator Binds="Root.PropertyMasterAM1.PropertyPieChart_ROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="-1"
+              id="PropertyPieChart_ROVOIterator"/>
+    <iterator Binds="Root.PropertyMasterAM1.SerachBuildingFilterROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="SerachBuildingFilterROVOIterator"/>
+    <searchRegion Binds="SerachBuildingFilterROVOIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SerachBuildingFilterROVOQuery"/>
+    <iterator Binds="Root.PropertyMasterAM1.SearchUnitFilterROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="5"
+              id="SearchUnitFilterROVOIterator"/>
+    <searchRegion Binds="SearchUnitFilterROVOIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SearchUnitFilterROVOQuery"/>
+    <iterator Binds="Root.PropertyMasterAM1.XXPL_PROPERTY_MS_PL_ROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="5"
+              id="XXPL_PROPERTY_MS_PL_ROVOIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="PropertyName">
+      <AttrNames>
+        <Item Value="PropertyName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="PropertyNameTl">
+      <AttrNames>
+        <Item Value="PropertyNameTl"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="PropertyNumber">
+      <AttrNames>
+        <Item Value="PropertyNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="PropertyShortcode">
+      <AttrNames>
+        <Item Value="PropertyShortcode"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplPropertyMasterView1Iterator" StaticList="false"
+          Uses="LOV_OrgId" id="OrgId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XxplPropertyMasterView1Iterator" StaticList="false"
+          Uses="LOV_ProjectId" id="ProjectId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XxplPropertyMasterView1Iterator" StaticList="false"
+          Uses="LOV_LocationId" id="LocationId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="PropertyType">
+      <AttrNames>
+        <Item Value="PropertyType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="NoOfUnits">
+      <AttrNames>
+        <Item Value="NoOfUnits"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="PropertyClass">
+      <AttrNames>
+        <Item Value="PropertyClass"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="PropertyCategory">
+      <AttrNames>
+        <Item Value="PropertyCategory"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="LastUpdatedBy">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="LastUpdateDate">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="ProjectName">
+      <AttrNames>
+        <Item Value="ProjectName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="ProjectNumber">
+      <AttrNames>
+        <Item Value="ProjectNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="ProjectStartDate">
+      <AttrNames>
+        <Item Value="ProjectStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="ProjectCloseDate">
+      <AttrNames>
+        <Item Value="ProjectCloseDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="ProjectCompletionDate">
+      <AttrNames>
+        <Item Value="ProjectCompletionDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="Address1">
+      <AttrNames>
+        <Item Value="Address1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="Address2">
+      <AttrNames>
+        <Item Value="Address2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="Address3">
+      <AttrNames>
+        <Item Value="Address3"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="Address4">
+      <AttrNames>
+        <Item Value="Address4"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator" id="City">
+      <AttrNames>
+        <Item Value="City"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator" id="Country">
+      <AttrNames>
+        <Item Value="Country"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XxplPropertyAreaView1Iterator"
+          id="XxplPropertyAreaView1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplPropertyAreaView"
+                      Name="XxplPropertyAreaView10">
+        <AttrNames>
+          <Item Value="AreaId"/>
+          <Item Value="PropertyId"/>
+          <Item Value="Area"/>
+          <Item Value="Value"/>
+          <Item Value="Description"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplPropertyAreaView1Iterator" id="CreateWithParams"
+            RequiresUpdateModel="true" Action="createWithParams">
+    <NamedData NDName="Area" NDValue="CHARGE" NDType="java.lang.String"/>
+    </action>
+    <list IterBinding="XxplPropertyMasterView1Iterator" StaticList="false"
+          Uses="LOV_PropertyType" id="PropertyType1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <tree IterBinding="XxplPropertyMilestoneVOIterator"
+          id="XxplPropertyMilestoneVO">
+      <nodeDefinition DefName="custom.lease.model.View.XxplPropertyMilestoneVO"
+                      Name="XxplPropertyMilestoneVO0">
+        <AttrNames>
+          <Item Value="PaymentPlan"/>
+          <Item Value="PriceList"/>
+          <Item Value="Remarks"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplPropertyMilestoneVOIterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <tree IterBinding="PropertyPieChart_ROVOIterator"
+          id="PropertyPieChart_ROVO" ChangeEventPolicy="ppr">
+      <nodeDefinition DefName="custom.lease.model.ROVO.PropertyPieChart_ROVO"
+                      Name="PropertyPieChart_ROVO">
+        <AttrNames>
+          <Item Value="Count1"/>
+          <Item Value="LookupValueNameDisp"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="SerachBuildingFilterROVOIterator"
+          id="SerachBuildingFilterROVO">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SerachBuildingFilterROVO"
+                      Name="SerachBuildingFilterROVO0">
+        <AttrNames>
+          <Item Value="BuildNumber"/>
+          <Item Value="BuildName"/>
+          <Item Value="BuildNameTl"/>
+          <Item Value="BuildShortcode"/>
+          <Item Value="BuildType"/>
+          <Item Value="BuildClass"/>
+          <Item Value="BuildCategory"/>
+          <Item Value="NoOfFloors"/>
+          <Item Value="Description"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="SearchUnitFilterROVOIterator" id="SearchUnitFilterROVO">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SearchUnitFilterROVO"
+                      Name="SearchUnitFilterROVO0">
+        <AttrNames>
+          <Item Value="UnitNumber"/>
+          <Item Value="UnitName"/>
+          <Item Value="UnitTypeDisp"/>
+          <Item Value="UnitNameTl"/>
+          <Item Value="UnitShortcode"/>
+          <Item Value="BuildName"/>
+          <Item Value="Status"/>
+          <Item Value="AreaTypeDisp"/>
+          <Item Value="ViewTypeDisp"/>
+          <Item Value="Description"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator"
+                     id="PropertyId">
+      <AttrNames>
+        <Item Value="PropertyId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="intAttachments"
+                  InstanceName="Documents_AMDataControl.dataProvider"
+                  DataControl="Documents_AMDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="intAttachments" IsViewObjectMethod="false">
+      <NamedData NDName="funcid" NDValue="#{bindings.FuncId.inputValue}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="funcrefid" NDValue="#{bindings.PropertyId.inputValue}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="XxplPropertyMasterView1Iterator" id="FuncId">
+      <AttrNames>
+        <Item Value="FuncId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XXPL_PROPERTY_MS_PL_ROVOIterator"
+          id="XXPL_PROPERTY_MS_PL_ROVO">
+      <nodeDefinition DefName="custom.lease.model.ROVO.XXPL_PROPERTY_MS_PL_ROVO"
+                      Name="XXPL_PROPERTY_MS_PL_ROVO0">
+        <AttrNames>
+          <Item Value="PlName"/>
+          <Item Value="MilestoneName"/>
+          <Item Value="MilestoneType"/>
+          <Item Value="ActiveYn"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

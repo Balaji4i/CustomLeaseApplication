@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">CheckList</property>
+      <property
+         name="page">/Page/CheckList.jspx</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>CheckList&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">192.59766</property>
+      <property
+         name="x">521.0</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall7"
+      to="View2">
+      <property
+         name="fromOutcome">filterCheckList</property>
+      <property
+         name="sdm:polyPoints">R50,272.01562,190.89062,480.0,192.24707,L50</property>
+   </ControlFlowCase>
+   <TaskFlowReturn
+      id="TaskFlowReturn5">
+      <property
+         name="activityId">backToScreen</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>backToScreen&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  backToScreen&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">192.24707</property>
+      <property
+         name="x">750.0</property>
+   </TaskFlowReturn>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="View2"
+      to="TaskFlowReturn5">
+      <property
+         name="fromOutcome">close</property>
+      <property
+         name="sdm:polyPoints">R50,562.0,192.24707,709.0,191.89648,L50</property>
+   </ControlFlowCase>
+   <MethodCall
+      id="MethodCall7">
+      <property
+         name="activityId">filterCheckList</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>filterCheckList&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">191.24121</property>
+      <property
+         name="x">231.01562</property>
+   </MethodCall>
+</SDM>

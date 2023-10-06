@@ -1,0 +1,494 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+      <af:panelSplitter id="ps1" styleClass="AFStretchWidth"
+                        inlineStyle="height:20.0cm;" positionedFromEnd="true"
+                        splitterPosition="250">
+        <f:facet name="first">
+          <af:panelSplitter id="ps2" orientation="vertical"
+                            splitterPosition="90" disabled="true">
+            <f:facet name="first">
+              <af:panelBox id="pb2" showDisclosure="false"
+                           inlineStyle="border-style:none;">
+                <!--  <af:query id="qryId1"
+                          value="#{bindings.SearchBookingQuery.queryDescriptor}"
+                          model="#{bindings.SearchBookingQuery.queryModel}"
+                          queryListener="#{bindings.SearchBookingQuery.processQuery}"
+                          queryOperationListener="#{bindings.SearchBookingQuery.processQueryOperation}"
+                          resultComponentId="::pc1:t1" rows="1" maxColumns="3"
+                          headerText="Search" disclosed="true"
+                          displayMode="design" rendered="false"/>-->
+                <af:panelDashboard id="pd1" columns="5"
+                                   styleClass="AFStretchWidth" rowHeight="80px"
+                                   rendered="true"> 
+                  <af:panelBox text="Draft" id="pb5" showDisclosure="false"
+                               styleClass="leftBorderSkyBlue"
+                               background="medium">
+                    <af:commandLink text="#{bindings.DraBooking.inputValue}"
+                                    id="cl1" actionListener="#{backingBeanScope.SearchBookingBB.onClickStatusCount}"
+                                    inlineStyle="font-size:7mm;color:Blue;text-align:center;">
+                      <af:setPropertyListener from="Draft"
+                                              to="#{pageFlowScope.statusType}"
+                                              type="action"/>
+                    </af:commandLink>
+                    <f:facet name="toolbar"/>
+                  </af:panelBox>
+                  <af:panelBox text="Approved" id="pb4" showDisclosure="false"
+                               styleClass="leftBorderGreen" background="medium">
+                    <af:commandLink text="#{bindings.AprBooking.inputValue}"
+                                    id="of1"
+                                    inlineStyle="font-size:7mm;color:Green;text-align:center;"
+                                    actionListener="#{backingBeanScope.SearchBookingBB.onClickStatusCount}">
+                      <af:setPropertyListener from="Approved"
+                                              to="#{pageFlowScope.statusType}"
+                                              type="action"/>
+                    </af:commandLink>
+                    <f:facet name="toolbar"/>
+                  </af:panelBox>
+                  <af:panelBox text="Pending" id="pb6" showDisclosure="false"
+                               styleClass="leftBorderYellow"
+                               background="medium">
+                    <af:commandLink text="#{bindings.PenBooking.inputValue}"
+                                    id="cl2" actionListener="#{backingBeanScope.SearchBookingBB.onClickStatusCount}"
+                                    inlineStyle="font-size:7mm;color:Orange;text-align:center;">
+                      <af:setPropertyListener from="Pending"
+                                              to="#{pageFlowScope.statusType}"
+                                              type="action"/>
+                    </af:commandLink>
+                    <f:facet name="toolbar"/>
+                  </af:panelBox>
+                  <af:panelBox text="Rejected" id="pb7"
+                               styleClass="leftBorderRed" showDisclosure="false"
+                               background="medium">
+                    <af:commandLink text="#{bindings.RejBooking.inputValue}"
+                                    id="cl3" actionListener="#{backingBeanScope.SearchBookingBB.onClickStatusCount}"
+                                    inlineStyle="font-size:7mm;color:Red;text-align:center;">
+                      <af:setPropertyListener from="Rejected"
+                                              to="#{pageFlowScope.statusType}"
+                                              type="action"/>
+                    </af:commandLink>
+                    <f:facet name="toolbar"/>
+                  </af:panelBox>
+                  <af:panelBox text="Cancelled" id="pb8"
+                               styleClass="leftBorderBlue"
+                               showDisclosure="false" background="medium">
+                    <af:commandLink text="#{bindings.CancelBooking.inputValue}"
+                                    id="cl4" actionListener="#{backingBeanScope.SearchBookingBB.onClickStatusCount}"
+                                    inlineStyle="font-size:7mm;text-align:center;">
+                      <af:setPropertyListener from="Cancelled"
+                                              to="#{pageFlowScope.statusType}"
+                                              type="action"/>
+                    </af:commandLink>
+                    <f:facet name="toolbar"/>
+                  </af:panelBox>
+                </af:panelDashboard>
+              </af:panelBox>
+            </f:facet>
+            <f:facet name="second">
+              <af:panelBox id="pb3" showDisclosure="false">
+                <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                  <f:facet name="menus"/>
+                  <f:facet name="toolbar">
+                    <af:toolbar id="t2" flex="10">
+                      <af:menuBar id="mb1">
+                        <af:menu text="Actions" id="m1" partialTriggers="t1">
+                          <af:commandMenuItem text="Add Other Charges"
+                                              disabled="#{bindings.Status.inputValue ne 'Approved' and bindings.Status.inputValue ne 'Draft'}"
+                                              action="addCharges" id="cmi1">
+                            <af:setPropertyListener from="#{bindings.BookingHdrId.inputValue}"
+                                                    to="#{pageFlowScope.BookingId}"
+                                                    type="action"/>
+                          </af:commandMenuItem>
+                          <af:commandMenuItem text="Add Paid Car Parking"
+                                              disabled="true" id="cmi2"
+                                              rendered="false"/>
+                          <af:commandMenuItem text="Revise Booking" id="cmi3"
+                                              action="#{backingBeanScope.SearchBookingBB.onClickLeasePaymentPlanChange}"
+                                              disabled="#{bindings.Status.inputValue ne 'Approved'}"/>
+                          <af:commandMenuItem text="Renewal Leasing" id="cmi4" disabled="#{bindings.Status.inputValue ne 'Approved'}">
+                            <af:showPopupBehavior popupId="::p1"/>
+                          </af:commandMenuItem>
+                          <af:commandMenuItem text="Generate Receipt" id="cmi5" action="toAddEdit"
+                                                disabled="#{bindings.Status.inputValue ne 'Approved'}"
+                                              rendered="false">
+                          <af:setPropertyListener from="Edit"
+                                                to="#{pageFlowScope.addEditMode}"
+                                                type="action"/>
+                        <af:setPropertyListener from="#{bindings.BookingHdrId.inputValue}"
+                                                to="#{pageFlowScope.editBookingId}"
+                                                type="action"/>
+                        <af:setPropertyListener from="true"
+                                                to="#{pageFlowScope.hdrSaved}"
+                                                type="action"/>
+                        <af:setPropertyListener from="true" to="#{pageFlowScope.showMSOC}" type="action"/>
+                        <af:setPropertyListener from="ReceiptCreation" to="#{pageFlowScope.EditMode}" type="action"/>
+                          </af:commandMenuItem>
+                          <af:commandMenuItem text="Create Invoice" id="cmi11"
+                                              rendered="false">
+                            <af:showPopupBehavior triggerType="action"
+                                                  popupId="::p2"/>
+                          </af:commandMenuItem>
+                          <af:commandMenuItem text="Cancellation"
+                                              id="cmi6"
+                                               disabled="#{bindings.Status.inputValue eq 'Ready To Cancel' ? false :true}"
+                                              action="#{backingBeanScope.SearchBookingBB.leaseToCancel}"/>
+                          <af:commandMenuItem text="Move In" id="cmi7"
+                                               disabled="#{bindings.Status.inputValue eq 'Reserved' ? false :true}"
+                                               action="#{backingBeanScope.SearchBookingBB.leaseToMoveIn}">
+                                                    </af:commandMenuItem>
+                          <af:commandMenuItem text="Move Out" id="cmi8"
+                                               disabled="#{bindings.Status.inputValue eq 'Approved' ? false :true}"
+                                               action="#{backingBeanScope.SearchBookingBB.leaseToMoveOut}"/>
+                        </af:menu>
+                        <af:menu text="Interface Error" id="m2">
+                          <af:commandMenuItem text="Send Mail"
+                                              id="cmi9"
+                                              actionListener="#{backingBeanScope.SearchBookingBB.onSendInterfaceError}"
+                                              rendered="false"/> 
+                          <af:goMenuItem text="Download Report" id="gmi1"
+                                         destination="#{sessionScope.httpPath}/LeaseIntegrationServices/webresources/autointegration/LeaseErrorstatus?P_TABLE=XXPL_BOOKING_MILESTONES"
+                                         targetFrame="_blank" rendered="false"/>
+                        </af:menu>
+                      </af:menuBar>
+                      <af:commandImageLink action="toAddEdit"
+                                           icon="/images/func_add_16_ena.png"
+                                           hoverIcon="/images/func_add_16_hov.png"
+                                           depressedIcon="/images/func_add_16_act.png"
+                                           disabledIcon="/images/func_add_16_dis.png"
+                                           id="cil2">
+                        <af:setPropertyListener from="Create"
+                                                to="#{pageFlowScope.addEditMode}"
+                                                type="action"/>
+                        <af:setPropertyListener from="false"
+                                                to="#{pageFlowScope.hdrSaved}"
+                                                type="action"/>
+                    <af:setPropertyListener from="AddMode" to="#{pageFlowScope.EditMode}" type="action"/>
+                    <af:setPropertyListener from="false" to="#{pageFlowScope.showMSOC}" type="action"/>
+                      </af:commandImageLink>
+                      <af:spacer width="10" height="10" id="s4"/>
+                      <af:commandImageLink id="cil3" immediate="true"
+                                  icon="/images/func_remove_16_ena.png"
+                                  hoverIcon="/images/func_remove_16_hov.png"
+                                  depressedIcon="/images/func_remove_16_act.png"
+                                  disabledIcon="/images/func_remove_16_dis.png"
+                                  disabled="#{bindings.Status.inputValue ne 'Draft'}"
+                                  actionListener="#{backingBeanScope.SearchBookingBB.onDeleteBooking}"
+                                           partialTriggers="t1"/>
+                                  
+                      <af:spacer width="30" height="10" id="s1"/>
+                      <af:quickQuery label="Search" id="qq1"
+                                     value="#{bindings.SearchBookingQuery.queryDescriptor}"
+                                     model="#{bindings.SearchBookingQuery.queryModel}"
+                                     queryListener="#{bindings.SearchBookingQuery.processQuery}"
+                                     queryOperationListener="#{bindings.SearchBookingQuery.processQueryOperation}"
+                                     searchDesc="Search"/>
+                      <af:spacer width="30" height="10" id="s2"/>
+                      <af:commandImageLink 
+                                      icon="/images/xl.png"
+                                      id="cil4">
+                        <!--<af:fileDownloadActionListener contentType="application/xls"
+                                                       filename="Lease Booking.xls"
+                                                       method="#{backingBeanScope.SearchBookingBB.exportToExcel}"/>-->
+                        <af:fileDownloadActionListener contentType="application/xls"
+                                                       filename="Lease Booking.xls"
+                                                       method="#{backingBeanScope.SearchBookingBB.exportToExcel}"/>
+                      </af:commandImageLink>
+                    </af:toolbar>
+                  </f:facet>
+                  <f:facet name="statusbar"/>
+                  <af:table value="#{bindings.SEARCH_BOOKING_ROVO.collectionModel}"
+                            var="row"
+                            rows="#{bindings.SEARCH_BOOKING_ROVO.rangeSize}"
+                            emptyText="#{bindings.SEARCH_BOOKING_ROVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="15" scrollPolicy="page"
+                            rowBandingInterval="0" autoHeightRows="0"
+                            filterModel="#{bindings.SEARCH_BOOKING_ROVOQuery.queryDescriptor}"
+                            queryListener="#{bindings.SEARCH_BOOKING_ROVOQuery.processQuery}"
+                            filterVisible="false" varStatus="vs"
+                            selectedRowKeys="#{bindings.SEARCH_BOOKING_ROVO.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.SEARCH_BOOKING_ROVO.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t1"
+                            partialTriggers="::qq1" columnBandingInterval="0"
+                            columnStretching="last">
+                    <af:column id="c73" width="50" headerText="S.No"
+                               align="center" frozen="true">
+                      <af:outputText value="#{vs.index+1}" id="ot23"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.BookingHdrId.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SEARCH_BOOKING_ROVO.hints.BookingHdrId.label}"
+                               id="c1" rendered="false">
+                      <af:outputText value="#{row.BookingHdrId}" id="ot6"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.OrgId.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SEARCH_BOOKING_ROVO.hints.OrgId.label}"
+                               id="c13" rendered="false">
+                      <af:outputText value="#{row.OrgId}" id="ot5"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.BookingNumber.name}"
+                               filterable="true" sortable="true"
+                               headerText="Lease #" id="c15" align="center">
+                      <af:commandImageLink text="#{row.BookingNumber}"
+                                           inlineStyle="font-weight:bolder; font-size:small; color:#1367AE;"
+                                           action="toAddEdit" id="cil1">
+                        <af:setPropertyListener from="Edit"
+                                                to="#{pageFlowScope.addEditMode}"
+                                                type="action"/>
+                        <af:setPropertyListener from="#{row.BookingHdrId}"
+                                                to="#{pageFlowScope.editBookingId}"
+                                                type="action"/>
+                        <af:setPropertyListener from="true"
+                                                to="#{pageFlowScope.hdrSaved}"
+                                                type="action"/>
+                      <af:setPropertyListener from="EditMode" to="#{pageFlowScope.EditMode}" type="action"/>
+                      <af:setPropertyListener from="false" to="#{pageFlowScope.showMSOC}" type="action"/>
+                      </af:commandImageLink>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.BookingDate.name}"
+                               filterable="true" sortable="true"
+                               headerText="Date" id="c11" align="left">
+                      <f:facet name="filter">
+                        <af:inputDate value="#{vs.filterCriteria.BookingDate}"
+                                      id="id3"/>
+                      </f:facet>
+                      <af:outputText value="#{row.BookingDate}" id="ot8">
+                        <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.UnitName.name}"
+                               filterable="true" sortable="true"
+                               headerText="Unit Name" id="c9" width="180">
+                      <af:outputText value="#{row.UnitName}" id="ot1"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.CustomerName.name}"
+                               filterable="true" sortable="true"
+                               headerText="Tenant Name" id="c14" width="180">
+                      <af:outputText value="#{row.CustomerName}" id="ot13"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.OrgName.name}"
+                               filterable="true" sortable="true"
+                               headerText="Business Unit" id="c3" width="150">
+                      <af:outputText value="#{row.OrgName}" id="ot4"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.Status.name}"
+                               filterable="true" sortable="true"
+                               headerText="Status" id="c10"
+                               width="150">
+                      <af:outputText value="#{row.Status}" id="ot9"
+                                     inlineStyle="color:#{row.Status eq 'Approved' ? 'Green' : row.Status eq 'Rejected' ? 'Red' : row.Status eq 'Cancelled' ? 'Red' : row.Status eq 'Pending' ? 'Orange' : row.Status eq 'Reserved' ? 'Blue' : row.Status eq 'Revision' ? 'Brown' : 'Black'}; font-weight:bold;"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.BookingLeaseStartDate.name}"
+                               filterable="true" sortable="true"
+                               headerText="Lease Start Date" id="c17"
+                               visible="false">
+                      <f:facet name="filter">
+                        <af:inputDate value="#{vs.filterCriteria.BookingLeaseStartDate}"
+                                      id="id1"/>
+                      </f:facet>
+                      <af:outputText value="#{row.BookingLeaseStartDate}"
+                                     id="ot18">
+                        <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.BookingLeaseEndDate.name}"
+                               filterable="true" sortable="true"
+                               headerText="Lease End Date" id="c4"
+                               visible="false">
+                      <f:facet name="filter">
+                        <af:inputDate value="#{vs.filterCriteria.BookingLeaseEndDate}"
+                                      id="id4"/>
+                      </f:facet>
+                      <af:outputText value="#{row.BookingLeaseEndDate}"
+                                     id="ot14">
+                        <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.PropertyName.name}"
+                               filterable="true" sortable="true"
+                               headerText="Property Name" id="c8" width="150">
+                      <af:outputText value="#{row.PropertyName}" id="ot10"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.BuildName.name}"
+                               filterable="true" sortable="true"
+                               headerText="Building Name" id="c16"
+                               visible="false" width="150">
+                      <af:outputText value="#{row.BuildName}" id="ot2"/>
+                    </af:column>
+                    <af:column headerText="System Comments"
+                               id="c19" width="250" displayIndex="-1">
+                      <af:outputText value="#{row.Attribute2}" id="ot16"/>
+                    </af:column>
+                    <af:column headerText="Renewed From"
+                               id="c20">
+                      <af:outputText value="#{row.Attribute4}" id="ot19"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.Description.name}"
+                               filterable="true" sortable="true"
+                               headerText="Description" id="c6">
+                      <af:outputText value="#{row.Description}" id="ot17"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.CreatedBy.name}"
+                               filterable="true" sortable="true"
+                               headerText="Created By" id="c2" visible="false">
+                      <af:outputText value="#{row.CreatedBy}" id="ot7"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.CreationDate.name}"
+                               filterable="true" sortable="true"
+                               headerText="Creation Date" id="c5"
+                               visible="false">
+                      <f:facet name="filter">
+                        <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                      id="id2"/>
+                      </f:facet>
+                      <af:outputText value="#{row.CreationDate}" id="ot11">
+                        <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.LastUpdatedBy.name}"
+                               filterable="true" sortable="true"
+                               headerText="Last Updated By" id="c18"
+                               visible="false">
+                      <af:outputText value="#{row.LastUpdatedBy}" id="ot3"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.LastUpdateDate.name}"
+                               filterable="true" sortable="true"
+                               headerText="Last Updated Date" id="c12"
+                               visible="false">
+                      <f:facet name="filter">
+                        <af:inputDate value="#{vs.filterCriteria.LastUpdateDate}"
+                                      id="id5"/>
+                      </f:facet>
+                      <af:outputText value="#{row.LastUpdateDate}" id="ot12">
+                        <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SEARCH_BOOKING_ROVO.hints.LastUpdateLogin.name}"
+                               filterable="true" sortable="true"
+                               headerText="Last Update By" id="c7"
+                               visible="false">
+                      <af:outputText value="#{row.LastUpdateLogin}" id="ot15"/>
+                    </af:column>
+                  </af:table>
+                </af:panelCollection>
+                <f:facet name="toolbar"/>
+                <af:popup id="p2">
+                  <af:dialog id="d1" type="none" title="Create Invoice">
+                    <af:panelFormLayout id="pfl2" labelWidth="100">
+                      <af:inputDate label="Invoice Date" id="id11" required="true" autoSubmit="true"
+                                    binding="#{backingBeanScope.SearchBookingBB.invCreateDate}">
+                        <af:convertDateTime type="date" pattern="dd-MMM-yyyy"/>
+                      </af:inputDate>
+                      <af:spacer width="10" height="10" id="s3"/>
+                      <af:commandButton text="Generate Invoice" id="cb1"
+                                        actionListener="#{backingBeanScope.SearchBookingBB.onCreateInvoiceMail}"/>
+                    </af:panelFormLayout>
+                  </af:dialog>
+                </af:popup>
+                <af:popup id="p1" autoCancel="disabled" animate="false"
+                          binding="#{backingBeanScope.SearchBookingBB.renewPop}">
+                  <af:dialog id="d4" type="none" title="Leasing Renewal"
+                             closeIconVisible="false">
+                    <af:panelBox id="pb10" showDisclosure="false"
+                                 inlineStyle="border-style:none;"> 
+                      <af:panelFormLayout id="pfl1" rows="3" maxColumns="3"> 
+                      <af:inputText value="#{bindings.BookingNumber.inputValue}"
+                                      label="Booking Number" readOnly="true"
+                                      required="#{bindings.BookingNumber.hints.mandatory}"
+                                      columns="#{bindings.BookingNumber.hints.displayWidth}"
+                                      maximumLength="#{bindings.BookingNumber.hints.precision}"
+                                      shortDesc="#{bindings.BookingNumber.hints.tooltip}"
+                                      id="it1"  contentStyle="width:180px;font-weight:bolder;font-size:small;color:#1367AE;">
+                          <f:validator binding="#{bindings.BookingNumber.validator}"/>
+                        </af:inputText>
+                        <af:inputDate value="#{bindings.BookingLeaseStartDate.inputValue}"
+                                      label="Current Lease Start Date" contentStyle="width:200px;"
+                                      required="#{bindings.BookingLeaseStartDate.hints.mandatory}"
+                                      shortDesc="#{bindings.BookingLeaseStartDate.hints.tooltip}"
+                                      id="id9" disabled="true">
+                          <f:validator binding="#{bindings.BookingLeaseStartDate.validator}"/>
+                          <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                        </af:inputDate>
+                        <af:inputDate value="#{bindings.BookingLeaseEndDate.inputValue}"
+                                      label="Current Lease End Date" contentStyle="width:200px;"
+                                      required="#{bindings.BookingLeaseEndDate.hints.mandatory}"
+                                      shortDesc="#{bindings.BookingLeaseEndDate.hints.tooltip}"
+                                      id="id6" disabled="true">
+                          <f:validator binding="#{bindings.BookingLeaseEndDate.validator}"/>
+                          <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                        </af:inputDate>
+                        <af:inputDate value="#{bindings.RenewalFromDate.inputValue}"
+                                      label="Renewal Start Date" contentStyle="width:200px;"
+                                      required="#{bindings.RenewalFromDate.hints.mandatory}"
+                                      shortDesc="#{bindings.RenewalFromDate.hints.tooltip}"
+                                      id="id10" disabled="true">
+                          <f:validator binding="#{bindings.RenewalFromDate.validator}"/>
+                          <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                        </af:inputDate>
+                        <af:inputDate value="#{bindings.DummyDate1.inputValue}"
+                                      label="Valid End Date" rendered="false"
+                                      required="#{bindings.DummyDate1.hints.mandatory}"
+                                      shortDesc="#{bindings.DummyDate1.hints.tooltip}"
+                                      id="id8" contentStyle="width:200px;">
+                          <f:validator binding="#{bindings.DummyDate1.validator}"/>
+                          <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                        </af:inputDate>
+                        <af:inputDate value="#{bindings.DummyDate2.inputValue}" contentStyle="width:200px;"
+                                      label="Renewal End Date" minValue="#{bindings.DummyDate1.inputValue}"
+                                      required="true"
+                                      shortDesc="#{bindings.DummyDate2.hints.tooltip}"
+                                      id="id7">
+                          <f:validator binding="#{bindings.DummyDate2.validator}"/>
+                          <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                        </af:inputDate>
+                        <af:selectOneChoice value="#{bindings.PaymentType.inputValue}"
+                                            label="Payment Type" required="true"
+                                            shortDesc="#{bindings.PaymentType.hints.tooltip}"
+                                            id="soc1" autoSubmit="true" contentStyle="width:200px;">
+                          <f:selectItems value="#{bindings.PaymentType.items}"
+                                         id="si1"/>
+                        </af:selectOneChoice>
+                      </af:panelFormLayout>
+                    </af:panelBox>
+                    <f:facet name="buttonBar">
+                      <af:panelGroupLayout id="pgl13">
+                        <af:commandButton text="OK" id="cb14"
+                                          action="#{backingBeanScope.SearchBookingBB.onClickRenewal}"/>
+                        <af:spacer width="10" height="10" id="s23"/>
+                        <af:commandButton text="Cancel" id="cb15"
+                                          actionListener="#{backingBeanScope.SearchBookingBB.onCancelRenewal}"/>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                  </af:dialog>
+                </af:popup>
+              </af:panelBox>
+            </f:facet>
+          </af:panelSplitter>
+        </f:facet>
+        <f:facet name="second">
+          <af:panelBox id="pb1" showDisclosure="false" inlineStyle="border-style:none;">
+            <f:facet name="toolbar">
+              <af:panelGroupLayout id="pgl3" layout="horizontal" halign="end"
+                                   rendered="true">
+                <af:commandImageLink id="bl2"
+                                     actionListener="#{backingBeanScope.FilmStripBean.hideFSDropDown}"
+                                     visible="#{sessionScope.hideStrip ne true}"
+                                     shortDesc="Hide the Film Strip"
+                                     icon="/images/func_arrowheadup_16_act.png"/>
+                <af:commandImageLink id="bl1"
+                                     actionListener="#{backingBeanScope.FilmStripBean.showFSDropDown}"
+                                     visible="#{sessionScope.hideStrip eq true}"
+                                     shortDesc="Show Film Strip"
+                                     icon="/images/func_arrowheaddown_16_act.png"/>
+              </af:panelGroupLayout>
+            </f:facet>
+          </af:panelBox>
+        </f:facet>
+      </af:panelSplitter>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

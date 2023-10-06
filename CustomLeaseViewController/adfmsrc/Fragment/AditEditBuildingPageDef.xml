@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="AditEditBuildingPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <iterator Binds="Root.PropertyBuildingsAM1.XXplPropertyBuildingView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XXplPropertyBuildingView1Iterator"/>
+    <iterator Binds="Root.PropertyBuildingsAM1.XxplPropertyAreaView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplPropertyAreaView1Iterator"/>
+    <iterator Binds="Root.PropertyBuildingsAM1.SearchUnitFilterROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="8"
+              id="SearchUnitFilterROVOIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="XXplPropertyBuildingView1Iterator"
+                     id="BuildNumber">
+      <AttrNames>
+        <Item Value="BuildNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XXplPropertyBuildingView1Iterator"
+                     id="BuildName">
+      <AttrNames>
+        <Item Value="BuildName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XXplPropertyBuildingView1Iterator"
+                     id="BuildNameTl">
+      <AttrNames>
+        <Item Value="BuildNameTl"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XXplPropertyBuildingView1Iterator"
+                     id="BuildShortcode">
+      <AttrNames>
+        <Item Value="BuildShortcode"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XXplPropertyBuildingView1Iterator" StaticList="false"
+          Uses="LOV_PropertyId" id="PropertyId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XXplPropertyBuildingView1Iterator" StaticList="false"
+          Uses="LOV_BuildCategory" id="BuildCategory" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XXplPropertyBuildingView1Iterator" StaticList="false"
+          Uses="LOV_BuildClass" id="BuildClass" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XXplPropertyBuildingView1Iterator" StaticList="false"
+          Uses="LOV_BuildType" id="BuildType" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XXplPropertyBuildingView1Iterator"
+                     id="NoOfFloors">
+      <AttrNames>
+        <Item Value="NoOfFloors"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XXplPropertyBuildingView1Iterator"
+                     id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XxplPropertyAreaView1Iterator"
+          id="XxplPropertyAreaView1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplPropertyAreaView"
+                      Name="XxplPropertyAreaView10">
+        <AttrNames>
+          <Item Value="Area"/>
+          <Item Value="Value"/>
+          <Item Value="Description"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="SearchUnitFilterROVOIterator" id="SearchUnitFilterROVO">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SearchUnitFilterROVO"
+                      Name="SearchUnitFilterROVO0">
+        <AttrNames>
+          <Item Value="UnitNumber"/>
+          <Item Value="UnitName"/>
+          <Item Value="UnitTypeDisp"/>
+          <Item Value="UnitNameTl"/>
+          <Item Value="UnitShortcode"/>
+          <Item Value="BuildName"/>
+          <Item Value="Status"/>
+          <Item Value="AreaTypeDisp"/>
+          <Item Value="ViewTypeDisp"/>
+          <Item Value="Description"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action IterBinding="XxplPropertyAreaView1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

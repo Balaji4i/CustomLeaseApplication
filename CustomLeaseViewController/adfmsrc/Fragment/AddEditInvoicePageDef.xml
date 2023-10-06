@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="AddEditInvoicePageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.Invoice_AM.XxplInvoiceHeader1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplInvoiceHeader1Iterator"/>
+    <iterator id="InvoiceNumberROVO1Iterator"
+              Binds="Root.Invoice_AM.InvoiceNumberROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="Root.Invoice_AM.XxplInvoiceLineVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplInvoiceLineVO1Iterator"/>
+    <iterator Binds="InvoiceLinesROVO" RangeSize="5"
+              DataControl="Invoice_AMDataControl"
+              id="InvoiceLinesROVOIterator"/>
+    <searchRegion Binds="InvoiceLinesROVOIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="InvoiceLinesROVOQuery"/>
+    <searchRegion Binds="XxplInvoiceLineVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="XxplInvoiceLineVO1Query"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="XxplInvoiceHeader1Iterator" id="GlDate">
+      <AttrNames>
+        <Item Value="GlDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplInvoiceHeader1Iterator"
+                     id="InterfaceStatus">
+      <AttrNames>
+        <Item Value="InterfaceStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplInvoiceHeader1Iterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplInvoiceHeader1Iterator"
+                     id="InvoiceNumber">
+      <AttrNames>
+        <Item Value="InvoiceNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="XxplInvoiceHeader1Iterator"
+                  Uses="LOV_BusinessUnitTrans" id="BusinessUnitTrans"/>
+    <list IterBinding="XxplInvoiceHeader1Iterator" StaticList="false"
+          Uses="LOV_CurrencyCodeTrans" id="CurrencyCodeTrans"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplInvoiceHeader1Iterator"
+                     id="ProjectIdTrans">
+      <AttrNames>
+        <Item Value="ProjectIdTrans"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="updateTranscation"
+                  InstanceName="Invoice_AMDataControl.dataProvider"
+                  DataControl="Invoice_AMDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="updateTranscation"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="project_id" NDType="java.lang.Long"/>
+    </methodAction>
+    <tree IterBinding="XxplInvoiceLineVO1Iterator" id="XxplInvoiceLineVO1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplInvoiceLineVO"
+                      Name="XxplInvoiceLineVO10">
+        <AttrNames>
+          <Item Value="CheckBoxFreeze"/>
+          <Item Value="LineType"/>
+          <Item Value="LineNumber"/>
+          <Item Value="PropertyTrans"/>
+          <Item Value="BuildNumberTrans"/>
+          <Item Value="UnitNumber"/>
+          <Item Value="Amount"/>
+          <Item Value="TaxCode"/>
+          <Item Value="TaxPerc"/>
+          <Item Value="TaxAmount"/>
+          <Item Value="ChargeType"/>
+          <Item Value="InstallmentType"/>
+          <Item Value="Description"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="XxplInvoiceLineVO1Iterator" id="CheckBoxFreeze"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="CheckBoxFreeze"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <action IterBinding="XxplInvoiceLineVO1Iterator" id="Create"
+            InstanceName="customRootAppModuleDataControl.Root.Invoice_AM.XxplInvoiceLineVO1"
+            DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <tree IterBinding="InvoiceLinesROVOIterator" id="InvoiceLinesROVO">
+      <nodeDefinition DefName="custom.lease.model.ROVO.InvoiceLinesROVO"
+                      Name="InvoiceLinesROVO0">
+        <AttrNames>
+          <Item Value="CheckBoxTrans"/>
+          <Item Value="PropertyName"/>
+          <Item Value="BuildName"/>
+          <Item Value="UnitNumber"/>
+          <Item Value="Baseamount"/>
+          <Item Value="TaxRate"/>
+          <Item Value="TaxCode"/>
+          <Item Value="ChargeTypeDisp"/>
+          <Item Value="TaxAmount"/>
+          <Item Value="InstallmentName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="InvoiceLinesROVOIterator" id="CheckBoxTrans"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="CheckBoxTrans"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="XxplInvoiceHeader1Iterator"
+                     id="TotalLineAmount">
+      <AttrNames>
+        <Item Value="TotalLineAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplInvoiceHeader1Iterator"
+                     id="InterfaceErrorMsg">
+      <AttrNames>
+        <Item Value="InterfaceErrorMsg"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="XxplInvoiceHeader1Iterator"
+                  Uses="LOV_BookingNumber" id="BookingNumber"/>
+    <attributeValues IterBinding="XxplInvoiceHeader1Iterator"
+                     id="CustomerNameTrans">
+      <AttrNames>
+        <Item Value="CustomerNameTrans"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <attributeValues IterBinding="XxplInvoiceHeader1Iterator" id="InvoiceDate">
+      <AttrNames>
+        <Item Value="InvoiceDate"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

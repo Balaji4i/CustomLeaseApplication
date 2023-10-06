@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="SearchReceiptPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.Receipt_AM.SearchReceiptROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="10"
+              id="SearchReceiptROVO1Iterator"/>
+    <searchRegion Criteria="Search_Receipt"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchReceiptROVO1Iterator"
+                  id="SearchReceiptROVOCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SearchReceiptROVO1Iterator" id="SearchReceiptROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SearchReceiptROVO"
+                      Name="SearchReceiptROVO10">
+        <AttrNames>
+          <Item Value="ReceiptId"/>
+          <Item Value="ReceiptNumber"/>
+          <Item Value="OrgName"/>
+          <Item Value="ReceiptDate"/>
+          <Item Value="CustomerName"/>
+          <Item Value="ReceivedAmount"/>
+          <Item Value="Receipttype1"/>
+          <Item Value="ReceiptAmount"/>
+          <Item Value="ReceiptMethodName"/>
+          <Item Value="InterfaceStatus"/>
+          <Item Value="Description"/>
+          <Item Value="Attribute1"/>
+          <Item Value="Attribute2"/>
+          <Item Value="Attribute3"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SearchReceiptROVO1Iterator" id="ReceiptId">
+      <AttrNames>
+        <Item Value="ReceiptId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

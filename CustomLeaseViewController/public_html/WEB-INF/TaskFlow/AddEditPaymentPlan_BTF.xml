@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="AddEditPaymentPlan_BTF">
+    <default-activity id="__1">router1</default-activity>
+    <transaction id="__21">
+      <requires-transaction/>
+    </transaction>
+    <input-parameter-definition id="__12">
+      <name id="__13">navigation</name>
+      <value>#{pageFlowScope.navigation}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__14">
+      <name id="__15">MsHdrId</name>
+      <value>#{pageFlowScope.MsHdrId}</value>
+    </input-parameter-definition>
+    <managed-bean id="__6">
+      <managed-bean-name id="__7">PaymentPlanBean</managed-bean-name>
+      <managed-bean-class id="__4">custom.lease.view.bean.backing.PaymentPlanBean</managed-bean-class>
+      <managed-bean-scope id="__5">request</managed-bean-scope>
+    </managed-bean>
+    <view id="AddEditPaymentPlan">
+      <page>/Fragment/AddEditPaymentPlan.jsff</page>
+    </view>
+    <router id="router1">
+      <case>
+        <expression>#{pageFlowScope.navigation eq 'add'}</expression>
+        <outcome id="__10">add</outcome>
+      </case>
+      <case>
+        <expression>#{pageFlowScope.navigation eq 'edit'}</expression>
+        <outcome id="__11">edit</outcome>
+      </case>
+      <default-outcome>add</default-outcome>
+    </router>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome id="__22">
+        <name>taskFlowReturn1</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome id="__38">
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="taskFlowReturn2">
+      <outcome id="__47">
+        <name>taskFlowReturn2</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome id="__51">
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id id="__3">router1</from-activity-id>
+      <control-flow-case id="__39">
+        <from-outcome id="__40">add</from-outcome>
+        <to-activity-id id="__41">CreateInsert</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__53">
+        <from-outcome id="__54">edit</from-outcome>
+        <to-activity-id id="__52">ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id id="__24">AddEditPaymentPlan</from-activity-id>
+      <control-flow-case id="__25">
+        <from-outcome id="__27">cancel</from-outcome>
+        <to-activity-id id="__26">taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__48">
+        <from-outcome id="__50">Save</from-outcome>
+        <to-activity-id id="__49">taskFlowReturn2</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__42">
+      <from-activity-id id="__43">CreateInsert</from-activity-id>
+      <control-flow-case id="__44">
+        <from-outcome id="__45">CreateInsert</from-outcome>
+        <to-activity-id id="__46">AddEditPaymentPlan</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__55">
+      <from-activity-id id="__56">ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__59">
+        <from-outcome id="__57">ExecuteWithParams</from-outcome>
+        <to-activity-id id="__58">AddEditPaymentPlan</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<JLibraryNode nselem="JLibraryNode" class="oracle.jdeveloper.library.JLibraryNode" deployedByDefault="true" xmlns="http://xmlns.oracle.com/jdeveloper/110000jlibrarynode">
+   <classPath>
+      <entries>
+         <Item path="../../../../../../BaseCopies/lib/ojdbc14-10.2.0.2.0.jar" jar-entry=""/>
+         <Item path="../../../../../../BaseCopies/lib/poi-ooxml-3.17.jar" jar-entry=""/>
+         <Item path="../../../../../../BaseCopies/lib/poi-ooxml-schemas-3.17.jar" jar-entry=""/>
+         <Item path="../../../../../../BaseCopies/lib/poi-scratchpad-3.17.jar" jar-entry=""/>
+      </entries>
+   </classPath>
+   <docPath/>
+   <locked>true</locked>
+   <name>ADF Library Dependencies</name>
+   <sourcePath/>
+</JLibraryNode>

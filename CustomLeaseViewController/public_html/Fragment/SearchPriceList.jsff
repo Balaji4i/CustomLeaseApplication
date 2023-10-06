@@ -1,0 +1,275 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+      <af:panelGroupLayout id="pgl1" layout="vertical">
+        <af:panelBox text="Price List" id="pb1" showDisclosure="false"
+                     styleClass="AFStretchWidth"
+                     inlineStyle="border-color:transparent;">
+          <f:facet name="toolbar">
+            <af:toolbar id="t3">
+              <af:commandImageLink id="bl1"
+                                   actionListener="#{backingBeanScope.FilmStripBean.showFSDropDown}"
+                                   visible="#{sessionScope.hideStrip eq true}"
+                                   shortDesc="Show Film Strip"
+                                   icon="/images/func_arrowheaddown_16_act.png"/>
+              <af:commandImageLink id="bl2"
+                                   actionListener="#{backingBeanScope.FilmStripBean.hideFSDropDown}"
+                                   visible="#{sessionScope.hideStrip ne true}"
+                                   shortDesc="Hide the Film Strip"
+                                   icon="/images/func_arrowheadup_16_act.png"/>
+            </af:toolbar>
+          </f:facet>
+          <af:query id="qryId1" headerText="Search" disclosed="true"
+                    maxColumns="3" rows="2"
+                    value="#{bindings.SearchPriceListROVOQuery.queryDescriptor}"
+                    model="#{bindings.SearchPriceListROVOQuery.queryModel}"
+                    queryListener="#{bindings.SearchPriceListROVOQuery.processQuery}"
+                    queryOperationListener="#{bindings.SearchPriceListROVOQuery.processQueryOperation}"/>
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+            <f:facet name="menus">
+              <af:menu text="About Record" id="m1" rendered="false">
+                <af:commandMenuItem text="About this Record" id="cmi1"
+                                    actionListener="#{backingBeanScope.SearchBean.onClickAbout}"></af:commandMenuItem>
+              </af:menu>
+            </f:facet>
+            <f:facet name="toolbar">
+              <af:toolbar id="t1" flex="100">
+                <af:commandImageLink id="cil1" inlineStyle="margin-right:10px;"
+                                     action="toPrice"
+                                     hoverIcon="/images/func_add_16_hov.png"
+                                     depressedIcon="/images/func_add_16_act.png"
+                                     disabledIcon="/images/func_add_16_dis.png"
+                                     icon="/images/func_add_16_ena.png">
+                  <af:clientListener method="enforcePreventUserInput"
+                                     type="action"/>
+                  <af:setPropertyListener from="#{'Add'}"
+                                          to="#{pageFlowScope.action}"
+                                          type="action"/>
+                </af:commandImageLink>
+                <af:spacer width="10" height="10" id="s2"/>
+                <af:commandImageLink id="cil2"
+                                     hoverIcon="/images/func_pencil_16_hov.png"
+                                     inlineStyle="margin-right:10px;"
+                                     action="toPrice"
+                                     disabledIcon="/images/func_pencil_16_dis.png"
+                                     depressedIcon="/images/func_pencil_16_act.png"
+                                     icon="/images/func_pencil_16_ena.png">
+                  <af:clientListener method="enforcePreventUserInput"
+                                     type="action"/>
+                  <af:setPropertyListener from="#{'edit'}"
+                                          to="#{pageFlowScope.action}"
+                                          type="action"/>
+                    <af:setPropertyListener from="#{bindings.PlId.inputValue}"
+                                          to="#{pageFlowScope.Priceid}"
+                                          type="action"/>
+                </af:commandImageLink>
+                <af:commandImageLink text="Price List Revision" id="cil3"
+                                     visible="#{bindings.Status.inputValue eq 'Approved'}"
+                                     partialTriggers="t2" partialSubmit="true"
+                                     action="#{backingBeanScope.SearchPriceList.onClickRevise}">
+                  <af:clientListener method="enforcePreventUserInput"
+                                     type="action"/>
+                  <af:setPropertyListener from="#{'edit'}"
+                                          to="#{pageFlowScope.action}"
+                                          type="action"/>
+                  <af:setPropertyListener from="#{bindings.PlId.inputValue}"
+                                          to="#{pageFlowScope.Priceid}"
+                                          type="action"/>
+                </af:commandImageLink>
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:commandImageLink id="cil4"
+                                       icon="/images/xl.png" rendered="true">
+                    <af:showPopupBehavior popupId="p2" triggerType="action"/>
+                  </af:commandImageLink>
+              </af:toolbar>
+            </f:facet>
+            <f:facet name="statusbar"/>
+            <af:table value="#{bindings.SearchPriceListROVO.collectionModel}"
+                      var="row" rows="#{bindings.SearchPriceListROVO.rangeSize}"
+                      emptyText="#{bindings.SearchPriceListROVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="10"
+                      rowBandingInterval="0"
+                      filterModel="#{bindings.SearchPriceListROVOQuery.queryDescriptor}"
+                      queryListener="#{bindings.SearchPriceListROVOQuery.processQuery}"
+                      filterVisible="true" varStatus="vs"
+                      partialTriggers=":::qryId1"
+                      selectedRowKeys="#{bindings.SearchPriceListROVO.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.SearchPriceListROVO.collectionModel.makeCurrent}"
+                      rowSelection="single" id="t2" scrollPolicy="page"
+                      autoHeightRows="0">
+              <af:column id="c7" headerText="S.No" filterable="true" 
+                        >
+                <af:panelGroupLayout id="pgl4" halign="center"
+                                     layout="vertical">
+                  <af:outputText value="#{vs.index+1}" id="o5"/>
+                </af:panelGroupLayout>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchPriceListROVO.hints.PlNumber.name}"
+                         filterable="true" sortable="false"  width="160" 
+                         headerText="#{bindings.SearchPriceListROVO.hints.PlNumber.label}"
+                         id="c1">
+                <af:commandLink text="#{row.PlNumber}" id="cl2" action="toPrice"
+                                inlineStyle="color:#0F6CB9; font-size:small; font-weight:bold;">
+                  <af:setPropertyListener from="#{row.PlId}"
+                                          to="#{pageFlowScope.Priceid}"
+                                          type="action"/>
+                  <af:setPropertyListener from="#{'edit'}"
+                                          to="#{pageFlowScope.action}"
+                                          type="action"/>
+                </af:commandLink>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchPriceListROVO.hints.PlName.name}"
+                         filterable="true" sortable="false" width="180"
+                         headerText="#{bindings.SearchPriceListROVO.hints.PlName.label}"
+                         id="c18">
+                <af:outputText value="#{row.PlName}" id="ot10"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchPriceListROVO.hints.OrgName.name}"
+                         filterable="true" sortable="false" width="250"
+                         headerText="Business Unit" id="c20">
+                <af:outputText value="#{row.OrgName}" id="ot8"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchPriceListROVO.hints.PropertyName.name}"
+                         filterable="true" sortable="false"
+                         headerText="Property Name"  width="190"
+                         id="c17" rendered="false">
+                <af:outputText value="#{row.PropertyName}" id="ot18"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchPriceListROVO.hints.BuildName.name}"
+                         filterable="true" sortable="false"
+                         headerText="Building Name" width="190"
+                         id="c3" rendered="false">
+                <af:outputText value="#{row.BuildName}" id="ot14"/>
+              </af:column>
+            
+              <af:column sortProperty="#{bindings.SearchPriceListROVO.hints.UnitName.name}"
+                         filterable="true" sortable="false"  width="180"
+                         headerText="Unit Number"
+                         id="c13" rendered="false">
+                <af:outputText value="#{row.UnitName}" id="ot11"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchPriceListROVO.hints.Description.name}"
+                         filterable="true" sortable="false"  rendered="false"
+                         headerText="#{bindings.SearchPriceListROVO.hints.Description.label}"
+                         id="c19">
+                <af:outputText value="#{row.Description}" id="ot5"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchPriceListROVO.hints.StartDate.name}"
+                         filterable="true" sortable="false" width="180"
+                         headerText="#{bindings.SearchPriceListROVO.hints.StartDate.label}"
+                         id="c9">
+                <f:facet name="filter">
+                  <af:inputDate value="#{vs.filterCriteria.StartDate}"
+                                id="id1"/>
+                </f:facet>
+                <af:outputText value="#{row.StartDate}" id="ot4">
+                  <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchPriceListROVO.hints.EndDate.name}"  width="180"
+                         filterable="true" sortable="false"
+                         headerText="#{bindings.SearchPriceListROVO.hints.EndDate.label}"
+                         id="c12">
+                <f:facet name="filter">
+                  <af:inputDate value="#{vs.filterCriteria.EndDate}" id="id3"/>
+                </f:facet>
+                <af:outputText value="#{row.EndDate}" id="ot2">
+                  <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchPriceListROVO.hints.Status.name}"
+                         filterable="true" sortable="false" width="185"
+                         headerText="#{bindings.SearchPriceListROVO.hints.Status.label}"
+                         id="c10">
+                <af:outputText value="#{row.Status}" id="ot9" inlineStyle=" color:#{(row.Status eq 'AVAILABLE')?'orange':(row.Status eq 'Approved')?'green':(row.Status eq 'Revision')?'Blue':'black'};"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchPriceListROVO.hints.PlNameTl.name}"
+                         filterable="true" sortable="false"  rendered="false"
+                         headerText="#{bindings.SearchPriceListROVO.hints.PlNameTl.label}"
+                         id="c8">
+                <af:outputText value="#{row.PlNameTl}" id="ot16"/>
+              </af:column>
+              <af:column id="c21" headerText="More Details About this Record"  width="150" >
+                <af:outputText value="More" id="ot24" clientComponent="true">
+                  <af:clientAttribute name="Creation"
+                                      value="#{row.CreationDate}"/>
+                  <af:clientAttribute name="CreatedBy" value="#{row.CreatedBy}"/>
+                  <af:clientAttribute name="LastUpdateDate"
+                                      value="#{row.LastUpdateDate}"/>
+                  <af:clientAttribute name="LastUpdatedBy"
+                                      value="#{row.LastUpdatedBy}"/>
+                  <af:clientAttribute name="departmentId"
+                                      value="#{row.LastUpdateLogin}"/>
+                  <af:showPopupBehavior popupId=":::p1" triggerType="mouseHover"
+                                        align="endAfter" alignId="ot24"/>
+                </af:outputText>
+              </af:column>
+            </af:table>
+          <af:popup id="p2">
+                <af:dialog id="d1" contentWidth="750" contentHeight="300"
+                           type="none">
+                  <af:region value="#{bindings.ExcelUpload_BTF.regionModel}"
+                             id="r1"/>
+                </af:dialog>
+              </af:popup>
+          </af:panelCollection>
+        </af:panelBox>
+        <af:popup id="p1" launcherVar="source" contentDelivery="lazyUncached"
+                  eventContext="launcher">
+          <af:noteWindow id="nw1">
+            <af:panelFormLayout id="pfl1">
+              <af:panelLabelAndMessage label="#{bindings.CreationDate.hints.label}"
+                                       id="plam1">
+                <af:outputText value="#{bindings.CreationDate.inputValue}"
+                               id="ot17">
+                  <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{bindings.CreatedBy.hints.label}"
+                                       id="plam2">
+                <af:outputText value="#{bindings.CreatedBy.inputValue}"
+                               id="ot20"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{bindings.LastUpdateDate.hints.label}"
+                                       id="plam3">
+                <af:outputText value="#{bindings.LastUpdateDate.inputValue}"
+                               id="ot21">
+                  <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{bindings.LastUpdatedBy.hints.label}"
+                                       id="plam4">
+                <af:outputText value="#{bindings.LastUpdatedBy.inputValue}"
+                               id="ot22"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{bindings.LastUpdateLogin.hints.label}"
+                                       id="plam5">
+                <af:outputText value="#{bindings.LastUpdateLogin.inputValue}"
+                               id="ot23"/>
+              </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+          </af:noteWindow>
+          <af:setPropertyListener from="#{bindings.CreationDate.inputValue}"
+                                  to="#{viewScope.CreationDate}"
+                                  type="popupFetch"/>
+          <af:setPropertyListener from="#{bindings.CreatedBy.inputValue}"
+                                  to="#{viewScope.CreatedBy}"
+                                  type="popupFetch"/>
+          <af:setPropertyListener from="#{bindings.LastUpdateDate.inputValue}"
+                                  to="#{viewScope.LastUpdateDate}"
+                                  type="popupFetch"/>
+          <af:setPropertyListener from="#{bindings.LastUpdatedBy.inputValue}"
+                                  to="#{viewScope.LastUpdatedBy}"
+                                  type="popupFetch"/>
+          <af:setPropertyListener from="#{bindings.LastUpdateLogin.inputValue}"
+                                  to="#{viewScope.LastUpdateLogin}"
+                                  type="popupFetch"/>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

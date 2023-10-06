@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <view id="FilmStrip">
+    <page>/Page/FilmStrip.jspx</page>
+  </view>
+  <view id="Invalid">
+    <page>/Page/Invalid.jspx</page>
+  </view>
+  <managed-bean id="__1">
+    <managed-bean-name id="__3">FlimStripListener</managed-bean-name>
+    <managed-bean-class id="__4">custom.lease.custom.view.beans.filmStrip.FilmStripPhaseListener</managed-bean-class>
+    <managed-bean-scope id="__2">backingBean</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__6">
+    <managed-bean-name id="__5">FilmStripBean</managed-bean-name>
+    <managed-bean-class id="__7">custom.lease.custom.view.beans.filmStrip.FilmStripBean</managed-bean-class>
+    <managed-bean-scope id="__8">backingBean</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__10">
+    <managed-bean-name id="__9">DashBoard</managed-bean-name>
+    <managed-bean-class id="__12">custom.lease.custom.view.beans.filmStrip.DashBoard</managed-bean-class>
+    <managed-bean-scope id="__11">backingBean</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__14">
+    <managed-bean-name id="__13">backing_Page_testing</managed-bean-name>
+    <managed-bean-class id="__15">custom.lease.view.backing.Page.Testing</managed-bean-class>
+    <managed-bean-scope id="__16">backingBean</managed-bean-scope>
+    <!--oracle-jdev-comment:managed-bean-jsp-link:1Page/testing.jspx-->
+  </managed-bean>
+</adfc-config>

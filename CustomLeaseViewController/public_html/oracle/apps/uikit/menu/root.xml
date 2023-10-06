@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2017, Oracle and/or its affiliates. All rights reserved.
+-->
+<menu>
+    <groupNode id="LeaseModule" idref="LeaseModuleId" label="">
+        <!--Property Master-->
+        <itemNode id="PropertyMaster" label="Property Master" icon="/images/grid_dot_household.png"
+                  cardIcon="/images/grid_dot_household.png" taskMenuSource="/WEB-INF/TaskFlow/SearchProperty_BTF.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/SearchProperty_BTF.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="true"/>
+        <!--Property Building-->
+         <itemNode id="PropertyBuilding" label="Property Building" icon="/images/grid_dot_packages.png"
+                  cardIcon="/images/grid_dot_packages.png" taskMenuSource="/WEB-INF/TaskFlow/SearchBuilding_BTF.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/SearchBuilding_BTF.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="true"/>
+       <!--Unit Master-->          
+       <itemNode id="Unit" label="Unit" icon="/images/grid_dot_buildings.png"
+                  cardIcon="/images/grid_dot_buildings.png" taskMenuSource="/WEB-INF/TaskFlow/SearchUnit_BTF.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/SearchUnit_BTF.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="true"/>
+         <!--Payment Plan-->          
+       <itemNode id="PaymentPlan" label="Payment Plan" icon="/images/grid_dot_checkbook.png"
+                  cardIcon="/images/grid_dot_checkbook.png" taskMenuSource="/WEB-INF/TaskFlow/SearchPaymentPlan_BTF.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/SearchPaymentPlan_BTF.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="true"/>
+         <!--Price List-->          
+        <itemNode id="PriceList" label="Price List" icon="/images/grid_dot_document.png"
+                  cardIcon="/images/grid_dot_document.png" taskMenuSource="/WEB-INF/TaskFlow/SearchPriceList_BTF.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/SearchPriceList_BTF.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="true"/>
+        <!--Lead-->          
+       <itemNode id="VisitorLog" label="Lead Information" icon="/images/grid_matte_contacts.png"
+                  cardIcon="/images/grid_matte_contacts.png" taskMenuSource="/WEB-INF/TaskFlow/SearchLead_BTF.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/SearchLead_BTF.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="true"/>
+        <!--Booking Process-->         
+        <itemNode id="Booking" label="Lease" icon="/images/grid_dot_matrix.png"
+                  cardIcon="/images/grid_dot_matrix.png" taskMenuSource="/WEB-INF/TaskFlow/SearchBooking_BTF.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/SearchBooking_BTF.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="true"/>
+        <!--OtherCharge-->
+        <itemNode id="OtherCharge" label="Additional Charge" icon="/images/grid_dot_select.png"
+                  cardIcon="/images/grid_dot_select.png" taskMenuSource="/WEB-INF/TaskFlow/ARSetup_BTF.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/ARSetup_BTF.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="false"/>
+        <!--Billing-->
+        <itemNode id="Billing" label="Billing" icon="/images/grid_dot_personedit.png"
+                  cardIcon="/images/grid_dot_personedit.png" taskMenuSource="/WEB-INF/TaskFlow/SearchBilling_BTF.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/SearchBilling_BTF.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="false"/>
+         <!--Invoice-->          
+        <itemNode id="Transcation" label="Transcation" icon="/images/grid_dot_exchange.png"
+                  cardIcon="/images/grid_dot_exchange.png" taskMenuSource="/WEB-INF/TaskFlow/Searchinvoice.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/Searchinvoice.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="false"/>
+        <!--Receipt-->          
+        <itemNode id="TenantReceipts" label="Tenant Receipts" icon="/images/grid_dot_clipboard.png"
+                  cardIcon="/images/grid_dot_clipboard.png" taskMenuSource="/WEB-INF/TaskFlow/SearchReceipt_BTF.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/SearchReceipt_BTF.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="true"/>
+          <!--MOVEIN-->          
+        <itemNode id="MoveIn" label="Move In" icon="/images/grid_dot_dollycart.png"
+                  cardIcon="/images/grid_dot_dollycart.png" taskMenuSource="/WEB-INF/TaskFlow/SearchMoveInOut_BTF.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/SearchMoveInOut_BTF.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="true"/>
+        <!--Cancellation-->
+        <itemNode id="Cancellation" label="Cancellation" icon="/images/grid_dot_persontarget.png"
+                  cardIcon="/images/grid_dot_persontarget.png" taskMenuSource="/WEB-INF/TaskFlow/SearchCancellation_BTF.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/SearchCancellation_BTF.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="true"/>
+        <!--MoveOut-->          
+        <itemNode id="MoveOut" label="Move Out" icon="/images/grid_dot_deliver.png"
+                  cardIcon="/images/grid_dot_deliver.png" taskMenuSource="/WEB-INF/TaskFlow/SearchMoveInOut_BTF.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/SearchMoveInOut_BTF.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="true"/>
+        <!--Ar setup-->
+        <itemNode id="ARSetup" label="AR Setup" icon="/images/grid_dot_household.png"
+                  cardIcon="/images/grid_dot_household.png" taskMenuSource="/WEB-INF/TaskFlow/ARSetup_BTF.xml"
+                  securedResourceName="/WEB-INF/TaskFlow/ARSetup_BTF.xml" focusViewId="/LeaseApp"
+                  webApp="LeaseApp" applicationStripe="LeaseApp" showOnHomeGrid="true" rendered="true"/>
+    </groupNode>
+</menu>

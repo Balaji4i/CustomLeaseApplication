@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+      <af:panelGroupLayout id="pgl1" layout="vertical"
+                           styleClass="AFStretchWidth">
+        <af:panelBox id="pb1" showDisclosure="false"
+                     inlineStyle="height:850px; border-color:transparent;"
+                     styleClass="AFStretchWidth">
+          <af:query id="qryId1" headerText="Search Cancellation"
+                    disclosed="true"
+                    value="#{bindings.SearchCancellationVCQuery.queryDescriptor}"
+                    model="#{bindings.SearchCancellationVCQuery.queryModel}"
+                    queryListener="#{bindings.SearchCancellationVCQuery.processQuery}"
+                    queryOperationListener="#{bindings.SearchCancellationVCQuery.processQueryOperation}"
+                    resultComponentId="::pc1:resId1" rows="2" maxColumns="3"
+                    labelAlignment="start"/>
+          <af:spacer width="10" height="10" id="s1"/>
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+            <f:facet name="menus"/>
+            <f:facet name="toolbar">
+              <af:toolbar id="t1" flex="10">
+                <af:commandImageLink id="cil1" action="toCancel"
+                                     hoverIcon="/images/func_add_16_hov.png"
+                                     depressedIcon="/images/func_add_16_act.png"
+                                     disabledIcon="/images/func_add_16_dis.png"
+                                     icon="/images/func_add_16_ena.png">
+                  <af:clientListener method="enforcePreventUserInput"
+                                     type="action"/>
+                  <af:setPropertyListener from="ADD"
+                                          to="#{pageFlowScope.addEditMode}"
+                                          type="action"/>
+                </af:commandImageLink>
+              </af:toolbar>
+            </f:facet>
+            <af:table value="#{bindings.SEARCH_CANCELLATION_ROVO.collectionModel}"
+                      var="row"
+                      rows="#{bindings.SEARCH_CANCELLATION_ROVO.rangeSize}"
+                      emptyText="#{bindings.SEARCH_CANCELLATION_ROVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="15"
+                      rowBandingInterval="0"
+                      filterModel="#{bindings.SearchCancellationVCQuery.queryDescriptor}"
+                      queryListener="#{bindings.SearchCancellationVCQuery.processQuery}"
+                      filterVisible="true" varStatus="vs"
+                      selectedRowKeys="#{bindings.SEARCH_CANCELLATION_ROVO.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.SEARCH_CANCELLATION_ROVO.collectionModel.makeCurrent}"
+                      rowSelection="single" id="resId1"
+                      columnStretching="column:resId1c7" scrollPolicy="page"
+                      autoHeightRows="0" styleClass="AFStretchWidth">
+              <af:column id="c7" width="50" headerText="S.No" filterable="true"
+                         frozen="true">
+                <af:panelGroupLayout id="pgl4" halign="center"
+                                     layout="vertical">
+                  <af:outputText value="#{vs.index+1}" id="ot1"/>
+                </af:panelGroupLayout>
+              </af:column>
+              <af:column sortProperty="#{bindings.SEARCH_CANCELLATION_ROVO.hints.CancelId.name}"
+                         filterable="true" sortable="true"
+                         headerText="#{bindings.SEARCH_CANCELLATION_ROVO.hints.CancelId.label}"
+                         id="resId1c1" rendered="false">
+                <af:outputText value="#{row.CancelId}" id="ot6"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SEARCH_CANCELLATION_ROVO.hints.CancelNumber.name}"
+                         filterable="true" sortable="true"
+                         headerText="Cancel No" id="resId1c3" width="140">
+                <af:commandImageLink text="#{row.CancelNumber}"
+                                     action="toCancel" id="gil1"
+                                     inlineStyle="font-weight:bolder;font-size:small;color:#1367AE;">
+                  <af:setPropertyListener from="Edit"
+                                          to="#{pageFlowScope.addEditMode}"
+                                          type="action"/>
+                  <af:setPropertyListener from="#{row.CancelId}"
+                                          to="#{pageFlowScope.editCancelId}"
+                                          type="action"/>
+                </af:commandImageLink>
+              </af:column>
+              <af:column sortProperty="#{bindings.SEARCH_CANCELLATION_ROVO.hints.BookingNo.name}"
+                         filterable="true" sortable="true"
+                         headerText="Booking No" id="resId1c2" width="140">
+                <af:outputText value="#{row.BookingNo}" id="ot12"/>
+              </af:column>
+              <af:column headerText="#{bindings.SEARCH_CANCELLATION_ROVO.hints.Attribute4.label}"
+                         id="c1">
+                <af:outputText value="#{row.Attribute4}" id="ot13"/>
+              </af:column>
+              <af:column headerText="#{bindings.SEARCH_CANCELLATION_ROVO.hints.Attribute5.label}"
+                         id="c2" width="130">
+                <af:outputText value="#{row.Attribute5}" id="ot15"/>
+              </af:column>
+              <af:column headerText="#{bindings.SEARCH_CANCELLATION_ROVO.hints.Attribute6.label}"
+                         id="c3" width="150">
+                <af:outputText value="#{row.Attribute6}" id="ot16"/>
+              </af:column>
+              <af:column headerText="#{bindings.SEARCH_CANCELLATION_ROVO.hints.Attribute7.label}"
+                         id="c4" width="140">
+                <af:outputText value="#{row.Attribute7}" id="ot17"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SEARCH_CANCELLATION_ROVO.hints.CancelDate.name}"
+                         filterable="true" sortable="true" headerText="Date"
+                         id="resId1c4" width="150">
+                <f:facet name="filter">
+                  <af:inputDate value="#{vs.filterCriteria.CancelDate}"
+                                id="id4"/>
+                </f:facet>
+                <af:outputText value="#{row.CancelDate}" id="ot5">
+                  <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.SEARCH_CANCELLATION_ROVO.hints.FinalCancelDate.name}"
+                         filterable="true" sortable="true"
+                         headerText="Final Cancel Date" id="resId1c5"
+                         width="150">
+                <f:facet name="filter">
+                  <af:inputDate value="#{vs.filterCriteria.FinalCancelDate}"
+                                id="id1"/>
+                </f:facet>
+                <af:outputText value="#{row.FinalCancelDate}" id="ot10">
+                  <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.SEARCH_CANCELLATION_ROVO.hints.Status.name}"
+                         filterable="true" sortable="true" headerText="Status"
+                         id="resId1c6" width="100">
+                <af:outputText value="#{row.Status}" id="ot14"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SEARCH_CANCELLATION_ROVO.hints.CreatedBy.name}"
+                         filterable="true" sortable="true"
+                         headerText="Created By" id="resId1c8" visible="false">
+                <af:outputText value="#{row.CreatedBy}" id="ot8"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SEARCH_CANCELLATION_ROVO.hints.CreationDate.name}"
+                         filterable="true" sortable="true"
+                         headerText="Creation Date" id="resId1c9"
+                         visible="false">
+                <f:facet name="filter">
+                  <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                id="id2"/>
+                </f:facet>
+                <af:outputText value="#{row.CreationDate}" id="ot3">
+                  <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.SEARCH_CANCELLATION_ROVO.hints.LastUpdatedBy.name}"
+                         filterable="true" sortable="true"
+                         headerText="Last Updated By" id="resId1c10"
+                         visible="false">
+                <af:outputText value="#{row.LastUpdatedBy}" id="ot9"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SEARCH_CANCELLATION_ROVO.hints.LastUpdateDate.name}"
+                         filterable="true" sortable="true"
+                         headerText="Last Updated On" id="resId1c11"
+                         visible="false">
+                <f:facet name="filter">
+                  <af:inputDate value="#{vs.filterCriteria.LastUpdateDate}"
+                                id="id3"/>
+                </f:facet>
+                <af:outputText value="#{row.LastUpdateDate}" id="ot4">
+                  <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.SEARCH_CANCELLATION_ROVO.hints.LastUpdateLogin.name}"
+                         filterable="true" sortable="true"
+                         headerText="Last Update Login" id="resId1c12"
+                         visible="false">
+                <af:outputText value="#{row.LastUpdateLogin}" id="ot2"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SEARCH_CANCELLATION_ROVO.hints.InterfaceStatus.name}"
+                         filterable="true" sortable="true"
+                         headerText="Interface Status" id="resId1c13"
+                         width="120">
+                <af:outputText value="#{row.InterfaceStatus}" id="ot7"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SEARCH_CANCELLATION_ROVO.hints.Description.name}"
+                         filterable="true" sortable="true"
+                         headerText="Description" id="resId1c7" visible="false">
+                <af:outputText value="#{row.Description}" id="ot11"/>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+          <af:panelBox text="Search Result" id="pb2" rendered="false">
+            <f:facet name="toolbar"/>
+          </af:panelBox>
+        </af:panelBox>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="SearchBuildingPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SearchBuilding_ROVO1" RangeSize="10"
+              DataControl="PropertyBuildingsAMDataControl"
+              id="SearchBuilding_ROVO1Iterator"/>
+    <searchRegion Binds="SearchBuilding_ROVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SearchBuilding_ROVO1Query"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchBuilding_ROVO1Iterator"
+                  id="ImplicitViewCriteriaQuery"/>
+    <searchRegion Criteria="SearchBuilding_ROVOCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchBuilding_ROVO1Iterator"
+                  id="SearchBuildingROVOCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SearchBuilding_ROVO1Iterator" id="SearchBuilding_ROVO12">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SearchBuilding_ROVO"
+                      Name="SearchBuilding_ROVO120">
+        <AttrNames>
+          <Item Value="PropertyName"/>
+          <Item Value="BuildId"/>
+          <Item Value="PropertyId"/>
+          <Item Value="BuildName"/>
+          <Item Value="BuildNumber"/>
+          <Item Value="BuildShortcode"/>
+          <Item Value="BuildType"/>
+          <Item Value="Description"/>
+          <Item Value="ActiveYn"/>
+          <Item Value="SaleableYn"/>
+          <Item Value="LeaseableYn"/>
+          <Item Value="NoOfFloors"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateLogin"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SearchBuilding_ROVO1Iterator" id="BuildId">
+      <AttrNames>
+        <Item Value="BuildId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73"
+                id="AddEditARSetup_BTF_AddEditARSetup_BTF_ExecuteWithParamsPageDef"
+                Package="TaskFlow" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="Root.ARSetup_AM1.XxplARSetupVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplARSetupVOIterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="XxplARSetupVOIterator" id="ExecuteWithParams"
+            RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="BV_ID" NDValue="#{pageFlowScope.headerId}"
+                 NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

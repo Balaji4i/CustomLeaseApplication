@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PropertyUnit_Ass_CarParking"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="XxplPropertyUnitsEO"
+    Cardinality="1"
+    Source="true"
+    Owner="custom.lease.model.Entity.XxplPropertyUnitsEO"
+    LockLevel="NONE">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="XxplPropertyUnitsEO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.Entity.XxplPropertyUnitsEO.UnitId"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="XxplPropertyCarparksEO"
+    Cardinality="-1"
+    Owner="custom.lease.model.Entity.XxplPropertyCarparksEO">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="XxplPropertyCarparksEO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.Entity.XxplPropertyCarparksEO.UnitId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

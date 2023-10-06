@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PaymentPlan_Hdr_Line_VL"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  EntityAssociation="custom.lease.model.Asso.PaymentPlan_Hdr_Line_Assoc">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="custom.lease.model.VL.PaymentPlan_Hdr_Line_VL_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="XxplPaymentPlanHeaderView"
+    Cardinality="1"
+    Owner="custom.lease.model.View.XxplPaymentPlanHeaderView"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XxplPaymentPlanHeaderView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.View.XxplPaymentPlanHeaderView.MsHdrId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="XxplPaymentPlanLineView"
+    Cardinality="-1"
+    Owner="custom.lease.model.View.XxplPaymentPlanLineView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XxplPaymentPlanLineView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.View.XxplPaymentPlanLineView.MsHdrId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="custom.lease.model.CustomLeaseModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

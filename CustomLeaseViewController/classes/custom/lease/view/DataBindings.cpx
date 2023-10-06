@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application"
+             version="11.1.1.66.73" id="DataBindings" SeparateXMLFiles="false"
+             Package="custom.lease.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adfm/dvt"
+             className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"/>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/Page/FilmStrip.jspx"
+          usageId="custom_lease_view_FilmStripPageDef"/>
+    <page path="/Page/Invalid.jspx" usageId="custom_lease_view_InvalidPageDef"/>
+    <page path="/Page/Temp.jspx" usageId="custom_lease_view_TempPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditProperty_BTF.xml#AddEditProperty_BTF@CreateInsert"
+          usageId="custom_lease_view_AddEditProperty_BTF_AddEditProperty_BTF_CreateInsertPageDef"/>
+    <page path="/Fragment/SearchProperty.jsff"
+          usageId="custom_lease_view_SearchPropertyPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditPriceList_BTF.xml#AddEditPriceList_BTF@CreateInsert"
+          usageId="custom_lease_view_AddEditPriceList_BTF_AddEditPriceList_BTF_CreateInsertPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditPriceList_BTF.xml#AddEditPriceList_BTF@ExecuteWithParams"
+          usageId="custom_lease_view_AddEditPriceList_BTF_AddEditPriceList_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/Fragment/SearchPriceList.jsff"
+          usageId="custom_lease_view_SearchPriceListPageDef"/>
+    <page path="/WEB-INF/TaskFlow/SearchLead_BTF.xml#SearchLead_BTF@Execute"
+          usageId="custom_lease_view_SearchLead_BTF_SearchLead_BTF_ExecutePageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditLead_BTF.xml#AddEditLead_BTF@CreateInsert"
+          usageId="custom_lease_view_AddEditLead_BTF_AddEditLead_BTF_CreateInsertPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditLead_BTF.xml#AddEditLead_BTF@ExecuteWithParams"
+          usageId="custom_lease_view_AddEditLead_BTF_AddEditLead_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/Fragment/SearchPaymentPlan.jsff"
+          usageId="custom_lease_view_SearchPaymentPlanPageDef"/>
+    <page path="/Fragment/SearchBuilding.jsff"
+          usageId="custom_lease_view_SearchBuildingPageDef"/>
+    <page path="/Fragment/SearchLead.jsff"
+          usageId="custom_lease_view_SearchLeadPageDef"/>
+    <page path="/Fragment/AddEditLead.jsff"
+          usageId="custom_lease_view_AddEditLeadPageDef"/>
+    <page path="/Fragment/AddEditProperty.jsff"
+          usageId="custom_lease_view_AddEditPropertyPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditProperty_BTF.xml#AddEditProperty_BTF@ExecuteWithParams"
+          usageId="custom_lease_view_AddEditProperty_BTF_AddEditProperty_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/Fragment/AddEditPaymentPlan.jsff"
+          usageId="custom_lease_view_AddEditPaymentPlanPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditPaymentPlan_BTF.xml#AddEditPaymentPlan_BTF@CreateInsert"
+          usageId="custom_lease_view_AddEditPaymentPlan_BTF_AddEditPaymentPlan_BTF_CreateInsertPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditPaymentPlan_BTF.xml#AddEditPaymentPlan_BTF@ExecuteWithParams"
+          usageId="custom_lease_view_AddEditPaymentPlan_BTF_AddEditPaymentPlan_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/WEB-INF/TaskFlow/SearchPaymentPlan_BTF.xml#SearchPaymentPlan_BTF@Execute"
+          usageId="custom_lease_view_SearchPaymentPlan_BTF_SearchPaymentPlan_BTF_ExecutePageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditBuilding_BTF.xml#AddEditBuilding_BTF@ExecuteWithParams"
+          usageId="custom_lease_view_AddEditBuilding_BTF_AddEditBuilding_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/Fragment/AditEditBuilding.jsff"
+          usageId="custom_lease_view_AditEditBuildingPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditBuilding_BTF.xml#AddEditBuilding_BTF@CreateInsert"
+          usageId="custom_lease_view_AddEditBuilding_BTF_AddEditBuilding_BTF_CreateInsert1PageDef"/>
+    <page path="/WEB-INF/TaskFlow/SearchBuilding_BTF.xml#SearchBuilding_BTF@Execute"
+          usageId="custom_lease_view_SearchBuilding_BTF_SearchBuilding_BTF_ExecutePageDef"/>
+    <page path="/WEB-INF/TaskFlow/SearchProperty_BTF.xml#SearchProperty_BTF@Execute"
+          usageId="custom_lease_view_SearchProperty_BTF_SearchProperty_BTF_ExecutePageDef"/>
+    <page path="/Fragment/AddEditPriceList.jsff"
+          usageId="custom_lease_view_AddEditPriceListPageDef"/>
+    <page path="/Fragment/SearchUnit.jsff"
+          usageId="custom_lease_view_SearchUnitPageDef"/>
+    <page path="/Fragment/AddEditUnit.jsff"
+          usageId="custom_lease_view_AddEditUnitPageDef"/>
+    <page path="/WEB-INF/TaskFlow/SearchUnit_BTF.xml#SearchUnit_BTF@Execute"
+          usageId="custom_lease_view_SearchUnit_BTF_SearchUnit_BTF_ExecutePageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditUnit_BTF.xml#AddEditUnit_BTF@ExecuteWithParams"
+          usageId="custom_lease_view_AddEditUnit_BTF_AddEditUnit_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditUnit_BTF.xml#AddEditUnit_BTF@CreateInsert"
+          usageId="custom_lease_view_AddEditUnit_BTF_AddEditUnit_BTF_CreateInsertPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditInvoice.xml#AddEditInvoice@CreateInsert"
+          usageId="custom_lease_view_AddEditInvoice_AddEditInvoice_CreateInsertPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditInvoice.xml#AddEditInvoice@ExecuteWithParams"
+          usageId="custom_lease_view_AddEditInvoice_AddEditInvoice_ExecuteWithParamsPageDef"/>
+    <page path="/Fragment/SearchReceipt.jsff"
+          usageId="custom_lease_view_SearchReceiptPageDef"/>
+    <page path="/Fragment/AddEditInvoice.jsff"
+          usageId="custom_lease_view_AddEditInvoicePageDef"/>
+    <page path="/Fragment/SearchInvoice.jsff"
+          usageId="custom_lease_view_SearchInvoicePageDef"/>
+    <page path="/WEB-INF/TaskFlow/SearchPriceList_BTF.xml#SearchPriceList_BTF@Execute"
+          usageId="custom_lease_view_SearchPriceList_BTF_SearchPriceList_BTF_ExecutePageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditBooking_BTF.xml#AddEditBooking_BTF@CreateInsert"
+          usageId="custom_lease_view_AddEditBooking_BTF_AddEditBooking_BTF_CreateInsertPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditBooking_BTF.xml#AddEditBooking_BTF@ExecuteWithParams"
+          usageId="custom_lease_view_AddEditBooking_BTF_AddEditBooking_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/Fragment/AddEditBooking.jsff"
+          usageId="custom_lease_view_AddEditBookingPageDef"/>
+    <page path="/Fragment/AddEditReceipts.jsff"
+          usageId="custom_lease_view_AddEditReceiptsPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditReceipt.xml#AddEditReceipt@CreateInsert"
+          usageId="custom_lease_view_AddEditReceipt_AddEditReceipt_CreateInsertPageDef"/>
+    <page path="/WEB-INF/TaskFlow/Attachmnent_BTF.xml#Attachmnent_BTF@intAttachments"
+          usageId="custom_lease_view_Attachmnent_BTF_Attachmnent_BTF_intAttachmentsPageDef"/>
+    <page path="/Page/Attachment.jspx"
+          usageId="custom_lease_view_AttachmentPageDef"/>
+    <page path="/Fragment/SetUpAR.jsff"
+          usageId="custom_lease_view_SetUpARPageDef"/>
+    <page path="/WEB-INF/TaskFlow/ARSetup_BTF.xml#ARSetup_BTF@Execute"
+          usageId="custom_lease_view_ARSetup_BTF_ARSetup_BTF_ExecutePageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditARSetup_BTF.xml#AddEditARSetup_BTF@CreateInsert"
+          usageId="custom_lease_view_AddEditARSetup_BTF_AddEditARSetup_BTF_CreateInsertPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditARSetup_BTF.xml#AddEditARSetup_BTF@ExecuteWithParams"
+          usageId="custom_lease_view_AddEditARSetup_BTF_AddEditARSetup_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/Fragment/AddEditARSetup.jsff"
+          usageId="custom_lease_view_AddEditARSetupPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditARSetup_BTF.xml#AddEditARSetup_BTF@CreateWithParameters"
+          usageId="custom_lease_view_AddEditARSetup_BTF_AddEditARSetup_BTF_CreateWithParametersPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditARSetup_BTF.xml#AddEditARSetup_BTF@CreateWithParameters1"
+          usageId="custom_lease_view_AddEditARSetup_BTF_AddEditARSetup_BTF_CreateWithParameters1PageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditReceipt.xml#AddEditReceipt@ExecuteWithParams"
+          usageId="custom_lease_view_AddEditReceipt_AddEditReceipt_ExecuteWithParamsPageDef"/>
+    <page path="/WEB-INF/TaskFlow/SearchReceipt_BTF.xml#SearchReceipt_BTF@Execute"
+          usageId="custom_lease_view_SearchReceipt_BTF_SearchReceipt_BTF_ExecutePageDef"/>
+    <page path="/WEB-INF/TaskFlow/Searchinvoice.xml#Searchinvoice@Execute"
+          usageId="custom_lease_view_Searchinvoice_Searchinvoice_ExecutePageDef"/>
+    <page path="/Fragment/SearchMoveInOut.jsff"
+          usageId="custom_lease_view_SearchMoveInOutPageDef"/>
+    <page path="/Fragment/SearchBilling.jsff"
+          usageId="custom_lease_view_SearchBillingPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditBilling_BTF.xml#AddEditBilling_BTF@ExecuteWithParams"
+          usageId="custom_lease_view_AddEditBilling_BTF_AddEditBilling_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditBilling_BTF.xml#AddEditBilling_BTF@CreateInsert"
+          usageId="custom_lease_view_AddEditBilling_BTF_AddEditBilling_BTF_CreateInsertPageDef"/>
+    <page path="/Fragment/AddEditBilling.jsff"
+          usageId="custom_lease_view_AddEditBillingPageDef"/>
+    <page path="/WEB-INF/TaskFlow/SearchBilling_BTF.xml#SearchBilling_BTF@Execute"
+          usageId="custom_lease_view_SearchBilling_BTF_SearchBilling_BTF_ExecutePageDef"/>
+    <page path="/Fragment/AddEditMoveInOut.jsff"
+          usageId="custom_lease_view_AddEditMoveInOutPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditMoveInOut_BTF.xml#AddEditMoveInOut_BTF@ExecuteWithParams"
+          usageId="custom_lease_view_AddEditMoveInOut_BTF_AddEditMoveInOut_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditMoveInOut_BTF.xml#AddEditMoveInOut_BTF@CreateInsert"
+          usageId="custom_lease_view_AddEditMoveInOut_BTF_AddEditMoveInOut_BTF_CreateInsertPageDef"/>
+    <page path="/WEB-INF/TaskFlow/SearchMoveInOut_BTF.xml#SearchMoveInOut_BTF@Execute"
+          usageId="custom_lease_view_SearchMoveInOut_BTF_SearchMoveInOut_BTF_ExecutePageDef"/>
+    <page path="/Fragment/SearchBooking.jsff"
+          usageId="custom_lease_view_SearchBookingPageDef"/>
+    <page path="/WEB-INF/TaskFlow/SearchBooking_BTF.xml#SearchBooking_BTF@Execute"
+          usageId="custom_lease_view_SearchBooking_BTF_SearchBooking_BTF_ExecutePageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditReceipt.xml#AddEditReceipt@Execute"
+          usageId="custom_lease_view_AddEditReceipt_AddEditReceipt_ExecutePageDef"/>
+    <page path="/Fragment/OtherCharges.jsff"
+          usageId="custom_lease_view_OtherChargesPageDef"/>
+    <page path="/WEB-INF/TaskFlow/OtherCharges_BTF.xml#OtherCharges_BTF@ExecuteWithParams"
+          usageId="custom_lease_view_OtherCharges_BTF_OtherCharges_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/Fragment/SearchCancellation.jsff"
+          usageId="custom_lease_view_SearchCancellationPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditCancellation_BTF.xml#AddEditCancellation_BTF@CreateInsert"
+          usageId="custom_lease_view_AddEditCancellation_BTF_AddEditCancellation_BTF_CreateInsertPageDef"/>
+    <page path="/Fragment/AddEditCancellation.jsff"
+          usageId="custom_lease_view_AddEditCancellationPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditCancellation_BTF.xml#AddEditCancellation_BTF@ExecuteWithParams"
+          usageId="custom_lease_view_AddEditCancellation_BTF_AddEditCancellation_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/WEB-INF/TaskFlow/SearchCancellation_BTF.xml#SearchCancellation_BTF@Execute"
+          usageId="custom_lease_view_SearchCancellation_BTF_SearchCancellation_BTF_ExecutePageDef"/>
+    <page path="/Fragment/Approvalhistory.jsff"
+          usageId="custom_lease_view_ApprovalhistoryPageDef"/>
+    <page path="/Page/CheckList.jspx"
+          usageId="custom_lease_view_CheckListPageDef"/>
+    <page path="/WEB-INF/TaskFlow/CheckList_BTF.xml#CheckList_BTF@filterCheckList"
+          usageId="custom_lease_view_CheckList_BTF_CheckList_BTF_filterCheckList1PageDef"/>
+    <page path="/Fragment/LeaseRcptCollection.jsff"
+          usageId="custom_lease_view_LeaseRcptCollectionPageDef"/>
+    <page path="/WEB-INF/TaskFlow/AddEditBooking_BTF.xml#AddEditBooking_BTF@Execute"
+          usageId="custom_lease_view_AddEditBooking_BTF_AddEditBooking_BTF_ExecutePageDef"/>
+    <page path="/Page/DashBoard.jspx"
+          usageId="custom_lease_view_DashBoardPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="custom_lease_view_FilmStripPageDef" path="Page.FilmStripPageDef"/>
+    <page id="custom_lease_view_InvalidPageDef" path="Page.InvalidPageDef"/>
+    <page id="custom_lease_view_TempPageDef" path="Page.TempPageDef"/>
+    <page id="custom_lease_view_AddEditProperty_BTF_AddEditProperty_BTF_CreateInsertPageDef"
+          path="TaskFlow.AddEditProperty_BTF_AddEditProperty_BTF_CreateInsertPageDef"/>
+    <page id="custom_lease_view_SearchPropertyPageDef"
+          path="Fragment.SearchPropertyPageDef"/>
+    <page id="custom_lease_view_AddEditPriceList_BTF_AddEditPriceList_BTF_CreateInsertPageDef"
+          path="TaskFlow.AddEditPriceList_BTF_AddEditPriceList_BTF_CreateInsertPageDef"/>
+    <page id="custom_lease_view_AddEditPriceList_BTF_AddEditPriceList_BTF_ExecuteWithParamsPageDef"
+          path="TaskFlow.AddEditPriceList_BTF_AddEditPriceList_BTF_ExecuteWithParamsPageDef"/>
+    <page id="custom_lease_view_SearchPriceListPageDef"
+          path="Fragment.SearchPriceListPageDef"/>
+    <page id="custom_lease_view_SearchLead_BTF_SearchLead_BTF_ExecutePageDef"
+          path="TaskFlow.SearchLead_BTF_SearchLead_BTF_ExecutePageDef"/>
+    <page id="custom_lease_view_AddEditLead_BTF_AddEditLead_BTF_CreateInsertPageDef"
+          path="TaskFlow.AddEditLead_BTF_AddEditLead_BTF_CreateInsertPageDef"/>
+    <page id="custom_lease_view_AddEditLead_BTF_AddEditLead_BTF_ExecuteWithParamsPageDef"
+          path="TaskFlow.AddEditLead_BTF_AddEditLead_BTF_ExecuteWithParamsPageDef"/>
+    <page id="custom_lease_view_SearchPaymentPlanPageDef"
+          path="Fragment.SearchPaymentPlanPageDef"/>
+    <page id="custom_lease_view_SearchBuildingPageDef"
+          path="Fragment.SearchBuildingPageDef"/>
+    <page id="custom_lease_view_SearchLeadPageDef"
+          path="Fragment.SearchLeadPageDef"/>
+    <page id="custom_lease_view_AddEditLeadPageDef"
+          path="Fragment.AddEditLeadPageDef"/>
+    <page id="custom_lease_view_AddEditPropertyPageDef"
+          path="Fragment.AddEditPropertyPageDef"/>
+    <page id="custom_lease_view_AddEditProperty_BTF_AddEditProperty_BTF_ExecuteWithParamsPageDef"
+          path="TaskFlow.AddEditProperty_BTF_AddEditProperty_BTF_ExecuteWithParamsPageDef"/>
+    <page id="custom_lease_view_AddEditPaymentPlanPageDef"
+          path="Fragment.AddEditPaymentPlanPageDef"/>
+    <page id="custom_lease_view_AddEditPaymentPlan_BTF_AddEditPaymentPlan_BTF_CreateInsertPageDef"
+          path="TaskFlow.AddEditPaymentPlan_BTF_AddEditPaymentPlan_BTF_CreateInsertPageDef"/>
+    <page id="custom_lease_view_AddEditPaymentPlan_BTF_AddEditPaymentPlan_BTF_ExecuteWithParamsPageDef"
+          path="TaskFlow.AddEditPaymentPlan_BTF_AddEditPaymentPlan_BTF_ExecuteWithParamsPageDef"/>
+    <page id="custom_lease_view_SearchPaymentPlan_BTF_SearchPaymentPlan_BTF_ExecutePageDef"
+          path="TaskFlow.SearchPaymentPlan_BTF_SearchPaymentPlan_BTF_ExecutePageDef"/>
+    <page id="custom_lease_view_AddEditBuilding_BTF_AddEditBuilding_BTF_ExecuteWithParamsPageDef"
+          path="TaskFlow.AddEditBuilding_BTF_AddEditBuilding_BTF_ExecuteWithParamsPageDef"/>
+    <page id="custom_lease_view_AditEditBuildingPageDef"
+          path="Fragment.AditEditBuildingPageDef"/>
+    <page id="custom_lease_view_AddEditBuilding_BTF_AddEditBuilding_BTF_CreateInsert1PageDef"
+          path="TaskFlow.AddEditBuilding_BTF_AddEditBuilding_BTF_CreateInsert1PageDef"/>
+    <page id="custom_lease_view_SearchBuilding_BTF_SearchBuilding_BTF_ExecutePageDef"
+          path="TaskFlow.SearchBuilding_BTF_SearchBuilding_BTF_ExecutePageDef"/>
+    <page id="custom_lease_view_SearchProperty_BTF_SearchProperty_BTF_ExecutePageDef"
+          path="TaskFlow.SearchProperty_BTF_SearchProperty_BTF_ExecutePageDef"/>
+    <page id="custom_lease_view_AddEditPriceListPageDef"
+          path="Fragment.AddEditPriceListPageDef"/>
+    <page id="custom_lease_view_SearchUnitPageDef"
+          path="Fragment.SearchUnitPageDef"/>
+    <page id="custom_lease_view_AddEditUnitPageDef"
+          path="Fragment.AddEditUnitPageDef"/>
+    <page id="custom_lease_view_SearchUnit_BTF_SearchUnit_BTF_ExecutePageDef"
+          path="TaskFlow.SearchUnit_BTF_SearchUnit_BTF_ExecutePageDef"/>
+    <page id="custom_lease_view_AddEditUnit_BTF_AddEditUnit_BTF_ExecuteWithParamsPageDef"
+          path="TaskFlow.AddEditUnit_BTF_AddEditUnit_BTF_ExecuteWithParamsPageDef"/>
+    <page id="custom_lease_view_AddEditUnit_BTF_AddEditUnit_BTF_CreateInsertPageDef"
+          path="TaskFlow.AddEditUnit_BTF_AddEditUnit_BTF_CreateInsertPageDef"/>
+    <page id="custom_lease_view_SearchReceiptPageDef"
+          path="Fragment.SearchReceiptPageDef"/>
+    <page id="custom_lease_view_AddEditInvoice_AddEditInvoice_CreateInsertPageDef"
+          path="TaskFlow.AddEditInvoice_AddEditInvoice_CreateInsertPageDef"/>
+    <page id="custom_lease_view_AddEditInvoice_AddEditInvoice_ExecuteWithParamsPageDef"
+          path="TaskFlow.AddEditInvoice_AddEditInvoice_ExecuteWithParamsPageDef"/>
+    <page id="custom_lease_view_AddEditInvoicePageDef"
+          path="Fragment.AddEditInvoicePageDef"/>
+    <page id="custom_lease_view_SearchInvoicePageDef"
+          path="Fragment.SearchInvoicePageDef"/>
+    <page id="custom_lease_view_AddEditBooking_BTF_AddEditBooking_BTF_CreateInsertPageDef"
+          path="TaskFlow.AddEditBooking_BTF_AddEditBooking_BTF_CreateInsertPageDef"/>
+    <page id="custom_lease_view_AddEditBooking_BTF_AddEditBooking_BTF_ExecuteWithParamsPageDef"
+          path="TaskFlow.AddEditBooking_BTF_AddEditBooking_BTF_ExecuteWithParamsPageDef"/>
+    <page id="custom_lease_view_AddEditBookingPageDef"
+          path="Fragment.AddEditBookingPageDef"/>
+    <page id="custom_lease_view_AddEditReceiptsPageDef"
+          path="Fragment.AddEditReceiptsPageDef"/>
+    <page id="custom_lease_view_AddEditReceipt_AddEditReceipt_CreateInsertPageDef"
+          path="TaskFlow.AddEditReceipt_AddEditReceipt_CreateInsertPageDef"/>
+    <page id="custom_lease_view_SearchPriceList_BTF_SearchPriceList_BTF_ExecutePageDef"
+          path="TaskFlow.SearchPriceList_BTF_SearchPriceList_BTF_ExecutePageDef"/>
+    <page id="custom_lease_view_Attachmnent_BTF_Attachmnent_BTF_intAttachmentsPageDef"
+          path="TaskFlow.Attachmnent_BTF_Attachmnent_BTF_intAttachmentsPageDef"/>
+    <page id="custom_lease_view_AttachmentPageDef"
+          path="Page.AttachmentPageDef"/>
+    <page id="custom_lease_view_SetUpARPageDef" path="Fragment.SetUpARPageDef"/>
+    <page id="custom_lease_view_ARSetup_BTF_ARSetup_BTF_ExecutePageDef"
+          path="TaskFlow.ARSetup_BTF_ARSetup_BTF_ExecutePageDef"/>
+    <page id="custom_lease_view_AddEditARSetup_BTF_AddEditARSetup_BTF_CreateInsertPageDef"
+          path="TaskFlow.AddEditARSetup_BTF_AddEditARSetup_BTF_CreateInsertPageDef"/>
+    <page id="custom_lease_view_AddEditARSetup_BTF_AddEditARSetup_BTF_ExecuteWithParamsPageDef"
+          path="TaskFlow.AddEditARSetup_BTF_AddEditARSetup_BTF_ExecuteWithParamsPageDef"/>
+    <page id="custom_lease_view_AddEditARSetupPageDef"
+          path="Fragment.AddEditARSetupPageDef"/>
+    <page id="custom_lease_view_AddEditARSetup_BTF_AddEditARSetup_BTF_CreateWithParametersPageDef"
+          path="TaskFlow.AddEditARSetup_BTF_AddEditARSetup_BTF_CreateWithParametersPageDef"/>
+    <page id="custom_lease_view_AddEditARSetup_BTF_AddEditARSetup_BTF_CreateWithParameters1PageDef"
+          path="TaskFlow.AddEditARSetup_BTF_AddEditARSetup_BTF_CreateWithParameters1PageDef"/>
+    <page id="custom_lease_view_AddEditReceipt_AddEditReceipt_ExecuteWithParamsPageDef"
+          path="TaskFlow.AddEditReceipt_AddEditReceipt_ExecuteWithParamsPageDef"/>
+    <page id="custom_lease_view_SearchReceipt_BTF_SearchReceipt_BTF_ExecutePageDef"
+          path="TaskFlow.SearchReceipt_BTF_SearchReceipt_BTF_ExecutePageDef"/>
+    <page id="custom_lease_view_Searchinvoice_Searchinvoice_ExecutePageDef"
+          path="TaskFlow.Searchinvoice_Searchinvoice_ExecutePageDef"/>
+    <page id="custom_lease_view_SearchMoveInOutPageDef"
+          path="Fragment.SearchMoveInOutPageDef"/>
+    <page id="custom_lease_view_SearchBillingPageDef"
+          path="Fragment.SearchBillingPageDef"/>
+    <page id="custom_lease_view_AddEditBilling_BTF_AddEditBilling_BTF_ExecuteWithParamsPageDef"
+          path="TaskFlow.AddEditBilling_BTF_AddEditBilling_BTF_ExecuteWithParamsPageDef"/>
+    <page id="custom_lease_view_AddEditBilling_BTF_AddEditBilling_BTF_CreateInsertPageDef"
+          path="TaskFlow.AddEditBilling_BTF_AddEditBilling_BTF_CreateInsertPageDef"/>
+    <page id="custom_lease_view_AddEditBillingPageDef"
+          path="Fragment.AddEditBillingPageDef"/>
+    <page id="custom_lease_view_SearchBilling_BTF_SearchBilling_BTF_ExecutePageDef"
+          path="TaskFlow.SearchBilling_BTF_SearchBilling_BTF_ExecutePageDef"/>
+    <page id="custom_lease_view_AddEditMoveInOutPageDef"
+          path="Fragment.AddEditMoveInOutPageDef"/>
+    <page id="custom_lease_view_AddEditMoveInOut_BTF_AddEditMoveInOut_BTF_ExecuteWithParamsPageDef"
+          path="TaskFlow.AddEditMoveInOut_BTF_AddEditMoveInOut_BTF_ExecuteWithParamsPageDef"/>
+    <page id="custom_lease_view_AddEditMoveInOut_BTF_AddEditMoveInOut_BTF_CreateInsertPageDef"
+          path="TaskFlow.AddEditMoveInOut_BTF_AddEditMoveInOut_BTF_CreateInsertPageDef"/>
+    <page id="custom_lease_view_SearchMoveInOut_BTF_SearchMoveInOut_BTF_ExecutePageDef"
+          path="TaskFlow.SearchMoveInOut_BTF_SearchMoveInOut_BTF_ExecutePageDef"/>
+    <page id="custom_lease_view_SearchBookingPageDef"
+          path="Fragment.SearchBookingPageDef"/>
+    <page id="custom_lease_view_SearchBooking_BTF_SearchBooking_BTF_ExecutePageDef"
+          path="TaskFlow.SearchBooking_BTF_SearchBooking_BTF_ExecutePageDef"/>
+    <page id="custom_lease_view_AddEditReceipt_AddEditReceipt_ExecutePageDef"
+          path="TaskFlow.AddEditReceipt_AddEditReceipt_ExecutePageDef"/>
+    <page id="custom_lease_view_OtherChargesPageDef"
+          path="Fragment.OtherChargesPageDef"/>
+    <page id="custom_lease_view_OtherCharges_BTF_OtherCharges_BTF_ExecuteWithParamsPageDef"
+          path="TaskFlow.OtherCharges_BTF_OtherCharges_BTF_ExecuteWithParamsPageDef"/>
+    <page id="custom_lease_view_SearchCancellationPageDef"
+          path="Fragment.SearchCancellationPageDef"/>
+    <page id="custom_lease_view_AddEditCancellation_BTF_AddEditCancellation_BTF_CreateInsertPageDef"
+          path="TaskFlow.AddEditCancellation_BTF_AddEditCancellation_BTF_CreateInsertPageDef"/>
+    <page id="custom_lease_view_AddEditCancellationPageDef"
+          path="Fragment.AddEditCancellationPageDef"/>
+    <page id="custom_lease_view_AddEditCancellation_BTF_AddEditCancellation_BTF_ExecuteWithParamsPageDef"
+          path="TaskFlow.AddEditCancellation_BTF_AddEditCancellation_BTF_ExecuteWithParamsPageDef"/>
+    <page id="custom_lease_view_SearchCancellation_BTF_SearchCancellation_BTF_ExecutePageDef"
+          path="TaskFlow.SearchCancellation_BTF_SearchCancellation_BTF_ExecutePageDef"/>
+    <page id="custom_lease_view_ApprovalhistoryPageDef"
+          path="Fragment.ApprovalhistoryPageDef"/>
+    <page id="custom_lease_view_CheckListPageDef" path="Page.CheckListPageDef"/>
+    <page id="custom_lease_view_CheckList_BTF_CheckList_BTF_filterCheckList1PageDef"
+          path="TaskFlow.CheckList_BTF_CheckList_BTF_filterCheckList1PageDef"/>
+    <page id="custom_lease_view_LeaseRcptCollectionPageDef"
+          path="Fragment.LeaseRcptCollectionPageDef"/>
+    <page id="custom_lease_view_AddEditBooking_BTF_AddEditBooking_BTF_ExecutePageDef"
+          path="TaskFlow.AddEditBooking_BTF_AddEditBooking_BTF_ExecutePageDef"/>
+    <page id="custom_lease_view_DashBoardPageDef" path="Page.DashBoardPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="customRootAppModuleDataControl"
+                     Package="custom.lease.model.AM"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="customRootAppModuleLocal"
+                     syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="PropertyBuildingsAMDataControl"
+                     Package="custom.lease.model.AM"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="PropertyBuildingsAMLocal"
+                     syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="PaymentPlanAMDataControl"
+                     Package="custom.lease.model.AM"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="PaymentPlanAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="Documents_AMDataControl"
+                     Package="custom.lease.model.AM"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="Documents_AMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="Receipt_AMDataControl" Package="custom.lease.model.AM"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="Receipt_AMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="Invoice_AMDataControl" Package="custom.lease.model.AM"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="Invoice_AMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="PriceListAMDataControl" Package="custom.lease.model.AM"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="PriceListAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="Booking_AMDataControl" Package="custom.lease.model.AM"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="Booking_AMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="PropertyMasterAMDataControl"
+                     Package="custom.lease.model.AM"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="PropertyMasterAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="PropertyUnitAMDataControl"
+                     Package="custom.lease.model.AM"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="PropertyUnitAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

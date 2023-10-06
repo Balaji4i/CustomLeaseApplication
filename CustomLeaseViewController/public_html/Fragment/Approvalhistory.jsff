@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth"
+                         dimensionsFrom="auto">
+    <f:facet name="center">
+      <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+        <f:facet name="toolbar">
+          <af:toolbar id="t2"/>
+        </f:facet>
+        <af:table value="#{bindings.ApprovalHistoryRovo1.collectionModel}"
+                  var="row" rows="#{bindings.ApprovalHistoryRovo1.rangeSize}"
+                  emptyText="#{bindings.ApprovalHistoryRovo1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  fetchSize="4"
+                  rowBandingInterval="0"
+                  filterModel="#{bindings.ApprovalHistoryRovo1Query.queryDescriptor}"
+                  queryListener="#{bindings.ApprovalHistoryRovo1Query.processQuery}"
+                  filterVisible="true" varStatus="vs"
+                  selectedRowKeys="#{bindings.ApprovalHistoryRovo1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.ApprovalHistoryRovo1.collectionModel.makeCurrent}"
+                  rowSelection="single" id="t1" styleClass="AFStretchWidth"
+                  scrollPolicy="page" autoHeightRows="0"
+                  columnStretching="column:c7">
+          <af:column id="c11" headerText="S.No" width="40">
+            <af:outputText value="#{vs.index+1}" id="ot11"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.ApprovalHistoryRovo1.hints.ApprRole.name}"
+                     filterable="true" sortable="true"
+                     headerText="#{bindings.ApprovalHistoryRovo1.hints.ApprRole.label}"
+                     id="c9" rendered="false">
+            <af:outputText value="#{row.ApprRole}" id="ot5"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.ApprovalHistoryRovo1.hints.ApproverId.name}"
+                     filterable="true" sortable="true"
+                     headerText="Approver"
+                     id="c3">
+            <af:outputText value="#{row.ApproverId}" id="ot4"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.ApprovalHistoryRovo1.hints.UserName.name}"
+                     filterable="true" sortable="true"
+                     headerText="Name"
+                     id="c8" width="150">
+            <af:outputText value="#{row.UserName}" id="ot6"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.ApprovalHistoryRovo1.hints.UserEmailId.name}"
+                     filterable="true" sortable="true"
+                     headerText="Email"
+                     id="c10" width="150">
+            <af:outputText value="#{row.UserEmailId}" id="ot7"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.ApprovalHistoryRovo1.hints.CycleNo.name}"
+                     filterable="true" sortable="true"
+                     headerText="Cycle No"
+                     id="c5">
+            <af:outputText value="#{row.CycleNo}" id="ot2"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.ApprovalHistoryRovo1.hints.CycleFlag.name}"
+                     filterable="true" sortable="true"
+                     headerText="Cycle Flag"
+                     id="c1" rendered="false">
+            <af:outputText value="#{row.CycleFlag}" id="ot9"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.ApprovalHistoryRovo1.hints.SubmissionDate.name}"
+                     filterable="true" sortable="true"
+                     headerText="Submission Date"
+                     id="c4">
+            <f:facet name="filter">
+              <af:inputDate value="#{vs.filterCriteria.SubmissionDate}"
+                            id="id2"/>
+            </f:facet>
+            <af:outputText value="#{row.SubmissionDate}" id="ot1">
+              <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortProperty="#{bindings.ApprovalHistoryRovo1.hints.ActionDate.name}"
+                     filterable="true" sortable="true"
+                     headerText="Action Date"
+                     id="c6">
+            <f:facet name="filter">
+              <af:inputDate value="#{vs.filterCriteria.ActionDate}" id="id1"/>
+            </f:facet>
+            <af:outputText value="#{row.ActionDate}" id="ot3">
+              <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortProperty="#{bindings.ApprovalHistoryRovo1.hints.Status.name}"
+                     filterable="true" sortable="true"
+                     headerText="#{bindings.ApprovalHistoryRovo1.hints.Status.label}"
+                     id="c2">
+            <af:outputText value="#{row.Status}" id="ot10"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.ApprovalHistoryRovo1.hints.Description.name}"
+                     filterable="true" sortable="true"
+                     headerText="#{bindings.ApprovalHistoryRovo1.hints.Description.label}"
+                     id="c7">
+            <af:outputText value="#{row.Description}" id="ot8"/>
+          </af:column>
+        </af:table>
+      </af:panelCollection>
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>

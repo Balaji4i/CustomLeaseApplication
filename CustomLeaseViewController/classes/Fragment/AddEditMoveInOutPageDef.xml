@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="AddEditMoveInOutPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.MoveInOut_AM1.xxplMoveInOutView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="xxplMoveInOutView1Iterator"/>
+    <iterator Binds="Root.MoveInOut_AM1.XxplMoveIoKeysView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplMoveIoKeysView1Iterator"/>
+    <iterator Binds="Root.MoveInOut_AM1.XxplMoveIoMetersView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplMoveIoMetersView1Iterator"/>
+    <iterator Binds="Root.MoveInOut_AM1.XxplMoveIoCustVisitView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplMoveIoCustVisitView1Iterator"/>
+    <taskFlow id="ApprovalHistory_BTF1"
+              taskFlowId="/WEB-INF/TaskFlow/ApprovalHistory_BTF.xml#ApprovalHistory_BTF"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="plid" value="#{pageFlowScope.FuncRefId}"/>
+        <parameter id="fuctionid" value="#{pageFlowScope.FuncId}"/>
+      </parameters>
+    </taskFlow>
+    <iterator id="AppovalTypeROVO1Iterator"
+              Binds="Root.Documents_AM.AppovalTypeROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator id="GetID_Rovo1Iterator" Binds="Root.Documents_AM.GetID_Rovo1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <listOfValues StaticList="false" IterBinding="xxplMoveInOutView1Iterator"
+                  Uses="LOV_BookingIdTrans" id="BookingIdTrans"/>
+    <listOfValues StaticList="false" IterBinding="xxplMoveInOutView1Iterator"
+                  Uses="LOV_ResourceName" id="ResourceName"/>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator" id="MoveIoId">
+      <AttrNames>
+        <Item Value="MoveIoId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator" id="MoveIoNumber">
+      <AttrNames>
+        <Item Value="MoveIoNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator" id="MoveIoDate">
+      <AttrNames>
+        <Item Value="MoveIoDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="xxplMoveInOutView1Iterator" StaticList="false"
+          Uses="LOV_OrgId" id="OrgId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator" id="BookingId">
+      <AttrNames>
+        <Item Value="BookingId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator" id="AssistedBy">
+      <AttrNames>
+        <Item Value="AssistedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator" id="CertDate">
+      <AttrNames>
+        <Item Value="CertDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator" id="CertNumber">
+      <AttrNames>
+        <Item Value="CertNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator" id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator" id="FuncId">
+      <AttrNames>
+        <Item Value="FuncId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator" id="HandoverType">
+      <AttrNames>
+        <Item Value="HandoverType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator" id="IoFlag">
+      <AttrNames>
+        <Item Value="IoFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XxplMoveIoKeysView1Iterator" id="XxplMoveIoKeysView1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplMoveIoKeysView"
+                      Name="XxplMoveIoKeysView10">
+        <AttrNames>
+          <Item Value="KeyId"/>
+          <Item Value="MoveIoId"/>
+          <Item Value="KeyQty"/>
+          <Item Value="BookingId"/>
+          <Item Value="KeyCode"/>
+          <Item Value="EmployeeName"/>
+          <Item Value="AssistedBy"/>
+          <Item Value="KeyDescription"/>
+          <Item Value="KeyStatus" Binds="KeyStatus"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="XxplMoveIoMetersView1Iterator"
+          id="XxplMoveIoMetersView1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplMoveIoMetersView"
+                      Name="XxplMoveIoMetersView10">
+        <AttrNames>
+          <Item Value="MoveIoId"/>
+          <Item Value="MeterId"/>
+          <Item Value="MeterValue"/>
+          <Item Value="MeterCode"/>
+          <Item Value="EmployeeName"/>
+          <Item Value="AssistedBy"/>
+          <Item Value="BookingId"/>
+          <Item Value="ViewDescription"/>
+          <Item Value="ViewStatus" Binds="ViewStatus"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="XxplMoveIoCustVisitView1Iterator"
+          id="XxplMoveIoCustVisitView1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplMoveIoCustVisitView"
+                      Name="XxplMoveIoCustVisitView10">
+        <AttrNames>
+          <Item Value="MoveIoId"/>
+          <Item Value="BookingId"/>
+          <Item Value="VisitId"/>
+          <Item Value="VisitDate"/>
+          <Item Value="EmployeeName"/>
+          <Item Value="AssistedBy"/>
+          <Item Value="AcceptFlag" Binds="AcceptFlag"/>
+          <Item Value="VisitDescription"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplMoveIoKeysView1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="XxplMoveIoKeysView1Iterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="XxplMoveIoMetersView1Iterator" id="CreateInsert1"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="XxplMoveIoMetersView1Iterator" id="Delete1"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="XxplMoveIoCustVisitView1Iterator" id="CreateInsert2"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="XxplMoveIoCustVisitView1Iterator" id="Delete2"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <button IterBinding="XxplMoveIoCustVisitView1Iterator" id="AcceptFlag"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="AcceptFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="xxplMoveInOutView1Iterator" id="CertReceived"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="CertReceived"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <action id="Commit" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <button IterBinding="XxplMoveIoKeysView1Iterator" id="KeyStatus"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="KeyStatus"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="XxplMoveIoMetersView1Iterator" id="ViewStatus"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ViewStatus"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator"
+                     id="leaseenddate_trans">
+      <AttrNames>
+        <Item Value="leaseenddate_trans"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator"
+                     id="leasestartdate_trans">
+      <AttrNames>
+        <Item Value="leasestartdate_trans"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="xxplMoveInOutView1Iterator" id="FlowWith">
+      <AttrNames>
+        <Item Value="FlowWith"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

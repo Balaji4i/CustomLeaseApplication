@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+      <af:panelGroupLayout id="pgl1" styleClass="AFStretchWidth"
+                           inlineStyle="border-color:transparent; height:auto;">
+        <af:panelBox text="Search Result" id="pb1" showDisclosure="false"
+                     styleClass="AFStretchWidth"
+                     inlineStyle="height:670.0px;border-color:transparent;">
+          <f:facet name="toolbar"/>
+          <af:query id="qryId1" headerText="Search" disclosed="true"
+                    value="#{bindings.XxplLeadVROVOCriteriaQuery.queryDescriptor}"
+                    model="#{bindings.XxplLeadVROVOCriteriaQuery.queryModel}"
+                    queryListener="#{bindings.XxplLeadVROVOCriteriaQuery.processQuery}"
+                    queryOperationListener="#{bindings.XxplLeadVROVOCriteriaQuery.processQueryOperation}"
+                    resultComponentId="::pc1:t2" rows="2" maxColumns="3"/>
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+            <f:facet name="menus"/>
+            <f:facet name="toolbar">
+              <af:toolbar id="t1" flex="100">
+                <af:commandImageLink id="cil1" inlineStyle="margin-right:10px;"
+                                     hoverIcon="/images/func_add_16_hov.png"
+                                     depressedIcon="/images/func_add_16_act.png"
+                                     disabledIcon="/images/func_add_16_dis.png"
+                                     icon="/images/func_add_16_ena.png"
+                                     action="addEdit">
+                  <af:setPropertyListener from="#{'add'}"
+                                          to="#{pageFlowScope.mode}"
+                                          type="action"/>
+                  <af:setPropertyListener from="#{null}"
+                                          to="#{pageFlowScope.headerId}"
+                                          type="action"/>
+                </af:commandImageLink>
+                <af:spacer width="10" height="10" id="s2"/>
+                <af:commandImageLink id="cil2"
+                                     hoverIcon="/images/func_pencil_16_hov.png"
+                                     inlineStyle="margin-right:10px;"
+                                     disabledIcon="/images/func_pencil_16_dis.png"
+                                     depressedIcon="/images/func_pencil_16_act.png"
+                                     icon="/images/func_pencil_16_ena.png"
+                                     action="addEdit"
+                                     actionListener="#{backingBeanScope.SearchLead.onClickEdit}">
+                  <af:setPropertyListener from="#{'edit'}"
+                                          to="#{pageFlowScope.mode}"
+                                          type="action"/>
+                  <af:setPropertyListener from="#{bindings.LeadId.inputValue}"
+                                          to="#{pageFlowScope.headerId}"
+                                          type="action"/>
+                </af:commandImageLink>
+                <af:spacer width="10" height="10" id="s3"/>
+              </af:toolbar>
+            </f:facet>
+            <f:facet name="statusbar"/>
+            <af:table value="#{bindings.XxplLead_V_ROVO.collectionModel}"
+                      var="row" rows="#{bindings.XxplLead_V_ROVO.rangeSize}"
+                      emptyText="#{bindings.XxplLead_V_ROVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="10"
+                      rowBandingInterval="0" varStatus="vs"
+                      selectedRowKeys="#{bindings.XxplLead_V_ROVO.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.XxplLead_V_ROVO.collectionModel.makeCurrent}"
+                      rowSelection="single" id="t2" columnStretching="last"
+                      scrollPolicy="page" autoHeightRows="0">
+              <af:column id="c77" width="50" headerText="S.No" filterable="true"
+                         frozen="true">
+                <af:panelGroupLayout id="pgl4" halign="center"
+                                     layout="vertical">
+                  <af:outputText value="#{vs.index+1}" id="ot110"/>
+                </af:panelGroupLayout>
+              </af:column>
+              <af:column headerText="#{bindings.XxplLead_V_ROVO.hints.LeadId.label}"
+                         id="c11" rendered="false"
+                         sortProperty="#{bindings.XxplLead_V_ROVO.hints.LeadId.name}"
+                         sortable="false">
+                        
+                <af:outputText value="#{row.LeadId}" id="ot11">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.XxplLead_V_ROVO.hints.LeadId.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplLead_V_ROVO.hints.LeadNumber.name}"
+                         sortable="false" headerText="Lead No" id="c5"
+                         width="150">
+                          <af:commandImageLink id="cil3"
+                                   
+                                     action="addEdit"
+                                     actionListener="#{backingBeanScope.SearchLead.onClickEdit}"
+                                               text="#{row.LeadNumber}">
+                  <af:setPropertyListener from="#{'edit'}"
+                                          to="#{pageFlowScope.mode}"
+                                          type="action"/>
+                  <af:setPropertyListener from="#{bindings.LeadId.inputValue}"
+                                          to="#{pageFlowScope.headerId}"
+                                          type="action"/>
+                </af:commandImageLink> 
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplLead_V_ROVO.hints.LeadName.name}"
+                         sortable="false" headerText="Lead Name" id="c6"
+                         width="200">
+                <af:outputText value="#{row.LeadName}" id="ot2"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplLead_V_ROVO.hints.OrgName.name}"
+                         sortable="false" headerText="Business Unit" id="c3"
+                         width="200">
+                <af:outputText value="#{row.OrgName}" id="ot10"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplLead_V_ROVO.hints.Status.name}"
+                         sortable="false" headerText="Status" id="c2"
+                         width="200" align="center">
+                <af:outputText value="#{row.Status}" id="ot7"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplLead_V_ROVO.hints.EmailId.name}"
+                         sortable="false" headerText="Email" id="c8"
+                         width="200">
+                <af:outputText value="#{row.EmailId}" id="ot3"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XxplLead_V_ROVO.hints.MobileNumber.name}"
+                         sortable="false" headerText="Mobile No" id="c1"
+                         width="200">
+                <af:outputText value="#{row.MobileNumber}" id="ot1"/>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </af:panelBox>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

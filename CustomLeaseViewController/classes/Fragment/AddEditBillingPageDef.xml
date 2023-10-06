@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="AddEditBillingPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.BillingAppModule1.XxplBilling_View1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplBilling_View1Iterator"/>
+    <iterator Binds="Root.BillingAppModule1.XxplBookingMilestones_VO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="10"
+              id="XxplBookingMilestones_VO1Iterator"/>
+    <searchRegion Binds="XxplBookingMilestones_VO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="XxplBookingMilestones_VO1Query"/>
+    <iterator Binds="Root.BillingAppModule1.BillingMilestoneROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="8"
+              id="BillingMilestoneROVO1Iterator"/>
+    <searchRegion Criteria="SearchMilestone"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="BillingMilestoneROVO1Iterator"
+                  id="SearchMilestoneQuery"/>
+    <iterator id="XxplBookingMilestones_VO2Iterator"
+              Binds="Root.BillingAppModule1.XxplBookingMilestones_VO2"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator id="AppovalTypeROVO1Iterator"
+              Binds="Root.BillingAppModule1.AppovalTypeROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="XxplBilling_View1Iterator" id="BillingId">
+      <AttrNames>
+        <Item Value="BillingId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBilling_View1Iterator" id="BillingNumber">
+      <AttrNames>
+        <Item Value="BillingNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBilling_View1Iterator" id="BillingDate">
+      <AttrNames>
+        <Item Value="BillingDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplBilling_View1Iterator" StaticList="false"
+          Uses="LOV_OrgId" id="OrgId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplBilling_View1Iterator" id="ProjectId">
+      <AttrNames>
+        <Item Value="ProjectId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBilling_View1Iterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBilling_View1Iterator" id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplBilling_View1Iterator" id="FuncId">
+      <AttrNames>
+        <Item Value="FuncId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XxplBookingMilestones_VO1Iterator"
+          id="XxplBookingMilestones_VO1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplBookingMilestones_VO"
+                      Name="XxplBookingMilestones_VO10">
+        <AttrNames>
+          <Item Value="Attribute1"/>
+          <Item Value="Attribute10"/>
+          <Item Value="Attribute2"/>
+          <Item Value="Attribute3"/>
+          <Item Value="Attribute4"/>
+          <Item Value="Attribute5"/>
+          <Item Value="Attribute6"/>
+          <Item Value="Attribute7"/>
+          <Item Value="Attribute8"/>
+          <Item Value="Attribute9"/>
+          <Item Value="Baseamount"/>
+          <Item Value="BillingId"/>
+          <Item Value="BookingHdrId"/>
+          <Item Value="BookingMsDtlId"/>
+          <Item Value="CarparkingId"/>
+          <Item Value="ChargeName"/>
+          <Item Value="ChargeType"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CustType"/>
+          <Item Value="DueDate"/>
+          <Item Value="InstallmentAmount"/>
+          <Item Value="InstallmentAmountR"/>
+          <Item Value="InstallmentPct"/>
+          <Item Value="InstallmentPctR"/>
+          <Item Value="InstallmentType"/>
+          <Item Value="InvoiceId"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="MilestoneType"/>
+          <Item Value="MilestonesStatus"/>
+          <Item Value="MsDtlId"/>
+          <Item Value="NoOfDays"/>
+          <Item Value="ObjectVersion"/>
+          <Item Value="PaymentTerm"/>
+          <Item Value="PlModId"/>
+          <Item Value="Remarks"/>
+          <Item Value="SeqNumber"/>
+          <Item Value="SourceFuncId"/>
+          <Item Value="SourceFuncRefId"/>
+          <Item Value="Status"/>
+          <Item Value="TaxAmount"/>
+          <Item Value="TaxCode"/>
+          <Item Value="TaxRate"/>
+          <Item Value="BookingDtlId"/>
+          <Item Value="Charges"/>
+          <Item Value="ChargeMethod"/>
+          <Item Value="InstallmentNameTrans"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="BillingMilestoneROVO1Iterator"
+          id="BillingMilestoneROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.BillingMilestoneROVO"
+                      Name="BillingMilestoneROVO10">
+        <AttrNames>
+          <Item Value="BookingMsDtlId"/>
+          <Item Value="BookingHdrId"/>
+          <Item Value="MilestoneType"/>
+          <Item Value="InstallmentType"/>
+          <Item Value="ChargeName"/>
+          <Item Value="InstallmentPct"/>
+          <Item Value="Baseamount"/>
+          <Item Value="TaxRate"/>
+          <Item Value="TaxCode"/>
+          <Item Value="TaxAmount"/>
+          <Item Value="InstallmentAmount"/>
+          <Item Value="ChargeType"/>
+          <Item Value="OrgId"/>
+          <Item Value="BookingNumber"/>
+          <Item Value="PropertyId"/>
+          <Item Value="BuildingId"/>
+          <Item Value="UnitId"/>
+          <Item Value="UnitNumber"/>
+          <Item Value="BuildName"/>
+          <Item Value="BuildNumber"/>
+          <Item Value="PropertyNumber"/>
+          <Item Value="PropertyName"/>
+          <Item Value="InstallmentName"/>
+          <Item Value="ChargeTypeDisp"/>
+          <Item Value="TransientCheckBox"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

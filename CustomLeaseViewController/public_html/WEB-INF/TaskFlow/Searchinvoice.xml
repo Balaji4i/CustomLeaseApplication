@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Searchinvoice">
+    <default-activity id="__1">SearchInvoice</default-activity>
+    <managed-bean id="__9">
+      <managed-bean-name id="__11">Film</managed-bean-name>
+      <managed-bean-class id="__12">custom.lease.custom.view.beans.filmStrip.FilmStripBean</managed-bean-class>
+      <managed-bean-scope id="__10">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchInvoice">
+      <page>/Fragment/SearchInvoice.jsff</page>
+    </view>
+    <task-flow-call id="AddEditInvoice">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditInvoice.xml</document>
+        <id>AddEditInvoice</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>action</name>
+        <value>#{pageFlowScope.action}</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>invoiceNumber</name>
+        <value>#{pageFlowScope.invoiceNumber}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome id="__13">
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Show_TS">
+      <method>#{backingBeanScope.Film._showFilmStrip}</method>
+      <outcome id="__31">
+        <fixed-outcome>back</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id id="__3">SearchInvoice</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome id="__6">toInvoice</from-outcome>
+        <to-activity-id id="__4">AddEditInvoice</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
+      <from-activity-id id="__15">AddEditInvoice</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome id="__17">rollback</from-outcome>
+        <to-activity-id id="__18">Execute</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__21">
+        <from-outcome id="__20">commit</from-outcome>
+        <to-activity-id id="__19">Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__32">
+      <from-activity-id id="__33">Execute</from-activity-id>
+      <control-flow-case id="__34">
+        <from-outcome id="__35">Execute</from-outcome>
+        <to-activity-id id="__36">Show_TS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__37">
+      <from-activity-id id="__38">Show_TS</from-activity-id>
+      <control-flow-case id="__41">
+        <from-outcome id="__39">back</from-outcome>
+        <to-activity-id id="__40">SearchInvoice</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

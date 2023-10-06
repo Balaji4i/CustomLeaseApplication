@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+ <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                  id="pt1">
+  <f:facet name="pageContents">
+   <af:panelBox text="Create Receipts" id="pb1" showDisclosure="false"
+                 inlineStyle="border-color:transparent;">
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+     <f:facet name="menus"/>
+     <f:facet name="toolbar">
+      <af:toolbar id="t2">
+       <af:commandButton text="Create" id="cb1" action="bckToRcpt"
+                         actionListener="#{backingBeanScope.LeaseRcptCollectionMb.onClickCreateRcpt}"
+                         disabled="#{bindings.XxplReceiptTransaction_V_ROVO1.estimatedRowCount =='0' ? true : false}"/>
+       <af:commandButton text="Cancel" id="cb2" action="bckToRcpt"/>
+      </af:toolbar>
+     </f:facet>
+     <f:facet name="statusbar"/>
+     <af:table value="#{bindings.XxplReceiptTransaction_V_ROVO1.collectionModel}"
+               var="row"
+               rows="#{bindings.XxplReceiptTransaction_V_ROVO1.rangeSize}"
+               emptyText="#{bindings.XxplReceiptTransaction_V_ROVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+               fetchSize="10"
+               rowBandingInterval="0" columnStretching="column:c3"
+               selectedRowKeys="#{bindings.XxplReceiptTransaction_V_ROVO1.collectionModel.selectedRow}"
+               selectionListener="#{bindings.XxplReceiptTransaction_V_ROVO1.collectionModel.makeCurrent}"
+               rowSelection="single" id="t1" partialTriggers="cil40 cil30"
+               scrollPolicy="page" autoHeightRows="0">
+      <af:column headerText="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.Receipt_Flag_Trans.label}"
+                 id="c1" align="center">
+       <af:selectBooleanCheckbox value="#{row.bindings.Receipt_Flag_Trans.inputValue}"
+                                 label="#{row.bindings.Receipt_Flag_Trans.label}"
+                                 shortDesc="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.Receipt_Flag_Trans.tooltip}"
+                                 id="sbc1"/>
+        <f:facet name="header">
+                    <af:panelGroupLayout id="pgl3" layout="vertical"
+                                         halign="center">
+                      <af:commandImageLink id="cil40"
+                                           icon="/images/cfg_checkboxselected_ena.png"
+                                           disabledIcon="/images/cfg_checkboxselected_dis.png"
+                                           hoverIcon="/images/cfg_checkboxselected_ena.png"
+                                           text="Select All"
+                                           actionListener="#{backingBeanScope.LeaseRcptCollectionMb.onClickReceiptSelectAll}"
+                                           partialSubmit="true"/>
+                      <af:spacer width="10" height="10" id="s90"/>
+                      <af:commandImageLink id="cil30"
+                                           disabledIcon="/images/cfg_checkboxunselected_dis.png"
+                                           icon="/images/cfg_checkboxunselected_ena.png"
+                                           hoverIcon="/images/cfg_checkboxunselected_ovr.png"
+                                           text="UnSelect All"
+                                           actionListener="#{backingBeanScope.LeaseRcptCollectionMb.onClickReceiptUnSelectAll}"
+                                           partialSubmit="true"/>
+                    </af:panelGroupLayout>
+                  </f:facet>
+      </af:column>
+      <af:column sortProperty="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.PeriodDuration.name}"
+                 sortable="false"
+                 headerText="Period Duration"
+                 id="c3" align="center">
+       <af:outputText value="#{row.PeriodDuration}" id="ot7"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.Amount.name}"
+                 sortable="false"
+                 headerText="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.Amount.label}"
+                 id="c8" align="center">
+       <af:outputText value="#{row.Amount}" id="ot1">
+       <af:convertNumber
+                                      pattern="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.Amount.format}"
+                                      minFractionDigits="2"
+                                      maxFractionDigits="2"/>
+       </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.Tax.name}"
+                 sortable="false"
+                 headerText="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.Tax.label}"
+                 id="c10" align="center">
+       <af:outputText value="#{row.Tax}" id="ot5">
+       <af:convertNumber
+                                      pattern="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.Tax.format}"
+                                      minFractionDigits="2"
+                                      maxFractionDigits="2"/>
+       </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.InvoiceAmt.name}"
+                 sortable="false"
+                 headerText="Invoice Amount"
+                 id="c9" align="center">
+       <af:outputText value="#{row.InvoiceAmt}" id="ot2">
+        <af:convertNumber
+                                      pattern="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.InvoiceAmt.format}"
+                                      minFractionDigits="2"
+                                      maxFractionDigits="2"/>
+       </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.ReceiptAppliedAmt.name}"
+                 sortable="false"
+                 headerText="Applied Amount"
+                 id="c5" align="center">
+       <af:outputText value="#{row.ReceiptAppliedAmt}" id="ot6">
+       <af:convertNumber
+                                      pattern="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.ReceiptAppliedAmt.format}"
+                                      minFractionDigits="2"
+                                      maxFractionDigits="2"/>
+       </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.BalanceAmt.name}"
+                 sortable="false"
+                 headerText="Balance Amount"
+                 id="c2" align="center">
+       <af:outputText value="#{row.BalanceAmt}" id="ot10">
+       <af:convertNumber
+                                      pattern="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.BalanceAmt.format}"
+                                      minFractionDigits="2"
+                                      maxFractionDigits="2"/>
+       </af:outputText>
+      </af:column>
+      <af:column headerText="Receiving Amount"
+                 id="c4">
+       <af:inputText value="#{row.bindings.Set_Amount_Trans.inputValue}"
+                     label="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.Set_Amount_Trans.label}"
+                     required="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.Set_Amount_Trans.mandatory}"
+                     columns="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.Set_Amount_Trans.displayWidth}"
+                     maximumLength="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.Set_Amount_Trans.precision}"
+                     shortDesc="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.Set_Amount_Trans.tooltip}"
+                     id="it1"
+                     binding="#{backingBeanScope.LeaseRcptCollectionMb.it1}"
+                     valueChangeListener="#{backingBeanScope.LeaseRcptCollectionMb.onEntrSetAmtTrans}"
+                     autoSubmit="true">
+        <f:validator binding="#{row.bindings.Set_Amount_Trans.validator}"/>
+       </af:inputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.ReceiptCategory.name}"
+                 sortable="false"
+                 headerText="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.ReceiptCategory.label}"
+                 id="c6" visible="false">
+       <af:outputText value="#{row.ReceiptCategory}" id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.SourcesRefDtlId.name}"
+                 sortable="false"
+                 headerText="#{bindings.XxplReceiptTransaction_V_ROVO1.hints.SourcesRefDtlId.label}"
+                 id="c7" rendered="false">
+       <af:outputText value="#{row.SourcesRefDtlId}" id="ot3"/>
+      </af:column>
+     </af:table>
+    </af:panelCollection>
+   </af:panelBox>
+</f:facet>
+</af:pageTemplate>
+</jsp:root>

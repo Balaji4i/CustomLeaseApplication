@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SearchBilling_BTF">
+    <default-activity id="__1">SearchBilling</default-activity>
+    <managed-bean id="__29">
+      <managed-bean-name id="__31">FlimStrip</managed-bean-name>
+      <managed-bean-class id="__32">com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope id="__30">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchBilling">
+      <page>/Fragment/SearchBilling.jsff</page>
+    </view>
+    <task-flow-call id="AddEditBilling_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditBilling_BTF.xml</document>
+        <id>AddEditBilling_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>billingId</name>
+        <value>#{pageFlowScope.billid}</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>BillingNavigation</name>
+        <value>#{pageFlowScope.billNaviResult}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome id="__9">
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="showFs">
+      <method>#{backingBeanScope.FlimStrip._showFilmStrip}</method>
+      <outcome id="__28">
+        <fixed-outcome>back</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id id="__3">SearchBilling</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome id="__6">toBilling</from-outcome>
+        <to-activity-id id="__4">AddEditBilling_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id id="__11">AddEditBilling_BTF</from-activity-id>
+      <control-flow-case id="__12">
+        <from-outcome id="__14">Cancel</from-outcome>
+        <to-activity-id id="__13">Execute</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__16">
+        <from-outcome id="__17">Save</from-outcome>
+        <to-activity-id id="__15">Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__18">
+      <from-activity-id id="__19">Execute</from-activity-id>
+      <control-flow-case id="__21">
+        <from-outcome id="__20">Execute</from-outcome>
+        <to-activity-id id="__22">showFs</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id id="__24">showFs</from-activity-id>
+      <control-flow-case id="__26">
+        <from-outcome id="__27">back</from-outcome>
+        <to-activity-id id="__25">SearchBilling</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

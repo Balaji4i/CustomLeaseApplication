@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SearchCancellation_BTF">
+    <default-activity id="__1">SearchCancellation</default-activity>
+    <managed-bean id="__12">
+      <managed-bean-name id="__11">FilmStrip</managed-bean-name>
+      <managed-bean-class id="__10">com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope id="__9">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchCancellation">
+      <page>/Fragment/SearchCancellation.jsff</page>
+    </view>
+    <task-flow-call id="AddEditCancellation_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditCancellation_BTF.xml</document>
+        <id>AddEditCancellation_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>editCancelId</name>
+        <value>#{pageFlowScope.editCancelId}</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>addEditMode</name>
+        <value>#{pageFlowScope.addEditMode}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="hideFS">
+      <method>#{backingBeanScope.FilmStrip._hideFilmStrip}</method>
+      <outcome id="__18">
+        <fixed-outcome>hideAndGo</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome id="__19">
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="showFS">
+      <method>#{backingBeanScope.FilmStrip._showFilmStrip}</method>
+      <outcome id="__38">
+        <fixed-outcome>showFsAndGo</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id id="__3">SearchCancellation</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome id="__6">toCancel</from-outcome>
+        <to-activity-id id="__5">hideFS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id id="__14">hideFS</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome id="__17">hideAndGo</from-outcome>
+        <to-activity-id id="__16">AddEditCancellation_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__20">
+      <from-activity-id id="__21">Execute</from-activity-id>
+      <control-flow-case id="__22">
+        <from-outcome id="__24">Execute</from-outcome>
+        <to-activity-id id="__23">SearchCancellation</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__25">
+      <from-activity-id id="__26">AddEditCancellation_BTF</from-activity-id>
+      <control-flow-case id="__28">
+        <from-outcome id="__27">Save</from-outcome>
+        <to-activity-id id="__29">showFS</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__32">
+        <from-outcome id="__30">RollBack</from-outcome>
+        <to-activity-id id="__31">showFS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__33">
+      <from-activity-id id="__34">showFS</from-activity-id>
+      <control-flow-case id="__35">
+        <from-outcome id="__37">showFsAndGo</from-outcome>
+        <to-activity-id id="__36">Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

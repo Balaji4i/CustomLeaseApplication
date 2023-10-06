@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="SearchBookingPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.Booking_AM.SEARCH_BOOKING_ROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="15"
+              id="SEARCH_BOOKING_ROVOIterator"/>
+    <searchRegion Binds="SEARCH_BOOKING_ROVOIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SEARCH_BOOKING_ROVOQuery"/>
+    <searchRegion Criteria="SearchBooking"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SEARCH_BOOKING_ROVOIterator" id="SearchBookingQuery"/>
+    <iterator Binds="Root.Booking_AM.BookingCount_ROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="BookingCount_ROVOIterator"/>
+    <iterator id="BookingVmsDtls_RoVo1Iterator"
+              Binds="Root.Booking_AM.BookingVmsDtls_RoVo1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SEARCH_BOOKING_ROVOIterator" id="SEARCH_BOOKING_ROVO">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SEARCH_BOOKING_ROVO"
+                      Name="SEARCH_BOOKING_ROVO0">
+        <AttrNames>
+          <Item Value="BookingHdrId"/>
+          <Item Value="OrgId"/>
+          <Item Value="BookingNumber"/>
+          <Item Value="BookingDate"/>
+          <Item Value="UnitName"/>
+          <Item Value="CustomerName"/>
+          <Item Value="OrgName"/>
+          <Item Value="Status"/>
+          <Item Value="BookingLeaseStartDate"/>
+          <Item Value="BookingLeaseEndDate"/>
+          <Item Value="PropertyName"/>
+          <Item Value="BuildName"/>
+          <Item Value="Description"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="Attribute2"/>
+          <Item Value="Attribute4"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SEARCH_BOOKING_ROVOIterator"
+                     id="BookingHdrId">
+      <AttrNames>
+        <Item Value="BookingHdrId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BookingCount_ROVOIterator" id="AllBooking">
+      <AttrNames>
+        <Item Value="AllBooking"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BookingCount_ROVOIterator" id="AprBooking">
+      <AttrNames>
+        <Item Value="AprBooking"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BookingCount_ROVOIterator" id="DraBooking">
+      <AttrNames>
+        <Item Value="DraBooking"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BookingCount_ROVOIterator" id="PenBooking">
+      <AttrNames>
+        <Item Value="PenBooking"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BookingCount_ROVOIterator" id="RejBooking">
+      <AttrNames>
+        <Item Value="RejBooking"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BookingCount_ROVOIterator" id="CancelBooking">
+      <AttrNames>
+        <Item Value="CancelBooking"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SEARCH_BOOKING_ROVOIterator"
+                     id="BookingNumber">
+      <AttrNames>
+        <Item Value="BookingNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SEARCH_BOOKING_ROVOIterator"
+                     id="BookingLeaseStartDate">
+      <AttrNames>
+        <Item Value="BookingLeaseStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SEARCH_BOOKING_ROVOIterator"
+                     id="BookingLeaseEndDate">
+      <AttrNames>
+        <Item Value="BookingLeaseEndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SEARCH_BOOKING_ROVOIterator" id="DummyDate1">
+      <AttrNames>
+        <Item Value="DummyDate1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SEARCH_BOOKING_ROVOIterator" id="DummyDate2">
+      <AttrNames>
+        <Item Value="DummyDate2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SEARCH_BOOKING_ROVOIterator"
+                     id="RenewalFromDate">
+      <AttrNames>
+        <Item Value="RenewalFromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SEARCH_BOOKING_ROVOIterator" StaticList="false"
+          Uses="LOV_PaymentType" id="PaymentType" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="SEARCH_BOOKING_ROVOIterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

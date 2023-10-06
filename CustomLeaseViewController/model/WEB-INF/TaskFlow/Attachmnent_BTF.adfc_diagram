@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">intAttachments</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>intAttachments&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">161.44824</property>
+      <property
+         name="x">171.68555</property>
+   </MethodCall>
+   <TaskFlowReturn
+      id="TaskFlowReturn4">
+      <property
+         name="activityId">taskFlowReturn1</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>taskFlowReturn1&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  taskFlowReturn1&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">107.94824</property>
+      <property
+         name="x">664.0</property>
+   </TaskFlowReturn>
+   <View
+      id="View12">
+      <property
+         name="activityId">Attachment</property>
+      <property
+         name="page">/Page/Attachment.jspx</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>Attachment&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="thumbnailExpanded">false</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">394.6953</property>
+      <property
+         name="x">325.5</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase13"
+      from="MethodCall3"
+      to="View12">
+      <property
+         name="fromOutcome">intAttachments</property>
+      <property
+         name="sdm:polyPoints">B50,171.68555,215.09766,322.0,340.34473,T44</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase14"
+      from="View12"
+      to="TaskFlowReturn4">
+      <property
+         name="fromOutcome">retunBack</property>
+      <property
+         name="sdm:polyPoints">T56,329.0,340.34473,623.0,107.59766,L50</property>
+   </ControlFlowCase>
+</SDM>

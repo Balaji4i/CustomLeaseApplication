@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="SearchMoveInOutPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.MoveInOut_AM1.SearchMoveInOut_ROVO1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="SearchMoveInOut_ROVO1Iterator"/>
+    <searchRegion Criteria="Search_MoveInOut"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchMoveInOut_ROVO1Iterator"
+                  id="SearchMoveInOutQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SearchMoveInOut_ROVO1Iterator"
+          id="SearchMoveInOut_ROVO1">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SearchMoveInOut_ROVO"
+                      Name="SearchMoveInOut_ROVO10">
+        <AttrNames>
+          <Item Value="MoveIoId"/>
+          <Item Value="MoveIoNumber"/>
+          <Item Value="BookingNumber"/>
+          <Item Value="CustomerName"/>
+          <Item Value="OrgName"/>
+          <Item Value="MoveIoDate"/>
+          <Item Value="ResourceName"/>
+          <Item Value="IoFlag"/>
+          <Item Value="AssistedBy"/>
+          <Item Value="Usage"/>
+          <Item Value="Status"/>
+          <Item Value="Description"/>
+          <Item Value="Attribute1"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SearchMoveInOut_ROVO1Iterator" id="MoveIoId">
+      <AttrNames>
+        <Item Value="MoveIoId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

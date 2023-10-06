@@ -1,0 +1,489 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+      <af:panelBox text="Manage Payment Plan" id="pb1" showDisclosure="false"
+                   inlineStyle="height:870.0px;border-color:transparent;" styleClass="AFStretchWidth">
+        <f:facet name="toolbar">
+          <af:group id="g1">
+            <af:toolbar id="t1">
+              <af:menuBar id="mb1">
+                <af:menu text="Revision" id="m2">
+                  <af:commandMenuItem text="Revised" id="cmi2"
+                                      actionListener="#{PaymentPlanBean.onClickRevised}"
+                                      disabled="#{bindings.Status.inputValue ne 'Approved'}"
+                                      action="Save"/>
+                </af:menu>
+                <af:menu text="Action" id="m1">
+                  <af:commandMenuItem text="Submit" id="commandMenuItem2"
+                                      actionListener="#{PaymentPlanBean.onClickSubmit}"
+                                      action="Save"
+                                      disabled="#{bindings.Status.inputValue ne 'Draft' and bindings.Status.inputValue ne 'Revision'}"/>
+                  <af:commandMenuItem text="Approve" id="cmi1"
+                                      disabled="#{bindings.Status.inputValue ne 'Pending'}">
+                    <af:showPopupBehavior triggerType="action" popupId="p2"/>
+                  </af:commandMenuItem>
+                  <af:commandMenuItem text="Reject" id="commandMenuItem1"
+                                      actionListener="#{PaymentPlanBean.onClickRejected}"
+                                      disabled="#{bindings.Status.inputValue ne 'Pending'}">
+                    <af:showPopupBehavior triggerType="action" popupId="p3"/>
+                  </af:commandMenuItem>
+                  <af:commandMenuItem text="Approval History" id="cmi4"
+                                      actionListener="#{PaymentPlanBean.onClickApprovalHistory}"/>
+                </af:menu>
+                <af:commandButton text="Submit" id="cb4"
+                                  actionListener="#{PaymentPlanBean.onClickSubmit}"
+                                  rendered="false"/>
+                <af:commandButton text="Save" id="cb1"
+                                  actionListener="#{PaymentPlanBean.onClickSave}"/>
+                <af:commandButton text="Save and Close" id="cb2" action="Save"
+                                  actionListener="#{PaymentPlanBean.onClickSave}"/>
+                <af:commandButton text="Cancel" id="cb3" action="cancel"
+                                  immediate="true"/>
+              </af:menuBar>
+              <af:popup id="p2" contentDelivery="lazyUncached">
+                <af:dialog id="d2" type="none" title="Approve"
+                           titleIconSource="/images/available_lg_qualifer.png">
+                  <af:inputText label="Comments" id="it32" rows="3"
+                                contentStyle="width:200px;"
+                                binding="#{PaymentPlanBean.approveComments}"/>
+                  <f:facet name="buttonBar">
+                    <af:group id="g3">
+                      <af:commandButton text="Ok" id="cb5"
+                                        action="Save"
+                                        actionListener="#{PaymentPlanBean.onClickApprove}"/>
+                      <af:commandButton text="Cancel" id="cb6"/>
+                    </af:group>
+                  </f:facet>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="p3" contentDelivery="lazyUncached">
+                <af:dialog id="d3" type="none" title="Reject"
+                           titleIconSource="/images/alert_qualifier.png">
+                  <af:inputText label="Comments" id="it33" rows="3"
+                                contentStyle="width:200px;"/>
+                  <f:facet name="buttonBar">
+                    <af:group id="g4">
+                      <af:commandButton text="Ok" id="cb7"
+                                        action="Save"
+                                        actionListener="#{PaymentPlanBean.onClickRejected}"/>
+                      <af:commandButton text="Cancel" id="cb8"/>
+                    </af:group>
+                  </f:facet>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="p8" binding="#{PaymentPlanBean.p8}">
+               <af:dialog id="d5" title="Approval History">
+                  <af:region value="#{bindings.ApprovalHistory_BTF1.regionModel}" id="r1"/>
+                </af:dialog>
+              </af:popup>
+            </af:toolbar>
+          </af:group>
+        </f:facet>
+        <af:panelFormLayout id="pfl1" maxColumns="3" rows="6">
+          <af:inputText value="#{bindings.MsHdrId.inputValue}"
+                        label="#{bindings.MsHdrId.hints.label}"
+                        required="#{bindings.MsHdrId.hints.mandatory}"
+                        columns="#{bindings.MsHdrId.hints.displayWidth}"
+                        maximumLength="#{bindings.MsHdrId.hints.precision}"
+                        shortDesc="#{bindings.MsHdrId.hints.tooltip}" id="it1"
+                        rendered="false">
+            <f:validator binding="#{bindings.MsHdrId.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.MsHdrId.format}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.MilestoneNumber.inputValue}"
+                        label="#{bindings.MilestoneNumber.hints.label}"
+                        required="#{bindings.MilestoneNumber.hints.mandatory}"
+                        columns="#{bindings.MilestoneNumber.hints.displayWidth}"
+                        maximumLength="#{bindings.MilestoneNumber.hints.precision}"
+                        shortDesc="#{bindings.MilestoneNumber.hints.tooltip}"
+                        id="it9"
+                        contentStyle="width:220px;font-size:medium; font-weight:bold;color:#1367ae;" readOnly="true"
+                        partialTriggers="cb1" autoSubmit="true">
+            <f:validator binding="#{bindings.MilestoneNumber.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.MilestoneName.inputValue}"
+                        label="#{bindings.MilestoneName.hints.label}"
+                        required="#{bindings.MilestoneName.hints.mandatory}"
+                        columns="#{bindings.MilestoneName.hints.displayWidth}"
+                        maximumLength="#{bindings.MilestoneName.hints.precision}"
+                        shortDesc="#{bindings.MilestoneName.hints.tooltip}"
+                        id="it7" contentStyle="width:220px;" autoSubmit="true"
+                        disabled="#{bindings.Status.inputValue eq 'Approved' or bindings.Status.inputValue eq 'Pending'}"
+                        partialTriggers="cmi2">
+            <f:validator binding="#{bindings.MilestoneName.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.MilestoneShortcode.inputValue}"
+                        label="#{bindings.MilestoneShortcode.hints.label}"
+                        required="#{bindings.MilestoneShortcode.hints.mandatory}"
+                        columns="#{bindings.MilestoneShortcode.hints.displayWidth}"
+                        maximumLength="#{bindings.MilestoneShortcode.hints.precision}"
+                        shortDesc="#{bindings.MilestoneShortcode.hints.tooltip}"
+                        id="it12" contentStyle="width:220px;" autoSubmit="true"
+                        disabled="#{bindings.Status.inputValue eq 'Approved' or bindings.Status.inputValue eq 'Pending'}"
+                        partialTriggers="cmi2">
+            <f:validator binding="#{bindings.MilestoneShortcode.validator}"/>
+          </af:inputText>
+          <af:inputDate value="#{bindings.MilestoneDate.inputValue}"
+                        label="#{bindings.MilestoneDate.hints.label}"
+                        required="#{bindings.MilestoneDate.hints.mandatory}"
+                        shortDesc="#{bindings.MilestoneDate.hints.tooltip}"
+                        id="id1" contentStyle="width:220px;" autoSubmit="true"
+                        disabled="#{bindings.Status.inputValue eq 'Approved' or bindings.Status.inputValue eq 'Pending'}"
+                        partialTriggers="cmi2">
+            <f:validator binding="#{bindings.MilestoneDate.validator}"/>
+            <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+          </af:inputDate>
+          <af:inputDate value="#{bindings.StartDate.inputValue}"
+                        label="#{bindings.StartDate.hints.label}"
+                        shortDesc="#{bindings.StartDate.hints.tooltip}" id="id4"
+                        contentStyle="width:220px;" autoSubmit="true"
+                        required="true"
+                        disabled="#{bindings.Status.inputValue eq 'Approved' or bindings.Status.inputValue eq 'Pending'}"
+                        partialTriggers="cmi2">
+            <f:validator binding="#{bindings.StartDate.validator}"/>
+            <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+          </af:inputDate>
+          <af:inputDate value="#{bindings.EndDate.inputValue}"
+                        label="#{bindings.EndDate.hints.label}"
+                        shortDesc="#{bindings.EndDate.hints.tooltip}" id="id5"
+                        contentStyle="width:220px;" autoSubmit="true"
+                        required="true"
+                        disabled="#{bindings.Status.inputValue eq 'Approved' or bindings.Status.inputValue eq 'Pending'}"
+                        partialTriggers="cmi2">
+            <f:validator binding="#{bindings.EndDate.validator}"/>
+            <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+          </af:inputDate>
+          <af:inputComboboxListOfValues id="buNameTransId"
+                                        popupTitle="Search and Select: #{bindings.BuNameTrans.hints.label}"
+                                        value="#{bindings.BuNameTrans.inputValue}"
+                                        label="#{bindings.BuNameTrans.hints.label}"
+                                        model="#{bindings.BuNameTrans.listOfValuesModel}"
+                                        columns="#{bindings.BuNameTrans.hints.displayWidth}"
+                                        shortDesc="#{bindings.BuNameTrans.hints.tooltip}"
+                                        autoSubmit="true"
+                                        contentStyle="width:180px;"
+                                        required="true"
+                                        disabled="#{bindings.Status.inputValue eq 'Approved' or bindings.Status.inputValue eq 'Pending'}"
+                                        partialTriggers="cmi2">
+            <f:validator binding="#{bindings.BuNameTrans.validator}"/>
+          </af:inputComboboxListOfValues>
+          <af:selectOneChoice value="#{bindings.ProjectId.inputValue}"
+                              label="#{bindings.ProjectId.label}"
+                              required="#{bindings.ProjectId.hints.mandatory}"
+                              shortDesc="#{bindings.ProjectId.hints.tooltip}"
+                              id="soc2" partialTriggers="buNameTransId cmi2"
+                              contentStyle="width:220px;" autoSubmit="true"
+                              disabled="#{bindings.Status.inputValue eq 'Approved' or bindings.Status.inputValue eq 'Pending'}">
+            <f:selectItems value="#{bindings.ProjectId.items}" id="si2"/>
+          </af:selectOneChoice>
+          <af:selectOneChoice value="#{bindings.MilestoneType.inputValue}"
+                              label="#{bindings.MilestoneType.label}"
+                              required="true"
+                              shortDesc="#{bindings.MilestoneType.hints.tooltip}"
+                              id="soc1" contentStyle="width:220px;"
+                              autoSubmit="true"
+                              disabled="#{bindings.Status.inputValue eq 'Approved' or bindings.Status.inputValue eq 'Pending'}"
+                              partialTriggers="cmi2">
+            <f:selectItems value="#{bindings.MilestoneType.items}" id="si1"/>
+          </af:selectOneChoice>
+          <af:selectBooleanCheckbox value="#{bindings.ActiveYn.inputValue}"
+                                    label="#{bindings.ActiveYn.label}"
+                                    shortDesc="#{bindings.ActiveYn.hints.tooltip}"
+                                    id="sbc1" contentStyle="width:200px;"
+                                    autoSubmit="true"
+                                    disabled="#{bindings.Status.inputValue eq 'Approved' or bindings.Status.inputValue eq 'Pending'}"
+                                    partialTriggers="cmi2"/>
+          <af:inputText value="#{bindings.Status.inputValue}"
+                        label="#{bindings.Status.hints.label}"
+                        required="#{bindings.Status.hints.mandatory}"
+                        columns="#{bindings.Status.hints.displayWidth}"
+                        maximumLength="#{bindings.Status.hints.precision}"
+                        shortDesc="#{bindings.Status.hints.tooltip}" id="it11"
+                        contentStyle="width:220px;" partialTriggers="cmi2"
+                        disabled="false" readOnly="true">
+            <f:validator binding="#{bindings.Status.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.RevisionNo.inputValue}"
+                        label="#{bindings.RevisionNo.hints.label}"
+                        required="#{bindings.RevisionNo.hints.mandatory}"
+                        columns="#{bindings.RevisionNo.hints.displayWidth}"
+                        maximumLength="#{bindings.RevisionNo.hints.precision}"
+                        shortDesc="#{bindings.RevisionNo.hints.tooltip}"
+                        id="it2" disabled="true" contentStyle="width:220px;"
+                        partialTriggers="cmi2">
+            <f:validator binding="#{bindings.RevisionNo.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.RevisionNo.format}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.RevisedBy.inputValue}"
+                        label="#{bindings.RevisedBy.hints.label}"
+                        required="#{bindings.RevisedBy.hints.mandatory}"
+                        columns="#{bindings.RevisedBy.hints.displayWidth}"
+                        maximumLength="#{bindings.RevisedBy.hints.precision}"
+                        shortDesc="#{bindings.RevisedBy.hints.tooltip}"
+                        id="it3" disabled="true" contentStyle="width:220px;">
+            <f:validator binding="#{bindings.RevisedBy.validator}"/>
+          </af:inputText>
+          <af:inputDate value="#{bindings.RevisionDate.inputValue}"
+                        label="#{bindings.RevisionDate.hints.label}"
+                        required="#{bindings.RevisionDate.hints.mandatory}"
+                        shortDesc="#{bindings.RevisionDate.hints.tooltip}"
+                        id="id3" disabled="true" contentStyle="width:220px;">
+            <f:validator binding="#{bindings.RevisionDate.validator}"/>
+            <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+          </af:inputDate>
+          <af:inputText value="#{bindings.OrgId.inputValue}"
+                        label="#{bindings.OrgId.hints.label}"
+                        required="#{bindings.OrgId.hints.mandatory}"
+                        columns="#{bindings.OrgId.hints.displayWidth}"
+                        maximumLength="#{bindings.OrgId.hints.precision}"
+                        shortDesc="#{bindings.OrgId.hints.tooltip}"
+                        partialTriggers="buNameTransId" id="it4"
+                        rendered="false">
+            <f:validator binding="#{bindings.OrgId.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.OrgId.format}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.CreatedBy.inputValue}"
+                        label="#{bindings.CreatedBy.hints.label}"
+                        required="#{bindings.CreatedBy.hints.mandatory}"
+                        columns="#{bindings.CreatedBy.hints.displayWidth}"
+                        maximumLength="#{bindings.CreatedBy.hints.precision}"
+                        shortDesc="#{bindings.CreatedBy.hints.tooltip}"
+                        id="it13" rendered="false">
+            <f:validator binding="#{bindings.CreatedBy.validator}"/>
+          </af:inputText>
+          <af:inputDate value="#{bindings.CreationDate.inputValue}"
+                        label="#{bindings.CreationDate.hints.label}"
+                        required="#{bindings.CreationDate.hints.mandatory}"
+                        shortDesc="#{bindings.CreationDate.hints.tooltip}"
+                        id="id6" rendered="false">
+            <f:validator binding="#{bindings.CreationDate.validator}"/>
+            <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+          </af:inputDate>
+          <af:inputText value="#{bindings.FuncId.inputValue}"
+                        label="#{bindings.FuncId.hints.label}"
+                        required="#{bindings.FuncId.hints.mandatory}"
+                        columns="#{bindings.FuncId.hints.displayWidth}"
+                        maximumLength="#{bindings.FuncId.hints.precision}"
+                        shortDesc="#{bindings.FuncId.hints.tooltip}" id="it5"
+                        partialTriggers="cb1" rendered="false">
+            <f:validator binding="#{bindings.FuncId.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.FuncId.format}"/>
+          </af:inputText>
+          <af:inputDate value="#{bindings.LastUpdateDate.inputValue}"
+                        label="#{bindings.LastUpdateDate.hints.label}"
+                        required="#{bindings.LastUpdateDate.hints.mandatory}"
+                        shortDesc="#{bindings.LastUpdateDate.hints.tooltip}"
+                        id="id2" rendered="false">
+            <f:validator binding="#{bindings.LastUpdateDate.validator}"/>
+            <af:convertDateTime pattern="#{sessionScope.dateFormat}"/>
+          </af:inputDate>
+          <af:inputText value="#{bindings.LastUpdateLogin.inputValue}"
+                        label="#{bindings.LastUpdateLogin.hints.label}"
+                        required="#{bindings.LastUpdateLogin.hints.mandatory}"
+                        columns="#{bindings.LastUpdateLogin.hints.displayWidth}"
+                        maximumLength="#{bindings.LastUpdateLogin.hints.precision}"
+                        shortDesc="#{bindings.LastUpdateLogin.hints.tooltip}"
+                        id="it14" rendered="false">
+            <f:validator binding="#{bindings.LastUpdateLogin.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.LastUpdatedBy.inputValue}"
+                        label="#{bindings.LastUpdatedBy.hints.label}"
+                        required="#{bindings.LastUpdatedBy.hints.mandatory}"
+                        columns="#{bindings.LastUpdatedBy.hints.displayWidth}"
+                        maximumLength="#{bindings.LastUpdatedBy.hints.precision}"
+                        shortDesc="#{bindings.LastUpdatedBy.hints.tooltip}"
+                        id="it10" rendered="false">
+            <f:validator binding="#{bindings.LastUpdatedBy.validator}"/>
+          </af:inputText>
+        </af:panelFormLayout>
+        <af:spacer width="10" height="20" id="s3"/>
+        <af:inputText value="#{bindings.Description.inputValue}"
+                      label="#{bindings.Description.hints.label}"
+                      required="#{bindings.Description.hints.mandatory}"
+                      columns="#{bindings.Description.hints.displayWidth}"
+                      maximumLength="#{bindings.Description.hints.precision}"
+                      shortDesc="#{bindings.Description.hints.tooltip}" id="it8"
+                      contentStyle="width:620px;" rows="6" autoSubmit="true">
+          <f:validator binding="#{bindings.Description.validator}"/>
+        </af:inputText>
+        <af:spacer width="10" height="10" id="s2"/>
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth"
+                            rendered="false">
+          <f:facet name="toolbar">
+            <af:toolbar id="t3" flex="100">
+              <af:commandImageLink actionListener="#{bindings.CreateInsert.execute}"
+                                   disabled="#{!bindings.CreateInsert.enabled}"
+                                   id="cil1"
+                                   icon="/images/func_add_16_ena.png"
+                                   disabledIcon="/images/func_add_16_dis.png"
+                                   hoverIcon="/images/func_add_16_hov.png"
+                                   depressedIcon="/images/func_add_16_act.png"/>
+              <af:spacer width="10" height="10" id="s1"/>
+              <af:commandImageLink actionListener="#{bindings.Delete.execute}"
+                                   disabled="#{!bindings.Delete.enabled}"
+                                   id="cil2"
+                                   icon="/images/func_remove_16_ena.png"
+                                   disabledIcon="/images/func_remove_16_dis.png"
+                                   hoverIcon="/images/func_remove_16_hov.png"
+                                   depressedIcon="/images/func_remove_16_act.png"/>
+            </af:toolbar>
+          </f:facet>
+          <af:table value="#{bindings.XxplPaymentPlanLineView1.collectionModel}"
+                    var="row"
+                    rows="#{bindings.XxplPaymentPlanLineView1.rangeSize}"
+                    emptyText="#{bindings.XxplPaymentPlanLineView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="10"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.XxplPaymentPlanLineView1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.XxplPaymentPlanLineView1.collectionModel.makeCurrent}"
+                    rowSelection="single" id="t2" styleClass="AFStretchWidth"
+                    columnStretching="last" varStatus="vs"
+                    scrollPolicy="page" autoHeightRows="0"
+                    partialTriggers=":::cmi2">
+            <af:column id="c9" headerText="S.No" width="60" align="center">
+              <af:outputText value="#{vs.index+1}" id="ot1"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.XxplPaymentPlanLineView1.hints.MsHdrId.name}"
+                       sortable="false"
+                       headerText="#{bindings.XxplPaymentPlanLineView1.hints.MsHdrId.label}"
+                       id="c7" rendered="false">
+              <af:inputText value="#{row.bindings.MsHdrId.inputValue}"
+                            label="#{bindings.XxplPaymentPlanLineView1.hints.MsHdrId.label}"
+                            required="#{bindings.XxplPaymentPlanLineView1.hints.MsHdrId.mandatory}"
+                            columns="#{bindings.XxplPaymentPlanLineView1.hints.MsHdrId.displayWidth}"
+                            maximumLength="#{bindings.XxplPaymentPlanLineView1.hints.MsHdrId.precision}"
+                            shortDesc="#{bindings.XxplPaymentPlanLineView1.hints.MsHdrId.tooltip}"
+                            id="it18">
+                <f:validator binding="#{row.bindings.MsHdrId.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.XxplPaymentPlanLineView1.hints.MsHdrId.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.XxplPaymentPlanLineView1.hints.MsDtlId.name}"
+                       sortable="false"
+                       headerText="#{bindings.XxplPaymentPlanLineView1.hints.MsDtlId.label}"
+                       id="c8" rendered="false">
+              <af:inputText value="#{row.bindings.MsDtlId.inputValue}"
+                            label="#{bindings.XxplPaymentPlanLineView1.hints.MsDtlId.label}"
+                            required="#{bindings.XxplPaymentPlanLineView1.hints.MsDtlId.mandatory}"
+                            columns="#{bindings.XxplPaymentPlanLineView1.hints.MsDtlId.displayWidth}"
+                            maximumLength="#{bindings.XxplPaymentPlanLineView1.hints.MsDtlId.precision}"
+                            shortDesc="#{bindings.XxplPaymentPlanLineView1.hints.MsDtlId.tooltip}"
+                            id="it17">
+                <f:validator binding="#{row.bindings.MsDtlId.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.XxplPaymentPlanLineView1.hints.MsDtlId.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="#{bindings.XxplPaymentPlanLineView1.hints.InstallmentType.label}"
+                       id="c3" width="200" align="center">
+              <af:inputListOfValues id="installmentTypeId"
+                                    popupTitle="Search and Select: #{bindings.XxplPaymentPlanLineView1.hints.InstallmentType.label}"
+                                    value="#{row.bindings.InstallmentType.inputValue}"
+                                    model="#{row.bindings.InstallmentType.listOfValuesModel}"
+                                    required="#{bindings.XxplPaymentPlanLineView1.hints.InstallmentType.mandatory}"
+                                    columns="#{bindings.XxplPaymentPlanLineView1.hints.InstallmentType.displayWidth}"
+                                    converter="#{row.bindings.InstallmentType.converter}"
+                                    shortDesc="#{bindings.XxplPaymentPlanLineView1.hints.InstallmentType.tooltip}"
+                                    autoSubmit="true"
+                                    disabled="#{bindings.Status.inputValue eq 'Approved'}">
+                <f:validator binding="#{row.bindings.InstallmentType.validator}"/>
+              </af:inputListOfValues>
+            </af:column>
+            <af:column sortProperty="#{bindings.XxplPaymentPlanLineView1.hints.InstallmentPct.name}"
+                       sortable="false"
+                       headerText="#{bindings.XxplPaymentPlanLineView1.hints.InstallmentPct.label}"
+                       id="c5" align="center">
+              <af:inputText value="#{row.bindings.InstallmentPct.inputValue}"
+                            label="#{bindings.XxplPaymentPlanLineView1.hints.InstallmentPct.label}"
+                            required="#{bindings.XxplPaymentPlanLineView1.hints.InstallmentPct.mandatory}"
+                            columns="#{bindings.XxplPaymentPlanLineView1.hints.InstallmentPct.displayWidth}"
+                            maximumLength="#{bindings.XxplPaymentPlanLineView1.hints.InstallmentPct.precision}"
+                            shortDesc="#{bindings.XxplPaymentPlanLineView1.hints.InstallmentPct.tooltip}"
+                            id="it6" autoSubmit="true"
+                            contentStyle="text-align:right;"
+                            disabled="#{bindings.Status.inputValue eq 'Approved'}">
+                <f:validator binding="#{row.bindings.InstallmentPct.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.XxplPaymentPlanLineView1.hints.InstallmentPct.format}"
+                                  minFractionDigits="2" maxFractionDigits="2"/>
+                <af:validateDoubleRange minimum="0.0" maximum="100.0"
+                                        hintMinimum="a" hintMaximum="b"
+                                        messageDetailMinimum="d"
+                                        messageDetailMaximum="e"
+                                        messageDetailNotInRange="f"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.XxplPaymentPlanLineView1.hints.ChargeType.name}"
+                       sortable="false"
+                       headerText="#{bindings.XxplPaymentPlanLineView1.hints.ChargeType.label}"
+                       id="c4" width="200" align="left">
+              <af:selectOneChoice value="#{row.bindings.ChargeType.inputValue}"
+                                  label="#{row.bindings.ChargeType.label}"
+                                  required="#{bindings.XxplPaymentPlanLineView1.hints.ChargeType.mandatory}"
+                                  shortDesc="#{bindings.XxplPaymentPlanLineView1.hints.ChargeType.tooltip}"
+                                  id="soc5" disabled="true">
+                <f:selectItems value="#{row.bindings.ChargeType.items}"
+                               id="si4"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.XxplPaymentPlanLineView1.hints.PaymentTerm.name}"
+                       sortable="false"
+                       headerText="#{bindings.XxplPaymentPlanLineView1.hints.PaymentTerm.label}"
+                       id="c6" width="200" align="left">
+              <af:selectOneChoice value="#{row.bindings.PaymentTerm.inputValue}"
+                                  label="#{row.bindings.PaymentTerm.label}"
+                                  required="#{bindings.XxplPaymentPlanLineView1.hints.PaymentTerm.mandatory}"
+                                  shortDesc="#{bindings.XxplPaymentPlanLineView1.hints.PaymentTerm.tooltip}"
+                                  id="soc4"
+                                  disabled="#{bindings.Status.inputValue eq 'Approved'}">
+                <f:selectItems value="#{row.bindings.PaymentTerm.items}"
+                               id="si5"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.XxplPaymentPlanLineView1.hints.NoOfDays.name}"
+                       sortable="false"
+                       headerText="#{bindings.XxplPaymentPlanLineView1.hints.NoOfDays.label}"
+                       id="c1" align="right">
+              <af:inputText value="#{row.bindings.NoOfDays.inputValue}"
+                            label="#{bindings.XxplPaymentPlanLineView1.hints.NoOfDays.label}"
+                            required="#{bindings.XxplPaymentPlanLineView1.hints.NoOfDays.mandatory}"
+                            columns="#{bindings.XxplPaymentPlanLineView1.hints.NoOfDays.displayWidth}"
+                            maximumLength="#{bindings.XxplPaymentPlanLineView1.hints.NoOfDays.precision}"
+                            shortDesc="#{bindings.XxplPaymentPlanLineView1.hints.NoOfDays.tooltip}"
+                            id="it16" contentStyle="text-align:right;"
+                            disabled="#{bindings.Status.inputValue eq 'Approved'}">
+                <f:validator binding="#{row.bindings.NoOfDays.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.XxplPaymentPlanLineView1.hints.NoOfDays.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.XxplPaymentPlanLineView1.hints.Remarks.name}"
+                       sortable="false"
+                       headerText="#{bindings.XxplPaymentPlanLineView1.hints.Remarks.label}"
+                       id="c2" align="left">
+              <af:inputText value="#{row.bindings.Remarks.inputValue}"
+                            label="#{bindings.XxplPaymentPlanLineView1.hints.Remarks.label}"
+                            required="#{bindings.XxplPaymentPlanLineView1.hints.Remarks.mandatory}"
+                            columns="#{bindings.XxplPaymentPlanLineView1.hints.Remarks.displayWidth}"
+                            maximumLength="#{bindings.XxplPaymentPlanLineView1.hints.Remarks.precision}"
+                            shortDesc="#{bindings.XxplPaymentPlanLineView1.hints.Remarks.tooltip}"
+                            id="it15"
+                            disabled="#{bindings.Status.inputValue eq 'Approved'}">
+                <f:validator binding="#{row.bindings.Remarks.validator}"/>
+              </af:inputText>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:panelBox>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

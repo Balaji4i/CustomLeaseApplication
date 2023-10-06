@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="AttachmentPageDef" Package="Page">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="XxfndFuncAttachVO" RangeSize="25"
+              DataControl="Documents_AMDataControl"
+              id="XxfndFuncAttachVOIterator"/>
+    <iterator Binds="Root.Documents_AM.XxfndFuncAttachVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxfndFuncAttachVOIterator1"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="XxfndFuncAttachVOIterator" id="XxfndFuncAttachVO">
+      <nodeDefinition DefName="custom.lease.model.View.XxfndFuncAttachVO"
+                      Name="XxfndFuncAttachVO0">
+        <AttrNames>
+          <Item Value="FileType"/>
+          <Item Value="FileName"/>
+          <Item Value="Description"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxfndFuncAttachVOIterator" id="Delete"
+            InstanceName="Documents_AMDataControl.XxfndFuncAttachVO"
+            DataControl="Documents_AMDataControl" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <action IterBinding="XxfndFuncAttachVOIterator" id="CreateInsert"
+            InstanceName="Documents_AMDataControl.XxfndFuncAttachVO"
+            DataControl="Documents_AMDataControl" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <attributeValues IterBinding="XxfndFuncAttachVOIterator" id="Attachment">
+      <AttrNames>
+        <Item Value="Attachment"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="XxfndFuncAttachVOIterator" id="CreateInsert1"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="XxfndFuncAttachVOIterator" id="CreateWithParams"
+            RequiresUpdateModel="true" Action="createWithParams">
+         <NamedData NDName="FuncId" NDValue="#{pageFlowScope.funcId}" NDType="java.lang.String"/>   
+         <NamedData NDName="FuncRefId" NDValue="#{pageFlowScope.funcRefId}" NDType="java.lang.String"/>   
+    </action>
+    <methodAction id="commitAttachment"
+                  InstanceName="Documents_AMDataControl.dataProvider"
+                  DataControl="Documents_AMDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="commitAttachment" IsViewObjectMethod="false"/>
+  </bindings>
+</pageDefinition>

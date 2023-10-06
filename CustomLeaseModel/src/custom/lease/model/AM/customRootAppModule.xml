@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="customRootAppModule"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true" RequeryOnCommit="true">
+  <DesignTime>
+    <Attr Name="_deployType" Value="0"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="custom.lease.model.AM.customRootAppModule_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <AppModuleUsage
+    Name="PropertyMasterAM1"
+    FullName="custom.lease.model.AM.PropertyMasterAM"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="LeadAM1"
+    FullName="custom.lease.model.AM.LeadAM"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="PriceListAM1"
+    FullName="custom.lease.model.AM.PriceListAM"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="PaymentPlanAM1"
+    FullName="custom.lease.model.AM.PaymentPlanAM"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="PropertyBuildingsAM1"
+    FullName="custom.lease.model.AM.PropertyBuildingsAM"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="Receipt_AM"
+    FullName="custom.lease.model.AM.Receipt_AM"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="Invoice_AM"
+    FullName="custom.lease.model.AM.Invoice_AM"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="Documents_AM"
+    FullName="custom.lease.model.AM.Documents_AM"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="Booking_AM"
+    FullName="custom.lease.model.AM.Booking_AM"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="ARSetup_AM1"
+    FullName="custom.lease.model.AM.ARSetup_AM"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="MoveInOut_AM1"
+    FullName="custom.lease.model.AM.MoveInOut_AM"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="BillingAppModule1"
+    FullName="custom.lease.model.AM.BillingAppModule"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="CancellationAppModule1"
+    FullName="custom.lease.model.AM.CancellationAppModule"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="OtherChargeAppModule1"
+    FullName="custom.lease.model.AM.OtherChargeAppModule"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="ApprovalHistory_AM1"
+    FullName="custom.lease.model.AM.ApprovalHistory_AM"
+    SharedScope="0"/>
+  <AppModuleUsage
+    Name="PropertyUnitAM1"
+    FullName="custom.lease.model.AM.PropertyUnitAM"
+    SharedScope="0"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="custom.lease.model.CustomLeaseModelBundle"/>
+  </ResourceBundle>
+</AppModule>

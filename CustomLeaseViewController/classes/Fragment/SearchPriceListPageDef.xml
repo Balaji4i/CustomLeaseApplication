@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="SearchPriceListPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.PriceListAM1.SearchPriceListROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="10"
+              id="SearchPriceListROVOIterator"/>
+    <searchRegion Criteria="SearchPriceListROVO"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchPriceListROVOIterator"
+                  id="SearchPriceListROVOQuery"/>
+    <taskFlow taskFlowId="/WEB-INF/taskFlow/ExcelUpload_BTF.xml#ExcelUpload_BTF"
+              id="ExcelUpload_BTF"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="parentInterfaceName" value="PRICE_LIST"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings>
+    <tree IterBinding="SearchPriceListROVOIterator" id="SearchPriceListROVO">
+      <nodeDefinition DefName="custom.lease.model.ROVO.SearchPriceListROVO"
+                      Name="SearchPriceListROVO0">
+        <AttrNames>
+          <Item Value="BuildName"/>
+          <Item Value="PropertyName"/>
+          <Item Value="UnitName"/>
+          <Item Value="OrgName"/>
+          <Item Value="Description"/>
+          <Item Value="CurrencyCode"/>
+          <Item Value="StartDate"/>
+          <Item Value="EndDate"/>
+          <Item Value="Status"/>
+          <Item Value="PlId"/>
+          <Item Value="PlName"/>
+          <Item Value="PlNumber"/>
+          <Item Value="PlNameTl"/>
+          <Item Value="PlType"/>
+          <Item Value="Priority"/>
+          <Item Value="Usage"/>
+          <Item Value="RevisionNo"/>
+          <Item Value="RevisionDate"/>
+          <Item Value="RevisedBy"/>
+          <Item Value="ActiveYn"/>
+          <Item Value="Attribute1"/>
+          <Item Value="Attribute10"/>
+          <Item Value="Attribute2"/>
+          <Item Value="Attribute3"/>
+          <Item Value="Attribute4"/>
+          <Item Value="Attribute5"/>
+          <Item Value="Attribute6"/>
+          <Item Value="Attribute7"/>
+          <Item Value="Attribute8"/>
+          <Item Value="Attribute9"/>
+          <Item Value="AttributeCategory"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="FlowLevel"/>
+          <Item Value="FlowStatus"/>
+          <Item Value="FlowWith"/>
+          <Item Value="FuncId"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="ObjectVersion"/>
+          <Item Value="OrgId"/>
+          <Item Value="UserGrpId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SearchPriceListROVOIterator"
+                     id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchPriceListROVOIterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchPriceListROVOIterator"
+                     id="LastUpdateDate">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchPriceListROVOIterator"
+                     id="LastUpdatedBy">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchPriceListROVOIterator"
+                     id="LastUpdateLogin">
+      <AttrNames>
+        <Item Value="LastUpdateLogin"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="SearchPriceListROVOIterator" id="ExecuteWithParams"
+            InstanceName="customRootAppModuleDataControl.Root.PriceListAM1.SearchPriceListROVO"
+            DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="p_property_number" NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <attributeValues IterBinding="SearchPriceListROVOIterator" id="PlId">
+      <AttrNames>
+        <Item Value="PlId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchPriceListROVOIterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

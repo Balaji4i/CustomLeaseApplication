@@ -1,0 +1,1301 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XxplReceiptHeaderView"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  SelectList="XxplReceiptEO.RECEIPT_ID, 
+       XxplReceiptEO.FUNC_ID, 
+       XxplReceiptEO.SOURCE_FUNC_ID, 
+       XxplReceiptEO.SOURCE_FUNC_REF_ID, 
+       XxplReceiptEO.RECEIPT_NUMBER, 
+       XxplReceiptEO.RECEIPT_DATE, 
+       XxplReceiptEO.ORG_ID, 
+       XxplReceiptEO.RECEIPT_TYPE, 
+       XxplReceiptEO.PROPERTY_ID, 
+       XxplReceiptEO.BUILD_ID, 
+       XxplReceiptEO.UNIT_ID, 
+       XxplReceiptEO.CUST_ID, 
+       XxplReceiptEO.CUSTOMER_NAME, 
+       XxplReceiptEO.CUST_SITE_ID, 
+       XxplReceiptEO.CURRENCY_CODE, 
+       XxplReceiptEO.RECEIPT_METHOD_ID, 
+       XxplReceiptEO.BANK_NAME, 
+       XxplReceiptEO.BANK_BRANCH_NAME, 
+       XxplReceiptEO.BANK_ACCOUNT_NUM, 
+       XxplReceiptEO.MODE_OF_RECEIPT, 
+       XxplReceiptEO.RECEIVED_AMOUNT, 
+       XxplReceiptEO.RECEIPT_AMOUNT, 
+       XxplReceiptEO.PDC_NUMBER, 
+       XxplReceiptEO.STATUS, 
+       XxplReceiptEO.DESCRIPTION, 
+       XxplReceiptEO.FLOW_STATUS, 
+       XxplReceiptEO.FLOW_LEVEL, 
+       XxplReceiptEO.FLOW_WITH, 
+       XxplReceiptEO.TAX_AMOUNT, 
+       XxplReceiptEO.TAX_CODE, 
+       XxplReceiptEO.TAX_RATE, 
+       XxplReceiptEO.REV_GL_DATE, 
+       XxplReceiptEO.REV_CATEGORY, 
+       XxplReceiptEO.REV_REASON, 
+       XxplReceiptEO.REV_DESC, 
+       XxplReceiptEO.REV_INT_STATUS, 
+       XxplReceiptEO.RECEIPT_RISK_YN, 
+       XxplReceiptEO.REMIT_BANK_ACCT_USE_ID, 
+       XxplReceiptEO.INTERFACE_STATUS, 
+       XxplReceiptEO.INTERFACE_ERROR_MSG, 
+       XxplReceiptEO.ATTRIBUTE_CATEGORY, 
+       XxplReceiptEO.ATTRIBUTE1, 
+       XxplReceiptEO.ATTRIBUTE2, 
+       XxplReceiptEO.ATTRIBUTE3, 
+       XxplReceiptEO.ATTRIBUTE4, 
+       XxplReceiptEO.ATTRIBUTE5, 
+       XxplReceiptEO.ATTRIBUTE6, 
+       XxplReceiptEO.ATTRIBUTE7, 
+       XxplReceiptEO.ATTRIBUTE8, 
+       XxplReceiptEO.ATTRIBUTE9, 
+       XxplReceiptEO.ATTRIBUTE10, 
+       XxplReceiptEO.ATTRIBUTE11, 
+       XxplReceiptEO.ATTRIBUTE12, 
+       XxplReceiptEO.ATTRIBUTE13, 
+       XxplReceiptEO.ATTRIBUTE14, 
+       XxplReceiptEO.ATTRIBUTE15, 
+       XxplReceiptEO.ATTRIBUTE16, 
+       XxplReceiptEO.ATTRIBUTE17, 
+       XxplReceiptEO.ATTRIBUTE18, 
+       XxplReceiptEO.ATTRIBUTE19, 
+       XxplReceiptEO.ATTRIBUTE20, 
+       XxplReceiptEO.OBJECT_VERSION, 
+       XxplReceiptEO.CREATED_BY, 
+       XxplReceiptEO.CREATION_DATE, 
+       XxplReceiptEO.LAST_UPDATED_BY, 
+       XxplReceiptEO.LAST_UPDATE_DATE, 
+       XxplReceiptEO.LAST_UPDATE_LOGIN, 
+       XxplReceiptEO.ACTIVEYN, 
+       XxplReceiptEO.REVISED_BY, 
+       XxplReceiptEO.REVISION_NO, 
+       XxplReceiptEO.REVISION_DATE, 
+       XxplReceiptEO.GL_DATE, 
+       XxplReceiptEO.MATURITY_DATE, 
+       XxplReceiptEO.AR_RECEIPT_APPLIED_AMOUNT, 
+       XxplReceiptEO.AR_RECEIPT_ID, 
+       XxplReceiptEO.SAAS_RECEIPT_ID, 
+       XxplReceiptEO.SAAS_RECEIPT_STATUS, 
+       XxplReceiptEO.SOURCES_REF_DTL_ID, 
+       XxplReceiptEO.RECEIPT_CATEGORY"
+  FromList="XXPL_RECEIPT XxplReceiptEO"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  RowClass="custom.lease.model.View.XxplReceiptHeaderViewRowImpl"
+  OrderBy="XxplReceiptEO.RECEIPT_ID asc">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="custom.lease.model.View.XxplReceiptHeaderView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="BV_ReceiptId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <ViewAccessor
+    Name="XXSTG_ORGANIZATIONS_ROVO1"
+    ViewObjectName="custom.lease.model.ROVO.XXSTG_ORGANIZATIONS_ROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="XXFND_CURRENCY_ROVO1"
+    ViewObjectName="custom.lease.model.ROVO.XXFND_CURRENCY_ROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="XXFND_LOOKUP_V_ROVO1"
+    ViewObjectName="custom.lease.model.ROVO.XXFND_LOOKUP_V_ROVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="CHARGE_TYPE_Filter"
+      FullName="custom.lease.model.ROVO.XXFND_LOOKUP_V_ROVO.CHARGE_TYPE_Filter"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ReceiptMethod_ROVO1"
+    ViewObjectName="custom.lease.model.ROVO.ReceiptMethod_ROVO">
+    <ViewCriteriaUsage
+      Name="OrgIdFilter"
+      FullName="custom.lease.model.ROVO.ReceiptMethod_ROVO.OrgIdFilter"/>
+    <ParameterMap>
+      <PIMap Variable="BV_OrgId">
+        <TransientExpression><![CDATA[OrgId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ReceiptSites_ROVO1"
+    ViewObjectName="custom.lease.model.ROVO.ReceiptSites_ROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ReceiptMethod_ROVA_E"
+    ViewObjectName="custom.lease.model.ROVO.ReceiptMethod_ROVO">
+    <ViewCriteriaUsage
+      Name="OrgIdFilter"
+      FullName="custom.lease.model.ROVO.ReceiptMethod_ROVO.OrgIdFilter"/>
+    <ViewCriteriaUsage
+      Name="filterByEditAccount"
+      FullName="custom.lease.model.ROVO.ReceiptMethod_ROVO.filterByEditAccount"/>
+    <ParameterMap>
+      <PIMap Variable="BV_OrgId">
+        <TransientExpression><![CDATA[OrgId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="bv_rec_methoid">
+        <TransientExpression><![CDATA[ReceiptMethodId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="bv_rec_rebankid">
+        <TransientExpression><![CDATA[RemitBankAcctUseId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ReceiptHeaderCustomer_ROVO1"
+    ViewObjectName="custom.lease.model.ROVO.ReceiptHeaderCustomer_ROVO">
+    <ViewCriteriaUsage
+      Name="OrgIdFilter"
+      FullName="custom.lease.model.ROVO.ReceiptHeaderCustomer_ROVO.OrgIdFilter"/>
+    <ParameterMap>
+      <PIMap Variable="BV_OrgId">
+        <TransientExpression><![CDATA[OrgId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ReceiptHeaderCustomer_ROVA_E"
+    ViewObjectName="custom.lease.model.ROVO.ReceiptHeaderCustomer_ROVO">
+    <ViewCriteriaUsage
+      Name="EditFilter"
+      FullName="custom.lease.model.ROVO.ReceiptHeaderCustomer_ROVO.EditFilter"/>
+    <ParameterMap>
+      <PIMap Variable="bv_receipt_booking">
+        <TransientExpression><![CDATA[SourceFuncRefId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="bv_receipt_cust">
+        <TransientExpression><![CDATA[CustId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="bv_receipt_unit">
+        <TransientExpression><![CDATA[UnitId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="LOOKUP_RevCategory"
+    ViewObjectName="custom.lease.model.ROVO.XXFND_LOOKUP_V_ROVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="FindByRevCategory"
+      FullName="custom.lease.model.ROVO.XXFND_LOOKUP_V_ROVO.FindByRevCategory"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="LOOKUP_RevReason"
+    ViewObjectName="custom.lease.model.ROVO.XXFND_LOOKUP_V_ROVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="FindByRevReason"
+      FullName="custom.lease.model.ROVO.XXFND_LOOKUP_V_ROVO.FindByRevReason"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="XxplReceiptTransaction_V_ROVO1"
+    ViewObjectName="custom.lease.model.ROVO.XxplReceiptTransaction_V_ROVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_OrgId"
+    ListVOName="XXSTG_ORGANIZATIONS_ROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_OrgId_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OrgId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="OrgId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="OrgName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CurrencyCode"
+    ListVOName="XXFND_CURRENCY_ROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CurrencyCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CurrencyValueName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CurrencyvalueNameDisp"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ReceiptType"
+    ListVOName="XXFND_LOOKUP_V_ROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ReceiptType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValueName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValueNameDisp"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ReceiptMethodTrans"
+    ListVOName="ReceiptMethod_ROVO1"
+    ListRangeSize="5"
+    NullValueFlag="none"
+    NullValueId="LOV_ReceiptMethodTrans_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ReceiptMethodTrans"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ReceiptMethodId"/>
+      <Item Value="BankAccountNum"/>
+      <Item Value="BankBranchName"/>
+      <Item Value="BankName"/>
+      <Item Value="RemitBankAcctUseId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReceiptMethodName"/>
+      <Item Value="ReceiptMethodId"/>
+      <Item Value="RecBankAccNum"/>
+      <Item Value="RecBankBranchName"/>
+      <Item Value="RecBankName"/>
+      <Item Value="RemitBankAcctUseId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReceiptMethodName"/>
+      <Item Value="RecBankAccNum"/>
+      <Item Value="RecBankBranchName"/>
+      <Item Value="RecBankName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="ReceiptMethodFilter"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ModeOfReceipt"
+    ListVOName="XXFND_LOOKUP_V_ROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ModeOfReceipt"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValueName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValueNameDisp"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CustomerName"
+    ListVOName="ReceiptHeaderCustomer_ROVO1"
+    ListRangeSize="5"
+    NullValueFlag="none"
+    NullValueId="LOV_CustomerName_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CustomerName"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="CustId"/>
+      <Item Value="CustSiteId"/>
+      <Item Value="CustomerSiteTrans"/>
+      <Item Value="PropertyId"/>
+      <Item Value="BuildId"/>
+      <Item Value="UnitId"/>
+      <Item Value="SourceFuncRefId"/>
+      <Item Value="SourceFuncId"/>
+      <Item Value="BookingNumber_Trans"/>
+      <Item Value="UnitNumber_Trans"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CustomerName"/>
+      <Item Value="CustId"/>
+      <Item Value="ShipToSiteId"/>
+      <Item Value="SiteNumber"/>
+      <Item Value="PropertyId"/>
+      <Item Value="Building"/>
+      <Item Value="UnitId"/>
+      <Item Value="BookingHdrId"/>
+      <Item Value="FuncId"/>
+      <Item Value="BookingNumber"/>
+      <Item Value="UnitNumber"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CustomerName"/>
+      <Item Value="SiteNumber"/>
+      <Item Value="UnitNumber"/>
+      <Item Value="BookingNumber"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="customerfilter"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RevCategory"
+    ListVOName="LOOKUP_RevCategory"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="RevCategory"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValueName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValueNameDisp"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RevReason"
+    ListVOName="LOOKUP_RevReason"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="RevReason"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValueName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValueNameDisp"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="XxplReceiptEO"
+    Entity="custom.lease.model.Entity.XxplReceiptEO"/>
+  <ViewAttribute
+    Name="ReceiptId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ReceiptId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="RECEIPT_ID"/>
+  <ViewAttribute
+    Name="FuncId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FuncId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="FUNC_ID"
+    DefaultValue="9"/>
+  <ViewAttribute
+    Name="SourceFuncId"
+    PrecisionRule="true"
+    EntityAttrName="SourceFuncId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="SOURCE_FUNC_ID"/>
+  <ViewAttribute
+    Name="SourceFuncRefId"
+    PrecisionRule="true"
+    EntityAttrName="SourceFuncRefId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="SOURCE_FUNC_REF_ID"/>
+  <ViewAttribute
+    Name="ReceiptNumber"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ReceiptNumber"
+    EntityUsage="XxplReceiptEO"
+    AliasName="RECEIPT_NUMBER">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.ReceiptNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReceiptDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ReceiptDate"
+    EntityUsage="XxplReceiptEO"
+    AliasName="RECEIPT_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.ReceiptDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrgId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrgId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ORG_ID"
+    LOVName="LOV_OrgId">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.OrgId_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReceiptType"
+    PrecisionRule="true"
+    EntityAttrName="ReceiptType"
+    EntityUsage="XxplReceiptEO"
+    AliasName="RECEIPT_TYPE"
+    LOVName="LOV_ReceiptType"
+    DefaultValue="LOU">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.ReceiptType_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PropertyId"
+    PrecisionRule="true"
+    EntityAttrName="PropertyId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="PROPERTY_ID"/>
+  <ViewAttribute
+    Name="BuildId"
+    PrecisionRule="true"
+    EntityAttrName="BuildId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="BUILD_ID"/>
+  <ViewAttribute
+    Name="UnitId"
+    PrecisionRule="true"
+    EntityAttrName="UnitId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="UNIT_ID"/>
+  <ViewAttribute
+    Name="CustId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CustId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="CUST_ID"/>
+  <ViewAttribute
+    Name="CustomerName"
+    PrecisionRule="true"
+    EntityAttrName="CustomerName"
+    EntityUsage="XxplReceiptEO"
+    AliasName="CUSTOMER_NAME"
+    LOVName="LOV_CustomerName">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.CustomerName_LABEL"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustSiteId"
+    PrecisionRule="true"
+    EntityAttrName="CustSiteId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="CUST_SITE_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.CustSiteId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CurrencyCode"
+    PrecisionRule="true"
+    EntityAttrName="CurrencyCode"
+    EntityUsage="XxplReceiptEO"
+    AliasName="CURRENCY_CODE"
+    LOVName="LOV_CurrencyCode"
+    DefaultValue="AED">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.CurrencyCode_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReceiptMethodId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ReceiptMethodId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="RECEIPT_METHOD_ID"/>
+  <ViewAttribute
+    Name="BankName"
+    PrecisionRule="true"
+    EntityAttrName="BankName"
+    EntityUsage="XxplReceiptEO"
+    AliasName="BANK_NAME">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.BankName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BankBranchName"
+    PrecisionRule="true"
+    EntityAttrName="BankBranchName"
+    EntityUsage="XxplReceiptEO"
+    AliasName="BANK_BRANCH_NAME">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.BankBranchName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BankAccountNum"
+    PrecisionRule="true"
+    EntityAttrName="BankAccountNum"
+    EntityUsage="XxplReceiptEO"
+    AliasName="BANK_ACCOUNT_NUM">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.BankAccountNum_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ModeOfReceipt"
+    PrecisionRule="true"
+    EntityAttrName="ModeOfReceipt"
+    EntityUsage="XxplReceiptEO"
+    AliasName="MODE_OF_RECEIPT"
+    LOVName="LOV_ModeOfReceipt"
+    DefaultValue="LOU">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.ModeOfReceipt_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReceivedAmount"
+    PrecisionRule="true"
+    EntityAttrName="ReceivedAmount"
+    EntityUsage="XxplReceiptEO"
+    AliasName="RECEIVED_AMOUNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.ReceivedAmount_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReceiptAmount"
+    PrecisionRule="true"
+    EntityAttrName="ReceiptAmount"
+    EntityUsage="XxplReceiptEO"
+    AliasName="RECEIPT_AMOUNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.ReceiptAmount_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PdcNumber"
+    PrecisionRule="true"
+    EntityAttrName="PdcNumber"
+    EntityUsage="XxplReceiptEO"
+    AliasName="PDC_NUMBER">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.PdcNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Status"
+    PrecisionRule="true"
+    EntityAttrName="Status"
+    EntityUsage="XxplReceiptEO"
+    AliasName="STATUS"
+    DefaultValue="Draft"/>
+  <ViewAttribute
+    Name="Description"
+    PrecisionRule="true"
+    EntityAttrName="Description"
+    EntityUsage="XxplReceiptEO"
+    AliasName="DESCRIPTION"/>
+  <ViewAttribute
+    Name="FlowStatus"
+    PrecisionRule="true"
+    EntityAttrName="FlowStatus"
+    EntityUsage="XxplReceiptEO"
+    AliasName="FLOW_STATUS"/>
+  <ViewAttribute
+    Name="FlowLevel"
+    PrecisionRule="true"
+    EntityAttrName="FlowLevel"
+    EntityUsage="XxplReceiptEO"
+    AliasName="FLOW_LEVEL"/>
+  <ViewAttribute
+    Name="FlowWith"
+    PrecisionRule="true"
+    EntityAttrName="FlowWith"
+    EntityUsage="XxplReceiptEO"
+    AliasName="FLOW_WITH"/>
+  <ViewAttribute
+    Name="TaxAmount"
+    PrecisionRule="true"
+    EntityAttrName="TaxAmount"
+    EntityUsage="XxplReceiptEO"
+    AliasName="TAX_AMOUNT"/>
+  <ViewAttribute
+    Name="TaxCode"
+    PrecisionRule="true"
+    EntityAttrName="TaxCode"
+    EntityUsage="XxplReceiptEO"
+    AliasName="TAX_CODE"/>
+  <ViewAttribute
+    Name="TaxRate"
+    PrecisionRule="true"
+    EntityAttrName="TaxRate"
+    EntityUsage="XxplReceiptEO"
+    AliasName="TAX_RATE"/>
+  <ViewAttribute
+    Name="RevGlDate"
+    PrecisionRule="true"
+    EntityAttrName="RevGlDate"
+    EntityUsage="XxplReceiptEO"
+    AliasName="REV_GL_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.RevGlDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RevCategory"
+    PrecisionRule="true"
+    EntityAttrName="RevCategory"
+    EntityUsage="XxplReceiptEO"
+    AliasName="REV_CATEGORY"
+    LOVName="LOV_RevCategory">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.RevCategory_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RevReason"
+    PrecisionRule="true"
+    EntityAttrName="RevReason"
+    EntityUsage="XxplReceiptEO"
+    AliasName="REV_REASON"
+    LOVName="LOV_RevReason">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.RevReason_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RevDesc"
+    PrecisionRule="true"
+    EntityAttrName="RevDesc"
+    EntityUsage="XxplReceiptEO"
+    AliasName="REV_DESC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.RevDesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RevIntStatus"
+    PrecisionRule="true"
+    EntityAttrName="RevIntStatus"
+    EntityUsage="XxplReceiptEO"
+    AliasName="REV_INT_STATUS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.RevIntStatus_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReceiptRiskYn"
+    PrecisionRule="true"
+    EntityAttrName="ReceiptRiskYn"
+    EntityUsage="XxplReceiptEO"
+    AliasName="RECEIPT_RISK_YN">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.ReceiptRiskYn_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RemitBankAcctUseId"
+    PrecisionRule="true"
+    EntityAttrName="RemitBankAcctUseId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="REMIT_BANK_ACCT_USE_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.RemitBankAcctUseId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InterfaceStatus"
+    PrecisionRule="true"
+    EntityAttrName="InterfaceStatus"
+    EntityUsage="XxplReceiptEO"
+    AliasName="INTERFACE_STATUS"
+    DefaultValue="Draft"/>
+  <ViewAttribute
+    Name="InterfaceErrorMsg"
+    IsQueriable="false"
+    PrecisionRule="true"
+    EntityAttrName="InterfaceErrorMsg"
+    EntityUsage="XxplReceiptEO"
+    AliasName="INTERFACE_ERROR_MSG"/>
+  <ViewAttribute
+    Name="AttributeCategory"
+    PrecisionRule="true"
+    EntityAttrName="AttributeCategory"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE_CATEGORY"/>
+  <ViewAttribute
+    Name="Attribute1"
+    PrecisionRule="true"
+    EntityAttrName="Attribute1"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE1"/>
+  <ViewAttribute
+    Name="Attribute2"
+    PrecisionRule="true"
+    EntityAttrName="Attribute2"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE2"/>
+  <ViewAttribute
+    Name="Attribute3"
+    PrecisionRule="true"
+    EntityAttrName="Attribute3"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE3"/>
+  <ViewAttribute
+    Name="Attribute4"
+    PrecisionRule="true"
+    EntityAttrName="Attribute4"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE4"
+    DefaultValue="Tenant"/>
+  <ViewAttribute
+    Name="Attribute5"
+    PrecisionRule="true"
+    EntityAttrName="Attribute5"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE5"/>
+  <ViewAttribute
+    Name="Attribute6"
+    PrecisionRule="true"
+    EntityAttrName="Attribute6"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE6"/>
+  <ViewAttribute
+    Name="Attribute7"
+    PrecisionRule="true"
+    EntityAttrName="Attribute7"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE7"/>
+  <ViewAttribute
+    Name="Attribute8"
+    PrecisionRule="true"
+    EntityAttrName="Attribute8"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE8"/>
+  <ViewAttribute
+    Name="Attribute9"
+    PrecisionRule="true"
+    EntityAttrName="Attribute9"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE9"/>
+  <ViewAttribute
+    Name="Attribute10"
+    PrecisionRule="true"
+    EntityAttrName="Attribute10"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE10"/>
+  <ViewAttribute
+    Name="Attribute11"
+    PrecisionRule="true"
+    EntityAttrName="Attribute11"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE11"/>
+  <ViewAttribute
+    Name="Attribute12"
+    PrecisionRule="true"
+    EntityAttrName="Attribute12"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE12"/>
+  <ViewAttribute
+    Name="Attribute13"
+    PrecisionRule="true"
+    EntityAttrName="Attribute13"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE13"/>
+  <ViewAttribute
+    Name="Attribute14"
+    PrecisionRule="true"
+    EntityAttrName="Attribute14"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE14"/>
+  <ViewAttribute
+    Name="Attribute15"
+    PrecisionRule="true"
+    EntityAttrName="Attribute15"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE15"/>
+  <ViewAttribute
+    Name="Attribute16"
+    PrecisionRule="true"
+    EntityAttrName="Attribute16"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE16"/>
+  <ViewAttribute
+    Name="Attribute17"
+    PrecisionRule="true"
+    EntityAttrName="Attribute17"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE17"/>
+  <ViewAttribute
+    Name="Attribute18"
+    PrecisionRule="true"
+    EntityAttrName="Attribute18"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE18"/>
+  <ViewAttribute
+    Name="Attribute19"
+    PrecisionRule="true"
+    EntityAttrName="Attribute19"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE19"/>
+  <ViewAttribute
+    Name="Attribute20"
+    PrecisionRule="true"
+    EntityAttrName="Attribute20"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ATTRIBUTE20"/>
+  <ViewAttribute
+    Name="ObjectVersion"
+    PrecisionRule="true"
+    EntityAttrName="ObjectVersion"
+    EntityUsage="XxplReceiptEO"
+    AliasName="OBJECT_VERSION"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="XxplReceiptEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="XxplReceiptEO"
+    AliasName="CREATION_DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="XxplReceiptEO"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="XxplReceiptEO"
+    AliasName="LAST_UPDATE_DATE"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateLogin"
+    EntityUsage="XxplReceiptEO"
+    AliasName="LAST_UPDATE_LOGIN"/>
+  <ViewAttribute
+    Name="Activeyn"
+    PrecisionRule="true"
+    EntityAttrName="Activeyn"
+    EntityUsage="XxplReceiptEO"
+    AliasName="ACTIVEYN"/>
+  <ViewAttribute
+    Name="CustomerSiteTrans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[if(CustSiteId!=null){
+oracle.jbo.Key keyVal=new oracle.jbo.Key(CustSiteId);
+return ReceiptSites_ROVO1.findByKey(keyVal,1)[0].getAttribute("SiteNumber");
+}
+else{
+return null;
+}]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.CustomerSiteTrans_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReceiptMethodTrans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_ReceiptMethodTrans">
+    <RecalcCondition><![CDATA[false]]></RecalcCondition>
+    <TransientExpression><![CDATA[if(ReceiptMethod_ROVA_E.first()!=null && ReceiptMethodId !=null && RemitBankAcctUseId !=null && OrgId !=null)
+{
+ReceiptMethod_ROVA_E.first().getAttribute("ReceiptMethodName");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.ReceiptMethodTrans_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UnitNumber_Trans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[if(ReceiptHeaderCustomer_ROVA_E.first()!=null && SourceFuncRefId !=null && UnitId !=null && CustId !=null)
+{
+ReceiptHeaderCustomer_ROVA_E.first().getAttribute("UnitNumber");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.UnitNumber_Trans_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BookingNumber_Trans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[if(ReceiptHeaderCustomer_ROVA_E.first()!=null && SourceFuncRefId !=null && UnitId !=null && CustId !=null)
+{
+ReceiptHeaderCustomer_ROVA_E.first().getAttribute("BookingNumber");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplReceiptHeaderView.BookingNumber_Trans_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <AUTOSUBMIT
+          Value="true"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RevisedBy"
+    PrecisionRule="true"
+    EntityAttrName="RevisedBy"
+    EntityUsage="XxplReceiptEO"
+    AliasName="REVISED_BY"/>
+  <ViewAttribute
+    Name="RevisionNo"
+    PrecisionRule="true"
+    EntityAttrName="RevisionNo"
+    EntityUsage="XxplReceiptEO"
+    AliasName="REVISION_NO"/>
+  <ViewAttribute
+    Name="RevisionDate"
+    PrecisionRule="true"
+    EntityAttrName="RevisionDate"
+    EntityUsage="XxplReceiptEO"
+    AliasName="REVISION_DATE"/>
+  <ViewAttribute
+    Name="GlDate"
+    PrecisionRule="true"
+    EntityAttrName="GlDate"
+    EntityUsage="XxplReceiptEO"
+    AliasName="GL_DATE">
+    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MaturityDate"
+    PrecisionRule="true"
+    EntityAttrName="MaturityDate"
+    EntityUsage="XxplReceiptEO"
+    AliasName="MATURITY_DATE"/>
+  <ViewAttribute
+    Name="ArReceiptAppliedAmount"
+    PrecisionRule="true"
+    EntityAttrName="ArReceiptAppliedAmount"
+    EntityUsage="XxplReceiptEO"
+    AliasName="AR_RECEIPT_APPLIED_AMOUNT"/>
+  <ViewAttribute
+    Name="ArReceiptId"
+    PrecisionRule="true"
+    EntityAttrName="ArReceiptId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="AR_RECEIPT_ID"/>
+  <ViewAttribute
+    Name="SaasReceiptId"
+    PrecisionRule="true"
+    EntityAttrName="SaasReceiptId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="SAAS_RECEIPT_ID"/>
+  <ViewAttribute
+    Name="SaasReceiptStatus"
+    PrecisionRule="true"
+    EntityAttrName="SaasReceiptStatus"
+    EntityUsage="XxplReceiptEO"
+    AliasName="SAAS_RECEIPT_STATUS"/>
+  <ViewAttribute
+    Name="SourcesRefDtlId"
+    PrecisionRule="true"
+    EntityAttrName="SourcesRefDtlId"
+    EntityUsage="XxplReceiptEO"
+    AliasName="SOURCES_REF_DTL_ID"/>
+  <ViewAttribute
+    Name="ReceiptCategory"
+    PrecisionRule="true"
+    EntityAttrName="ReceiptCategory"
+    EntityUsage="XxplReceiptEO"
+    AliasName="RECEIPT_CATEGORY"
+    DefaultValue="LEASE"/>
+  <ViewAttribute
+    Name="SourcesRefDtlId_Trans"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewCriteria
+    Name="editFilter"
+    ViewObjectName="custom.lease.model.View.XxplReceiptHeaderView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow158"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="ReceiptId"
+        ViewAttribute="ReceiptId"
+        Operator="="
+        Conjunction="AND"
+        Value=":BV_ReceiptId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="findByRcptCtgryLEASE"
+    ViewObjectName="custom.lease.model.View.XxplReceiptHeaderView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow325"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="ReceiptCategory"
+        ViewAttribute="ReceiptCategory"
+        Operator="="
+        Conjunction="AND"
+        Value="LEASE"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="findBySecurityDeposit"
+    ViewObjectName="custom.lease.model.View.XxplReceiptHeaderView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow173"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Attribute1"
+        ViewAttribute="Attribute1"
+        Operator="="
+        Conjunction="AND"
+        Value="Security Deposit"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="XxplReceiptLineView"
+    ViewLink="custom.lease.model.VL.ReceiptHdrLine_VL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="custom.lease.model.CustomLeaseModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

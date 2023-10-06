@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73"
+                id="SearchLead_BTF_SearchLead_BTF_ExecutePageDef"
+                Package="TaskFlow" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="Root.LeadAM1.XxplLead_V_ROVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplLead_V_ROVOIterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="XxplLead_V_ROVOIterator" id="Execute"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

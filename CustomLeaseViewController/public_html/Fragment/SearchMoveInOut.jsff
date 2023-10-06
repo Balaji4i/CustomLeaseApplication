@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+      <af:panelBox text="Manage #{sessionScope.ScreenName}" id="pb1" showDisclosure="false"
+                   inlineStyle="border-color:transparent;">
+        <f:facet name="toolbar"/>
+        <af:panelGroupLayout layout="vertical" id="pgl1">
+          <af:query id="qryId1" headerText="Search" disclosed="true"
+                    value="#{bindings.SearchMoveInOutQuery.queryDescriptor}"
+                    model="#{bindings.SearchMoveInOutQuery.queryModel}"
+                    queryListener="#{bindings.SearchMoveInOutQuery.processQuery}"
+                    queryOperationListener="#{bindings.SearchMoveInOutQuery.processQueryOperation}"
+                    resultComponentId="::pc1:resId1" rows="2" maxColumns="3"/>
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+            <f:facet name="menus"/>
+            <f:facet name="toolbar">
+              <af:toolbar id="t1" flex="100">
+                <af:commandImageLink id="cil2"
+                                     icon="/images/func_add_16_ena.png"
+                                     disabledIcon="/images/func_add_16_dis.png"
+                                     hoverIcon="/images/func_add_16_hov.png"
+                                     depressedIcon="/images/func_add_16_act.png "
+                                     action="AddEdit">
+                  <af:setPropertyListener from="#{'add'}"
+                                          to="#{pageFlowScope.navigation}" type="action"/>
+                </af:commandImageLink>
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:commandImageLink id="cil3"
+                                     icon="/images/func_pencil_16_ena.png"
+                                     disabledIcon="/images/func_pencil_16_dis.png"
+                                     hoverIcon="/images/func_pencil_16_hov.png"
+                                     depressedIcon="/images/func_pencil_16_act.png"
+                                     action="AddEdit">
+                  <af:setPropertyListener from="#{bindings.MoveIoId.inputValue}"
+                                          to="#{pageFlowScope.MoveInOutId}" type="action"/>
+                  <af:setPropertyListener from="#{'edit'}"
+                                          to="#{pageFlowScope.navigation}" type="action"/>
+                </af:commandImageLink>
+              </af:toolbar>
+            </f:facet>
+            <f:facet name="statusbar"/>
+            <af:table value="#{bindings.SearchMoveInOut_ROVO1.collectionModel}"
+                      var="row"
+                      rows="#{bindings.SearchMoveInOut_ROVO1.rangeSize}"
+                      emptyText="#{bindings.SearchMoveInOut_ROVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.SearchMoveInOut_ROVO1.rangeSize}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.SearchMoveInOut_ROVO1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.SearchMoveInOut_ROVO1.collectionModel.makeCurrent}"
+                      rowSelection="single" id="resId1"
+                      styleClass="AFStretchWidth" varStatus="vs"
+                      autoHeightRows="0" scrollPolicy="page">
+              <af:column sortProperty="#{bindings.SearchMoveInOut_ROVO1.hints.MoveIoId.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchMoveInOut_ROVO1.hints.MoveIoId.label}"
+                         id="c2" rendered="false">
+                <af:inputText value="#{row.bindings.MoveIoId.inputValue}"
+                              label="#{bindings.SearchMoveInOut_ROVO1.hints.MoveIoId.label}"
+                              required="#{bindings.SearchMoveInOut_ROVO1.hints.MoveIoId.mandatory}"
+                              columns="#{bindings.SearchMoveInOut_ROVO1.hints.MoveIoId.displayWidth}"
+                              maximumLength="#{bindings.SearchMoveInOut_ROVO1.hints.MoveIoId.precision}"
+                              shortDesc="#{bindings.SearchMoveInOut_ROVO1.hints.MoveIoId.tooltip}"
+                              id="it1">
+                  <f:validator binding="#{row.bindings.MoveIoId.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column id="c1" headerText="S.No" width="40">
+                <af:outputText value="#{vs.index+1}" id="ot12"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchMoveInOut_ROVO1.hints.MoveIoNumber.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchMoveInOut_ROVO1.hints.MoveIoNumber.label}"
+                         id="resId1c1" align="center">
+                <af:commandImageLink text="#{row.MoveIoNumber}" id="cil1"
+                                     action="AddEdit">
+                  <af:setPropertyListener from="#{'edit'}"
+                                          to="#{pageFlowScope.navigation}"
+                                          type="action"/>
+                  <af:setPropertyListener from="#{row.bindings.MoveIoId.inputValue}"
+                                          to="#{pageFlowScope.MoveInOutId}"
+                                          type="action"/>
+                </af:commandImageLink>
+                <af:outputText value="#{row.MoveIoNumber}" id="ot5"
+                               rendered="false"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchMoveInOut_ROVO1.hints.BookingNumber.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchMoveInOut_ROVO1.hints.BookingNumber.label}"
+                         id="resId1c2" align="center" width="120">
+                <af:outputText value="#{row.BookingNumber}" id="ot11"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchMoveInOut_ROVO1.hints.CustomerName.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchMoveInOut_ROVO1.hints.CustomerName.label}"
+                         id="resId1c3" width="200">
+                <af:outputText value="#{row.CustomerName}" id="ot4"/>
+              </af:column>
+              <af:column headerText="#{bindings.SearchMoveInOut_ROVO1.hints.Attribute1.label}"
+                         id="c3" width="200">
+                <af:outputText value="#{row.Attribute1}" id="ot13"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchMoveInOut_ROVO1.hints.OrgName.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchMoveInOut_ROVO1.hints.OrgName.label}"
+                         id="resId1c4" align="center" width="200">
+                <af:outputText value="#{row.OrgName}" id="ot9"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchMoveInOut_ROVO1.hints.MoveIoDate.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchMoveInOut_ROVO1.hints.MoveIoDate.label}"
+                         id="resId1c5" align="center">
+                <af:outputText value="#{row.MoveIoDate}" id="ot1">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchMoveInOut_ROVO1.hints.ResourceName.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchMoveInOut_ROVO1.hints.ResourceName.label}"
+                         id="resId1c6" align="center" rendered="false">
+                <af:outputText value="#{row.ResourceName}" id="ot10"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchMoveInOut_ROVO1.hints.IoFlag.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchMoveInOut_ROVO1.hints.IoFlag.label}"
+                         id="resId1c7" align="center" rendered="false">
+                <af:outputText value="#{row.IoFlag}" id="ot3"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchMoveInOut_ROVO1.hints.AssistedBy.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchMoveInOut_ROVO1.hints.AssistedBy.label}"
+                         id="resId1c8" align="center" rendered="false">
+                <af:outputText value="#{row.AssistedBy}" id="ot8"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchMoveInOut_ROVO1.hints.Usage.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchMoveInOut_ROVO1.hints.Usage.label}"
+                         id="resId1c9" align="center" rendered="false">
+                <af:outputText value="#{row.Usage}" id="ot2"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchMoveInOut_ROVO1.hints.Status.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchMoveInOut_ROVO1.hints.Status.label}"
+                         id="resId1c10" align="center">
+                <af:outputText value="#{row.Status}" id="ot6"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.SearchMoveInOut_ROVO1.hints.Description.name}"
+                         sortable="false"
+                         headerText="#{bindings.SearchMoveInOut_ROVO1.hints.Description.label}"
+                         id="resId1c11" align="center" width="180">
+                <af:outputText value="#{row.Description}" id="ot7"/>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </af:panelGroupLayout>
+      </af:panelBox>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

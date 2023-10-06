@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SearchPaymentPlan_BTF">
+    <default-activity id="__1">SearchPaymentPlan</default-activity>
+    <managed-bean id="__9">
+      <managed-bean-name id="__10">filmStrip</managed-bean-name>
+      <managed-bean-class id="__11">com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope id="__12">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchPaymentPlan">
+      <page>/Fragment/SearchPaymentPlan.jsff</page>
+    </view>
+    <task-flow-call id="AddEditPaymentPlan_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/AddEditPaymentPlan_BTF.xml</document>
+        <id>AddEditPaymentPlan_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>navigation</name>
+        <value>#{pageFlowScope.navigation}</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>MsHdrId</name>
+        <value>#{pageFlowScope.MsHdrId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome id="__20">
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Hide_FS">
+      <method>#{backingBeanScope.filmStrip._hideFilmStrip}</method>
+      <outcome id="__17">
+        <fixed-outcome>hide</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Show_FS">
+      <method>#{backingBeanScope.filmStrip._showFilmStrip}</method>
+      <outcome id="__19">
+        <fixed-outcome>show</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id id="__3">SearchPaymentPlan</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome id="__6">add_edit</from-outcome>
+        <to-activity-id id="__4">Hide_FS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__21">
+      <from-activity-id id="__22">AddEditPaymentPlan_BTF</from-activity-id>
+      <control-flow-case id="__24">
+        <to-activity-id id="__25">Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__26">
+      <from-activity-id id="__27">Execute</from-activity-id>
+      <control-flow-case id="__29">
+        <from-outcome id="__28">Execute</from-outcome>
+        <to-activity-id id="__30">Show_FS</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id id="__14">Hide_FS</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome id="__18">hide</from-outcome>
+        <to-activity-id id="__16">AddEditPaymentPlan_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id id="__31">Show_FS</from-activity-id>
+      <control-flow-case id="__33">
+        <from-outcome id="__34">show</from-outcome>
+        <to-activity-id id="__32">SearchPaymentPlan</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

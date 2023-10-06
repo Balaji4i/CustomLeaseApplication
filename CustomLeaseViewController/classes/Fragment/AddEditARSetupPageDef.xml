@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="AddEditARSetupPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="XxplARSetupVOIterator1" Binds="Root.ARSetup_AM1.XxplARSetupVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+    <iterator id="XxplARSetupVOIterator2" Binds="Root.ARSetup_AM1.XxplARSetupVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <action id="Commit" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <attributeValues IterBinding="XxplARSetupVOIterator1"
+                     id="AccountingRuleName">
+      <AttrNames>
+        <Item Value="AccountingRuleName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplARSetupVOIterator1" id="ArSetupId">
+      <AttrNames>
+        <Item Value="ArSetupId"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplARSetupVOIterator1" StaticList="false"
+          Uses="LOV_BusinessUnitId" id="BusinessUnitId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XxplARSetupVOIterator1" StaticList="false"
+          Uses="LOV_ChargeType" id="ChargeType" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplARSetupVOIterator1"
+                     id="ConcatenatedSegment">
+      <AttrNames>
+        <Item Value="ConcatenatedSegment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplARSetupVOIterator1" id="InvoicingRule">
+      <AttrNames>
+        <Item Value="InvoicingRule"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplARSetupVOIterator1" StaticList="false"
+          Uses="LOV_TaxCode" id="TaxCode" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XxplARSetupVOIterator1" StaticList="false"
+          Uses="LOV_TxnSource" id="TxnSource" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplARSetupVOIterator1" id="TxnSourceId">
+      <AttrNames>
+        <Item Value="TxnSourceId"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplARSetupVOIterator1" StaticList="false"
+          Uses="LOV_TxnType" id="TxnType" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplARSetupVOIterator1" id="TxnTypeId">
+      <AttrNames>
+        <Item Value="TxnTypeId"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplARSetupVOIterator1" StaticList="false"
+          Uses="LOV_UnitCategory" id="UnitCategory" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XxplARSetupVOIterator1" id="Usage">
+      <AttrNames>
+        <Item Value="Usage"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplARSetupVOIterator1" id="LedgerName">
+      <AttrNames>
+        <Item Value="LedgerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplARSetupVOIterator1" id="Attribute1">
+      <AttrNames>
+        <Item Value="Attribute1"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplARSetupVOIterator1" StaticList="false"
+          Uses="LOV_UnitMethod" id="UnitMethod" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

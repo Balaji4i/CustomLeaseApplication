@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE JboProject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<JboProject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="CustomLeaseModel"
+   Version="11.1.1.66.73"
+   SeparateXMLFiles="true"
+   PackageName="custom.lease.model">
+   <DesignTime>
+      <Attr Name="_jprName" Value="../../../../CustomLeaseModel.jpr"/>
+      <Attr Name="_appModuleNames1"
+         Value="custom.lease.model.AM.customRootAppModule"/>
+      <Attr Name="_appModuleNames0"
+         Value="custom.lease.model.AM.PropertyMasterAM"/>
+      <Attr Name="_NamedConnection" Value="Connection1"/>
+     <Attr Name="_appModuleNames2" Value="custom.lease.model.AM.PaymentPlanAM"/>      <Attr Name="_appModuleNames3"
+                                                                                         Value="custom.lease.model.AM.PropertyUnitAM"/>
+      <Attr Name="_appModuleNames4"
+         Value="custom.lease.model.AM.PropertyBuildingsAM"/>
+      <Attr Name="_appModuleNames5" Value="custom.lease.model.AM.PriceListAM"/>
+      <Attr Name="_jbo.TypeMapEntries" Value="Java"/>
+      <Attr Name="_appModuleNames6" Value="custom.lease.model.AM.Documents_AM"/>
+      <Attr Name="_appModuleNames7" Value="custom.lease.model.AM.Receipt_AM"/>
+      <Attr Name="_appModuleNames8"
+         Value="custom.lease.model.AM.BillingAppModule"/>
+      <Attr Name="_appModuleNames9" Value="custom.lease.model.AM.Booking_AM"/>
+      <Attr Name="_appModuleNames10" Value="custom.lease.model.AM.Invoice_AM"/>
+      <Attr Name="_appModuleNames11"
+         Value="custom.lease.model.AM.ApprovalHistory_AM"/>
+      <Attr Name="_appModuleNames12" Value="custom.lease.model.AM.LeadAM"/>
+   </DesignTime>
+   <Containee
+      Name="AM"
+      PackageName="custom.lease.model.AM"
+      ObjectType="JboPackage">
+      <DesignTime>
+         <Attr Name="_AM" Value="true"/>
+      </DesignTime>
+   </Containee>
+   <Containee
+      Name="Asso"
+      PackageName="custom.lease.model.Asso"
+      ObjectType="JboPackage">
+      <DesignTime>
+         <Attr Name="_AS" Value="true"/>
+      </DesignTime>
+   </Containee>
+   <Containee
+      Name="Entity"
+      PackageName="custom.lease.model.Entity"
+      ObjectType="JboPackage">
+      <DesignTime>
+         <Attr Name="_EO" Value="true"/>
+      </DesignTime>
+   </Containee>
+   <Containee
+      Name="ROVO"
+      PackageName="custom.lease.model.ROVO"
+      ObjectType="JboPackage">
+      <DesignTime>
+         <Attr Name="_VO" Value="true"/>
+      </DesignTime>
+   </Containee>
+   <Containee
+      Name="View"
+      PackageName="custom.lease.model.View"
+      ObjectType="JboPackage">
+      <DesignTime>
+         <Attr Name="_VO" Value="true"/>
+      </DesignTime>
+   </Containee>
+   <Containee
+      Name="VL"
+      PackageName="custom.lease.model.VL"
+      ObjectType="JboPackage">
+      <DesignTime>
+         <Attr Name="_VL" Value="true"/>
+      </DesignTime>
+   </Containee>
+   <AppContainee
+      Name="GenericExcelModel"
+      FullName="model.GenericExcelModel"
+      ObjectType="JboProject"/>
+</JboProject>

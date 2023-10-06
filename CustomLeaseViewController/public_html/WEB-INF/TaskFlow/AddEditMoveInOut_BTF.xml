@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="AddEditMoveInOut_BTF">
+    <default-activity id="__1">router1</default-activity>
+    <transaction id="__17">
+      <requires-transaction/>
+    </transaction>
+    <input-parameter-definition id="__12">
+      <name id="__13">navigation</name>
+      <value>#{pageFlowScope.navigation}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__14">
+      <name id="__15">MoveInOutId</name>
+      <value>#{pageFlowScope.MoveInOutId}</value>
+    </input-parameter-definition>
+    <managed-bean id="__42">
+      <managed-bean-name id="__39">MoveInOutBean</managed-bean-name>
+      <managed-bean-class id="__41">custom.lease.view.bean.backing.MoveInOutBean</managed-bean-class>
+      <managed-bean-scope id="__40">request</managed-bean-scope>
+    </managed-bean>
+    <view id="AddEditMoveInOut">
+      <page>/Fragment/AddEditMoveInOut.jsff</page>
+    </view>
+    <router id="router1">
+      <case>
+        <expression>#{pageFlowScope.navigation eq 'add'}</expression>
+        <outcome id="__10">add</outcome>
+      </case>
+      <case>
+        <expression>#{pageFlowScope.navigation eq 'edit'}</expression>
+        <outcome id="__11">edit</outcome>
+      </case>
+      <default-outcome>add</default-outcome>
+    </router>
+    <task-flow-return id="cancel">
+      <outcome id="__16">
+        <name>cancel</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="save">
+      <outcome id="__23">
+        <name>save</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome id="__27">
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome id="__33">
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="Attachmnent_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TaskFlow/Attachmnent_BTF.xml</document>
+        <id>Attachmnent_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__47">
+        <name>funcId</name>
+        <value>#{pageFlowScope.FuncId}</value>
+      </input-parameter>
+      <input-parameter id="__48">
+        <name>funcRefId</name>
+        <value>#{pageFlowScope.FuncRefId}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type id="__43">
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <control-flow-rule id="__2">
+      <from-activity-id id="__3">router1</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome id="__6">add</from-outcome>
+        <to-activity-id id="__4">CreateInsert</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome id="__9">edit</from-outcome>
+        <to-activity-id id="__7">ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__18">
+      <from-activity-id id="__19">AddEditMoveInOut</from-activity-id>
+      <control-flow-case id="__21">
+        <from-outcome id="__22">toCancel</from-outcome>
+        <to-activity-id id="__20">cancel</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__24">
+        <from-outcome id="__26">toSave</from-outcome>
+        <to-activity-id id="__25">save</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__45">
+        <from-outcome id="__46">Attachment</from-outcome>
+        <to-activity-id id="__44">Attachmnent_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__28">
+      <from-activity-id id="__29">ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__32">
+        <from-outcome id="__30">ExecuteWithParams</from-outcome>
+        <to-activity-id id="__31">AddEditMoveInOut</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__34">
+      <from-activity-id id="__35">CreateInsert</from-activity-id>
+      <control-flow-case id="__38">
+        <from-outcome id="__37">CreateInsert</from-outcome>
+        <to-activity-id id="__36">AddEditMoveInOut</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

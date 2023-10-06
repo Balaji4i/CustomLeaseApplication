@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MilestoneValidateROVO"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="custom.lease.model.ROVO.MilestoneValidateROVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P_BOOKING_HDR_ID"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_FROM_DATE"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_TO_DATE"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_TYPE"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_TYPES"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery>
+    <![CDATA[SELECT 
+XXPL_VALIDATE_MILESTONE_DATE(:P_BOOKING_HDR_ID,:P_FROM_DATE,:P_TO_DATE,:P_TYPE)AS DATA_VALUE,
+XXPL_VALIDATE_MILESTONE_DATE(:P_BOOKING_HDR_ID,:P_FROM_DATE,:P_TO_DATE,:P_TYPES)AS NO_OF_DAYS  
+FROM DUAL]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="DataValue"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="BIGINT"
+    AliasName="DATA_VALUE"
+    Expression="DATA_VALUE"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NoOfDays"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="NO_OF_DAYS"
+    Expression="NO_OF_DAYS"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="DataValue"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="custom.lease.model.CustomLeaseModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

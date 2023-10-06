@@ -1,0 +1,286 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+        <af:panelGroupLayout id="pgl4">
+        <af:panelSplitter id="ps2" orientation="vertical" splitterPosition="120"  styleClass="AFStretchWidth"
+                        inlineStyle="height:25.0cm;"
+                          disabled="true">
+          <f:facet name="first">
+            <af:panelBox id="pb2" showDisclosure="false"
+                         inlineStyle="border-style:none;" text="Property Units">
+              <af:panelDashboard id="pd1" columns="4"
+                                 styleClass="AFStretchWidth" rowHeight="80px">
+                <af:panelBox text="All" id="pb5" showDisclosure="false"
+                             styleClass="leftBorderSkyBlue" background="medium">
+                  <af:commandLink text="#{bindings.AllUnit.inputValue}" id="cl1"
+                                  actionListener="#{backingBeanScope.SearchUnitBB.onClickStatusCount}"
+                                  inlineStyle="font-size:7mm;color:Blue;text-align:center;">
+                    <af:setPropertyListener from="ALL"
+                                            to="#{pageFlowScope.statusType}"
+                                            type="action"/>
+                  </af:commandLink>
+                  <f:facet name="toolbar"/>
+                </af:panelBox>
+                <af:panelBox text="Available" id="pb4" showDisclosure="false"
+                             styleClass="leftBorderGreen" background="medium">
+                  <af:commandLink text="#{bindings.AvailUnit.inputValue}"
+                                  id="of1"
+                                  inlineStyle="font-size:7mm;color:Green;text-align:center;"
+                                  actionListener="#{backingBeanScope.SearchUnitBB.onClickStatusCount}">
+                    <af:setPropertyListener from="Available"
+                                            to="#{pageFlowScope.statusType}"
+                                            type="action"/>
+                  </af:commandLink>
+                  <f:facet name="toolbar"/>
+                </af:panelBox>
+                <af:panelBox text="Leased" id="pb7" styleClass="leftBorderRed"
+                             showDisclosure="false" background="medium">
+                  <af:commandLink text="#{bindings.LeasedUnit.inputValue}"
+                                  id="cl3"
+                                  actionListener="#{backingBeanScope.SearchUnitBB.onClickStatusCount}"
+                                  inlineStyle="font-size:7mm;color:Red;text-align:center;">
+                    <af:setPropertyListener from="Leased"
+                                            to="#{pageFlowScope.statusType}"
+                                            type="action"/>
+                  </af:commandLink>
+                  <f:facet name="toolbar"/>
+                </af:panelBox>
+                <af:panelBox text="Allotted" id="pb6" showDisclosure="false"
+                             styleClass="leftBorderYellow" background="medium">
+                  <af:commandLink text="#{bindings.AllottedUnit.inputValue}"
+                                  id="cl2"
+                                  actionListener="#{backingBeanScope.SearchUnitBB.onClickStatusCount}"
+                                  inlineStyle="font-size:7mm;color:Orange;text-align:center;">
+                    <af:setPropertyListener from="Allotted"
+                                            to="#{pageFlowScope.statusType}"
+                                            type="action"/>
+                  </af:commandLink>
+                  <f:facet name="toolbar"/>
+                </af:panelBox>
+              </af:panelDashboard>
+              <f:facet name="toolbar">
+                <af:panelGroupLayout id="pgl3" layout="horizontal" halign="end">
+                  <af:commandImageLink id="bl2"
+                                       actionListener="#{backingBeanScope.FilmStripBean.hideFSDropDown}"
+                                       visible="#{sessionScope.hideStrip ne true}"
+                                       shortDesc="Hide the Film Strip"
+                                       icon="/images/func_arrowheadup_16_act.png"/>
+                  <af:commandImageLink id="bl1"
+                                       actionListener="#{backingBeanScope.FilmStripBean.showFSDropDown}"
+                                       visible="#{sessionScope.hideStrip eq true}"
+                                       shortDesc="Show Film Strip"
+                                       icon="/images/func_arrowheaddown_16_act.png"/>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelBox>
+          </f:facet>
+          <f:facet name="second">
+            <af:panelBox text="Result" id="pb8" showDisclosure="false">
+              <f:facet name="toolbar"/>
+              <af:panelCollection id="pc1" styleClass="AFStretchWidth"
+                                  inlineStyle="height:750.0px;">
+                <f:facet name="toolbar">
+                  <af:toolbar id="t2" flex="100">
+                    <af:commandImageLink id="cil1"
+                                         icon="/images/func_add_16_ena.png"
+                                         disabledIcon="/images/func_add_16_dis.png "
+                                         hoverIcon="/images/func_add_16_hov.png"
+                                         depressedIcon="/images/func_add_16_act.png"
+                                         action="ToUnit">
+                      <af:setPropertyListener from="#{'ADD'}"
+                                              to="#{pageFlowScope.naviResult}"
+                                              type="action"/>
+                    </af:commandImageLink>
+                    <af:spacer width="10" height="10" id="s1"/>
+                    <af:commandImageLink id="cil2"
+                                         icon="/images/func_pencil_16_ena.png"
+                                         disabledIcon="/images/func_pencil_16_dis.png"
+                                         hoverIcon="/images/func_pencil_16_hov.png"
+                                         depressedIcon="/images/func_pencil_16_act.png"
+                                         action="ToUnit">
+                      <af:setPropertyListener from="#{'EDIT'}"
+                                              to="#{pageFlowScope.naviResult}"
+                                              type="action"/>
+                      <af:setPropertyListener to="#{pageFlowScope.uid}"
+                                              from="#{bindings.UnitId.inputValue}"
+                                              type="action"/>
+                    </af:commandImageLink>
+                    <af:spacer width="10" height="10" id="s2"/>
+                  <af:commandImageLink id="cil3"
+                                       icon="/images/xl.png" rendered="true">
+                    <af:showPopupBehavior popupId="p1" triggerType="action"/>
+                  </af:commandImageLink>
+                    <af:spacer width="10" height="10" id="s3"/>
+                    <af:quickQuery id="qryId1" label="Search Unit"
+                                   searchDesc="Search Unit"
+                                   value="#{bindings.SearchUnitQuery.queryDescriptor}"
+                                   model="#{bindings.SearchUnitQuery.queryModel}"
+                                   queryListener="#{bindings.SearchUnitQuery.processQuery}"
+                                   queryOperationListener="#{bindings.SearchUnitQuery.processQueryOperation}"/>
+                    <af:spacer width="10" height="10" id="s4"/>
+                    <af:commandImageLink text="Units export" 
+                                         id="cil4"
+                                         icon="/images/xl.png">
+                    <af:fileDownloadActionListener contentType="application/xls"
+                                                   filename="Unit Export.xls"
+                                                   method="#{backingBeanScope.SearchUnitBB.exportToExcel}"/>
+                  </af:commandImageLink>
+                  </af:toolbar>
+                </f:facet>
+                <af:table value="#{bindings.SearchPropertyUnitROVO1.collectionModel}"
+                          var="row"
+                          rows="#{bindings.SearchPropertyUnitROVO1.rangeSize}"
+                          emptyText="#{bindings.SearchPropertyUnitROVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="20" rowBandingInterval="0"
+                          filterModel="#{bindings.SearchUnitQuery.queryDescriptor}"
+                          queryListener="#{bindings.SearchUnitQuery.processQuery}"
+                          filterVisible="false" varStatus="vs"
+                          selectedRowKeys="#{bindings.SearchPropertyUnitROVO1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.SearchPropertyUnitROVO1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="resId1"
+                          autoHeightRows="0" columnStretching="last"
+                          partialTriggers="::qryId1" scrollPolicy="page">
+                  <af:column id="c1" headerText="S.No" width="60"
+                             align="center">
+                    <af:outputText value="#{vs.index+1}" id="ot48"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.UnitId.name}"
+                             filterable="true" sortable="true"
+                             headerText="UnitId" id="resId1c1" rendered="false">
+                    <af:outputText value="#{row.UnitId}" id="ot19">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.SearchPropertyUnitROVO1.hints.UnitId.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.PropertyId.name}"
+                             filterable="true" sortable="true"
+                             headerText="PropertyId" id="resId1c2"
+                             rendered="false">
+                    <af:outputText value="#{row.PropertyId}" id="ot26">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.SearchPropertyUnitROVO1.hints.PropertyId.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.BuildId.name}"
+                             filterable="true" sortable="true"
+                             headerText="BuildId" id="resId1c3"
+                             rendered="false">
+                    <af:outputText value="#{row.BuildId}" id="ot46">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.SearchPropertyUnitROVO1.hints.BuildId.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.UnitNumber.name}"
+                             filterable="true" sortable="true"
+                             headerText="#{bindings.SearchPropertyUnitROVO1.hints.UnitNumber.label}"
+                             id="resId1c14" width="160">
+                    <af:outputText value="#{row.UnitNumber}" id="ot38"
+                                   rendered="false"/>
+                    <af:commandLink text="#{row.UnitNumber}" id="cl5"
+                                    inlineStyle="font-weight:bolder; font-size:small; color:#1367AE;"
+                                    action="ToUnit">
+                      <af:setPropertyListener from="#{'EDIT'}"
+                                              to="#{pageFlowScope.naviResult}"
+                                              type="action"/>
+                      <af:setPropertyListener to="#{pageFlowScope.uid}"
+                                              from="#{row.UnitId}"
+                                              type="action"/>
+                    </af:commandLink>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.UnitName.name}"
+                             filterable="true" sortable="true"
+                             headerText="UnitName" id="resId1c4"
+                             rendered="false">
+                    <af:outputText value="#{row.UnitName}" id="ot13"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.UnitNameTl.name}"
+                             filterable="true" sortable="true"
+                             headerText="#{bindings.SearchPropertyUnitROVO1.hints.UnitNameTl.label}"
+                             id="resId1c5" rendered="false">
+                    <af:outputText value="#{row.UnitNameTl}" id="ot5"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.OrgName.name}"
+                             filterable="true" sortable="true"
+                             headerText="#{bindings.SearchPropertyUnitROVO1.hints.OrgName.label}"
+                             id="resId1c10" width="260" displayIndex="-1">
+                    <af:outputText value="#{row.OrgName}" id="ot31"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.PropertyName.name}"
+                             filterable="true" sortable="true"
+                             headerText="#{bindings.SearchPropertyUnitROVO1.hints.PropertyName.label}"
+                             id="resId1c6" width="250">
+                    <af:outputText value="#{row.PropertyName}" id="ot24"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.PropertyNumber.name}"
+                             filterable="true" sortable="true"
+                             headerText="#{bindings.SearchPropertyUnitROVO1.hints.PropertyNumber.label}"
+                             id="resId1c7" visible="false">
+                    <af:outputText value="#{row.PropertyNumber}" id="ot43"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.BuildName.name}"
+                             filterable="true" sortable="true"
+                             headerText="#{bindings.SearchPropertyUnitROVO1.hints.BuildName.label}"
+                             id="resId1c8" width="250">
+                    <af:outputText value="#{row.BuildName}" id="ot1"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.BuildNumber.name}"
+                             filterable="true" sortable="true"
+                             headerText="#{bindings.SearchPropertyUnitROVO1.hints.BuildNumber.label}"
+                             id="resId1c9" visible="false">
+                    <af:outputText value="#{row.BuildNumber}" id="ot25"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.UnitTypeDisp.name}"
+                             filterable="true" sortable="true"
+                             headerText="Unit Type" id="resId1c11">
+                    <af:outputText value="#{row.UnitTypeDisp}" id="ot18"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.AreaTypeDisp.name}"
+                             filterable="true" sortable="true"
+                             headerText="Area Type" id="resId1c12" width="130">
+                    <af:outputText value="#{row.AreaTypeDisp}" id="ot15"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.ViewTypeDisp.name}"
+                             filterable="true" sortable="true"
+                             headerText="View Type" id="resId1c13"
+                             visible="false">
+                    <af:outputText value="#{row.ViewTypeDisp}" id="ot30"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.Status.name}"
+                             filterable="true" sortable="true"
+                             headerText="#{bindings.SearchPropertyUnitROVO1.hints.Status.label}"
+                             id="resId1c26">
+                    <af:outputText value="#{row.Status}" id="ot6"
+                                   inlineStyle="color:#{row.Status eq 'Leased' ? 'Blue' : row.Status eq 'Allotted' ? 'Red' : row.Status eq 'Available' ? 'Green' : 'Black'}; font-weight:bold;"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.ActiveYn.name}"
+                             filterable="true" sortable="true"
+                             headerText="#{bindings.SearchPropertyUnitROVO1.hints.ActiveYn.label}"
+                             id="resId1c30" rendered="false">
+                    <af:outputText value="#{row.ActiveYn}" id="ot10"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.SearchPropertyUnitROVO1.hints.Description.name}"
+                             filterable="true" sortable="true"
+                             headerText="#{bindings.SearchPropertyUnitROVO1.hints.Description.label}"
+                             id="resId1c29" width="100">
+                    <af:outputText value="#{row.Description}" id="ot36"/>
+                  </af:column>
+                </af:table>
+                <af:popup id="p1">
+                <af:dialog id="d1" contentWidth="750" contentHeight="300"
+                           type="none">
+                  <af:region value="#{bindings.ExcelUpload_BTF1.regionModel}"
+                             id="r1"/>
+                </af:dialog>
+              </af:popup>
+              </af:panelCollection>
+            </af:panelBox>
+          </f:facet>
+        </af:panelSplitter>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

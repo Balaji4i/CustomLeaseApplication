@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="ApprovalHistory_BTF">
+    <default-activity id="__1">Approvalhistory</default-activity>
+    <input-parameter-definition id="__9">
+      <name id="__8">plid</name>
+      <value>#{sessionScope.plid}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__10">
+      <name id="__11">fuctionid</name>
+      <value>#{sessionScope.fuctionid}</value>
+    </input-parameter-definition>
+    <view id="Approvalhistory">
+      <page>/Fragment/Approvalhistory.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

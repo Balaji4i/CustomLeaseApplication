@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XxplOwnerDtleView"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  SelectList="XxplOwnerDtleEO.OWNER_ID, 
+       XxplOwnerDtleEO.PROPERTY_ID, 
+       XxplOwnerDtleEO.BUILD_ID, 
+       XxplOwnerDtleEO.UNIT_ID, 
+       XxplOwnerDtleEO.VEND_ID, 
+       XxplOwnerDtleEO.VEND_SITE_ID, 
+       XxplOwnerDtleEO.PRIMARY_YN, 
+       XxplOwnerDtleEO.DESCRIPTION, 
+       XxplOwnerDtleEO.ATTRIBUTE_CATEGORY, 
+       XxplOwnerDtleEO.ATTRIBUTE1, 
+       XxplOwnerDtleEO.ATTRIBUTE2, 
+       XxplOwnerDtleEO.ATTRIBUTE3, 
+       XxplOwnerDtleEO.ATTRIBUTE4, 
+       XxplOwnerDtleEO.ATTRIBUTE5, 
+       XxplOwnerDtleEO.ATTRIBUTE6, 
+       XxplOwnerDtleEO.ATTRIBUTE7, 
+       XxplOwnerDtleEO.ATTRIBUTE8, 
+       XxplOwnerDtleEO.ATTRIBUTE9, 
+       XxplOwnerDtleEO.ATTRIBUTE10, 
+       XxplOwnerDtleEO.ACTIVE_YN, 
+       XxplOwnerDtleEO.OBJECT_VERSION, 
+       XxplOwnerDtleEO.CREATED_BY, 
+       XxplOwnerDtleEO.CREATION_DATE, 
+       XxplOwnerDtleEO.LAST_UPDATED_BY, 
+       XxplOwnerDtleEO.LAST_UPDATE_DATE, 
+       XxplOwnerDtleEO.LAST_UPDATE_LOGIN, 
+       XxplOwnerDtleEO.ROWID, 
+       XxplOwnerDtleEO.VEND_CONTACT_ID"
+  FromList="XXPL_OWNER_DTLE XxplOwnerDtleEO"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  RowClass="custom.lease.model.View.XxplOwnerDtleViewRowImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="xxstg_Unit_OwnereROVA"
+    ViewObjectName="custom.lease.model.ROVO.xxstg_Unit_OwnereROVO">
+    <ParameterMap>
+      <PIMap Variable="OWN_ORG_ID">
+        <TransientExpression><![CDATA[OrgId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="xxstg_Unit_OwnereROVA_E"
+    ViewObjectName="custom.lease.model.ROVO.xxstg_Unit_OwnereROVO">
+    <ViewCriteriaUsage
+      Name="findByID"
+      FullName="custom.lease.model.ROVO.xxstg_Unit_OwnereROVO.findByID"/>
+    <ParameterMap>
+      <PIMap Variable="OWN_ORG_ID">
+        <TransientExpression><![CDATA[XxplPropertyUnitsView.OrgId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="OWN_VEN_ID">
+        <TransientExpression><![CDATA[VendId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="OWN_VEN_SITE_ID">
+        <TransientExpression><![CDATA[VendSiteId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_TransVendorName"
+    ListVOName="xxstg_Unit_OwnereROVA"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_TransVendorName_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransVendorName"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="VendId"/>
+      <Item Value="VendSiteId"/>
+      <Item Value="TransVendorSite"/>
+      <Item Value="VendContactId"/>
+      <Item Value="TransAddress1"/>
+      <Item Value="TransAddress2"/>
+      <Item Value="TransAddress3"/>
+      <Item Value="TransAddress4"/>
+      <Item Value="TransContractname"/>
+      <Item Value="TransEmailId"/>
+      <Item Value="TransMobileNumber"/>
+      <Item Value="TransPhoneNumber"/>
+      <Item Value="TransPostalCode"/>
+      <Item Value="City"/>
+      <Item Value="Country"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="VendorName"/>
+      <Item Value="VendId"/>
+      <Item Value="VendSiteId"/>
+      <Item Value="SiteNumber"/>
+      <Item Value="VendContactId"/>
+      <Item Value="Address1"/>
+      <Item Value="Address2"/>
+      <Item Value="Address3"/>
+      <Item Value="Address4"/>
+      <Item Value="ContactName"/>
+      <Item Value="EmailId"/>
+      <Item Value="MobileNumber"/>
+      <Item Value="PhoneNumber"/>
+      <Item Value="PostalCode"/>
+      <Item Value="City"/>
+      <Item Value="Country"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="VendorName"/>
+      <Item Value="SiteNumber"/>
+      <Item Value="VendorNumber"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="SearchSupplier"/>
+  </ListBinding>
+  <EntityUsage
+    Name="XxplOwnerDtleEO"
+    Entity="custom.lease.model.Entity.XxplOwnerDtleEO"/>
+  <ViewAttribute
+    Name="OwnerId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OwnerId"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="OWNER_ID"/>
+  <ViewAttribute
+    Name="PropertyId"
+    PrecisionRule="true"
+    EntityAttrName="PropertyId"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="PROPERTY_ID"/>
+  <ViewAttribute
+    Name="BuildId"
+    PrecisionRule="true"
+    EntityAttrName="BuildId"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="BUILD_ID"/>
+  <ViewAttribute
+    Name="UnitId"
+    PrecisionRule="true"
+    EntityAttrName="UnitId"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="UNIT_ID"/>
+  <ViewAttribute
+    Name="VendId"
+    PrecisionRule="true"
+    EntityAttrName="VendId"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="VEND_ID">
+    <Dependencies>
+      <Item
+        Value="TransVendorName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VendSiteId"
+    PrecisionRule="true"
+    EntityAttrName="VendSiteId"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="VEND_SITE_ID">
+    <Dependencies>
+      <Item
+        Value="TransVendorName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PrimaryYn"
+    PrecisionRule="true"
+    EntityAttrName="PrimaryYn"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="PRIMARY_YN"/>
+  <ViewAttribute
+    Name="Description"
+    PrecisionRule="true"
+    EntityAttrName="Description"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="DESCRIPTION"/>
+  <ViewAttribute
+    Name="AttributeCategory"
+    PrecisionRule="true"
+    EntityAttrName="AttributeCategory"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="ATTRIBUTE_CATEGORY"/>
+  <ViewAttribute
+    Name="Attribute1"
+    PrecisionRule="true"
+    EntityAttrName="Attribute1"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="ATTRIBUTE1"/>
+  <ViewAttribute
+    Name="Attribute2"
+    PrecisionRule="true"
+    EntityAttrName="Attribute2"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="ATTRIBUTE2"/>
+  <ViewAttribute
+    Name="Attribute3"
+    PrecisionRule="true"
+    EntityAttrName="Attribute3"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="ATTRIBUTE3"/>
+  <ViewAttribute
+    Name="Attribute4"
+    PrecisionRule="true"
+    EntityAttrName="Attribute4"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="ATTRIBUTE4"/>
+  <ViewAttribute
+    Name="Attribute5"
+    PrecisionRule="true"
+    EntityAttrName="Attribute5"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="ATTRIBUTE5"/>
+  <ViewAttribute
+    Name="Attribute6"
+    PrecisionRule="true"
+    EntityAttrName="Attribute6"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="ATTRIBUTE6"/>
+  <ViewAttribute
+    Name="Attribute7"
+    PrecisionRule="true"
+    EntityAttrName="Attribute7"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="ATTRIBUTE7"/>
+  <ViewAttribute
+    Name="Attribute8"
+    PrecisionRule="true"
+    EntityAttrName="Attribute8"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="ATTRIBUTE8"/>
+  <ViewAttribute
+    Name="Attribute9"
+    PrecisionRule="true"
+    EntityAttrName="Attribute9"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="ATTRIBUTE9"/>
+  <ViewAttribute
+    Name="Attribute10"
+    PrecisionRule="true"
+    EntityAttrName="Attribute10"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="ATTRIBUTE10"/>
+  <ViewAttribute
+    Name="ActiveYn"
+    PrecisionRule="true"
+    EntityAttrName="ActiveYn"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="ACTIVE_YN"/>
+  <ViewAttribute
+    Name="ObjectVersion"
+    PrecisionRule="true"
+    EntityAttrName="ObjectVersion"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="OBJECT_VERSION"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="CREATION_DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="LAST_UPDATE_DATE"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateLogin"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="LAST_UPDATE_LOGIN"/>
+  <ViewAttribute
+    Name="RowID"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="RowID"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="ROWID"/>
+  <ViewAttribute
+    Name="TransientCheckBox"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Boolean"
+    ColumnType="BIT"
+    AliasName="VIEW_ATTR"
+    SQLType="BIT">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+        <AUTOSUBMIT
+          Value="true"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrgId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[XxplPropertyUnitsView.OrgId]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransVendorName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransVendorName">
+    <RecalcCondition><![CDATA[false]]></RecalcCondition>
+    <TransientExpression><![CDATA[if(xxstg_Unit_OwnereROVA_E.first()!=null && VendId !=null && VendSiteId!=null && OrgId!=null)
+{
+xxstg_Unit_OwnereROVA_E.first().getAttribute("VendorName");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplOwnerDtleView.TransVendorName_LABEL"/>
+        <AUTOSUBMIT
+          Value="true"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransVendorSite"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[if(xxstg_Unit_OwnereROVA_E.first()!=null && VendId !=null && VendSiteId!=null && OrgId!=null)
+{
+xxstg_Unit_OwnereROVA_E.first().getAttribute("SiteNumber");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TransVendorName"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="custom.lease.model.View.XxplOwnerDtleView.TransVendorSite_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VendContactId"
+    PrecisionRule="true"
+    EntityAttrName="VendContactId"
+    EntityUsage="XxplOwnerDtleEO"
+    AliasName="VEND_CONTACT_ID"/>
+  <ViewAttribute
+    Name="TransAddress1"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[if(xxstg_Unit_OwnereROVA_E.first()!=null && VendId !=null && VendSiteId!=null && OrgId!=null)
+{
+xxstg_Unit_OwnereROVA_E.first().getAttribute("Address1");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TransVendorName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransAddress2"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[if(xxstg_Unit_OwnereROVA_E.first()!=null && VendId !=null && VendSiteId!=null && OrgId!=null)
+{
+xxstg_Unit_OwnereROVA_E.first().getAttribute("Address2");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TransVendorName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransAddress3"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[if(xxstg_Unit_OwnereROVA_E.first()!=null && VendId !=null && VendSiteId!=null && OrgId!=null)
+{
+xxstg_Unit_OwnereROVA_E.first().getAttribute("Address3");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TransVendorName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransAddress4"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[if(xxstg_Unit_OwnereROVA_E.first()!=null && VendId !=null && VendSiteId!=null && OrgId!=null)
+{
+xxstg_Unit_OwnereROVA_E.first().getAttribute("Address4");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TransVendorName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="City"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[if(xxstg_Unit_OwnereROVA_E.first()!=null && VendId !=null && VendSiteId!=null && OrgId!=null)
+{
+xxstg_Unit_OwnereROVA_E.first().getAttribute("City");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TransVendorName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransPostalCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[if(xxstg_Unit_OwnereROVA_E.first()!=null && VendId !=null && VendSiteId!=null && OrgId!=null)
+{
+xxstg_Unit_OwnereROVA_E.first().getAttribute("PostalCode");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TransVendorName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Country"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[if(xxstg_Unit_OwnereROVA_E.first()!=null && VendId !=null && VendSiteId!=null && OrgId!=null)
+{
+xxstg_Unit_OwnereROVA_E.first().getAttribute("Country");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TransVendorName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransContractname"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[if(xxstg_Unit_OwnereROVA_E.first()!=null && VendId !=null && VendSiteId!=null && OrgId!=null)
+{
+xxstg_Unit_OwnereROVA_E.first().getAttribute("ContactName");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TransVendorName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransMobileNumber"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[if(xxstg_Unit_OwnereROVA_E.first()!=null && VendId !=null && VendSiteId!=null && OrgId!=null)
+{
+xxstg_Unit_OwnereROVA_E.first().getAttribute("MobileNumber");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TransVendorName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransPhoneNumber"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[if(xxstg_Unit_OwnereROVA_E.first()!=null && VendId !=null && VendSiteId!=null && OrgId!=null)
+{
+xxstg_Unit_OwnereROVA_E.first().getAttribute("PhoneNumber");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TransVendorName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransEmailId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[if(xxstg_Unit_OwnereROVA_E.first()!=null && VendId !=null && VendSiteId!=null && OrgId!=null)
+{
+xxstg_Unit_OwnereROVA_E.first().getAttribute("EmailId");
+}
+else
+{
+return null;
+}]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TransVendorName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewLinkAccessor
+    Name="XxplPropertyUnitsView"
+    ViewLink="custom.lease.model.VL.Unit_VL_PropertyOwner"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="custom.lease.model.CustomLeaseModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

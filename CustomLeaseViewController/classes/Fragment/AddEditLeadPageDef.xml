@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="AddEditLeadPageDef"
+                Package="Fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.LeadAM1.XxplLeadVO"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplLeadVOIterator"/>
+    <iterator Binds="Root.LeadAM1.XxplLeadActivity_View1"
+              DataControl="customRootAppModuleDataControl" RangeSize="5"
+              id="XxplLeadActivity_View1Iterator"/>
+    <searchRegion Binds="XxplLeadActivity_View1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="XxplLeadActivity_View1Query"/>
+    <iterator Binds="Root.LeadAM1.XxplLeadNoteView1"
+              DataControl="customRootAppModuleDataControl" RangeSize="25"
+              id="XxplLeadNoteView1Iterator"/>
+    <searchRegion Binds="XxplLeadNoteView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="XxplLeadNoteView1Query"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="LeadNumber">
+      <AttrNames>
+        <Item Value="LeadNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="OrgId">
+      <AttrNames>
+        <Item Value="OrgId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="VisittedDate">
+      <AttrNames>
+        <Item Value="VisittedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="OwnerDetails">
+      <AttrNames>
+        <Item Value="OwnerDetails"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="Title">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="FirstName">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="LastName">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="LeadName">
+      <AttrNames>
+        <Item Value="LeadName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="Professional">
+      <AttrNames>
+        <Item Value="Professional"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="PrimarySource">
+      <AttrNames>
+        <Item Value="PrimarySource"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="SecSource">
+      <AttrNames>
+        <Item Value="SecSource"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="EmailId">
+      <AttrNames>
+        <Item Value="EmailId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="MobileNumber">
+      <AttrNames>
+        <Item Value="MobileNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="PerAddress1">
+      <AttrNames>
+        <Item Value="PerAddress1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="PerAddress2">
+      <AttrNames>
+        <Item Value="PerAddress2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="PerAddress3">
+      <AttrNames>
+        <Item Value="PerAddress3"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="PerAddress4">
+      <AttrNames>
+        <Item Value="PerAddress4"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="PerCity">
+      <AttrNames>
+        <Item Value="PerCity"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="PhoneNumber">
+      <AttrNames>
+        <Item Value="PhoneNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="Fax">
+      <AttrNames>
+        <Item Value="Fax"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="CurAddress1">
+      <AttrNames>
+        <Item Value="CurAddress1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="CurAddress2">
+      <AttrNames>
+        <Item Value="CurAddress2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="CurAddress3">
+      <AttrNames>
+        <Item Value="CurAddress3"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="CurAddress4">
+      <AttrNames>
+        <Item Value="CurAddress4"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="CurCity">
+      <AttrNames>
+        <Item Value="CurCity"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="EmiratesIdRef1">
+      <AttrNames>
+        <Item Value="EmiratesIdRef1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="EmiratesIdRef2">
+      <AttrNames>
+        <Item Value="EmiratesIdRef2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="EmiratesIdRef3">
+      <AttrNames>
+        <Item Value="EmiratesIdRef3"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="EmiratesIdRef4">
+      <AttrNames>
+        <Item Value="EmiratesIdRef4"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="Nationality">
+      <AttrNames>
+        <Item Value="Nationality"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="PassportNumber">
+      <AttrNames>
+        <Item Value="PassportNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="PassportExpDate">
+      <AttrNames>
+        <Item Value="PassportExpDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="CountryOfRes">
+      <AttrNames>
+        <Item Value="CountryOfRes"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="TradeLincenseName">
+      <AttrNames>
+        <Item Value="TradeLincenseName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator"
+                     id="TradeLincenseNameValidity">
+      <AttrNames>
+        <Item Value="TradeLincenseNameValidity"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="TradeLincenseNo">
+      <AttrNames>
+        <Item Value="TradeLincenseNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator"
+                     id="TradeLincenseNoValidity">
+      <AttrNames>
+        <Item Value="TradeLincenseNoValidity"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="Trn">
+      <AttrNames>
+        <Item Value="Trn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="IssuerEmirates">
+      <AttrNames>
+        <Item Value="IssuerEmirates"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="Poa">
+      <AttrNames>
+        <Item Value="Poa"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="Numb">
+      <AttrNames>
+        <Item Value="Numb"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="NameAndDetail">
+      <AttrNames>
+        <Item Value="NameAndDetail"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="customRootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <listOfValues StaticList="false" IterBinding="XxplLeadVOIterator"
+                  Uses="LOV_Tans_OrgName" id="Tans_OrgName"/>
+  
+    <button IterBinding="XxplLeadVOIterator" id="ActiveRp"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ActiveRp"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <listOfValues StaticList="false" IterBinding="XxplLeadVOIterator"
+                  Uses="LOV_Trans_CurCountry" id="Trans_CurCountry"/>
+    <listOfValues StaticList="false" IterBinding="XxplLeadVOIterator"
+                  Uses="LOV_Trans_Nationality" id="Trans_Nationality"/>
+    <listOfValues StaticList="false" IterBinding="XxplLeadVOIterator"
+                  Uses="LOV_Trans_PrimarySource" id="Trans_PrimarySource"/>
+    <listOfValues StaticList="false" IterBinding="XxplLeadVOIterator"
+                  Uses="LOV_Trans_PerCountry" id="Trans_PerCountry"/>
+    <attributeValues IterBinding="XxplLeadVOIterator" id="PerCountry">
+      <AttrNames>
+        <Item Value="PerCountry"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XxplLeadVOIterator" StaticList="false" Uses="LOV_Title"
+          id="Title1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <tree IterBinding="XxplLeadActivity_View1Iterator"
+          id="XxplLeadActivity_View1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplLeadActivity_View"
+                      Name="XxplLeadActivity_View10">
+        <AttrNames>
+          <Item Value="LeadActivityId"/>
+          <Item Value="LeadId"/>
+          <Item Value="ActivityType"/>
+          <Item Value="Subject"/>
+          <Item Value="Regarding"/>
+          <Item Value="DueDate"/>
+          <Item Value="Priority"/>
+          <Item Value="Status"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplLeadActivity_View1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="XxplLeadActivity_View1Iterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="XxplLeadNoteView1Iterator" id="XxplLeadNoteView1">
+      <nodeDefinition DefName="custom.lease.model.View.XxplLeadNoteView"
+                      Name="XxplLeadNoteView10">
+        <AttrNames>
+          <Item Value="LeadNoteId"/>
+          <Item Value="LeadId"/>
+          <Item Value="FuncId"/>
+          <Item Value="LeadNote"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XxplLeadNoteView1Iterator" id="CreateInsert1"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <list IterBinding="XxplLeadVOIterator" StaticList="false"
+          Uses="LOV_Request_Type" id="Attribute1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

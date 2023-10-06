@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Biling_VL_BookingMilestone"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  EntityAssociation="custom.lease.model.Asso.BilingAssBookingMs">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="custom.lease.model.VL.Biling_VL_BookingMilestone_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="XxplBilling_View"
+    Cardinality="1"
+    Owner="custom.lease.model.View.XxplBilling_View"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XxplBilling_View"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.View.XxplBilling_View.BillingId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="XxplBookingMilestones_VO"
+    Cardinality="-1"
+    Owner="custom.lease.model.View.XxplBookingMilestones_VO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XxplBookingMilestones_VO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="custom.lease.model.View.XxplBookingMilestones_VO.BillingId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="custom.lease.model.CustomLeaseModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

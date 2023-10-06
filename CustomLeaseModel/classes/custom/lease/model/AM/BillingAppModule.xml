@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BillingAppModule"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true">
+  <DesignTime>
+    <Attr Name="_deployType" Value="0"/>
+  </DesignTime>
+  <ViewUsage
+    Name="XxplBilling_View1"
+    ViewObjectName="custom.lease.model.View.XxplBilling_View">
+    <ViewCriteriaUsage
+      Name="findByBillId"
+      FullName="custom.lease.model.View.XxplBilling_View.findByBillId"/>
+    <ParameterMap>
+      <PIMap Variable="BV_BillID">
+        <TransientExpression><![CDATA[adf.context.pageFlowScope.billid]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewUsage>
+  <ViewUsage
+    Name="XxplBookingMilestones_VO1"
+    ViewObjectName="custom.lease.model.View.XxplBookingMilestones_VO"/>
+  <ViewUsage
+    Name="BillingMilestoneROVO1"
+    ViewObjectName="custom.lease.model.ROVO.BillingMilestoneROVO"/>
+  <ViewUsage
+    Name="SearachBillingROVO1"
+    ViewObjectName="custom.lease.model.ROVO.SearachBillingROVO"/>
+  <ViewUsage
+    Name="XxplBookingMilestones_VO2"
+    ViewObjectName="custom.lease.model.View.XxplBookingMilestones_VO"/>
+  <ViewUsage
+    Name="AppovalTypeROVO1"
+    ViewObjectName="custom.lease.model.ROVO.AppovalTypeROVO"/>
+  <ViewUsage
+    Name="SEARCH_BOOKING_ROVO"
+    ViewObjectName="custom.lease.model.ROVO.SEARCH_BOOKING_ROVO">
+    <ViewCriteriaUsage
+      Name="FindByBookingID"
+      FullName="custom.lease.model.ROVO.SEARCH_BOOKING_ROVO.FindByBookingID"/>
+    <ParameterMap>
+      <PIMap Variable="BV_BOOK_ID">
+        <TransientExpression><![CDATA[adf.context.pageFlowScope.BookingId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewUsage>
+  <ViewUsage
+    Name="BookingLineForChargeROVO"
+    ViewObjectName="custom.lease.model.ROVO.BookingLineForChargeROVO"/>
+  <ViewUsage
+    Name="XxplBookingOtherCharges"
+    ViewObjectName="custom.lease.model.View.XxplBookingMilestones_VO">
+    <ViewCriteriaUsage
+      Name="findByOCAfterApporval"
+      FullName="custom.lease.model.View.XxplBookingMilestones_VO.findByOCAfterApporval"/>
+  </ViewUsage>
+  <ViewUsage
+    Name="MilestoneReceiptAmount_ROVO"
+    ViewObjectName="custom.lease.model.ROVO.MilestoneReceiptAmount_ROVO"/>
+  <ViewLinkUsage
+    Name="Biling_VL_BookingMilestone1"
+    ViewLinkObjectName="custom.lease.model.VL.Biling_VL_BookingMilestone"
+    SrcViewUsageName="custom.lease.model.AM.BillingAppModule.XxplBilling_View1"
+    DstViewUsageName="custom.lease.model.AM.BillingAppModule.XxplBookingMilestones_VO1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="BookingDtl_Charge_VL1"
+    ViewLinkObjectName="custom.lease.model.VL.BookingSearch_Dtl_VL"
+    SrcViewUsageName="custom.lease.model.AM.BillingAppModule.SEARCH_BOOKING_ROVO"
+    DstViewUsageName="custom.lease.model.AM.BillingAppModule.BookingLineForChargeROVO"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="BookingDtl_Charge_VL2"
+    ViewLinkObjectName="custom.lease.model.VL.BookingDtl_Charge_VL"
+    SrcViewUsageName="custom.lease.model.AM.BillingAppModule.BookingLineForChargeROVO"
+    DstViewUsageName="custom.lease.model.AM.BillingAppModule.XxplBookingOtherCharges"
+    Reversed="false"/>
+</AppModule>
